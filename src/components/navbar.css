@@ -13,6 +13,10 @@
     padding: 0px 16px;
 }
 
+.menu-buttons button{
+  font: var(--unnamed-font-style-normal) normal 900 var(--unnamed-font-size-26)/26px Uni Sans;
+  font-weight: 600;
+}
 .underline-on-hover::after {
     content: '';
     display: block;
