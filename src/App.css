@@ -32,7 +32,15 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.triangle {
+  position: absolute;
+  margin-bottom: 4rem;
+  align-self: center;
+
 }

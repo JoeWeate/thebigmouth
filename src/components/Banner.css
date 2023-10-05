@@ -1,0 +1,10 @@
+.triangle {
+    position: absolute;
+    align-self: flex-end;
+    margin-bottom: 4rem;
+    transition: margin-bottom 0.3s ease;
+}
+
+.triangle:hover {
+    margin-bottom: 3rem;
+}
