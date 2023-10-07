@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Typography, Grid, Button, IconButton, Drawer, List, ListItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import Logo from '../assets/TheBigHouse.png';
+import Logo from '../../assets/TheBigHouse.png';
 import './navbar.css';
 
 export default function NavBar() {
   const navigate = useNavigate();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const isMobile = window.innerWidth <= 768; 
+  const isMobile = window.innerWidth <= 768;
 
   const menuItems = [
     { label: 'Home', path: '/page' },
@@ -35,18 +35,18 @@ export default function NavBar() {
       </Drawer>
       <Grid
         container
-        
+
         className="container"
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginLeft: '16px' }}>
             <img alt="The Big House Logo" src={Logo} style={{ width: 50, marginRight: 10 }} />
           </Link>
-          
-      
-       
+
+
+
         </div>
-  
+
         <div className={`menu-buttons ${isMobile ? 'mobile-menu' : ''}`}>
           <Button size="large" onClick={() => navigate('/page')} >
             Home
@@ -67,7 +67,7 @@ export default function NavBar() {
             THE BIG MOUTH
           </Button>
         </div>
-  
+
         <div className="poo" style={{ display: 'flex', alignItems: 'center' }}>
           <IconButton style={{ color: 'white' }}>
             <SearchIcon />
