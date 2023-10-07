@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material'
 import { Outlet } from 'react-router-dom'
-import NavBar from './components/navbar/NavBar'
+import NavBar from './components/NavBar'
 
 function App() {
   return (
