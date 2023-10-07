@@ -1,6 +1,6 @@
 import React, { Grid, Typography } from '@mui/material'
 import { TitleComponent } from '../../components/TitleComponent'
-import SideBySide from './SideBySide'
+import SideBySide from '../../components/sideBySide/SideBySide'
 
 export default function Home() {
   return (
