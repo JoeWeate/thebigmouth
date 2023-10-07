@@ -3,12 +3,12 @@ const prod_config =
 {
   env: 'prod',
   s3: {
-   //  REGION: 'us-east-1',
-   //  BUCKET: 'snp-perf-media'
+    REGION: 'eu-west-1',
+    BUCKET: 'thebigmouth-media'
   },
   apiGateway: {
-   //  REGION: 'us-east-1',
-   //  URL: '539m3kkvt5.execute-api.us-east-1.amazonaws.com/v1'
+    REGION: 'us-east-1',
+    URL: 'bqvbrpmepj.execute-api.us-east-1.amazonaws.com/v1'
   },
   auth0:{
     // 'domain': 'dev-a3d-pxib.us.auth0.com',
