@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Grid, Typography, Box, CssBaseline } from "@mui/material";
+import Link from "@mui/material/Link";
 
 const Footer = () => {
   return (
@@ -68,38 +69,46 @@ const Footer = () => {
               height="100%"
               flexDirection="row"
             >
-              <Typography
+              <Link
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
                   color: "#E0E0E0",
+                  textDecoration: "none",
                 }}
+                href="/back-to-the-big-mouth"
               >
                 Back to The Big Mouth
-              </Typography>
-              <Typography
+              </Link>
+              <Link
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
                   color: "#E0E0E0",
+                  textDecoration: "none",
                 }}
+                href="/become-a-member"
               >
                 Become a member
-              </Typography>
-              <Typography
+              </Link>
+              <Link
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
                   color: "#E0E0E0",
+                  textDecoration: "none",
                 }}
+                href="/contact"
               >
                 Contact
-              </Typography>
-              <Typography
+              </Link>
+              <Link
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
                   color: "#E0E0E0",
+                  textDecoration: "none",
                 }}
+                href="/talent-enquiry"
               >
                 Talent Enquiry
-              </Typography>
+              </Link>
             </Box>
           </Grid>
         </Grid>
