@@ -1,5 +1,7 @@
 import { Typography, Paper, CardMedia } from "@mui/material";
 import './Banner.css';
+//import CrossfadeImage from "react-crossfade-image";
+//< CrossfadeImage src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png" />
 
 
 const Banner = () => {
@@ -10,58 +12,48 @@ const Banner = () => {
             alignItems: "flex-end",
             height: "90vh",
             width: "100%",
-            backgroundImage: "url(https://i.pinimg.com/564x/21/a6/77/21a677df3097bbf8023084f2baad539e.jpg)",
+            backgroundImage: "url(https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/banner.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
             borderRadius: "0",
         }}>
-            <img alt="Image1" src="/istockphoto-1399763427-612x612.png" style={{ maxHeight: "90vh", height: "80vh", alignItems: "center" }} />
-            <CardMedia component="img" src="/BigMouth.png" sx={{
-                position: "absolute",
-                alignSelf: "center",
-                // marginBottom: {
-                //     xs: '15rem',
-                //     sm: '15rem',
-                //     md: '4rem',
-                //     lg: '10rem',
-                // },
-                width: {
-                    xs: '12rem',
-                    sm: '15rem',
-                    md: '15rem',
-                    lg: '18rem',
-                }
-            }} ></CardMedia>
-            <Typography
-                variant="h1"
-                sx={{
-                    position: "absolute",
+            <div className="logo-text">
 
-                    marginBottom: {
-                        xs: '22rem',
-                        sm: '23rem',
-                        md: '12rem',
-                        lg: '10rem',
-                        xl: '8rem',
-                    },
-                    paddingLeft: "1rem",
-                    paddingRight: "1rem",
-                    fontFamily: 'Arial',
-                    backgroundColor: "rgba(224,3,146, 0.6)",
-                    color: 'white',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                    fontSize: {
-                        xs: '2.5rem',
-                        sm: '5rem',
-                        md: '5rem',
-                        lg: '6rem',
-                        xl: '6rem',
-                    },
-                }}
-            >
-                THE BIG MOUTH
-            </Typography>
+                <CardMedia component="img" src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png" sx={{
+                    alignSelf: "center",
+                    width: {
+                        xs: '12rem',
+                        sm: '20rem',
+                        md: '22rem',
+                        lg: '25rem',
+                    }
+                }} >
+                </CardMedia>
+                <Typography
+                    variant="h1"
+                    sx={{
+                        position: "absolute",
+                        paddingLeft: "2rem",
+                        paddingRight: "2rem",
+                        fontFamily: 'Arial',
+                        backgroundColor: "rgba(224,3,146, 0.6)",
+                        color: 'white',
+                        textAlign: 'center',
+                        whiteSpace: 'nowrap',
+                        fontSize: {
+                            xs: '2.5rem',
+                            sm: '5rem',
+                            md: '5rem',
+                            lg: '6rem',
+                            xl: '6rem',
+                        },
+                    }}
+                >
+                    THE BIG MOUTH
+                </Typography>
+
+            </div>
+
             <img alt="triangle" src="/triangle-icon.png" width="40" height="30" className="triangle" />
 
         </Paper >

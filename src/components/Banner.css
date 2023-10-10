@@ -1,10 +1,20 @@
 .triangle {
     position: absolute;
     align-self: flex-end;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
     transition: margin-bottom 0.3s ease;
 }
 
 .triangle:hover {
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
+}
+
+.logo-text {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
