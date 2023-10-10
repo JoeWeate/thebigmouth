@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Grid, Typography, Box, CssBaseline } from "@mui/material";
-import logofooter from "../assets/TheBigMouth.png";
 
 const Footer = () => {
   return (
@@ -26,7 +25,7 @@ const Footer = () => {
             >
               <img
                 className="logo-image"
-                src={logofooter}
+                src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png"
                 alt="Logo"
                 width="237"
                 height="273"
@@ -36,6 +35,29 @@ const Footer = () => {
                   opacity: "1",
                 }}
               />
+              <div
+                style={{
+                  display: "inline",
+                  position: "absolute",
+                  right: "53%",
+                  transform: "translateX(-50%)",
+                  width: "386px",
+                  height: "79px",
+                  background: "#E6007E",
+                  opacity: 0.77,
+                  backdropFilter: "blur(5px)",
+                  fontFamily: "Uni Sans Bold",
+                  fontSize: "51px",
+                  fontWeight: "bold",
+                  color: "#FFFFFF",
+                  textAlign: "center",
+                  whiteSpace: "nowrap",
+                  letterSpacing: "-2.04px",
+                  zIndex: 1,
+                }}
+              >
+                THE BIG MOUTH
+              </div>
             </Box>
           </Grid>
           <Grid item xs={12} md={8}>
@@ -47,7 +69,6 @@ const Footer = () => {
               flexDirection="row"
             >
               <Typography
-                variant="h6"
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
                   color: "#E0E0E0",
@@ -56,7 +77,6 @@ const Footer = () => {
                 Back to The Big Mouth
               </Typography>
               <Typography
-                variant="h6"
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
                   color: "#E0E0E0",
@@ -65,7 +85,6 @@ const Footer = () => {
                 Become a member
               </Typography>
               <Typography
-                variant="h6"
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
                   color: "#E0E0E0",
@@ -74,7 +93,6 @@ const Footer = () => {
                 Contact
               </Typography>
               <Typography
-                variant="h6"
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
                   color: "#E0E0E0",
