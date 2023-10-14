@@ -11,9 +11,10 @@ const prod_config =
     URL: 'bqvbrpmepj.execute-api.us-east-1.amazonaws.com/v1'
   },
   auth0:{
-    // 'domain': 'dev-a3d-pxib.us.auth0.com',
-    // 'clientId': 'yJou2XVElSbPvbmi5DpyYrJ8itIuN6Cg',
-    // 'apiAudience': 'https://snp-perf-api.com',
+    'domain': 'thebigmouth.uk.auth0.com',
+    'clientId': 'aYP7YnBCGp8iIo3UKdQfn2WOyi9652jp',
+    'apiAudience': 'https://auth0-jwt-authorizer',
+   // 'apiAudience': 'https://snp-perf-api.com',
     // 'callbackUrl': `${window.origin}/authenticate`,
    // 'realm': 'Email-Password-Authentication',
    //  'scope': 'openid email update:email update:password',

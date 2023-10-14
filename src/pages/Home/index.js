@@ -2,7 +2,7 @@ import React, { Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { TitleComponent } from '../../components/TitleComponent'
 import { getHelloWorld } from '../../hooks/API/helloworld'
-// import env_config from '../../env_config'
+import env_config from '../../env_config'
 
 
 export default function Home() {
@@ -22,18 +22,11 @@ export default function Home() {
         />
         <Typography>This is our home page</Typography>
         <Typography variant='h5'>{message}</Typography>
+        <img
+          src={`https://${env_config.s3.BUCKET}.s3.amazonaws.com/public/big-mouth.png`}
+          style={{width: 250, height: 250}}
+          />
     </Grid>
   )
 }
 
-
-
-
-
-/*
-S3 Example
-  <img
-    src={`https://${env_config.s3.BUCKET}.s3.amazonaws.com/public/big-mouth.png`}
-    style={{width: 250, height: 250}}
-    />
-*/
