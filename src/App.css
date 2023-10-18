@@ -6,13 +6,14 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.logo-image {
+  margin-left: 4em;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -37,6 +38,7 @@
     transform: rotate(360deg);
   }
 }
+<<<<<<< HEAD
 
 .box-side-to-side:hover {
   border-radius: 50%;
@@ -60,3 +62,20 @@
   align-self: center;
 
 }
+=======
+@font-face {
+  font-family: "Core Sans D 45 Medium W01 Rg";
+  src:
+    url("./fonts/CoreSansD45Medium.svg#Core Sans D 45 Medium W01 Rg")
+      format("svg"),
+    url("src/fonts/Core Sans D 45 Medium W01 Rg.svg") format("truetype"),
+    url("src/fonts/Core Sans D 45 Medium W01 Rg.woff") format("woff"),
+    url("src/fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Uni Sans Bold", sans-serif;
+  src: url("src/fonts/Uni Sans Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+>>>>>>> footer
