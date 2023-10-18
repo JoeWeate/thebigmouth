@@ -9,7 +9,7 @@
     align-items: center;
     z-index: 999;
     background-color: black;
-    border-bottom: 1px solid rgb(230, 234, 234);
+    /* border-bottom: 1px solid rgb(230, 234, 234); */
     padding: 0px 16px;
 }
 
