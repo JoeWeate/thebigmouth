@@ -9,6 +9,7 @@ export default function Home() {
         description=""
         />
         <Typography>This is our home page</Typography>
+        
     </Grid>
   )
 }

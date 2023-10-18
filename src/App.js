@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import NavBar from './components/NavBar'
-import Banner from './components/Banner';
+import Banner from './components/Banner/Banner';
 
 function App() {
   return (
