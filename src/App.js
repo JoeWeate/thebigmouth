@@ -1,10 +1,11 @@
 import { Grid } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import NavBar from './components/navbar/NavBar'
+import Banner from './components/Banner/Banner';
 
 function App() {
   return (
-    <Grid
+    <Grid container display="flex" flexDirection="column"
       id='root'
       style={{
         paddingTop: 60,
@@ -12,9 +13,11 @@ function App() {
       }}
     >
       <NavBar />
-      <main style={{ display: 'flex', flexGrow: 1, alignItems: 'flex-start'}}>
-        <Outlet/>
+      <Banner />
+      <main style={{ display: 'flex', flexGrow: 1, alignItems: 'flex-start' }}>
+        <Outlet />
       </main>
+
     </Grid>
   );
 }

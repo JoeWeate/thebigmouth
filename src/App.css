@@ -54,3 +54,9 @@
 .right-box>h1 {
   margin: 0;
 }
+.triangle {
+  position: absolute;
+  margin-bottom: 4rem;
+  align-self: center;
+
+}
