@@ -16,7 +16,7 @@ function App() {
     >
       <NavBar />
       <Banner />
-      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start"  }}>
+      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start", backgroundColor: "black" }}>
         <Outlet  />
       </main>
 
