@@ -8,8 +8,8 @@ const Footer = () => {
       style={{
         backgroundColor: "#E6007E",
         width: "100%",
-        left: "0",
-        height: "279.72px",
+        position: "absolute",
+        top: "3180px",
       }}
     >
       <CssBaseline />

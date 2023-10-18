@@ -1,7 +1,8 @@
 import React, { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from 'react'
 import { TitleComponent } from "../../components/TitleComponent";
-import VideoBanner from "../../components/VideoBanner";import SideBySide from "../../components/sideBySide/SideBySide"
+import VideoBanner from "../../components/VideoBanner";
+import SideBySide from "../../components/sideBySide/SideBySide"
 
 export default function Home() {
   const [message, setMessage] = useState('')
@@ -25,7 +26,8 @@ export default function Home() {
       }}
     >
       <TitleComponent title="TheBigMouth" description="" />
-      <Typography>This is our home page</Typography>
+      {/* <Typography>This is our home page</Typography> */}
+      <SideBySide/>
       <VideoBanner />
     </Grid>
   )
