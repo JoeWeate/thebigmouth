@@ -17,6 +17,7 @@ export default function NavBar() {
     const theme = useTheme()
     const { isAuthenticated } = useAuth0();
 
+
   return (
     <Grid
       container
