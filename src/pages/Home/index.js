@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { TitleComponent } from "../../components/TitleComponent";
 import VideoBanner from "../../components/VideoBanner";
 import SideBySide from "../../components/sideBySide/SideBySide"
-
+import Banner from "../../components/Banner/Banner";
 export default function Home() {
   const [message, setMessage] = useState('')
 
@@ -22,11 +22,11 @@ export default function Home() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        paddingTop: 100,
       }}
     >
       <TitleComponent title="TheBigMouth" description="" />
-      {/* <Typography>This is our home page</Typography> */}
+      <Banner />
+
       <SideBySide/>
       <VideoBanner />
     </Grid>
