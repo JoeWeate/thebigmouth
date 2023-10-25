@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Grid, CircularProgress } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import { Auth0Provider } from '@auth0/auth0-react';
-
+import env_config from "./env_config"
 import Home from './pages/Home'
 import Error from './pages/Error'
 
