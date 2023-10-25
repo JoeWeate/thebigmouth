@@ -97,6 +97,7 @@ const Footer = () => {
               >
                 Contact
               </Link>
+
               <Link
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",
