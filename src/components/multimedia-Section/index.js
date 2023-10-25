@@ -10,7 +10,7 @@ function Index(props) {
   useEffect(() => {
     const axios = configureAxios();
 
-    axios.get(`${env_config.apiGateway.URL}/multimedia`)
+    axios.get(`/multimedia`)
       .then(response => {
         if (response.data) {
           setMultimediaData(response.data.multimedia);
