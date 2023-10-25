@@ -1,8 +1,10 @@
-import axios from 'axios'
+import axios from 'axios';
 import env_config from './../env_config'
+
 const DOMAIN = env_config.apiGateway.URL
 const PROTOCOL = `https`;
 const PREFIX = ``;
+
 
 function configureAxios(config) {
   axios.create({
