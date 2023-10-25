@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../../assets/TheBigHouse.png';
 import './navbar.css';
-
+import LoginButton from "../Auth/LoginButton"
 export default function NavBar() {
   const navigate = useNavigate();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function NavBar() {
             <img alt="The Big House Logo" src={Logo} style={{ width: 50, marginRight: 10 }} />
           </Link>
 
-
+<h1><LoginButton/></h1>
 
         </div>
 
