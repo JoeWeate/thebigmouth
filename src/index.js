@@ -27,27 +27,27 @@ import './index.css'
 
 ReactDOM.render(
   <ThemeProvider theme={Theme}>
-      <Auth0Provider
-        domain={env_config.auth0.domain}
-        clientId={env_config.auth0.clientId}
-        authorizationParams={{
-          audience: env_config.auth0.apiAudience,
-          redirect_uri: window.location.origin + '/login'
-        }}
-      >
+    <Auth0Provider
+      domain={env_config.auth0.domain}
+      clientId={env_config.auth0.clientId}
+      authorizationParams={{
+        audience: env_config.auth0.apiAudience,
+        redirect_uri: window.location.origin + '/login'
+      }}
+    >
       <Suspense fallback={<Grid container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}><CircularProgress color='primary' /></Grid>}>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<App />}>
               <Route path='' element={<Home />} />
-                <Route path='login' element={<PostAuthentication />} />
-                <Route path='profile' element={<ProtectedRoute><Account /></ProtectedRoute>} />
+              <Route path='login' element={<PostAuthentication />} />
+              <Route path='profile' element={<ProtectedRoute><Account /></ProtectedRoute>} />
               <Route path='*' element={<Error />} />
             </Route>
           </Routes>
         </BrowserRouter>
       </Suspense>
-      </Auth0Provider>
+    </Auth0Provider>
   </ThemeProvider>,
   document.getElementById('root')
 )
