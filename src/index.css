@@ -1,11 +1,17 @@
+@font-face {
+  font-display: swap;
+  font-family: "Core Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("./fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2"),
+    url("./fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Core Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 code {

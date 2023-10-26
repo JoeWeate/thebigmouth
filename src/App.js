@@ -18,7 +18,7 @@ function App() {
       }}
     >
       <NavBar />
-      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start", backgroundColor: "rgb(72,72,72)" }}>
+      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start" }}>
         <Outlet />
       </main>
       <Footer />
