@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Paper, styled } from "@mui/material";
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const VideoImageContainer = styled(Paper)(({ theme, isContainerHovered }) => ({
   minHeight: "700px",
@@ -74,10 +76,11 @@ const VideoBanner = () => {
     >
       <Video poster="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/video-banner.png"></Video>
       <PlayButton>
-        <Image
+        <PlayCircleOutlineIcon sx={{ fontSize: 110 }} />
+        {/* <Image
           src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/y-p.png"
           alt="Play Button"
-        />
+        /> */}
         <CircleIcon
           src="https://tbh.flipclip.co.in/p-c.png"
           alt="Circle Icon"
@@ -88,7 +91,7 @@ const VideoBanner = () => {
         <SIcon
           src={
             isIconHovered
-              ? "https://iconsplace.com/wp-content/uploads/_icons/ff0000/256/png/play-icon-14-256.png"
+              ? <PlayArrowIcon sx={{ width: "3rem", color: "pink" }} />
               : "https://tbh.flipclip.co.in/ics.png"
           }
           alt="S Icon"

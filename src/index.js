@@ -15,7 +15,7 @@ import Account from './pages/Account/index'
 import PostAuthentication from './pages/PostAuthentication/index'
 import ProtectedRoute from './components/Auth/ProtectedRoute'
 import reportWebVitals from './reportWebVitals'
-
+import Episode from './pages/Episode';
 
 import './index.css'
 
@@ -38,8 +38,10 @@ ReactDOM.render(
       <Suspense fallback={<Grid container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}><CircularProgress color='primary' /></Grid>}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<App />}>
+
+            <Route exact path='/' element={<App />}>
               <Route path='' element={<Home />} />
+              <Route path='/episode' element={<Episode />} />
               <Route path='login' element={<PostAuthentication />} />
               <Route path='profile' element={<ProtectedRoute><Account /></ProtectedRoute>} />
               <Route path='*' element={<Error />} />

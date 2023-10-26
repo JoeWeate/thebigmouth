@@ -1,0 +1,33 @@
+.info p {
+    font-size: 10pt
+}
+
+.info-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-wrapper {
+    margin: 0 auto;
+    width: 90%;
+}
+
+button {
+    background-color: none;
+    border: none;
+}
+
+.button-2:hover {
+    background-color: transparent;
+}
+
+.button-2:focus {
+    background-color: transparent;
+}
+
+.item {
+    margin-bottom: 2rem;
+    color: white;
+}

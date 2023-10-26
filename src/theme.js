@@ -5,7 +5,7 @@ const theme = createTheme({
       main: 'rgba(0, 0, 0, 1)'
     },
     text: {
-        main: '#232323'
+      main: '#232323'
     }
   },
   typography: {

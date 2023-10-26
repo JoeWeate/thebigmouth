@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Information from "./components/Page4/Information.js";
 import PlaceholderVideo from "./components/Page4/PlaceholderVideo.js";
-import About from "./components/Page4/About/About.js";
+import AboutInfo from "./components/Page4/About/AboutInfo.js";
 // import "./App.css";
 
 function App() {
@@ -18,11 +18,7 @@ function App() {
       }}
     >
       <NavBar />
-      <PlaceholderVideo />
-      <About />
-      <Information />
-      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start", backgroundColor: "black" }}>
-
+      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start", backgroundColor: "rgb(72,72,72)" }}>
         <Outlet />
       </main>
       <Footer />
