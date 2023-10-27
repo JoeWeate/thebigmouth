@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import { Paper, styled } from "@mui/material";
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
-const VideoImageContainer = styled(Paper)(({ theme, isContainerHovered }) => ({
-  minHeight: "700px",
-  backgroundColor: "#000",
-  textAlign: "center",
-  position: "relative",
-  maxHeight: "800px",
-  "&:hover": {
-    filter: isContainerHovered ? "brightness(50%)" : "none", // Apply brightness filter on hover
-  },
-}));
+const VideoImageContainer = styled(Paper)(
+  ({ theme, isContainerHovered, isMainImageHovered }) => ({
+    minHeight: "700px",
+    backgroundColor: "#000",
+    textAlign: "center",
+    position: "relative",
+    maxHeight: "800px",
+    transition: "filter 0.5s ease", // Increased transition duration
+    "&:hover": {
+      filter: isMainImageHovered
+        ? "none"
+        : isContainerHovered
+          ? "brightness(50%)"
+          : "none",
+    },
+  })
+);
 
 const Video = styled("video")({
   height: "90%",
   width: "100%",
   objectFit: "cover",
-  transition: "filter 0.2s ease",
+  transition: "filter 0.5s ease", // Increased transition duration
   transform: "scaleY(1.1)",
   cursor: "pointer",
 });
@@ -44,13 +49,13 @@ const Image = styled("img")({
 });
 
 const SIcon = styled("img")(({ theme, isHovered }) => ({
-  width: isHovered ? "60px" : "40px",
-  height: isHovered ? "60px" : "40px",
+  width: isHovered ? "45px" : "40px",
+  height: isHovered ? "45px" : "40px",
   position: "absolute",
   top: isHovered ? "50%" : "49.3%",
   left: isHovered ? "50.4%" : "50.3%",
   transform: "translate(-50%, -50%)",
-  transition: "width 0.2s, height 0.2s, left 0.2s, top 0.2s",
+  transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s", // Increased transition duration
   fontSize: isHovered ? "100px" : "100px",
 }));
 
@@ -60,44 +65,48 @@ const CircleIcon = styled("img")(({ theme, isHovered }) => ({
   position: "absolute",
   top: "50%",
   left: isHovered ? "50%" : "50%",
-  transform: isHovered ? "translate(-50%, -50%)" : "translate(-50%, -50%) ",
-  transition: "width 0.2s, height 0.2s, left 0.2s, top 0.2s",
+  transform: isHovered ? "translate(-50%, -50%)" : "translate(-50%, -50%)",
+  transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s", // Increased transition duration
 }));
 
-const VideoBanner = () => {
+const VideoBanner = ({ episode }) => {
   const [isContainerHovered, setContainerHovered] = useState(false);
-  const [isIconHovered, setIconHovered] = useState(false);
+  const [isMainImageHovered, setMainImageHovered] = useState(false);
 
   return (
     <VideoImageContainer
       isContainerHovered={isContainerHovered}
+      isMainImageHovered={isMainImageHovered}
       onMouseEnter={() => setContainerHovered(true)}
       onMouseLeave={() => setContainerHovered(false)}
     >
-      <Video poster="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/video-banner.png"></Video>
+      <Video
+        poster={episode.image}
+        onMouseEnter={() => setMainImageHovered(true)}
+        onMouseLeave={() => setMainImageHovered(false)}
+      ></Video>
       <PlayButton>
-        <PlayCircleOutlineIcon sx={{ fontSize: 110 }} />
-        {/* <Image
+        <Image
           src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/y-p.png"
           alt="Play Button"
-        /> */}
+        />
         <CircleIcon
           src="https://tbh.flipclip.co.in/p-c.png"
           alt="Circle Icon"
-          isHovered={isIconHovered}
-          onMouseEnter={() => setIconHovered(true)}
-          onMouseLeave={() => setIconHovered(false)}
+          isHovered={isMainImageHovered}
+          onMouseEnter={() => setMainImageHovered(true)}
+          onMouseLeave={() => setMainImageHovered(false)}
         />
         <SIcon
           src={
-            isIconHovered
-              ? <PlayArrowIcon sx={{ width: "3rem", color: "pink" }} />
+            isMainImageHovered
+              ? "https://thebigmouth-frontend.s3.eu-west-2.amazonaws.com/play-pink.png"
               : "https://tbh.flipclip.co.in/ics.png"
           }
           alt="S Icon"
-          isHovered={isIconHovered}
-          onMouseEnter={() => setIconHovered(true)}
-          onMouseLeave={() => setIconHovered(false)}
+          isHovered={isMainImageHovered}
+          onMouseEnter={() => setMainImageHovered(true)}
+          onMouseLeave={() => setMainImageHovered(false)}
         />
       </PlayButton>
     </VideoImageContainer>

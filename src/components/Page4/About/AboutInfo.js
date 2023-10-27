@@ -3,7 +3,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from "react";
 
-const AboutInfo = () => {
+const AboutInfo = ({ episode }) => {
   const [moreOpen, setMoreOpen] = useState(false);
 
   const handleClick = () => {
@@ -19,10 +19,10 @@ const AboutInfo = () => {
         <Grid item xs={6} ></Grid>
         <Grid item xs={6} sx={{ padding: "2rem" }}>
           <Typography sx={{ color: "white", marginLeft: "0.5rem" }}><h3>About</h3></Typography>
-          <Typography sx={{ color: "white", marginLeft: "0.5rem" }}><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis enim vitae lacus semper, in porta quam imperdiet. Phasellus in libero nisl. Aliquam in dictum enim. Aliquam quam neque, finibus vitae elementum vitae, malesuada eu odio. Nam aliquam, massa non consequat maximus, lorem enim posuere lectus, id finibus magna libero quis libero. </p></Typography>
+          <Typography sx={{ color: "white", marginLeft: "0.5rem" }}><p>{episode.description} </p></Typography>
           <Collapse in={moreOpen}>
             <Typography sx={{ color: "white", padding: "0.5rem" }}>
-              <p>Pellentesque condimentum scelerisque accumsan. Nam dignissim diam sit amet risus auctor, vitae molestie leo fringilla. Proin sed nisl pulvinar, porta dui et, pharetra augue. Proin eget quam augue. Etiam sit amet erat turpis. Phasellus leo dolor, auctor a sagittis ac, vehicula non tortor. Nam aliquam, massa non consequat maximus, lorem enim posuere lectus, id finibus magna libero quis libero. Pellentesque condimentum scelerisque accumsan. Nam dignissim diam sit amet risus auctor, vitae molestie leo fringilla. </p>
+              <p>{episode.description}</p>
             </Typography>
           </Collapse>
 

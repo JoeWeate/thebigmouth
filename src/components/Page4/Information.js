@@ -6,8 +6,9 @@ import theme from "../../theme";
 import { useState } from "react";
 
 
-const Information = () => {
+const Information = ({ episode }) => {
     const [open, setOpen] = useState(false)
+    const [disable, setDisable] = useState(false)
 
     const handleClick = () => {
         setOpen(true)
@@ -21,9 +22,10 @@ const Information = () => {
         <diV className="info-wrapper">
             <Divider sx={{ backgroundColor: "white" }} ></Divider>
             <div className="info-container">
-                <Typography typography={theme.typography.h5} classname="info" sx={{ color: "white" }}>
+                <Typography classname="info" sx={{ color: "white" }}>
                     <p>INFORMATION</p>
                 </Typography>
+                {!episode.rating && setDisable(true)}
                 {open ?
                     (<Button className="button-2" variant="text" disableRipple onClick={handleClickUp} sx={{
                         ml: 1,
@@ -34,7 +36,7 @@ const Information = () => {
                         <KeyboardArrowUpIcon sx={{ fontSize: 40, color: "white" }} />
                     </Button>
                     ) : (
-                        <Button className="button-2" variant="text" disableRipple onClick={handleClick} sx={{
+                        <Button disable={disable} className="button-2" variant="text" disableRipple onClick={handleClick} sx={{
                             ml: 1,
                             "&.MuiButtonBase-root:hover": {
                                 bgcolor: "transparent"

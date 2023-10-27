@@ -35,7 +35,7 @@ ReactDOM.render(
           <Routes>
             <Route exact path='/' element={<App />}>
               <Route path='' element={<Home />} />
-              <Route path='/episode' element={<Episode />} />
+              <Route path='/episode/:id' element={<Episode />} />
               <Route path='login' element={<PostAuthentication />} />
               <Route path='profile' element={<ProtectedRoute><Account /></ProtectedRoute>} />
               <Route path='*' element={<Error />} />
