@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Typography, Grid, Button, IconButton, Drawer, List, ListItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import Logo from '../../assets/TheBigHouse.png';
+import Logo from '../../assets/images/TheBigHouse.png';
 import './navbar.css';
 import LoginButton from "../Auth/LoginButton"
 export default function NavBar() {

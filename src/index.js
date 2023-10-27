@@ -7,6 +7,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import env_config from "./env_config"
 import Home from './pages/Home'
 import Error from './pages/Error'
+import Multimedia from "./pages/Multimedia";
 
 import Theme from './theme'
 import App from './App'
@@ -35,6 +36,7 @@ ReactDOM.render(
           <Routes>
             <Route exact path='/' element={<App />}>
               <Route path='' element={<Home />} />
+              <Route path='/multimedia/:ID' element={<Multimedia />} />
               <Route path='/episode/:id' element={<Episode />} />
               <Route path='login' element={<PostAuthentication />} />
               <Route path='profile' element={<ProtectedRoute><Account /></ProtectedRoute>} />
