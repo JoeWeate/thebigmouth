@@ -13,8 +13,8 @@ const VideoImageContainer = styled(Paper)(
       filter: isMainImageHovered
         ? "none"
         : isContainerHovered
-        ? "brightness(50%)"
-        : "none",
+          ? "brightness(50%)"
+          : "none",
     },
   })
 );
@@ -69,7 +69,7 @@ const CircleIcon = styled("img")(({ theme, isHovered }) => ({
   transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s", // Increased transition duration
 }));
 
-const VideoBanner = () => {
+const VideoBanner = ({ episode }) => {
   const [isContainerHovered, setContainerHovered] = useState(false);
   const [isMainImageHovered, setMainImageHovered] = useState(false);
 
@@ -81,7 +81,7 @@ const VideoBanner = () => {
       onMouseLeave={() => setContainerHovered(false)}
     >
       <Video
-        poster="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/video-banner.png"
+        poster={episode.image}
         onMouseEnter={() => setMainImageHovered(true)}
         onMouseLeave={() => setMainImageHovered(false)}
       ></Video>

@@ -1,4 +1,5 @@
 import { Typography, Paper } from "@mui/material";
+import triangleIcon from "../../assets/images/triangle-icon.svg";
 import "./Banner.css";
 
 export default function Banner() {
@@ -20,7 +21,7 @@ export default function Banner() {
     >
       <img
         alt="triangle"
-        src="/triangle-icon.png"
+        src={triangleIcon}
         width="40"
         height="30"
         className="triangle"

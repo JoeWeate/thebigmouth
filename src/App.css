@@ -1,19 +1,23 @@
 .App {
   text-align: center;
+  background-color: black;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+
 .logo-image {
   margin-left: 4em;
 }
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -38,14 +42,16 @@
     transform: rotate(360deg);
   }
 }
+
 @font-face {
   font-family: "Core Sans D 45 Medium W01 Rg";
   src:
-   
+
     url("./fonts/Core Sans D 45 Medium W01 Rg.svg") format("truetype"),
     url("./fonts/Core Sans D 45 Medium W01 Rg.woff") format("woff"),
     url("./fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2");
 }
+
 @font-face {
   font-family: "Uni Sans Bold", sans-serif;
   src: url("./fonts/Uni Sans Bold.ttf") format("truetype");
@@ -69,6 +75,7 @@
 .right-box>h1 {
   margin: 0;
 }
+
 .triangle {
   position: absolute;
   margin-bottom: 4rem;
