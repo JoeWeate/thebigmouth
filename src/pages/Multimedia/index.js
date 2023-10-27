@@ -5,6 +5,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import BannerMultimedia from "../../components/BannerMultimedia";
 import AboutInfo from "../../components/Page4/About/AboutInfo";
+import Information from "../../components/Page4/Information";
 import {getOneMultimedia} from "../../hooks/API/multimedia";
 
 import styles from './index.module.css';
@@ -37,6 +38,9 @@ const Multimedia = () => {
           </Grid>
           <Grid item xs={12}>
               {!isLoading && !isEmpty(media) && <AboutInfo />}
+          </Grid>
+          <Grid item xs={12}>
+              {!isLoading && !isEmpty(media) && <Information />}
           </Grid>
       </Grid>
 

@@ -1,6 +1,18 @@
+.imgWrapper {
+    position: relative;
+}
+
 .img{
     display: block;
     width: 100vw;
     height: calc(100vh - 66px); /* 66px is the height of the navbar */
     object-fit: cover;
+}
+
+.triangle {
+    display: block;
+    position: absolute;
+    top: 70vh;
+    left: 50%;
+    transform: translateX(-50%);
 }

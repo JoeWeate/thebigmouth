@@ -1,5 +1,6 @@
 import { Typography, Paper, CardMedia } from "@mui/material";
 import './Banner.css';
+import triangleIcon from "../../assets/images/triangle-icon.svg";
 //import CrossfadeImage from "react-crossfade-image";
 //< CrossfadeImage src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png" />
 
@@ -59,7 +60,7 @@ const Banner = (props) => {
 
             </div>
 
-            <img alt="triangle" src="/triangle-icon.png" width="40" height="30" className="triangle" />
+            <img alt="triangle" src={triangleIcon} width="73" height="70" className="triangle" />
 
         </Paper >
 
