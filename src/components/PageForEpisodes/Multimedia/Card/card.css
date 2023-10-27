@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 350px;
+  /* border: 2px solid #b40e0e; */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+  font-weight: 300;
+  line-height: 1.2;
+  padding: 10px;
+}
+
+.card-container .main-image {
+  margin-bottom: 15px;
+  height: 200px;
+  width: 100%;
+}
+
+.card-container h3 {
+  font-family: Arial;
+}
+
+/* %%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+.image-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-items: center;
+}
+
+.circle-image {
+  width: 23%;
+}
+
+.triangle-img {
+  width: 8%;
+  top: 10%;
+}
+
+.play-image {
+  width: 20%;
+}
+
+.image-container img {
+  grid-area: 1 / 1;
+}

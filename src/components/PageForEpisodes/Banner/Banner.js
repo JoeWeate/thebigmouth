@@ -18,30 +18,6 @@ export default function Banner() {
         position: "relative",
       }}
     >
-      <div className="logo-text">
-        <Typography
-          variant="h1"
-          sx={{
-            position: "absolute",
-            fontFamily: "Arial",
-            color: "white",
-            textAlign: "left",
-            whiteSpace: "nowrap",
-            fontSize: {
-              xs: "2.5rem",
-              sm: "5rem",
-              md: "5rem",
-              lg: "6rem",
-              xl: "6rem",
-            },
-            left: "15%", // Adjust the left position as needed
-            transform: "translateY(-50%)",
-          }}
-        >
-          TVshow title
-        </Typography>
-      </div>
-
       <img
         alt="triangle"
         src="/triangle-icon.png"

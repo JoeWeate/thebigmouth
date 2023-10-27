@@ -8,7 +8,7 @@ import { TitleComponent } from "../../components/TitleComponent";
 import VideoBanner from "../../components/VideoBanner";
 import SideBySide from "../../components/sideBySide/SideBySide";
 import Banner from "../../components/Banner/Banner";
-import MultiMediaSection from "../../components/multimedia-Section/index"
+import MultiMediaSection from "../../components/multimedia-Section/index";
 export default function Home() {
   // const [message, setMessage] = useState("");
   // const { user, isLoading } = useAuth0();
@@ -42,13 +42,11 @@ export default function Home() {
       <Banner />
       <SideBySide />
       <VideoBanner />
-      <MultiMediaSection/>
+      <MultiMediaSection />
       {/* <img
            src={`https://${env_config.s3.BUCKET}.s3.amazonaws.com/public/big-mouth.png`}
           style={{ width: 250, height: 250 }}
         /> */}
-
     </Grid>
   );
 }
-
