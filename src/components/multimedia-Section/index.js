@@ -24,8 +24,6 @@ function Index(props) {
   console.log( multimediaData);
 
  
-
-
   return (
     <div className="container-mult">
       <VideoSection sectionTitle="New to the Bigmouth" multimediaData={multimediaData} />
