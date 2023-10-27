@@ -51,18 +51,4 @@ export default function Home() {
     </Grid>
   );
 }
-// import Banner from "../../components/PageForEpisodes/Banner/Banner";
-// import About from "../../components/PageForEpisodes/About/About";
-// {/* <Grid
-// container
-// style={{
-//   margin: "auto",
-//   display: "flex",
-//   flexDirection: "column",
-//   justifyContent: "center",
-//   alignItems: "center",
-// }}
-// >
-// <Banner />
-// <About />
-// </Grid> */}
+
