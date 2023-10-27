@@ -81,7 +81,7 @@ const VideoBanner = ({ episode }) => {
       onMouseLeave={() => setContainerHovered(false)}
     >
       <Video
-        poster={episode.image}
+        poster={episode.episode.image}
         onMouseEnter={() => setMainImageHovered(true)}
         onMouseLeave={() => setMainImageHovered(false)}
       ></Video>

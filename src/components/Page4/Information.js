@@ -25,7 +25,7 @@ const Information = ({ episode }) => {
                 <Typography classname="info" sx={{ color: "white" }}>
                     <p>INFORMATION</p>
                 </Typography>
-                {!episode.rating && setDisable(true)}
+                {!episode.episode.rating && setDisable(true)}
                 {open ?
                     (<Button className="button-2" variant="text" disableRipple onClick={handleClickUp} sx={{
                         ml: 1,
