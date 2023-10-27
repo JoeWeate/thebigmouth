@@ -1,0 +1,6 @@
+.img{
+    display: block;
+    width: 100vw;
+    height: calc(100vh - 66px); /* 66px is the height of the navbar */
+    object-fit: cover;
+}
