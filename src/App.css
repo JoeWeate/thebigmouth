@@ -40,15 +40,14 @@
 @font-face {
   font-family: "Core Sans D 45 Medium W01 Rg";
   src:
-    url("./fonts/CoreSansD45Medium.svg#Core Sans D 45 Medium W01 Rg")
-      format("svg"),
-    url("src/fonts/Core Sans D 45 Medium W01 Rg.svg") format("truetype"),
-    url("src/fonts/Core Sans D 45 Medium W01 Rg.woff") format("woff"),
-    url("src/fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2");
+    url("./fonts/Core Sans D 45 Medium W01 Rg.svg") format("svg"),
+    url("./fonts/Core Sans D 45 Medium W01 Rg.ttf") format("truetype"),
+    url("./fonts/Core Sans D 45 Medium W01 Rg.woff") format("woff"),
+    url("./fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2");
 }
 @font-face {
   font-family: "Uni Sans Bold", sans-serif;
-  src: url("src/fonts/Uni Sans Bold.ttf") format("truetype");
+  src: url("./fonts/Uni Sans Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
