@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Paper, styled } from "@mui/material";
 
 const VideoImageContainer = styled(Paper)(
-  ({ theme, isContainerHovered, isMainImageHovered }) => ({
-    minHeight: "700px",
+  ({ isContainerHovered, isMainImageHovered }) => ({
+    minHeight: "90vh",
     backgroundColor: "#000",
     textAlign: "center",
     position: "relative",
@@ -48,7 +48,7 @@ const Image = styled("img")({
   margin: "0 10px",
 });
 
-const SIcon = styled("img")(({ theme, isHovered }) => ({
+const SIcon = styled("img")(({ isHovered }) => ({
   width: isHovered ? "45px" : "40px",
   height: isHovered ? "45px" : "40px",
   position: "absolute",
@@ -59,7 +59,7 @@ const SIcon = styled("img")(({ theme, isHovered }) => ({
   fontSize: isHovered ? "100px" : "100px",
 }));
 
-const CircleIcon = styled("img")(({ theme, isHovered }) => ({
+const CircleIcon = styled("img")(({ isHovered }) => ({
   width: isHovered ? "83px" : "105px",
   height: isHovered ? "83px" : "105px",
   position: "absolute",
@@ -69,19 +69,19 @@ const CircleIcon = styled("img")(({ theme, isHovered }) => ({
   transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s", // Increased transition duration
 }));
 
-const VideoBanner = ({ episode }) => {
+const VideoBanner = ({ image }) => {
   const [isContainerHovered, setContainerHovered] = useState(false);
   const [isMainImageHovered, setMainImageHovered] = useState(false);
 
   return (
-    <VideoImageContainer
+    <VideoImageContainer sx={{ height: "90vh" }}
       isContainerHovered={isContainerHovered}
       isMainImageHovered={isMainImageHovered}
       onMouseEnter={() => setContainerHovered(true)}
       onMouseLeave={() => setContainerHovered(false)}
     >
-      <Video
-        poster={episode.episode.image}
+      <Video sx={{ height: "90vh" }}
+        poster={image}
         onMouseEnter={() => setMainImageHovered(true)}
         onMouseLeave={() => setMainImageHovered(false)}
       ></Video>

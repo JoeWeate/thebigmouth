@@ -2,16 +2,14 @@ import { Button, Divider, Typography, Collapse } from "@mui/material"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import "./Information.css"
-import theme from "../../theme";
 import { useState } from "react";
 
 
-const Information = ({ episode }) => {
+const Information = ({ status }) => {
     const [open, setOpen] = useState(false)
-    const [disable, setDisable] = useState(false)
 
     const handleClick = () => {
-        setOpen(true)
+        setOpen(status)
     }
 
     const handleClickUp = () => {
@@ -25,7 +23,6 @@ const Information = ({ episode }) => {
                 <Typography classname="info" sx={{ color: "white" }}>
                     <p>INFORMATION</p>
                 </Typography>
-                {!episode.episode.rating && setDisable(true)}
                 {open ?
                     (<Button className="button-2" variant="text" disableRipple onClick={handleClickUp} sx={{
                         ml: 1,
@@ -36,7 +33,7 @@ const Information = ({ episode }) => {
                         <KeyboardArrowUpIcon sx={{ fontSize: 40, color: "white" }} />
                     </Button>
                     ) : (
-                        <Button disable={disable} className="button-2" variant="text" disableRipple onClick={handleClick} sx={{
+                        <Button className="button-2" variant="text" disableRipple onClick={handleClick} sx={{
                             ml: 1,
                             "&.MuiButtonBase-root:hover": {
                                 bgcolor: "transparent"

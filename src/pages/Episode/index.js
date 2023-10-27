@@ -1,5 +1,5 @@
 import AboutInfo from "../../components/Page4/About/AboutInfo";
-import PlaceholderVideo from "../../components/Page4/PlaceholderVideo";
+import VideoBanner from "../../components/Page4/PlaceholderVideo";
 import Information from "../../components/Page4/Information";
 import { getSingleEpisode } from "../../hooks/API/singleEpisode";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -22,7 +22,7 @@ function Episode() {
     const { search } = useLocation();
     const { user, isLoading } = useAuth0();
     const [isLoadingEpisode, setIsLoadingEpisode] = useState(false);
-
+    const [status, setStatus] = useState(true)
     const parsedQuery = queryString.parse(search, { decodeURIComponent: (str) => str });
     const episodeID = parsedQuery.episode_id;
 
@@ -33,14 +33,17 @@ function Episode() {
         if (!isLoading && user) {
             setIsLoadingEpisode(true);
             getSingleEpisode(id, episodeID).then((data) => {
-                const { singleEpisode } = data || {};
+                const { episode } = data || {};
                 console.log("data", data);
-                setEpisode(singleEpisode);
+                setEpisode(episode);
+                if (!episode.rating) {
+                    setStatus(false)
+                }
             }).then(() => setIsLoadingEpisode(false));
         }
     }, [isLoading, user, id, episodeID]);
 
-    console.log("episode", episode)
+
     return (
 
         <Grid container sx={{ minHeight: "100vh", width: "100vw", color: "white" }}>
@@ -49,14 +52,17 @@ function Episode() {
                     <p>Try another ID! There is no Episode with ID {id} or {episodeID}</p>
                 )}
                 {!isLoadingEpisode && !isEmpty(episode) && (
-                    <PlaceholderVideo episode={episode} />
+                    <VideoBanner image={episode.image} />
                 )}
             </Grid>
             <Grid item xs={12}>
-                {!isLoading && !isEmpty(episode) && <AboutInfo episode={episode} />}
-            </Grid>
-            <Grid item xs={12}>
-                {!isLoading && !isEmpty(episode) && <Information episode={episode} />}
+                {!isLoading && !isEmpty(episode) &&
+                    <div>
+
+                        <AboutInfo description={episode.description} />
+                        <Information status={status} />
+                    </div>
+                }
             </Grid>
         </Grid>
     )

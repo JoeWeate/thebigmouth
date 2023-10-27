@@ -4,7 +4,7 @@ const api = configureAxios({});
 
 export const getSingleEpisode = async (id, episode_id) => {
     try {
-        const response = await api.get(`/episode/${id}?episode_id=${episode_id}`);
+        const response = await api.get(`/episodes/${id}?episode_id=${episode_id}`);
         return response.data;
     } catch (error) {
         console.error(error);
