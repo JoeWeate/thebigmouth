@@ -13,11 +13,15 @@ export const getMultimedia = () => {
 }
 
 export const getOneMultimedia = (id) => {
-    return api.get(`/multimedia/${id}`, {
-    }).then((data) => {
+    console.log('API Call Started');
+    return api.get(`/multimedia/${id}`)
+      .then((data) => {
+        console.log('API Call Successful');
         return Promise.resolve(data.data);
-    }).catch((error) => {
-        console.log(error);
+      })
+      .catch((error) => {
+        console.log('API Call Failed:', error);
         // return Promise.reject(error);
-    });
-}
+      });
+  }
+  

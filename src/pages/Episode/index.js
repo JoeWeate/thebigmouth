@@ -16,6 +16,9 @@ function Episode() {
     const { user, isLoading } = useAuth0();
     const [isLoadingEpisode, setIsLoadingEpisode] = useState(false);
     console.log(id, episode_id, location);
+
+
+
     useEffect(() => {
         if (!isLoading && user) {
             getSingleEpisode(id, episode_id).then((data) => {
@@ -26,8 +29,12 @@ function Episode() {
             }).then(() => setIsLoadingEpisode(false));
         }
     }, [isLoading, user, id, episode_id]);
+
+
+
     return (
         <div>
+
             {!isLoading && !isLoadingEpisode && isEmpty(episode) && (
                 <p>Try another ID! There is no Episode with ID {id} or {episode_id}</p>
             )}

@@ -1,92 +1,160 @@
-import { Button, Divider, Typography, Collapse } from "@mui/material"
+import {Button, Divider, Typography, Collapse} from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import "./Information.css"
-import theme from "../../theme";
-import { useState } from "react";
+import './Information.css';
+import {useState} from 'react';
 
-
-const Information = ({ episode }) => {
-    const [open, setOpen] = useState(false)
-    const [disable, setDisable] = useState(false)
+const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
+    const [open, setOpen] = useState(false);
+    const [disable, setDisable] = useState(false);
 
     const handleClick = () => {
-        setOpen(true)
-    }
+        setOpen(true);
+    };
 
     const handleClickUp = () => {
         setOpen(false);
-    }
+    };
 
     return (
-        <diV className="info-wrapper">
-            <Divider sx={{ backgroundColor: "white" }} ></Divider>
+        <div className="info-wrapper">
+            <Divider sx={
+                {backgroundColor: 'white'}
+            }></Divider>
             <div className="info-container">
-                <Typography classname="info" sx={{ color: "white" }}>
+                <Typography className="info"
+                    sx={
+                        {color: 'white'}
+                }>
                     <p>INFORMATION</p>
                 </Typography>
-                {!episode.rating && setDisable(true)}
-                {open ?
-                    (<Button className="button-2" variant="text" disableRipple onClick={handleClickUp} sx={{
-                        ml: 1,
-                        "&.MuiButtonBase-root:hover": {
-                            bgcolor: "transparent"
-                        }
-                    }}>
-                        <KeyboardArrowUpIcon sx={{ fontSize: 40, color: "white" }} />
-                    </Button>
-                    ) : (
-                        <Button disable={disable} className="button-2" variant="text" disableRipple onClick={handleClick} sx={{
-                            ml: 1,
-                            "&.MuiButtonBase-root:hover": {
-                                bgcolor: "transparent"
+                {
+                !rated && setDisable(true)
+            }
+                {
+                open ? (
+                    <Button className="button-2" variant="text" disableRipple
+                        onClick={handleClickUp}
+                        sx={
+                            {ml: 1}
+                    }>
+                        <KeyboardArrowUpIcon sx={
+                            {
+                                fontSize: 40,
+                                color: 'white'
                             }
-                        }}>
-                            <KeyboardArrowDownIcon sx={{ fontSize: 40, color: "white" }} />
-                        </Button>
-                    )}
-            </div>
+                        }/>
+                    </Button>
+                ) : (
+                    <Button disable={
+                            disable ? true : undefined
+                        }
+                        className="button-2"
+                        variant="text"
+                        disableRipple
+                        onClick={handleClick}
+                        sx={
+                            {ml: 1}
+                    }>
+                        <KeyboardArrowDownIcon sx={
+                            {
+                                fontSize: 40,
+                                color: 'white'
+                            }
+                        }/>
+                    </Button>
+                )
+            } </div>
             <Collapse in={open}>
                 <div className="item">
-                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: "white" }}>
+                    <Typography sx={
+                        {
+                            fontSize: 18,
+                            fontWeight: 600,
+                            color: 'white'
+                        }
+                    }>
                         <p>Released</p>
                     </Typography>
-                    <Typography sx={{ fontSize: 14, marginTop: "-1.5rem", color: "white" }}>
-                        <p>2015</p>
+                    <Typography sx={
+                        {
+                            fontSize: 14,
+                            marginTop: '-1.5rem',
+                            color: 'white'
+                        }
+                    }>
+                        <p>{released}</p>
                     </Typography>
                 </div>
                 <div className="item">
-                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: "white" }}>
+                    <Typography sx={
+                        {
+                            fontSize: 18,
+                            fontWeight: 600,
+                            color: 'white'
+                        }
+                    }>
                         <p>Rated</p>
                     </Typography>
-                    <Typography sx={{ fontSize: 14, marginTop: "-1.5rem", color: "white" }}>
-                        <p>15</p>
+                    <Typography sx={
+                        {
+                            fontSize: 14,
+                            marginTop: '-1.5rem',
+                            color: 'white'
+                        }
+                    }>
+                        <p>{rated}</p>
                     </Typography>
                 </div>
                 <div className="item">
-                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: "white" }}>
+                    <Typography sx={
+                        {
+                            fontSize: 18,
+                            fontWeight: 600,
+                            color: 'white'
+                        }
+                    }>
                         <p>Region of Origin</p>
                     </Typography>
-                    <Typography sx={{ fontSize: 14, marginTop: "-1.5rem", color: "white" }}>
-                        <p>United Kingdom</p>
+                    <Typography sx={
+                        {
+                            fontSize: 14,
+                            marginTop: '-1.5rem',
+                            color: 'white'
+                        }
+                    }>
+                        <p>{regionOfOrigin}</p>
                     </Typography>
                 </div>
                 <div className="item">
-                    <Typography sx={{ fontSize: 18, fontWeight: 600, color: "white" }}>
+                    <Typography sx={
+                        {
+                            fontSize: 18,
+                            fontWeight: 600,
+                            color: 'white'
+                        }
+                    }>
                         <p>Original Audio</p>
                     </Typography>
-                    <Typography sx={{ fontSize: 14, marginTop: "-1.5rem", color: "white" }}>
-                        <p>English</p>
+                    <Typography sx={
+                        {
+                            fontSize: 14,
+                            marginTop: '-1.5rem',
+                            color: 'white'
+                        }
+                    }>
+                        <p>{originalAudio}</p>
                     </Typography>
                 </div>
-
-
             </Collapse>
-            <Divider sx={{ marginBottom: "1rem", backgroundColor: "white" }}></Divider>
-        </diV >
+            <Divider sx={
+                {
+                    marginBottom: '1rem',
+                    backgroundColor: 'white'
+                }
+            }></Divider>
+        </div>
+    );
+};
 
-
-    )
-}
-
-export default Information
+export default Information;
