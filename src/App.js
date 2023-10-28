@@ -26,7 +26,7 @@ function App() {
       <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start" }}>
         <Outlet />
       </main>
-      <ShowMore />
+      {/* <ShowMore /> */}
       <Footer />
     </Grid>
   );

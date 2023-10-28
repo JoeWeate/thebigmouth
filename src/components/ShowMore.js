@@ -14,7 +14,8 @@ const ShowMore = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
+        height: "50vh",
+        fontSize: "small",
         background: "black", // Transparent background
       }}
     >
