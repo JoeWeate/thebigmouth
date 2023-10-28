@@ -13,7 +13,6 @@ const Footer = () => {
         top: "5690px",
         left: "0",
         height: "279.72px",
-        marginTop: "2.5rem",
       }}
     >
       <CssBaseline />
