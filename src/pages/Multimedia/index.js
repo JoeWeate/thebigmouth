@@ -20,14 +20,14 @@ const Multimedia = () => {
 
   useEffect(() => {
     const axios = configureAxios();
-  
+
     setIsLoadingMedia(true);
     axios.get(`/multimedia`)
       .then((response) => {
         const { multimedia } = response.data || {};
         console.log('Multimedia Data:', multimedia);
         console.log('Target ID:', ID);
-        
+
         const selectedMedia = multimedia.find(item => item.ID.S.toString() === ID.toString());
         setMedia(selectedMedia);
       })
@@ -36,8 +36,8 @@ const Multimedia = () => {
       })
       .finally(() => setIsLoadingMedia(false));
   }, [ID]);
-  
-  
+
+
   useEffect(() => {
     const axios = configureAxios();
 
@@ -52,7 +52,6 @@ const Multimedia = () => {
         })
         .catch((error) => {
           console.log('Error fetching episodes:', error);
-          // Handle error (e.g., show user-friendly error message)
         })
         .finally(() => setLoadingEpisodes(false));
     }
@@ -70,7 +69,7 @@ const Multimedia = () => {
         {/* <p >{media.Description?.S}</p> */}
 
       </Grid>
- 
+
       <Grid item xs={12}>
           {!isLoadingMedia && !isEmpty(media) && (
             <SeasonComponent
