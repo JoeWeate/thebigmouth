@@ -20,7 +20,7 @@ const Multimedia = () => {
     getOneMultimedia(ID)
       .then((data) => {
         const { multimedia, episodes } = data || {};
-        setMedia(multimedia);
+        setMedia(multimedia); 
         setEpisodes(episodes);
       })
       .finally(() => setIsLoadingMedia(false));
