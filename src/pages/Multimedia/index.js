@@ -10,6 +10,10 @@ import styles from './index.module.css';
 import configureAxios from '../../hooks/configureAxios';
 import { colors } from '@mui/material';
 import SeasonComponent from '../../components/SeasonComponent/SeasonComponent';
+import EpisodePage from "../Episode/";
+import { Route, Routes } from 'react-router-dom';
+
+
 
 const Multimedia = () => {
   const params = useParams();
@@ -76,6 +80,9 @@ const Multimedia = () => {
               episodes={media.episodes}
             />
           )}
+        {/* <Routes>
+         <Route path='/hey' element={<EpisodePage />} />
+      </Routes> */}
         </Grid>
 
       <Grid item xs={12}>
