@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './videoSection.css';
 
 export default function VideoSection({ sectionTitle, multimediaData }) {
@@ -9,7 +10,12 @@ export default function VideoSection({ sectionTitle, multimediaData }) {
         {multimediaData.map((item, index) => (
           <div key={index} className="video-card">
             {item.images && item.images.S && (
-              <img src={item.images.S} alt={`Image ${item.ID && item.ID.S ? item.ID.S : index}`} />
+              <Link to={`/multimedia/${item.ID.S}`}>
+                <div className="image-container">
+                  <img src={item.images.S} alt={`Image ${item.ID && item.ID.S ? item.ID.S : index}`} />
+                  {item.Name && item.Name.S && <p className="image-text">{item.Name.S}</p>}
+                </div>
+              </Link>
             )}
           </div>
         ))}
