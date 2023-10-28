@@ -43,8 +43,8 @@ const PlayButton = styled("div")(({ theme }) => ({
 }));
 
 const Image = styled("img")({
-  width: "90px",
-  height: "90px",
+  width: "100%",
+    height: "100%",
   margin: "0 10px",
 });
 
@@ -80,14 +80,15 @@ const VideoBanner = ({ episode }) => {
       onMouseEnter={() => setContainerHovered(true)}
       onMouseLeave={() => setContainerHovered(false)}
     >
-      <Video
+      {/* <Video
         poster={episode.image}
         onMouseEnter={() => setMainImageHovered(true)}
         onMouseLeave={() => setMainImageHovered(false)}
-      ></Video>
+      ></Video> */}
       <PlayButton>
         <Image
-          src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/y-p.png"
+
+          src={episode.image}
           alt="Play Button"
         />
         <CircleIcon
