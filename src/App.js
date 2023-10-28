@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
-// import NavBar from "./components/navbar/NavBar";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar/NavBar";
+// import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Information from "./components/Page4/Information.js";
 import PlaceholderVideo from "./components/Page4/PlaceholderVideo.js";
