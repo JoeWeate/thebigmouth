@@ -24,7 +24,7 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
             <div className="info-container">
                 <Typography className="info"
                     sx={
-                        {color: 'white'}
+                        {color: 'black'}
                 }>
                     <p>INFORMATION</p>
                 </Typography>
