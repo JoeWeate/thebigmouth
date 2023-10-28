@@ -5,7 +5,9 @@ import "./card.css";
 const Card = ({ episode }) => {
   return (
     <div className="card-container">
-      <Link to={`http://localhost:3000/episode/12?episode_id=S01E01`}>
+      <Link
+        to={`http://localhost:3000/episode/12?episode_id=${episode.episode_id.S}`}
+      >
         <div className="image-container">
           <img
             className="main-image"
