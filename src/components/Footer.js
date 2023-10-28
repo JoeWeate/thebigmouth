@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Typography, Box, CssBaseline } from "@mui/material";
+import { Container, Grid, Box, CssBaseline } from "@mui/material";
 import Link from "@mui/material/Link";
 
 const Footer = () => {
@@ -8,8 +8,12 @@ const Footer = () => {
       style={{
         backgroundColor: "#E6007E",
         width: "100%",
-        position: "absolute",
-        top: "3180px",
+        display: "flex",
+        alignItems: "flex-end",
+        top: "5690px",
+        left: "0",
+        height: "279.72px",
+        marginTop: "2.5rem",
       }}
     >
       <CssBaseline />
@@ -21,41 +25,43 @@ const Footer = () => {
               alignItems="center"
               justifyContent="center"
               height="100%"
+              paddingRight="30px"
             >
-              <img
-                className="logo-image"
-                src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png"
-                alt="Logo"
-                width="237"
-                height="273"
-                style={{
-                  background:
-                    "var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box",
-                  opacity: "1",
-                }}
-              />
-              <div
-                style={{
-                  display: "inline",
-                  position: "absolute",
-                  right: "53%",
-                  transform: "translateX(-50%)",
-                  width: "386px",
-                  height: "79px",
-                  background: "#E6007E",
-                  opacity: 0.77,
-                  backdropFilter: "blur(5px)",
-                  fontFamily: "Uni Sans Bold",
-                  fontSize: "51px",
-                  fontWeight: "bold",
-                  color: "#FFFFFF",
-                  textAlign: "center",
-                  whiteSpace: "nowrap",
-                  letterSpacing: "-2.04px",
-                  zIndex: 1,
-                }}
-              >
-                THE BIG MOUTH
+              <div style={{ position: "relative", marginRight: "4em" }}>
+                <img
+                  className="logo-image"
+                  src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png"
+                  alt="Logo"
+                  width="237"
+                  height="273"
+                  style={{
+                    background:
+                      "var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box",
+                    opacity: "1",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: "386px",
+                    height: "79px",
+                    background: "#E6007E",
+                    opacity: 0.77,
+                    backdropFilter: "blur(5px)",
+                    fontFamily: "Uni Sans Bold",
+                    fontSize: "51px",
+                    fontWeight: "bold",
+                    color: "#FFFFFF",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "-2.04px",
+                    zIndex: 1,
+                  }}
+                >
+                  THE BIG MOUTH
+                </div>
               </div>
             </Box>
           </Grid>
@@ -66,6 +72,7 @@ const Footer = () => {
               justifyContent="space-around"
               height="100%"
               flexDirection="row"
+              marginLeft="3em"
             >
               <Link
                 style={{
@@ -97,7 +104,6 @@ const Footer = () => {
               >
                 Contact
               </Link>
-
               <Link
                 style={{
                   fontFamily: "Core Sans D 45 Medium W01 Rg",

@@ -25,7 +25,7 @@ function App() {
       <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start" }}>
         <Outlet />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </Grid>
   );
 }
