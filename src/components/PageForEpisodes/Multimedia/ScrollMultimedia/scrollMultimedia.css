@@ -5,7 +5,7 @@
 
 .container {
   /* border: 1px solid rgb(35, 236, 236); */
-  height: 40vh;
+  height: 60vh;
   width: 100%;
   position: relative;
   padding-left: 50px;
@@ -26,9 +26,9 @@
 
   position: relative;
 
-  /* border: 1px solid red; */
+  border: 1px solid red;
 
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 .horisontal-scroller .btn-scroll {
@@ -46,7 +46,8 @@
   font-size: 20px;
   position: absolute;
   z-index: 2;
-  padding: 0 10px;
+  width: 20px;
+  border: 1px solid rgb(72, 255, 0);
 }
 
 #btn-scroll-left {
@@ -65,4 +66,5 @@
   align-items: center;
   position: absolute;
   left: 0;
+  border: 1px solid rgb(66, 117, 228);
 }

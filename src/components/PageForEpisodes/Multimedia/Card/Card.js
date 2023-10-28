@@ -1,10 +1,14 @@
 import React from "react";
 import "./card.css";
-const Card = ({ multimedia }) => {
+const Card = ({ episode }) => {
   return (
     <div className="card-container">
       <div className="image-container">
-        <img className="main-image" src={multimedia.url} alt={multimedia.id} />
+        <img
+          className="main-image"
+          src={episode.image?.S}
+          alt={`Episode ${episode.episode_id?.S}`}
+        />
         <img
           className="play-image"
           src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/y-p.png"
@@ -20,13 +24,11 @@ const Card = ({ multimedia }) => {
           src="https://tbh.flipclip.co.in/ics.png"
           alt="Play Button"
         />
-        {/* <div className="frame pink-frame"></div>
-        <div className="frame yellow-frame"></div> */}
       </div>
 
-      <h6>EPISODE {multimedia.episode}</h6>
-      <h3>{multimedia.title}</h3>
-      <p>{multimedia.description}</p>
+      <h6>EPISODE {episode.episode_id?.S}</h6>
+      <h3>{episode.title?.S}</h3>
+      <p>{episode.description?.S}</p>
     </div>
   );
 };
