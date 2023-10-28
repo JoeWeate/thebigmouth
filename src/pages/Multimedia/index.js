@@ -11,6 +11,9 @@ import configureAxios from "../../hooks/configureAxios";
 import { colors } from "@mui/material";
 import SeasonComponent from "../../components/SeasonComponent/SeasonComponent";
 import ScrollMultimedia from "../../components/PageForEpisodes/Multimedia/ScrollMultimedia/ScrollMultimedia";
+import EpisodePage from "../Episode/";
+import { Route, Routes } from "react-router-dom";
+
 const Multimedia = () => {
   const params = useParams();
   const { ID } = params;
@@ -84,6 +87,9 @@ const Multimedia = () => {
           {!isLoadingMedia && !isEmpty(media) && (
             <ScrollMultimedia episodes={media.episodes} />
           )}
+          {/* <Routes>
+         <Route path='/hey' element={<EpisodePage />} />
+      </Routes> */}
         </Grid>
 
         <Grid item xs={12}>

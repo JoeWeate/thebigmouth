@@ -8,6 +8,7 @@ import PlaceholderVideo from "./components/Page4/PlaceholderVideo.js";
 import AboutInfo from "./components/Page4/About/AboutInfo.js";
 // import "./App.css";
 import Banner from "./components/Banner/Banner";
+import ShowMore from "./components/ShowMore";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start" }}>
         <Outlet />
       </main>
+      {/* <ShowMore /> */}
       <Footer />
     </Grid>
   );
