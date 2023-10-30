@@ -1,6 +1,6 @@
 import { Typography, Paper, CardMedia } from "@mui/material";
 import './Banner.css';
-import triangleIcon from "../../assets/images/triangle-icon.svg";
+import triangleIcon from "../../../assets/images/triangle-icon.svg";
 //import CrossfadeImage from "react-crossfade-image";
 //< CrossfadeImage src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png" />
 
