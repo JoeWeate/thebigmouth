@@ -18,50 +18,46 @@ const Multimedia = () => {
   const params = useParams();
   const { ID } = params;
   const [media, setMedia] = useState({});
+  const [episodes, setEpisodes] = useState([]);
   const [isLoadingMedia, setIsLoadingMedia] = useState(true);
   const [loadingEpisodes, setLoadingEpisodes] = useState(true);
 
+  // useEffect(() => {
+  //   const axios = configureAxios();
+
+  //   setIsLoadingMedia(true);
+  //   axios
+  //     .get(`/multimedia`)
+  //     .then((response) => {
+  //       const { multimedia } = response.data || {};
+  //       console.log("Multimedia Data:", multimedia);
+  //       console.log("Target ID:", ID);
+
+  //       const selectedMedia = multimedia.find(
+  //         (item) => item.ID === ID
+  //       );
+  //       console.log(selectedMedia)
+  //       setMedia(selectedMedia);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error fetching multimedia data:", error);
+  //     })
+  //     .finally(() => setIsLoadingMedia(false));
+  // }, []);
+
   useEffect(() => {
     const axios = configureAxios();
-
-    setIsLoadingMedia(true);
     axios
-      .get(`/multimedia`)
+      .get(`/multimedia/${ID}`)
       .then((response) => {
-        const { multimedia } = response.data || {};
-        console.log("Multimedia Data:", multimedia);
-        console.log("Target ID:", ID);
-
-        const selectedMedia = multimedia.find(
-          (item) => item.ID.S.toString() === ID.toString()
-        );
-        setMedia(selectedMedia);
+        const { episodes, multimedia } = response.data || {};
+        setMedia(multimedia);
+        setEpisodes(episodes);
       })
       .catch((error) => {
-        console.log("Error fetching multimedia data:", error);
+        console.log("Error fetching episodes:", error);
       })
-      .finally(() => setIsLoadingMedia(false));
-  }, [ID]);
-
-  useEffect(() => {
-    const axios = configureAxios();
-
-    if (media?.ID?.S) {
-      axios
-        .get(`/multimedia/${media.ID.S}`)
-        .then((response) => {
-          const { episodes } = response.data || {};
-          setMedia((prevMedia) => ({
-            ...prevMedia,
-            episodes,
-          }));
-        })
-        .catch((error) => {
-          console.log("Error fetching episodes:", error);
-        })
-        .finally(() => setLoadingEpisodes(false));
-    }
-  }, [media.ID?.S]);
+  }, []);
 
   return (
     <>
@@ -75,17 +71,17 @@ const Multimedia = () => {
             <p>Try another ID! There is no media with ID {ID}</p>
           )}
           {!isLoadingMedia && !isEmpty(media) && (
-            <BannerMultimedia src={media.images?.S} alt={media.Name?.S} />
+            <BannerMultimedia src={media.Images} alt={media.Name} />
           )}
         </Grid>
         <Grid item xs={12}>
-          <AboutInfo episode={media.Description?.S} />
+          <AboutInfo episode={media.Description} />
           {/* <p >{media.Description?.S}</p> */}
         </Grid>
 
         <Grid item xs={12}>
           {!isLoadingMedia && !isEmpty(media) && (
-            <ScrollMultimedia episodes={media.episodes} />
+            <ScrollMultimedia episodes={episodes} />
           )}
           {/* <Routes>
          <Route path='/hey' element={<EpisodePage />} />
@@ -95,10 +91,10 @@ const Multimedia = () => {
         <Grid item xs={12}>
           {!isLoadingMedia && !isEmpty(media) && (
             <Information
-              released={media.released?.N}
-              rated={media.rated?.N}
-              regionOfOrigin={media.region_of_origin?.S}
-              originalAudio={media.original_audio?.S}
+              released={media.released}
+              rated={media.rated}
+              regionOfOrigin={media.region_of_origin}
+              originalAudio={media.original_audio}
             />
           )}
         </Grid>

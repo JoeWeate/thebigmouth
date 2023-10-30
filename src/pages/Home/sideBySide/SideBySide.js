@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import '../../../src/App.css';
+import '../../../../src/App.css';
 
 
 const darkTheme = createTheme({

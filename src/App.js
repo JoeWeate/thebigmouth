@@ -7,7 +7,6 @@ import Information from "./components/Page4/Information.js";
 import PlaceholderVideo from "./components/Page4/PlaceholderVideo.js";
 import AboutInfo from "./components/Page4/About/AboutInfo.js";
 // import "./App.css";
-import Banner from "./components/Banner/Banner";
 import ShowMore from "./components/ShowMore";
 
 function App() {
