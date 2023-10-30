@@ -8,7 +8,6 @@ export const getMultimedia = () => {
         return Promise.resolve(data.data);
     }).catch((error) => {
         console.log(error);
-        // return Promise.reject(error);
     });
 }
 
@@ -21,7 +20,6 @@ export const getOneMultimedia = (id) => {
       })
       .catch((error) => {
         console.log('API Call Failed:', error);
-        // return Promise.reject(error);
       });
   }
   
