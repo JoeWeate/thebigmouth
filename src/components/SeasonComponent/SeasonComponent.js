@@ -17,7 +17,7 @@ const imageStyle = {
   objectFit: "cover",
 };
 
-const SeasonComponent = ({ episodes }) => {
+const SeasonComponent = ({ episodes, seriesId }) => {
   if (!episodes || episodes.length === 0) {
     return <p>No episodes available for this season.</p>;
   }
@@ -31,23 +31,23 @@ const SeasonComponent = ({ episodes }) => {
       </Grid>
       {episodes.map((episode, index) => (
         <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-          <Link to={`http://localhost:3000/episode/12?episode_id=S01E01`}>
+          <Link to={`/episode/${seriesId}?episode_id=${episode.episode_id}`}>
             <Card style={cardStyle}>
               <CardContent>
                 <Typography variant="h5" component="div">
-                  Episode {episode.episode_id?.S}
+                  Episode {episode.episode_id}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ color: "white" }}>
                   <img
-                    src={episode.image?.S}
-                    alt={`Episode ${episode.episode_id?.S}`}
+                    src={episode.image}
+                    alt={`Episode ${episode.episode_id}`}
                     style={imageStyle}
                   />
                   <br />
                   <strong>Title:</strong> <br />
-                  {episode.title?.S}
+                  {episode.title}
                   <br />
-                  <strong>Description:</strong> {episode.description?.S}
+                  <strong>Description:</strong> {episode.description}
                 </Typography>
               </CardContent>
             </Card>

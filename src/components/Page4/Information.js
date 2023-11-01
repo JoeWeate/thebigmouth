@@ -74,7 +74,6 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
                             color: 'white'
                         }
                     }>
-                        <p>Released</p>
                     </Typography>
                     <Typography sx={
                         {
@@ -83,7 +82,7 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
                             color: 'white'
                         }
                     }>
-                        <p>{released}</p>
+                        <p> Released {released}</p>
                     </Typography>
                 </div>
                 <div className="item">
@@ -94,7 +93,6 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
                             color: 'white'
                         }
                     }>
-                        <p>Rated</p>
                     </Typography>
                     <Typography sx={
                         {
@@ -103,7 +101,7 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
                             color: 'white'
                         }
                     }>
-                        <p>{rated}</p>
+                        <p>Rated {rated}</p>
                     </Typography>
                 </div>
                 <div className="item">
@@ -114,7 +112,6 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
                             color: 'white'
                         }
                     }>
-                        <p>Region of Origin</p>
                     </Typography>
                     <Typography sx={
                         {
@@ -123,7 +120,7 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
                             color: 'white'
                         }
                     }>
-                        <p>{regionOfOrigin}</p>
+                        <p>Region of Origin {regionOfOrigin}</p>
                     </Typography>
                 </div>
                 <div className="item">
@@ -134,7 +131,6 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
                             color: 'white'
                         }
                     }>
-                        <p>Original Audio</p>
                     </Typography>
                     <Typography sx={
                         {
@@ -143,7 +139,7 @@ const Information = ({released, rated, regionOfOrigin, originalAudio}) => {
                             color: 'white'
                         }
                     }>
-                        <p>{originalAudio}</p>
+                        <p>Original Audio {originalAudio}</p>
                     </Typography>
                 </div>
             </Collapse>
