@@ -30,35 +30,38 @@ function Episode() {
     console.log(id, episodeID);
 
     useEffect(() => {
-        if (!isLoading && user) {
-            setIsLoadingEpisode(true);
-            getSingleEpisode(id, episodeID).then((data) => {
-                const { episode } = data || {};
-                console.log("data", data);
-                setEpisode(episode);
-                if (!episode.rating) {
-                    setStatus(false)
-                }
-            }).then(() => setIsLoadingEpisode(false));
-        }
-    }, [isLoading]);
+      if (!isLoading && user) {
+        setIsLoadingEpisode(true);
+        getSingleEpisode(id, episodeID)
+          .then((data) => {
+            const { episode } = data || {};
+            console.log("data", data);
+            setEpisode(episode);
+            if (!episode.rating) {
+              setStatus(false);
+            }
+          })
+          .then(() => setIsLoadingEpisode(false));
+      }
+    }, [id, episodeID, user, isLoading]);
 
 
   useEffect(() => {
     const axios = configureAxios();
-      axios.get(`/multimedia/${id}`)
-        .then((response) => {
-          const { multimedia } = response.data || {};
-          setMedia((prevMedia) => ({
-            ...prevMedia,
-            ...multimedia,
-          }));
-        })
-        .catch((error) => {
-          console.log('Error fetching media:', error);
-        })
-        .finally(() => setLoadingMedia(false));
-  }, []);
+    axios
+      .get(`/multimedia/${id}`)
+      .then((response) => {
+        const { multimedia } = response.data || {};
+        setMedia((prevMedia) => ({
+          ...prevMedia,
+          ...multimedia,
+        }));
+      })
+      .catch((error) => {
+        console.log("Error fetching media:", error);
+      })
+      .finally(() => setLoadingMedia(false));
+  }, [id]);
 
 
     return (
