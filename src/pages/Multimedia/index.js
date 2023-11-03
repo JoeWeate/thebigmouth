@@ -11,6 +11,9 @@ import ScrollMultimedia from "../../components/PageForEpisodes/Multimedia/Scroll
 import SeasonComponent from "../../components/SeasonComponent/SeasonComponent";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import VideoSection from "../Home/multimedia-Section/VideoSection";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./index.module.css"
 
 const Multimedia = () => {
   const params = useParams();
@@ -59,6 +62,23 @@ const Multimedia = () => {
       fetchDetailedData();
     }
   }, [ID]);
+
+  const [multimediaData, setMultimediaData] = useState([]);
+
+  useEffect(() => {
+    const axios = configureAxios();
+    axios
+      .get(`/multimedia`)
+      .then((response) => {
+        if (response.data) {
+          setMultimediaData(response.data.multimedia);
+          console.log("Fetched Multimedia Data:", response.data.multimedia);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
  
 
   return (
@@ -86,10 +106,8 @@ const Multimedia = () => {
 
           {!isLoadingMedia && !isEmpty(media) && (
             <Link to={`/episode/${media.ID}?episode_id=S01E01`}>
-
             <ScrollMultimedia episodes={episodes} seriesId={media.ID} />
             </Link>
-
           )}
         </Grid>
     
@@ -104,8 +122,14 @@ const Multimedia = () => {
       />
     )}
   </Grid>
+     <VideoSection
+        sectionTitle="Related"
+        multimediaData={multimediaData}
+      /> 
 
-       
+      <Routes>
+        <Route path="/multimedia/:ID" element={<Multimedia />} />
+      </Routes>
       </Grid>
     </>
   );
