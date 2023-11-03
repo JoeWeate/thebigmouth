@@ -1,13 +1,14 @@
 import React from "react";
 import "./card.css";
 const Card = ({ episode }) => {
+  console.log(episode , 'here with card');
   return (
     <div className="card-container">
       <div className="image-container">
         <img
           className="main-image"
-          src={episode.image?.S}
-          alt={`Episode ${episode.episode_id?.S}`}
+          src={episode.image}
+          alt={`Episode ${episode.episode_id}`}
         />
         <img
           className="play-image"
@@ -26,9 +27,9 @@ const Card = ({ episode }) => {
         />
       </div>
 
-      <h6>EPISODE {episode.episode_id?.S}</h6>
-      <h3>{episode.title?.S}</h3>
-      <p>{episode.description?.S}</p>
+      <h6>EPISODE {episode.episode_id}</h6>
+      <h3>{episode.title}</h3>
+      <p>{episode.description}</p>
     </div>
   );
 };

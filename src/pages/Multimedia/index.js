@@ -17,7 +17,7 @@ const Multimedia = () => {
   const [media, setMedia] = useState({});
   const [episodes, setEpisodes] = useState([]);
   const [isLoadingMedia, setIsLoadingMedia] = useState(true);
-
+  
   useEffect(() => {
     const axios = configureAxios();
     axios
@@ -44,9 +44,9 @@ const Multimedia = () => {
         );
         const { episodes: detailedEpisodes, multimedia: detailedMedia } =
           response.data || {};
+        setEpisodes(detailedEpisodes);
         const selectedMedia = detailedMedia.find((item) => item.ID === ID);
         setMedia(selectedMedia);
-        setEpisodes(detailedEpisodes);
         setIsLoadingMedia(false);
       } catch (error) {
         console.error("Error fetching detailed multimedia data:", error);
@@ -58,7 +58,6 @@ const Multimedia = () => {
       fetchDetailedData();
     }
   }, [ID]);
-
  
 
   return (
