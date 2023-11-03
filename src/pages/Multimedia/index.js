@@ -10,6 +10,7 @@ import styles from "./index.module.css";
 import ScrollMultimedia from "../../components/PageForEpisodes/Multimedia/ScrollMultimedia/ScrollMultimedia"; // Import ScrollMultimedia component
 import SeasonComponent from "../../components/SeasonComponent/SeasonComponent";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Multimedia = () => {
   const params = useParams();
@@ -82,8 +83,13 @@ const Multimedia = () => {
 
       
         <Grid item xs={12}>
+
           {!isLoadingMedia && !isEmpty(media) && (
-            <SeasonComponent episodes={episodes} seriesId={media.ID} />
+            <Link to={`/episode/${media.ID}?episode_id=S01E01`}>
+
+            <ScrollMultimedia episodes={episodes} seriesId={media.ID} />
+            </Link>
+
           )}
         </Grid>
     
