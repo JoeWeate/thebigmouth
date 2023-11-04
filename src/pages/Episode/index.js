@@ -1,13 +1,11 @@
 import AboutInfo from "../../components/Page4/About/AboutInfo";
 import VideoBanner from "../../components/Page4/PlaceholderVideo";
-import Information from "../../components/Page4/Information";
-import { getSingleEpisode } from "../../hooks/API/singleEpisode";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { isEmpty } from "lodash";
 import queryString from "query-string";
-import { Grid } from "@mui/material";
+import { Grid, } from "@mui/material";
 import configureAxios from "../../hooks/configureAxios";
 
 function Episode() {
@@ -24,49 +22,15 @@ function Episode() {
   const episodeID = parsedQuery.episode_id;
   const [media, setMedia] = useState({});
   const [loadingMedia, setLoadingMedia] = useState(true);
-  console.log(id, episodeID);
-
-  // useEffect(() => {
-  //   if (!isLoading && user && episodeID) {
-  //     getSingleEpisode(id, episodeID)
-  //       .then((data) => {
-  //         const { episode } = data || {};
-  //         console.log("data", data);
-  //         setEpisode(episode);
-  //         setIsLoadingEpisode(false);
-  //         if (episode && !episode.rating) {
-  //           setStatus(false);
-  //         }
-  //       })
-  //       .then(() => setIsLoadingEpisode(false));
-  //   }
-  // }, [id, episodeID, user, isLoading]);
-
-  // useEffect(() => {
-  //   if (!isLoading && user) {
-  //     setIsLoadingEpisode(true);
-  //     getSingleEpisode(id, episodeID)
-  //       .then((data) => {
-  //         const { episode } = data || {};
-  //         console.log("episode", episode.episode);
-  //         setEpisode(episode);
-  //         if (!episode.rating) {
-  //           setStatus(false);
-  //         }
-  //       })
-  //       .then(() => setIsLoadingEpisode(false));
-  //   }
-  // }, [isLoading, user, id, episodeID]);
 
   useEffect(() => {
     const axios = configureAxios();
     axios
       .get(`/episodes/${id}`, { params: { episode_id: episodeID } })
       .then((data) => {
-        console.log(data.data.episode.description);
-        const newEpisode = data.data;
-        console.log(newEpisode);
+        const newEpisode = data.data.episode;
         setEpisode(newEpisode);
+        setIsLoadingEpisode(false)
       })
       .catch((error) => {
         console.log("Error fetching Episode:", error);
@@ -85,24 +49,14 @@ function Episode() {
         {!isLoadingEpisode && !isEmpty(episode) && (
           <VideoBanner episode={episode} />
         )}
-      </Grid>
-      <Grid item xs={12}>
+        </Grid>
+        <Grid item xs={12}>
         {!isLoading && !isEmpty(episode) && (
           <div>
             <AboutInfo episode={episode.description} />
-
-            {/* <Information status={status} /> */}
-            {!loadingMedia && (
-              <Information
-                released={media.released?.N}
-                rated={media.rated?.N}
-                regionOfOrigin={media.region_of_origin?.S}
-                originalAudio={media.original_audio?.S}
-              />
-            )}
           </div>
         )}
-      </Grid>
+        </Grid>
     </Grid>
   );
 }

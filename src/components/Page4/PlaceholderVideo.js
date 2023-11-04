@@ -87,7 +87,6 @@ const VideoBanner = ({ episode }) => {
       ></Video> */}
       <PlayButton>
         <Image
-
           src={episode.image}
           alt="Play Button"
         />

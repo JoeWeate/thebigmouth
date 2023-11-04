@@ -79,7 +79,7 @@ const Multimedia = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
- 
+
 
   return (
     <>
@@ -101,7 +101,7 @@ const Multimedia = () => {
         {/* <p >{media.Description?.S}</p> */}
       </Grid>
 
-      
+
         <Grid item xs={12}>
 
           {!isLoadingMedia && !isEmpty(media) && (
@@ -110,7 +110,7 @@ const Multimedia = () => {
             </Link>
           )}
         </Grid>
-    
+
 
     <Grid item xs={12}>
     {!isLoadingMedia && !isEmpty(media) && (
