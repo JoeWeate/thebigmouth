@@ -3,8 +3,8 @@
   font-family: "Core Sans";
   font-style: normal;
   font-weight: 400;
-  src: local(""), url("./fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2"),
-    url("./fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff");
+  src: local(""), url("assets/fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2"),
+    url("assets/fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff");
 }
 
 body {
