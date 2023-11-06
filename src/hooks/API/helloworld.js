@@ -2,11 +2,9 @@ import configureAxios from '../configureAxios'
 
 const api = configureAxios({});
 
-
-export const getHelloWorld = (name = 'World') => {
-    return api.get(`/world/${name}`, {
+export const getHelloWorld = (name = 'Joey') => {
+    return api.get(`/world`, {
     }).then((data) => {
-        console.log(data.data)
         return Promise.resolve(data.data);
     }).catch((error) => {
         console.log(error);
@@ -14,14 +12,12 @@ export const getHelloWorld = (name = 'World') => {
     });
   }
 
-
-export const getLoggedInHelloWorld = () => {
-    return api.get(`/world/secure}`, {
+  export const getHelloWorldByName = (name = '') => {
+    return api.get(`/world/${name}`, {
     }).then((data) => {
-        console.log(data.data)
+        console.log({data})
         return Promise.resolve(data.data);
     }).catch((error) => {
-        console.log(error);
-        return Promise.reject(error);
+        return Promise.resolve('Please make sure you are logged in');
     });
   }

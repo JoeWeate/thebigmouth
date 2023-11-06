@@ -5,13 +5,18 @@ import {
   Grid,
   Button,
 } from '@mui/material'
-import Logo from '../assets/TheBigHouse.png'
+import Logo from '../assets/images/TheBigHouse.png'
+import LoginButton from './Auth/LoginButton'
 import { useTheme } from '@mui/material/styles'
+import { useAuth0 } from "@auth0/auth0-react"
+import LogoutButton from './Auth/LogoutButton'
 
 
 export default function NavBar() {
     const navigate = useNavigate()
     const theme = useTheme()
+    const { isAuthenticated } = useAuth0();
+
 
   return (
     <Grid
@@ -65,11 +70,12 @@ export default function NavBar() {
             </Button>
             <Button size='large'
               onClick={() => {
-                navigate('/page')
+                navigate('/profile')
               }}
             >
-            A Page
+            My Profile
             </Button>
+            {isAuthenticated ? <LogoutButton/> : <LoginButton/>}
           </Grid>
     </Grid>
   )

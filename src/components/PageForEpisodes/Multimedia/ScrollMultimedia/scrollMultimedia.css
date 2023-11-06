@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  /* border: 1px solid rgb(35, 236, 236); */
+  height: 60vh;
+  width: 100%;
+  position: relative;
+  padding-left: 50px;
+}
+
+.horisontal-scroller {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  align-items: center;
+
+  overflow: hidden;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+
+  position: relative;
+
+  /* border: 1px solid red; */
+
+  /* scroll-behavior: smooth; */
+}
+
+.horisontal-scroller .btn-scroll {
+  padding: 5px 12px;
+  margin: 0 5px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.btn-scroll {
+  background-color: transparent;
+  border: none;
+  border-radius: 25px;
+  color: aliceblue;
+  font-size: 20px;
+  position: absolute;
+  z-index: 2;
+  width: 20px;
+  /* border: 1px solid rgb(72, 255, 0); */
+}
+
+#btn-scroll-left {
+  left: 6px;
+  top: 50%;
+}
+
+#btn-scroll-right {
+  right: 6px;
+  top: 50%;
+}
+
+.storys-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  /* border: 1px solid rgb(66, 117, 228); */
+}

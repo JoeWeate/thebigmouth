@@ -1,10 +1,15 @@
 .App {
   text-align: center;
+  background-color: black;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.logo-image {
+  margin-left: 4em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,7 +37,48 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: "Core Sans D 45 Medium W01 Rg";
+  src:
+
+    url("./fonts/Core Sans D 45 Medium W01 Rg.svg") format("truetype"),
+    url("./fonts/Core Sans D 45 Medium W01 Rg.woff") format("woff"),
+    url("./fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Uni Sans Bold", sans-serif;
+  src: url("./fonts/Uni Sans Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.box-side-to-side:hover {
+  border-radius: 50%;
+  transition: 0.4s;
+  transition-timing-function: ease-in;
+}
+
+.box-side-to-side {
+  display: flex;
+  border-radius: 0%;
+  transition: 0.4s;
+  transition-timing-function: ease-out;
+}
+
+.right-box>h1 {
+  margin: 0;
+}
+
+.triangle {
+  position: absolute;
+  margin-bottom: 4rem;
+  align-self: center;
+
 }
