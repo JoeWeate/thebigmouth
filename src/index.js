@@ -5,18 +5,17 @@ import { Grid, CircularProgress } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Auth0Provider } from "@auth0/auth0-react";
 import env_config from "./env_config";
-import Home from "./pages/Home";
-import Error from "./pages/Error";
-import Multimedia from "./pages/Multimedia";
+import Home from "./pages/HomePage";
+import Error from "./pages/ErrorPage";
+import Multimedia from "./pages/MultimediaPage";
+import Profile from "./pages/ProfilePage";
 
 import Theme from "./theme";
 import App from "./App";
 
-import Account from "./pages/Account/index";
-import PostAuthentication from "./pages/PostAuthentication/index";
-import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import PostAuthentication from "./components/PostAuthentication";
 import reportWebVitals from "./reportWebVitals";
-import Episode from "./pages/Episode";
+import Episode from "./pages/EpisodePage";
 
 import "./index.css";
 
@@ -55,9 +54,7 @@ ReactDOM.render(
               <Route
                 path="profile"
                 element={
-                  <ProtectedRoute>
-                    <Account />
-                  </ProtectedRoute>
+                  <Profile/>
                 }
               />
               <Route path="*" element={<Error />} />

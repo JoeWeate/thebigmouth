@@ -6,10 +6,10 @@ import {
   Button,
 } from '@mui/material'
 import Logo from '../assets/images/TheBigHouse.png'
-import LoginButton from './Auth/LoginButton'
+import LoginButton from './LoginButton'
 import { useTheme } from '@mui/material/styles'
 import { useAuth0 } from "@auth0/auth0-react"
-import LogoutButton from './Auth/LogoutButton'
+import LogoutButton from './LogoutButton'
 
 
 export default function NavBar() {

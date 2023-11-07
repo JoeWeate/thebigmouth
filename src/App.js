@@ -1,13 +1,7 @@
 import { Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
-// import NavBar from "./components/navbar/NavBar";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar.js";
 import Footer from "./components/Footer";
-import Information from "./components/Page4/Information.js";
-import PlaceholderVideo from "./components/Page4/PlaceholderVideo.js";
-import AboutInfo from "./components/Page4/About/AboutInfo.js";
-// import "./App.css";
-import ShowMore from "./components/ShowMore";
 
 function App() {
   return (

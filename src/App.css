@@ -47,14 +47,14 @@
   font-family: "Core Sans D 45 Medium W01 Rg";
   src:
 
-    url("./fonts/Core Sans D 45 Medium W01 Rg.svg") format("truetype"),
-    url("./fonts/Core Sans D 45 Medium W01 Rg.woff") format("woff"),
-    url("./fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2");
+    url("assets/fonts/Core Sans D 45 Medium W01 Rg.svg") format("truetype"),
+    url("assets/fonts/Core Sans D 45 Medium W01 Rg.woff") format("woff"),
+    url("assets/fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Uni Sans Bold", sans-serif;
-  src: url("./fonts/Uni Sans Bold.ttf") format("truetype");
+  src: url("assets/fonts/Uni Sans Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
