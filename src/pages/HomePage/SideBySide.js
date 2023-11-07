@@ -54,27 +54,24 @@ const SideBySide = () => {
             spacing={5}
           >
             <Grid item xs={12} md={7} columnSpacing={2}>
-              <Grid item>
-                <Box
-
-                  sx={{
-                    display: "flex",
-                    textAlign: "left",
-                    fontWeight: "bold",
-                    lineHeight: 0.8,
-                    minWidth: "100%",
-                    padding: { xs: "1px", md: "10px" },
-                    fontSize: { xs: "30px", sm: "55px" },
-                    height: { xs: "100%", md: "100%" },
-                  }}
-                >
-                  <h1 style={{ color: lightOn ? "white" : "lightgrey", margin: 0 }}>
-                    {`THE HOME OF OUR `}
-                    <span style={TextColor}>{words[wordIndex]}</span>
-                    {` CONTENT`}
-                  </h1>
-                </Box>
-              </Grid>
+              <Box
+                sx={{
+                  display: "flex",
+                  textAlign: "left",
+                  fontWeight: "bold",
+                  lineHeight: 0.8,
+                  minWidth: "100%",
+                  padding: { xs: "1px", md: "10px" },
+                  fontSize: { xs: "30px", sm: "55px" },
+                  height: { xs: "100%", md: "100%" },
+                }}
+              >
+                <h1 style={{ color: lightOn ? "white" : "lightgrey", margin: 0 }}>
+                  {`THE HOME OF OUR `}
+                  <span style={TextColor}>{words[wordIndex]}</span>
+                  {` CONTENT`}
+                </h1>
+              </Box>
             </Grid>
 
             <Grid item xs={12} md={5}>
