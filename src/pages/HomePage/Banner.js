@@ -61,9 +61,9 @@ const Banner = (props) => {
                             whiteSpace: 'nowrap',
                             fontWeight: "bold",
                             fontSize: {
-                                xs: '3.5rem',
-                                sm: '4rem',
-                                md: '5rem',
+                                xs: '2.3rem',
+                                sm: '4.5rem',
+                                md: '4.5rem',
                                 lg: '6rem',
                                 xl: '6rem',
                             },

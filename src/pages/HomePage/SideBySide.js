@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import '../../App.css';
+
 
 
 const darkTheme = createTheme({
@@ -31,9 +31,9 @@ const SideBySide = () => {
     return () => clearInterval(intervalId);
   }, [words.length]);
 
-    const TextColor = {
-      color: "#E6007E",
-    };
+  const TextColor = {
+    color: "#E6007E",
+  };
 
   return (
     <Container
@@ -54,38 +54,46 @@ const SideBySide = () => {
             spacing={5}
           >
             <Grid item xs={12} md={7} columnSpacing={2}>
-              <Box>
+              <Grid item>
                 <Box
-                  className="right-box"
+
                   sx={{
                     display: "flex",
                     textAlign: "left",
                     fontWeight: "bold",
                     lineHeight: 0.8,
-                    marginRight: { xs: '10px' },
+                    minWidth: "100%",
                     padding: { xs: "1px", md: "10px" },
                     fontSize: { xs: "30px", sm: "55px" },
-                    height: { xs: "100%", md: "491" },
+                    height: { xs: "100%", md: "100%" },
                   }}
                 >
-                  <h1 style={{ color: lightOn ? "white" : "lightgrey" }}>
+                  <h1 style={{ color: lightOn ? "white" : "lightgrey", margin: 0 }}>
                     {`THE HOME OF OUR `}
                     <span style={TextColor}>{words[wordIndex]}</span>
                     {` CONTENT`}
                   </h1>
                 </Box>
-              </Box>
+              </Grid>
             </Grid>
 
             <Grid item xs={12} md={5}>
               <Box
-                className="box-side-to-side"
                 sx={{
+                  display: "flex",
+                  borderRadius: 0,
+                  transition: "0.4s",
+                  transitionTimingFunction: "ease-out",
                   height: "450px",
                   textAlign: "center",
                   border: 3,
                   color: "#E6007E",
-                  padding: '20px'
+                  padding: '20px',
+                  ":hover": {
+                    borderRadius: "50%",
+                    transition: "0.4s",
+                    transitionTimingFunction: "ease-in"
+                  }
                 }}
               >
                 <Box
@@ -95,7 +103,7 @@ const SideBySide = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    fontSize:"20px",
+                    fontSize: "20px",
                     padding: { xs: "22px", md: "30px" },
                   }}
                 >
