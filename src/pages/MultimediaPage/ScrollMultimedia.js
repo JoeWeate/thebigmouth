@@ -1,52 +1,92 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import Card from "./Card";
-import "./ScrollMultimedia.css";
+import { Button, Grid } from "@mui/material";
 
 const ScrollMultimedia = ({ episodes }) => {
-  const ref = useRef("");
-  console.log(ref);
+  const ref = useRef(null);
 
   const handleScroll = (direction) => {
-    console.log(ref);
-
-    console.log("click");
     if (ref.current) {
       if (direction === "left") {
         ref.current.scrollLeft -= 200;
-        console.log("click left");
       } else if (direction === "right") {
         ref.current.scrollLeft += 200;
-        console.log("click right");
       }
     }
   };
+
   if (!episodes || episodes.length === 0) {
     return <p>No episodes available for this season.</p>;
   }
+
   return (
-    <div className="scroll-multimedia-container">
-      <button
+    <Grid container className="scroll-multimedia-container">
+      <Button
         onClick={() => handleScroll("left")}
         className="btn-scroll"
         id="btn-scroll-left"
+        sx={{
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "50%",
+          color: "aliceblue",
+          fontSize: 20,
+          position: "absolute",
+          zIndex: 2,
+          width: 40,
+          left: 6,
+          top: "50%",
+        }}
       >
-        <i className="fas fa-chevron-left"></i>
-      </button>
-      <button
+        &lt;
+      </Button>
+      <Button
         onClick={() => handleScroll("right")}
         className="btn-scroll"
         id="btn-scroll-right"
+        sx={{
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "50%",
+          color: "aliceblue",
+          fontSize: 20,
+          position: "absolute",
+          zIndex: 2,
+          width: 40,
+          right: 6,
+          top: "50%",
+        }}
       >
-        <i className="fas fa-chevron-right"></i>
-      </button>
-      <div ref={ref} className="horisontal-scroller">
-        <div className="storys-container">
+        &gt;
+      </Button>
+      <div
+        ref={ref}
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "row",
+          overflow: "hidden",
+          overflowX: "auto",
+          overscrollBehavior: "contain",
+          position: "relative",
+        }}
+      >
+        <div
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            position: "absolute",
+            left: 0,
+          }}
+        >
           {episodes.map((episode) => (
             <Card key={episode.id} episode={episode} />
           ))}
         </div>
       </div>
-    </div>
+    </Grid>
   );
 };
 
