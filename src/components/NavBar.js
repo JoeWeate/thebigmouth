@@ -13,9 +13,9 @@ import LogoutButton from './LogoutButton'
 
 
 export default function NavBar() {
-    const navigate = useNavigate()
-    const theme = useTheme()
-    const { isAuthenticated } = useAuth0();
+  const navigate = useNavigate()
+  const theme = useTheme()
+  const { isAuthenticated } = useAuth0();
 
 
   return (
@@ -34,9 +34,9 @@ export default function NavBar() {
     >
       <Grid
         item
-        xs={11}
+        xs={12}
         md={10}
-        lg={9}
+        lg={10}
         style={{
           height: 65,
           maxHeight: 65,
@@ -47,36 +47,36 @@ export default function NavBar() {
           margin: 'auto'
         }}
       >
-          <Link
-            to='/'
-            style={{ textDecoration: 'none', display: 'flex', alignItems: 'center'}}
-          >
-              <img
-                alt='The Big House Logo'
-                src={Logo}
-                style={{ width: 50}}
-              />
-            <Typography variant='h5' style={{color: theme.palette.primary.main }}>
+        <Link
+          to='/'
+          style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+        >
+          <img
+            alt='The Big House Logo'
+            src={Logo}
+            style={{ width: 50 }}
+          />
+          <Typography variant='h5' style={{ color: theme.palette.primary.main }}>
             The Big Mouth
-            </Typography>
-          </Link>
+          </Typography>
+        </Link>
 
-            <Button size='large'
-              onClick={() => {
-                navigate('/')
-              }}
-            >
-            Home
-            </Button>
-            <Button size='large'
-              onClick={() => {
-                navigate('/profile')
-              }}
-            >
-            My Profile
-            </Button>
-            {isAuthenticated ? <LogoutButton/> : <LoginButton/>}
-          </Grid>
+        <Button size='large'
+          onClick={() => {
+            navigate('/')
+          }}
+        >
+          Home
+        </Button>
+        <Button size='large'
+          onClick={() => {
+            navigate('/profile')
+          }}
+        >
+          My Profile
+        </Button>
+        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+      </Grid>
     </Grid>
   )
 }
