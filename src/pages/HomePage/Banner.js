@@ -15,7 +15,7 @@ const Banner = (props) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "flex-end",
-            height: "90vh",
+            height: "95vh",
             width: "100%",
             backgroundImage: `url(${backgroundImageUrl})`,
             backgroundSize: "cover",
