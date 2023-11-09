@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Card from "./Card";
+import EpisodeCard from "./EpisodeCard";
 import { Button, Grid } from "@mui/material";
 
 const ScrollMultimedia = ({ episodes }) => {
@@ -82,7 +82,7 @@ const ScrollMultimedia = ({ episodes }) => {
           }}
         >
           {episodes.map((episode) => (
-            <Card key={episode.id} episode={episode} />
+            <EpisodeCard key={episode.id} episode={episode} />
           ))}
         </div>
       </div>
