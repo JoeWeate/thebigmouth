@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Card from "./Card";
+import EpisodeCard from "./EpisodeCard";
 import "./ScrollMultimedia.css";
 
 const ScrollMultimedia = ({ episodes }) => {
@@ -42,7 +42,7 @@ const ScrollMultimedia = ({ episodes }) => {
       <div ref={ref} className="horisontal-scroller">
         <div className="storys-container">
           {episodes.map((episode) => (
-            <Card key={episode.id} episode={episode} />
+            <EpisodeCard key={episode.id} episode={episode} />
           ))}
         </div>
       </div>
