@@ -7,7 +7,7 @@ import AboutInfo from "../../components/AboutInfo";
 import Information from "./Information";
 import configureAxios from "../../api/configureAxios";
 
-import ScrollMultimedia from "./ScrollMultimedia"; // Import ScrollMultimedia component
+import EpisodesCarousel from "./EpisodesCarousel"; // Import ScrollMultimedia component
 import axios from "axios";
 import { Link } from "react-router-dom";
 import VideoSection from "../HomePage/VideoSection";
@@ -36,7 +36,6 @@ const MultimediaPage = () => {
         setIsLoadingMedia(false);
       });
   }, [ID]);
-
 
   useEffect(() => {
     const fetchDetailedData = async () => {
@@ -78,7 +77,6 @@ const MultimediaPage = () => {
       });
   }, []);
 
-
   return (
     <>
       <Grid
@@ -95,35 +93,29 @@ const MultimediaPage = () => {
           )}
         </Grid>
         <Grid item xs={12}>
-        <AboutInfo episode={media.Description} />
-        {/* <p >{media.Description?.S}</p> */}
-      </Grid>
-
+          <AboutInfo episode={media.Description} />
+          {/* <p >{media.Description?.S}</p> */}
+        </Grid>
 
         <Grid item xs={12}>
-
           {!isLoadingMedia && !isEmpty(media) && (
             <Link to={`/episode/${media.ID}?episode_id=S01E01`}>
-            <ScrollMultimedia episodes={episodes} seriesId={media.ID} />
+              <EpisodesCarousel episodes={episodes} seriesId={media.ID} />
             </Link>
           )}
         </Grid>
 
-
-    <Grid item xs={12}>
-    {!isLoadingMedia && !isEmpty(media) && (
-      <Information
-        released={media.Released}
-        rated={media.Rated}
-        regionOfOrigin={media.RegionOfOrigin}
-        originalAudio={media.OriginalAudio}
-      />
-    )}
-  </Grid>
-     <VideoSection
-        sectionTitle="Related"
-        multimediaData={multimediaData}
-      />
+        <Grid item xs={12}>
+          {!isLoadingMedia && !isEmpty(media) && (
+            <Information
+              released={media.Released}
+              rated={media.Rated}
+              regionOfOrigin={media.RegionOfOrigin}
+              originalAudio={media.OriginalAudio}
+            />
+          )}
+        </Grid>
+        <VideoSection sectionTitle="Related" multimediaData={multimediaData} />
       </Grid>
     </>
   );
