@@ -3,9 +3,8 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import VideoSection from "./VideoSection";
 import Multimedia from "../MultimediaPage"; // Import the Multimedia component
-import "./MultimediaSection.css";
 
-function MultimediaSection(props) {
+function MultimediaSection() {
   const [multimediaData, setMultimediaData] = useState([]);
 
   useEffect(() => {
