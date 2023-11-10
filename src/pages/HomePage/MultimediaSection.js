@@ -24,7 +24,10 @@ function MultimediaSection(props) {
   }, []);
 
   return (
-    <div className="container-mult">
+    <div style={{
+      marginTop: "4rem",
+      padding: "35px",
+    }}>
       <VideoSection
         sectionTitle="New to the Bigmouth"
         multimediaData={multimediaData}

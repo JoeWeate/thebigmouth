@@ -1,14 +1,13 @@
 import { Typography, Paper, CardMedia, Box } from "@mui/material";
 import triangleIcon from "../../assets/images/triangle-icon.svg";
 
-const defaultImage = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png";
-const defaultTitle = "THE BIG MOUTH";
-const defaultBackgroundImageUrl = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/banner.png";
 
 
+const Banner = ({ handleScrollDown }) => {
 
-const Banner = (props) => {
-    const { src = defaultImage, title = defaultTitle, backgroundImageUrl = defaultBackgroundImageUrl } = props;
+    const logoMouth = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png";
+    const title = "THE BIG MOUTH";
+    const backgroundImageUrl = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/banner.png";
 
     return (
         <Paper sx={{
@@ -31,7 +30,7 @@ const Banner = (props) => {
                 alignItems: "center"
             }}>
 
-                <CardMedia component="img" src={src} alt={title} sx={{
+                <CardMedia component="img" src={logoMouth} alt={title} sx={{
                     alignSelf: "center",
                     width: {
                         xs: '12rem',
@@ -75,6 +74,7 @@ const Banner = (props) => {
                     alignSelf: "flex-end",
                     marginBottom: "3rem",
                     transition: "margin-bottom 0.3s ease",
+                    cursor: "pointer",
                 }}
                 onMouseEnter={(e) => {
                     e.currentTarget.style.marginBottom = "2rem";
@@ -82,6 +82,7 @@ const Banner = (props) => {
                 onMouseLeave={(e) => {
                     e.currentTarget.style.marginBottom = "3rem";
                 }}
+                onClick={handleScrollDown}
             />
 
 

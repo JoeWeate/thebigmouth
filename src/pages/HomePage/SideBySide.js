@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Box, Grid, Hidden } from "@mui/material";
 
-const SideBySide = () => {
+const SideBySide = ({ targetRef }) => {
   const [wordIndex, setWordIndex] = useState(0);
   const [lightOn, setLightOn] = useState(true);
   const words = ["NEWS", "DIGITAL", "MUSIC", "ADVICE", "PODCAST", "VIDEO", "RESOURCE"];
@@ -21,6 +21,7 @@ const SideBySide = () => {
 
   return (
     <Container
+      ref={targetRef}
       sx={{
         minHeight: "100vh",
         height: "100%",

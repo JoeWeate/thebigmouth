@@ -1,11 +1,19 @@
-import React, { Grid} from "@mui/material";
+import React, { Grid } from "@mui/material";
 import { TitleComponent } from "../../components/TitleComponent";
 import VideoBanner from "./VideoBanner";
 import SideBySide from "./SideBySide";
 import Banner from "./Banner";
 import MultiMediaSection from "./MultimediaSection";
 import ShowMore from "../../components/ShowMore";
+import { useRef } from 'react';
+
 export default function HomePage() {
+  const targetRef = useRef(null);
+
+  const handleScrollDown = () => {
+    targetRef.current.scrollIntoView({ behavior: 'smooth' });
+
+  };
   return (
     <Grid
       container
@@ -16,8 +24,8 @@ export default function HomePage() {
       }}
     >
       <TitleComponent title="TheBigMouth" description="" />
-      <Banner />
-      <SideBySide />
+      <Banner handleScrollDown={handleScrollDown} />
+      <SideBySide targetRef={targetRef} />
       <VideoBanner />
       <MultiMediaSection />
       <ShowMore />
