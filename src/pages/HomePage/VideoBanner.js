@@ -56,6 +56,18 @@ const SIcon = styled("img")(({ theme, isHovered }) => ({
   transform: "translate(-50%, -50%)",
   transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s", // Increased transition duration
   fontSize: isHovered ? "100px" : "100px",
+  "@media (max-width: 600px)": {
+    height: isHovered ? "40px" : "40px",
+    top: isHovered ? "50%" : "48%",
+    left: isHovered ? "51%" : "50.15%",
+  },
+  "@media (min-width: 601px) and (max-width: 1024px)": {
+    height: isHovered ? "40px" : "40px",
+    left: isHovered ? "50.8%" : "50.15%",
+  },
+  "@media (min-width: 1025px)": {
+    height: isHovered ? "50px" : "45px",
+  },
 }));
 
 const CircleIcon = styled("img")(({ theme, isHovered }) => ({
