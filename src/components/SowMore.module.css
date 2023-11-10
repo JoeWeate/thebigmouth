@@ -1,0 +1,16 @@
+.left-line {
+    width: 70%;
+    height: 3px;
+    background: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+}
+
+.left-line.left-line-animation {
+    animation: leftLineHover 1.5s linear both;
+    transform: rotate(45deg) scaleX(0);
+}

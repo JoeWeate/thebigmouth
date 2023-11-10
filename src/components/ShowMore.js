@@ -1,85 +1,61 @@
 import React, { useState } from "react";
+import { Grid } from "@mui/material";
+import styles from "./ShowMore.module.css";
 
-const ShowMore = () => {
+function ShowMore() {
   const [showContent, setShowContent] = useState(false);
 
-  const toggleContent = () => {
-    setShowContent(!showContent);
+  const crossStyle = {
+    width: "45px",
+    height: "3px",
+    background: "white",
+    position: "relative",
+  };
+
+  const lineStyle = {
+    position: "absolute",
+    width: "70%",
+    height: "3px",
+    background: "white",
+  };
+  const verticalBarStyle = {
+    ...crossStyle,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  };
+
+  const horizontalBarStyle = {
+    ...crossStyle,
+    transform: "rotate(90deg)",
+  };
+
+
+  const rightLine = {
+    ...lineStyle,
+    bottom: -11,
+    right: -4,
+    transformOrigin: "bottom rigth",
+    transform: "rotate(135deg)",
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "50vh",
-        fontSize: "small",
-        background: "black", // Transparent background
-      }}
-    >
-      <div>
-        <button
-          onClick={toggleContent}
-          style={{
-            background: "transparent", // Transparent button background
-            border: "none", // Remove button border
-          }}
-        >
-          {showContent ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="50"
-              height="50"
-              viewBox="0 0 100 100"
-            >
-              <line
-                fill="none"
-                stroke="white" // White plus sign color
-                stroke-width="8"
-                x1="10"
-                y1="50"
-                x2="90"
-                y2="50"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100"
-              height="100"
-              viewBox="0 0 100 100"
-            >
-              <line
-                fill="none"
-                stroke="white"
-                stroke-width="8"
-                x1="10"
-                y1="50"
-                x2="90"
-                y2="50"
-              />
-              <line
-                fill="none"
-                stroke="white"
-                stroke-width="8"
-                x1="50"
-                y1="10"
-                x2="50"
-                y2="90"
-              />
-            </svg>
-          )}
-        </button>
+    <Grid container justifyContent="center" sx={{ height: "6rem" }}>
+      <div style={crossStyle}>
+        <div style={verticalBarStyle}></div>
+        <div style={horizontalBarStyle}></div>
+        <div
+          className={`${styles["left-line"]} ${showContent ? styles["left-line-animation"] : ""}`}
+          onMouseEnter={() => setShowContent(true)}
+          onMouseLeave={() => setShowContent(false)}
+        ></div>
+        <div style={rightLine}></div>
       </div>
-      <p style={{ color: "white" }}>
-        {showContent
-          ? "This is the additional content to show when clicked."
-          : "Show More"}
-      </p>
-    </div>
+    </Grid>
+
   );
-};
+
+}
 
 export default ShowMore;
