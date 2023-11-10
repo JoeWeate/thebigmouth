@@ -3,7 +3,6 @@ import { Paper, styled } from "@mui/material";
 
 const VideoImageContainer = styled(Paper)(
   ({ theme, isContainerHovered, isMainImageHovered }) => ({
-    minHeight: "700px",
     backgroundColor: "#000",
     textAlign: "center",
     position: "relative",
@@ -49,11 +48,11 @@ const Image = styled("img")({
 });
 
 const SIcon = styled("img")(({ theme, isHovered }) => ({
-  width: isHovered ? "45px" : "40px",
+  width: isHovered ? "38.5px" : "40px",
   height: isHovered ? "45px" : "40px",
   position: "absolute",
-  top: isHovered ? "50%" : "49.3%",
-  left: isHovered ? "50.4%" : "50.3%",
+  top: isHovered ? "50%" : "49.1%",
+  left: isHovered ? "50.4%" : "50.15%",
   transform: "translate(-50%, -50%)",
   transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s", // Increased transition duration
   fontSize: isHovered ? "100px" : "100px",
@@ -98,11 +97,7 @@ const VideoBanner = () => {
           onMouseLeave={() => setMainImageHovered(false)}
         />
         <SIcon
-          src={
-            isMainImageHovered
-              ? "https://thebigmouth-frontend.s3.eu-west-2.amazonaws.com/play-pink.png"
-              : "https://tbh.flipclip.co.in/ics.png"
-          }
+          src={"https://tbh.flipclip.co.in/ics.png"}
           alt="S Icon"
           isHovered={isMainImageHovered}
           onMouseEnter={() => setMainImageHovered(true)}
