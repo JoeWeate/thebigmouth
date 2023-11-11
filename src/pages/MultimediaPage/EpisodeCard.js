@@ -5,6 +5,8 @@ import EpisodeCardMedia from "./EpisodeCardMedia";
 
 const EpisodeCard = ({episode}) => {
 
+    const {EpisodeId, Image, Title, Description} = episode;
+
     return (
         <Paper
             square={true}
@@ -16,7 +18,7 @@ const EpisodeCard = ({episode}) => {
                 color: "white",
                 position: "relative"
             }}>
-            <EpisodeCardMedia episodeId={episode.episode_id} imageUrl={episode.image}/>
+            <EpisodeCardMedia episodeId={EpisodeId} imageUrl={Image}/>
             <CardContent
                 sx={{
                     padding: {
@@ -34,7 +36,7 @@ const EpisodeCard = ({episode}) => {
                             md: 22
                         },
                     }}>
-                    {`EPISODE ${episode.episode_id}`}
+                    {`EPISODE ${EpisodeId}`}
                 </Typography>
                 <Typography
                     gutterBottom
@@ -45,7 +47,7 @@ const EpisodeCard = ({episode}) => {
                             md: 30
                         }}}
                     component="h6">
-                    {episode.title}
+                    {Title}
                 </Typography>
                 <Typography
                     sx={{
@@ -55,7 +57,7 @@ const EpisodeCard = ({episode}) => {
                         md: 24
                     }}}
                     component="p">
-                    {episode.description}
+                    {Description}
                 </Typography>
             </CardContent>
         </Paper>
