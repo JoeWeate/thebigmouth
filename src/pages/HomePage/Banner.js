@@ -1,31 +1,36 @@
-import { Typography, Paper, CardMedia } from "@mui/material";
-import './Banner.css';
+import { Typography, Paper, CardMedia, Box } from "@mui/material";
 import triangleIcon from "../../assets/images/triangle-icon.svg";
-//import CrossfadeImage from "react-crossfade-image";
-//< CrossfadeImage src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png" />
 
 
-const defaultImage = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png";
-const defaultTitle = "The Big Mouth";
-const defaultBackgroundImageUrl = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/banner.png";
 
-const Banner = (props) => {
-    const {src = defaultImage, title = defaultTitle, backgroundImageUrl = defaultBackgroundImageUrl} = props;
+const Banner = ({ handleScrollDown }) => {
+
+    const logoMouth = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png";
+    const title = "THE BIG MOUTH";
+    const backgroundImageUrl = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/banner.png";
+
     return (
-        <Paper style={{
+        <Paper sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "flex-end",
-            height: "90vh",
+            height: "95vh",
             width: "100%",
             backgroundImage: `url(${backgroundImageUrl})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            borderRadius: "0",
+            borderRadius: 0,
         }}>
-            <div className="logo-text">
+            <Box sx={{
+                position: "absolute",
+                width: "100%",
+                height: "80%",
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center"
+            }}>
 
-                <CardMedia component="img" src={src} alt={title} sx={{
+                <CardMedia component="img" src={logoMouth} alt={title} sx={{
                     alignSelf: "center",
                     width: {
                         xs: '12rem',
@@ -41,30 +46,48 @@ const Banner = (props) => {
                         position: "absolute",
                         paddingLeft: "2rem",
                         paddingRight: "2rem",
-                        fontFamily: 'Arial',
                         backgroundColor: "rgba(224,3,146, 0.6)",
-                        color: 'white',
-                        textAlign: 'center',
-                        whiteSpace: 'nowrap',
+                        color: "white",
+                        textAlign: "center",
+                        whiteSpace: "nowrap",
+                        fontWeight: "bold",
                         fontSize: {
-                            xs: '2.5rem',
-                            sm: '5rem',
-                            md: '5rem',
-                            lg: '6rem',
-                            xl: '6rem',
+                            xs: "2.3rem",
+                            sm: "4.5rem",
+                            md: "4.5rem",
+                            lg: "6rem",
+                            xl: "6rem",
                         },
                     }}
                 >
                     {title}
                 </Typography>
+            </Box>
+            <img
+                alt="triangle"
+                src={triangleIcon}
 
-            </div>
+                style={{
+                    width: "63px",
+                    height: "66px",
+                    position: "absolute",
+                    alignSelf: "flex-end",
+                    marginBottom: "3rem",
+                    transition: "margin-bottom 0.3s ease",
+                    cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.marginBottom = "2rem";
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.marginBottom = "3rem";
+                }}
+                onClick={handleScrollDown}
+            />
 
-            <img alt="triangle" src={triangleIcon} width="73" height="70" className="triangle" />
 
         </Paper >
-
     )
-}
+};
 
 export default Banner
