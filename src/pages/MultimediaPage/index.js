@@ -1,4 +1,3 @@
-import {Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -6,7 +5,10 @@ import {isEmpty} from "lodash";
 import {getMultimedia, getOneMultimedia} from "../../api/multimedia";
 import BannerMultimedia from "./BannerMultimedia";
 import AboutInfo from "../../components/AboutInfo";
+import EmptyState from "./EmptyState";
 import Information from "./Information";
+import Loader from "./Loader";
+import PageContainer from "./PageContainer";
 import ScrollMultimedia from "./ScrollMultimedia";
 import {Link} from "react-router-dom";
 import VideoSection from "../HomePage/VideoSection";
@@ -18,9 +20,9 @@ const MultimediaPage = () => {
     const [mediaList, setMediaList] = useState({});
     const [episodes, setEpisodes] = useState([]);
     const [isLoadingMedia, setIsLoadingMedia] = useState(true);
+    const [isLoadingMediaList, setIsLoadingMediaList] = useState(true);
 
     useEffect(() => {
-        setIsLoadingMedia(true);
         try {
             getOneMultimedia(ID).then(data => {
                 setMedia(data.multimedia);
@@ -34,7 +36,6 @@ const MultimediaPage = () => {
     }, [])
 
     useEffect(() => {
-        setIsLoadingMedia(true);
         try {
             getMultimedia().then(data => {
                 setMediaList(data.multimedia)
@@ -42,56 +43,65 @@ const MultimediaPage = () => {
         } catch (error) {
             console.log({error});
         } finally {
-            setIsLoadingMedia(false);
+            setIsLoadingMediaList(false);
         }
-    }, [])
+    }, []);
 
+    if (isLoadingMedia && isEmpty(media)) {
+        return (
+            <PageContainer>
+                <Grid item xs={12} sx={{padding: "2rem"}}>
+                    <Loader/>
+                </Grid>
+            </PageContainer>
+        )
+    }
 
-    return (
-        <Grid
-            container
-            sx={{backgroundColor: "#2B2B2B",}}
-        >
-            {isLoadingMedia && isEmpty(media) && (
+    if (!isLoadingMedia && !isEmpty(media)) {
+        return (
+            <PageContainer>
                 <Grid item xs={12} sx={{padding: "2rem"}}>
-                    <Typography sx={{color: "white"}} variant="h5" component='p'>Data is loading...</Typography>
+                    <EmptyState>Try another ID! There is no media with ID {ID}</EmptyState>
                 </Grid>
-            )}
-            {!isLoadingMedia && isEmpty(media) && (
-                <Grid item xs={12} sx={{padding: "2rem"}}>
-                    <Typography sx={{color: "white"}} variant="h5" component='p'>Try another ID! There is no media with ID {ID}</Typography>
+            </PageContainer>
+        )
+    }
+
+    if (!isLoadingMedia && !isEmpty(media)) {
+        return (
+            <PageContainer>
+                <Grid item xs={12}>
+                    <BannerMultimedia src={media.Images} alt={media.Name}/>
                 </Grid>
-            )}
-            {!isLoadingMedia && !isEmpty(media) && (
-                <>
+                <Grid item xs={12}>
+                    <AboutInfo episode={media.Description}/>
+                </Grid>
+                <Grid item xs={12}>
+                    <Link to={`/episode/${media.ID}?episode_id=S01E01`}>
+                        <ScrollMultimedia episodes={episodes} seriesId={media.ID}/>
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
+                    <Information
+                        released={media.Released}
+                        rated={media.Rated}
+                        regionOfOrigin={media.RegionOfOrigin}
+                        originalAudio={media.OriginalAudio}
+                    />
+                </Grid>
+                {isLoadingMediaList && isEmpty(mediaList) && (
                     <Grid item xs={12}>
-                        <BannerMultimedia src={media.Images} alt={media.Name}/>
+                        <Loader/>
                     </Grid>
+                )}
+                {!isLoadingMediaList && !isEmpty(mediaList) && (
                     <Grid item xs={12}>
-                        <AboutInfo episode={media.Description}/>
+                        <VideoSection sectionTitle="Related" multimediaData={mediaList}/>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Link to={`/episode/${media.ID}?episode_id=S01E01`}>
-                            <ScrollMultimedia episodes={episodes} seriesId={media.ID}/>
-                        </Link>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Information
-                            released={media.Released}
-                            rated={media.Rated}
-                            regionOfOrigin={media.RegionOfOrigin}
-                            originalAudio={media.OriginalAudio}
-                        />
-                    </Grid>
-                    {!isEmpty(mediaList) && (
-                        <Grid item xs={12}>
-                            <VideoSection sectionTitle="Related" multimediaData={mediaList}/>
-                        </Grid>
-                    )}
-                </>
-            )}
-        </Grid>
-    );
+                )}
+            </PageContainer>
+        )
+    }
 };
 
 export default MultimediaPage;
