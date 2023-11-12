@@ -65,65 +65,39 @@ const SideBySide = ({ targetRef }) => {
           </Box>
         </Grid>
         <Grid item xs={0} lg={1} sx={{ marginRight: { lg: "-3rem" } }}></Grid>
-        <Grid item xs={11} lg={5} alignItems="center" justifyContent="center" sx={{ paddingRight: { xs: 0, lg: "2rem" } }}>
-          <Hidden smDown>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: { lg: 0, md: "2rem", sm: "2rem" },
-                marginBottom: { lg: 0, md: "2rem", sm: "2rem" },
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  borderRadius: 0,
-                  transition: "0.4s",
-                  transitionTimingFunction: "ease-out",
-                  height: "450px",
-                  width: "450px",
-                  textAlign: "center",
-                  border: 2,
-                  color: "#E6007E",
-                  padding: "30px",
-                  ":hover": {
-                    borderRadius: "50%",
-                    transition: "0.4s",
-                    transitionTimingFunction: "ease-in",
-                  },
-                }}
-              >
-                <Box
-                  color="#fff"
-                  sx={{
-                    textAlign: "left",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "17px",
-                    padding: "30px",
-                  }}
-                >
-                  <p>
-                    Welcome to The Big Mouth, the place where The Big House's
-                    digital content lives. It's still early days, and this is just
-                    the start of some big things to come. Read more about what
-                    we have
-                    <span style={TextColor}> got planned </span>
-                    or take a look below at what we have for you right now.
-                  </p>
-                </Box>
-              </Box>
-            </Box>
-          </Hidden>
-          <Hidden smUp>
+        <Grid container xs={11} lg={5} sx={{ justifyContent: { xs: "left", sm: "center" }, paddingRight: { xs: 0, lg: "2rem" } }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifySelf: "center",
+              justifyContent: "center",
+              borderRadius: 0,
+              transition: "0.4s",
+              transitionTimingFunction: "ease-out",
+              height: { xs: "250px", sm: "450px" },
+              maxHeight: "450px",
+              width: { xs: "450px", sm: "450px" },
+              maxWidth: "450px",
+              textAlign: "center",
+              border: { xs: 0, sm: 2 },
+              color: "#E6007E",
+              padding: { xs: 0, sm: "30px" },
+              ":hover": {
+                borderRadius: "50%",
+                transition: "0.4s",
+                transitionTimingFunction: "ease-in",
+              },
+            }}
+          >
             <Box
               color="#fff"
               sx={{
                 textAlign: "left",
                 display: "flex",
-                fontSize: "25px",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "17px",
+                padding: { xs: 0, sm: "30px" },
               }}
             >
               <p>
@@ -135,7 +109,7 @@ const SideBySide = ({ targetRef }) => {
                 or take a look below at what we have for you right now.
               </p>
             </Box>
-          </Hidden>
+          </Box>
         </Grid>
       </Grid>
     </Container>
