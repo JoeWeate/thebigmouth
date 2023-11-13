@@ -57,7 +57,7 @@ const MultimediaPage = () => {
         )
     }
 
-    if (!isLoadingMedia && !isEmpty(media)) {
+    if (!isLoadingMedia && isEmpty(media)) {
         return (
             <PageContainer>
                 <Grid item xs={12} sx={{padding: "2rem"}}>
