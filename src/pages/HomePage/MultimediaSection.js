@@ -1,7 +1,7 @@
 import configureAxios from "../../api/configureAxios";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import VideoSection from "./VideoSection";
+import MediaCard from "../../components/MediaCard";
 import Multimedia from "../MultimediaPage"; // Import the Multimedia component
 
 function MultimediaSection() {
@@ -27,15 +27,15 @@ function MultimediaSection() {
       marginTop: "4rem",
       padding: "35px",
     }}>
-      <VideoSection
+      <MediaCard
         sectionTitle="New to the Bigmouth"
         multimediaData={multimediaData}
       />
-      <VideoSection
+      <MediaCard
         sectionTitle="Behind the Scenes"
         multimediaData={multimediaData}
       />
-      <VideoSection sectionTitle="Short" multimediaData={multimediaData} />
+      <MediaCard sectionTitle="Short" multimediaData={multimediaData} />
       <Routes>
         <Route path="/multimedia/:ID" element={<Multimedia />} />
       </Routes>

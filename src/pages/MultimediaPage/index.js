@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import {isEmpty} from "lodash";
-import {getMultimedia, getOneMultimedia} from "../../api/multimedia";
+import { isEmpty } from "lodash";
+import { getMultimedia, getOneMultimedia } from "../../api/multimedia";
 import BannerMultimedia from "./BannerMultimedia";
 import AboutInfo from "../../components/AboutInfo";
 import EmptyState from "./EmptyState";
@@ -10,12 +10,12 @@ import Information from "./Information";
 import Loader from "./Loader";
 import PageContainer from "./PageContainer";
 import ScrollMultimedia from "./ScrollMultimedia";
-import {Link} from "react-router-dom";
-import VideoSection from "../HomePage/VideoSection";
+import { Link } from "react-router-dom";
+import MediaCard from "../../components/MediaCard";
 
 const MultimediaPage = () => {
     const params = useParams();
-    const {ID} = params;
+    const { ID } = params;
     const [media, setMedia] = useState({});
     const [mediaList, setMediaList] = useState({});
     const [episodes, setEpisodes] = useState([]);
@@ -29,7 +29,7 @@ const MultimediaPage = () => {
                 setEpisodes(data.episodes);
             });
         } catch (error) {
-            console.log({error});
+            console.log({ error });
         } finally {
             setIsLoadingMedia(false);
         }
@@ -41,7 +41,7 @@ const MultimediaPage = () => {
                 setMediaList(data.multimedia)
             });
         } catch (error) {
-            console.log({error});
+            console.log({ error });
         } finally {
             setIsLoadingMediaList(false);
         }
@@ -50,8 +50,8 @@ const MultimediaPage = () => {
     if (isLoadingMedia && isEmpty(media)) {
         return (
             <PageContainer>
-                <Grid item xs={12} sx={{padding: "2rem"}}>
-                    <Loader/>
+                <Grid item xs={12} sx={{ padding: "2rem" }}>
+                    <Loader />
                 </Grid>
             </PageContainer>
         )
@@ -60,7 +60,7 @@ const MultimediaPage = () => {
     if (!isLoadingMedia && isEmpty(media)) {
         return (
             <PageContainer>
-                <Grid item xs={12} sx={{padding: "2rem"}}>
+                <Grid item xs={12} sx={{ padding: "2rem" }}>
                     <EmptyState>Try another ID! There is no media with ID {ID}</EmptyState>
                 </Grid>
             </PageContainer>
@@ -71,14 +71,14 @@ const MultimediaPage = () => {
         return (
             <PageContainer>
                 <Grid item xs={12}>
-                    <BannerMultimedia src={media.Images} alt={media.Name}/>
+                    <BannerMultimedia src={media.Images} alt={media.Name} />
                 </Grid>
                 <Grid item xs={12}>
-                    <AboutInfo episode={media.Description}/>
+                    <AboutInfo episode={media.Description} />
                 </Grid>
                 <Grid item xs={12}>
                     <Link to={`/episode/${media.ID}?episode_id=S01E01`}>
-                        <ScrollMultimedia episodes={episodes} seriesId={media.ID}/>
+                        <ScrollMultimedia episodes={episodes} seriesId={media.ID} />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>
@@ -91,12 +91,12 @@ const MultimediaPage = () => {
                 </Grid>
                 {isLoadingMediaList && isEmpty(mediaList) && (
                     <Grid item xs={12}>
-                        <Loader/>
+                        <Loader />
                     </Grid>
                 )}
                 {!isLoadingMediaList && !isEmpty(mediaList) && (
                     <Grid item xs={12}>
-                        <VideoSection sectionTitle="Related" multimediaData={mediaList}/>
+                        <MediaCard sectionTitle="Related" multimediaData={mediaList} />
                     </Grid>
                 )}
             </PageContainer>
