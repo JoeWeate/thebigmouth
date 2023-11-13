@@ -69,7 +69,7 @@ const MultimediaPage = () => {
 
     if (!isLoadingMedia && !isEmpty(media)) {
         return (
-            <Grid container justifyContent="center">
+            <Grid container sx={{ justifyContent: { lg: "center", xs: "flex-end" } }}>
                 <Grid item xs={12}>
                     <BannerMultimedia src={media.Images} alt={media.Name} />
                 </Grid>
@@ -95,7 +95,7 @@ const MultimediaPage = () => {
                     </Grid>
                 )}
                 {!isLoadingMediaList && !isEmpty(mediaList) && (
-                    <Grid container justifyContent="flex-end" lg={12} xs={11} mt="2rem" >
+                    <Grid container justifyContent="flex-end" lg={12} xs={11.5} mt="2rem" >
                         <Grid item lg={11.2} justifyContent="flex-end">
                             <MediaCard sectionTitle="Related" multimediaData={mediaList} />
                         </Grid>
