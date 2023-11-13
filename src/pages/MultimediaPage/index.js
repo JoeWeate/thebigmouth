@@ -59,7 +59,7 @@ const MultimediaPage = () => {
 
     if (!isLoadingMedia && isEmpty(media)) {
         return (
-            <PageContainer>
+            <PageContainer >
                 <Grid item xs={12} sx={{ padding: "2rem" }}>
                     <EmptyState>Try another ID! There is no media with ID {ID}</EmptyState>
                 </Grid>
@@ -69,7 +69,7 @@ const MultimediaPage = () => {
 
     if (!isLoadingMedia && !isEmpty(media)) {
         return (
-            <PageContainer>
+            <Grid container justifyContent="center">
                 <Grid item xs={12}>
                     <BannerMultimedia src={media.Images} alt={media.Name} />
                 </Grid>
@@ -81,7 +81,7 @@ const MultimediaPage = () => {
                         <ScrollMultimedia episodes={episodes} seriesId={media.ID} />
                     </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item lg={11.5} xs={12} justifySelf="center">
                     <Information
                         released={media.Released}
                         rated={media.Rated}
@@ -95,11 +95,15 @@ const MultimediaPage = () => {
                     </Grid>
                 )}
                 {!isLoadingMediaList && !isEmpty(mediaList) && (
-                    <Grid item xs={12}>
-                        <MediaCard sectionTitle="Related" multimediaData={mediaList} />
+                    <Grid container justifyContent="flex-end" lg={12} xs={11} mt="2rem" >
+                        <Grid item lg={11.2} justifyContent="flex-end">
+                            <MediaCard sectionTitle="Related" multimediaData={mediaList} />
+                        </Grid>
+
                     </Grid>
-                )}
-            </PageContainer>
+                )
+                }
+            </Grid >
         )
     }
 };

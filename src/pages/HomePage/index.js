@@ -17,9 +17,8 @@ export default function HomePage() {
   return (
     <Grid
       container
+      direction="column"
       style={{
-        display: "flex",
-        flexDirection: "column",
         backgroundColor: "black",
       }}
     >

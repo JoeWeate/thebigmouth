@@ -5,14 +5,14 @@ import '../assets/styles/helper.css';
 
 export default function MediaCard({ sectionTitle, multimediaData }) {
   return (
-    <Grid container sx={{ pb: 4, flexDirection: 'column' }} lg={12}  >
+    <Grid container sx={{ pb: 4, flexDirection: 'column' }} lg={12} >
       <Typography variant='h5' sx={{ fontWeight: 'bold', color: 'white', pb: 1 }}>{sectionTitle}
       </Typography>
 
       <Grid container className="noscroll" mt="1.5rem" sx={{ display: 'flex', direction: 'row', flexWrap: 'nowrap', overflowX: 'auto' }}>
 
         {multimediaData.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index} sx={{ pr: 3, width: '100%', flex: '0 0 auto' }}>
+          <Grid item xs={12} sm={6} md={4} key={index} sx={{ pr: 3, width: '100%', flex: "auto 0 0" }}>
 
             <Link to={`/multimedia/${item.ID}`}>
               <Box sx={{ position: "relative" }}>
@@ -48,7 +48,7 @@ export default function MediaCard({ sectionTitle, multimediaData }) {
                     fontWeight: "bold",
                   }}
                 >
-                  <p style={{ fontFamily: "Reactive-3zz73" }}>{item.Name}</p>
+                  <p>{item.Name}</p>
                 </Typography>
               </Box>
             </Link>
