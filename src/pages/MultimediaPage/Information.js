@@ -30,7 +30,7 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
             >
                 <Grid container direction="row" mt={4} mb={3.5} justifyContent="center" flexWrap="nowrap" gap="1rem">
                     <Grid item>
-                        <Typography className="info" sx={{ color: 'white' }}>
+                        <Typography className="info" sx={{ fontSize: 18, color: 'white' }}>
                             <p>INFORMATION</p>
                         </Typography>
                     </Grid>
@@ -64,27 +64,27 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
                 <Divider sx={{ marginBottom: '1rem', backgroundColor: 'white' }} />
 
                 <Box sx={{ mt: "3rem" }}>
-                    <Typography sx={{ fontSize: 14, color: 'white' }}>
-                        <h4>Released</h4>
-                        <p style={{ fontWeight: "initial" }}>{released}</p>
+                    <Typography variant="h6" sx={{ fontSize: 14, color: 'white' }}>
+                        <p >Released</p>
+                        <p style={{ fontSize: 12 }}>{released}</p>
                     </Typography>
                 </Box>
                 <Box sx={{ mt: "1.5rem" }}>
-                    <Typography sx={{ fontSize: 14, color: 'white' }}>
-                        <h4>Rated</h4>
-                        <p style={{ fontWeight: "lighter" }}>{rated}</p>
+                    <Typography variant="h6" sx={{ fontSize: 14, color: 'white' }}>
+                        <p>Rated</p>
+                        <p style={{ fontSize: 12 }}>{rated}</p>
                     </Typography>
                 </Box>
                 <Box sx={{ mt: "1.5rem" }}>
-                    <Typography sx={{ fontSize: 14, color: 'white' }}>
-                        <h4>Region of Origin</h4>
-                        <p style={{ fontWeight: "lighter" }}>{regionOfOrigin}</p>
+                    <Typography variant="h6" sx={{ fontSize: 14, color: 'white' }}>
+                        <p>Region of Origin</p>
+                        <p style={{ fontSize: 12 }}>{regionOfOrigin}</p>
                     </Typography>
                 </Box>
                 <Box sx={{ mt: "1.5rem", mb: "2rem" }}>
-                    <Typography sx={{ fontSize: 14, color: 'white' }}>
-                        <h4>Original Audio</h4>
-                        <p style={{ fontWeight: "lighter" }}>{originalAudio}</p>
+                    <Typography variant="h6" sx={{ fontSize: 14, color: 'white' }}>
+                        <p>Original Audio</p>
+                        <p style={{ fontSize: 12 }}>{originalAudio}</p>
                     </Typography>
                 </Box>
             </Collapse>
