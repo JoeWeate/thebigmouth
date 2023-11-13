@@ -10,7 +10,6 @@ import Information from "./Information";
 import Loader from "./Loader";
 import PageContainer from "./PageContainer";
 import ScrollMultimedia from "./ScrollMultimedia";
-import {Link} from "react-router-dom";
 import VideoSection from "../HomePage/VideoSection";
 
 const MultimediaPage = () => {
@@ -77,9 +76,7 @@ const MultimediaPage = () => {
                     <AboutInfo episode={media.Description}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <Link to={`/episode/${media.ID}?episode_id=S01E01`}>
-                        <ScrollMultimedia episodes={episodes} seriesId={media.ID}/>
-                    </Link>
+                    <ScrollMultimedia episodes={episodes} seriesId={ID}/>
                 </Grid>
                 <Grid item xs={12}>
                     <Information
