@@ -58,27 +58,3 @@
   font-weight: bold;
   font-style: normal;
 }
-
-.box-side-to-side:hover {
-  border-radius: 50%;
-  transition: 0.4s;
-  transition-timing-function: ease-in;
-}
-
-.box-side-to-side {
-  display: flex;
-  border-radius: 0%;
-  transition: 0.4s;
-  transition-timing-function: ease-out;
-}
-
-.right-box>h1 {
-  margin: 0;
-}
-
-.triangle {
-  position: absolute;
-  margin-bottom: 4rem;
-  align-self: center;
-
-}

@@ -3,9 +3,8 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import VideoSection from "./VideoSection";
 import Multimedia from "../MultimediaPage"; // Import the Multimedia component
-import "./MultimediaSection.css";
 
-function MultimediaSection(props) {
+function MultimediaSection() {
   const [multimediaData, setMultimediaData] = useState([]);
 
   useEffect(() => {
@@ -24,7 +23,10 @@ function MultimediaSection(props) {
   }, []);
 
   return (
-    <div className="container-mult">
+    <div style={{
+      marginTop: "4rem",
+      padding: "35px",
+    }}>
       <VideoSection
         sectionTitle="New to the Bigmouth"
         multimediaData={multimediaData}
