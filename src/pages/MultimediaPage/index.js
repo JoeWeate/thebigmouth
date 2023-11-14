@@ -9,7 +9,7 @@ import EmptyState from "./EmptyState";
 import Information from "./Information";
 import Loader from "./Loader";
 import PageContainer from "./PageContainer";
-import ScrollMultimedia from "./ScrollMultimedia";
+import EpisodeCardsList from "./EpisodeCardsList";
 import VideoSection from "../HomePage/VideoSection";
 
 const MultimediaPage = () => {
@@ -76,7 +76,7 @@ const MultimediaPage = () => {
                     <AboutInfo episode={media.Description}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <ScrollMultimedia episodes={episodes} seriesId={ID}/>
+                    <EpisodeCardsList episodes={episodes} seriesId={ID}/>
                 </Grid>
                 <Grid item xs={12}>
                     <Information
