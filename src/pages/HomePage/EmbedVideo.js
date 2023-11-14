@@ -13,6 +13,7 @@ const EmbedVideo = ({ playVideo, setPlayVideo, videoUrl, videoImg }) => {
         position: "relative",
         overflow: "hidden",
         height: "auto",
+        backgroundColor: "rgba(255, 255, 255, 0)",
       }}
     >
       {playVideo ? (
@@ -28,11 +29,17 @@ const EmbedVideo = ({ playVideo, setPlayVideo, videoUrl, videoImg }) => {
         <Box
           sx={{
             position: "relative",
-            width: "100%",
+            maxWidth: {
+              xs: "600px",
+              sm: "960px",
+              md: "1280px ",
+              lg: "1920px",
+            },
             height: {
-              xs: "50vh",
-              sm: "60vh",
-              md: `calc(100vh - 65px)`,
+              xs: "100% ",
+              sm: "100%",
+              md: `100%`,
+              lg: `calc(100vh - 65px)`,
             },
             "& img": {
               width: "100%",
