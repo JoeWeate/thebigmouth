@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Grid, Box } from '@mui/material';
 import '../assets/styles/helper.css';
+import JumpingWords from './TextStyles/JumpingWords';
+import GraffitiText from './TextStyles/GraffitiText';
+import InLineText from './TextStyles/InLineText';
 
 export default function MediaCard({ sectionTitle, multimediaData }) {
   return (
@@ -48,7 +51,9 @@ export default function MediaCard({ sectionTitle, multimediaData }) {
                     fontWeight: "bold",
                   }}
                 >
-                  <p>{item.Name}</p>
+                  <InLineText title={item.Name} />
+                  {/* <GraffitiText title={item.Name} /> */}
+                  {/* <JumpingWords title={item.Name} /> */}
                 </Typography>
               </Box>
             </Link>
