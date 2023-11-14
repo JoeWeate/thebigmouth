@@ -15,7 +15,8 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
 
     return (
         <Container sx={{ width: { lg: "100%", xs: "90%" } }}>
-            <Divider sx={{ backgroundColor: 'white' }} />
+            {open ? <Divider sx={{ backgroundColor: 'white' }} /> : ""}
+
             <Button
                 disabled={disableButton}
                 variant="text"
@@ -64,27 +65,27 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
                 <Divider sx={{ marginBottom: '1rem', backgroundColor: 'white' }} />
 
                 <Box sx={{ mt: "3rem" }}>
-                    <Typography variant="h6" sx={{ fontSize: 14, color: 'white' }}>
+                    <Typography variant="h7" sx={{ fontSize: 16, color: 'white' }}>
                         <p >Released</p>
-                        <p style={{ fontSize: 12 }}>{released}</p>
+                        <p style={{ color: "#8c8c8c" }}>{released}</p>
                     </Typography>
                 </Box>
                 <Box sx={{ mt: "1.5rem" }}>
-                    <Typography variant="h6" sx={{ fontSize: 14, color: 'white' }}>
+                    <Typography variant="h7" sx={{ fontSize: 16, color: 'white' }}>
                         <p>Rated</p>
-                        <p style={{ fontSize: 12 }}>{rated}</p>
+                        <p style={{ color: "#8c8c8c" }}>{rated}</p>
                     </Typography>
                 </Box>
                 <Box sx={{ mt: "1.5rem" }}>
-                    <Typography variant="h6" sx={{ fontSize: 14, color: 'white' }}>
+                    <Typography variant="h7" sx={{ fontSize: 16, color: 'white' }}>
                         <p>Region of Origin</p>
-                        <p style={{ fontSize: 12 }}>{regionOfOrigin}</p>
+                        <p style={{ color: "#8c8c8c" }}>{regionOfOrigin}</p>
                     </Typography>
                 </Box>
                 <Box sx={{ mt: "1.5rem", mb: "2rem" }}>
-                    <Typography variant="h6" sx={{ fontSize: 14, color: 'white' }}>
+                    <Typography variant="h7" sx={{ fontSize: 16, color: 'white' }}>
                         <p>Original Audio</p>
-                        <p style={{ fontSize: 12 }}>{originalAudio}</p>
+                        <p style={{ color: "#8c8c8c" }}>{originalAudio}</p>
                     </Typography>
                 </Box>
             </Collapse>
