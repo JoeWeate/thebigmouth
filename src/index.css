@@ -7,6 +7,11 @@
     url("assets/fonts/Core Sans D 45 Medium W01 Rg.woff2") format("woff");
 }
 
+@font-face {
+  font-family: "Reactive-3zz73";
+  src: local("Reactive-3zz73"), url("./assets/fonts/Reactive-3zz73.ttf") format("truetype");
+}
+
 body {
   margin: 0;
   font-family: "Core Sans", sans-serif;
