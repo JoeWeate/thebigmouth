@@ -25,7 +25,12 @@ const Footer = () => {
   const src =
     "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png";
   const title = "THE BIG MOUTH";
-
+  const tiktokUrl = "https://www.tiktok.com/@bighousetheatre";
+  const fbUrl = "https://www.facebook.com/BigHouseTheatre/?locale=en_GB";
+  const instUrl = "https://www.instagram.com/_thebighouse_/?hl=en-gb";
+  const twitterUrl = "https://twitter.com/BigHouseTheatre";
+  const lnkdUrl =
+    "https://www.linkedin.com/company/the-big-house-theatre-company/";
   return (
     <Paper
       sx={{
@@ -46,16 +51,27 @@ const Footer = () => {
         sx={{
           backgroundColor: "#E6007E",
           flexDirection: "row",
-          height: { lg: "280px", md: "400px", sm: "600px" },
+          height: { lg: "280px", md: "400px", sm: "500px" },
         }}
       >
         <Grid
           item
           lg={4}
           xs={12}
-          alignItems="center"
-          justifyConten="center"
-          // sx={{ height: "279px" }}
+          // alignItems="center"
+          // justifyConten="center"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            [theme.breakpoints.down("sm")]: {
+              flexDirection: "row",
+              alignItems: "right",
+            },
+            [theme.breakpoints.up("md")]: {
+              flexDirection: "row",
+              justifyContent: "space-around",
+            },
+          }}
         >
           <Box
             sx={{
@@ -65,6 +81,10 @@ const Footer = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              flexDirection: "column",
+              [theme.breakpoints.down("sm", "md")]: {
+                textAlign: "right",
+              },
             }}
           >
             <CardMedia
@@ -74,14 +94,16 @@ const Footer = () => {
               sx={{
                 alignSelf: "center",
                 maxWidth: {
-                  xs: "40%",
-                  sm: "30%",
-                  md: "25%",
-                  lg: "40%",
+                  xs: "30%",
+                  sm: "25%",
+                  md: "20%",
+                  lg: "30%",
                 },
                 paddingBottom: {
-                  md: "3em",
                   lg: "3em",
+                },
+                marginBottom: {
+                  md: "1em",
                 },
               }}
             ></CardMedia>
@@ -99,8 +121,8 @@ const Footer = () => {
                 textAlign: "center",
                 whiteSpace: "nowrap",
                 fontSize: {
-                  xs: "2.5rem",
-                  sm: "3rem",
+                  xs: "1.5rem",
+                  sm: "2.5rem",
                   md: "2.5rem",
                   lg: "2.5rem",
                 },
@@ -117,21 +139,32 @@ const Footer = () => {
         <Grid item xs={4} sm={8} md={8} lg={8}>
           <Grid
             container
-            justifyContent={{ xs: "center", sm: "center", md: "center" }}
+            direction={{ xs: "column", sm: "column", md: "row", lg: "row" }}
+            justifyContent={{
+              xs: "center",
+              sm: "flex-start",
+              md: "center",
+            }}
             alignItems="center"
             sx={{
               width: "100%",
               gap: {
                 xs: "2.6rem",
-                sm: "0.5rem",
+                sm: "1.5rem",
                 md: "2.6rem",
               },
-              mb: "1rem",
+              mb: { xs: "2rem", sm: "7rem" },
+              mt: {
+                lg: "4rem",
+              },
+              pr: {
+                md: "2em",
+              },
             }}
           >
             <Link
               sx={{
-                textAlign: "center",
+                textAlign: { xs: "center", sm: "left" },
                 color: "white",
                 textDecoration: "none",
               }}
@@ -142,7 +175,7 @@ const Footer = () => {
             <Link
               href="/become-a-member"
               sx={{
-                textAlign: "center",
+                textAlign: { xs: "center", sm: "right", md: "right" },
                 color: "white",
                 textDecoration: "none",
               }}
@@ -152,7 +185,7 @@ const Footer = () => {
             <Link
               href="/contact"
               sx={{
-                textAlign: "center",
+                textAlign: { xs: "center", sm: "right", md: "right" },
                 color: "white",
                 textDecoration: "none",
               }}
@@ -162,7 +195,7 @@ const Footer = () => {
             <Link
               href="/talent-enquiry"
               sx={{
-                textAlign: "center",
+                textAlign: { xs: "center", sm: "right", md: "right" },
                 color: "white",
                 textDecoration: "none",
               }}
@@ -185,19 +218,19 @@ const Footer = () => {
               zIndex: 1,
             }}
           >
-            <Link href="#tiktok">
+            <Link href={tiktokUrl} target="_blank" rel="noopener noreferrer">
               <img src={tiktok} alt="TikTok" width="30" height="35" />
             </Link>
-            <Link href="#facebook">
+            <Link href={fbUrl} target="_blank" rel="noopener noreferrer">
               <FacebookIcon style={{ fontSize: "2rem", color: "white" }} />
             </Link>
-            <Link href="twitter">
+            <Link href={twitterUrl} target="_blank" rel="noopener noreferrer">
               <TwitterIcon style={{ fontSize: "2rem", color: "white" }} />
             </Link>
-            <Link href="#instagram">
+            <Link href={instUrl} target="_blank" rel="noopener noreferrer">
               <InstagramIcon style={{ fontSize: "2rem", color: "white" }} />
             </Link>
-            <Link href="#linkedin">
+            <Link href={lnkdUrl} target="_blank" rel="noopener noreferrer">
               <LinkedInIcon style={{ fontSize: "2rem", color: "white" }} />
             </Link>
           </Grid>
