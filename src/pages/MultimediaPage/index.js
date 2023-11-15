@@ -15,12 +15,12 @@ import MediaCard from "../../components/MediaCard";
 
 const MultimediaPage = () => {
     const params = useParams();
-    const { ID } = params;
-    const [media, setMedia] = useState({});
-    const [mediaList, setMediaList] = useState({});
+
+    const {ID} = params;
+    const [media, setMedia] = useState(null);
+    const [mediaList, setMediaList] = useState(null);
     const [episodes, setEpisodes] = useState([]);
-    const [isLoadingMedia, setIsLoadingMedia] = useState(true);
-    const [isLoadingMediaList, setIsLoadingMediaList] = useState(true);
+
 
     useEffect(() => {
         try {
@@ -29,9 +29,7 @@ const MultimediaPage = () => {
                 setEpisodes(data.episodes);
             });
         } catch (error) {
-            console.log({ error });
-        } finally {
-            setIsLoadingMedia(false);
+            console.log({error});
         }
     }, [])
 
@@ -44,10 +42,11 @@ const MultimediaPage = () => {
             console.log({ error });
         } finally {
             setIsLoadingMediaList(false);
+            console.log({error});
         }
     }, []);
 
-    if (isLoadingMedia && isEmpty(media)) {
+    if (media === null) {
         return (
             <PageContainer>
                 <Grid item xs={12} sx={{ padding: "2rem" }}>
@@ -57,7 +56,7 @@ const MultimediaPage = () => {
         )
     }
 
-    if (!isLoadingMedia && isEmpty(media)) {
+    if (isEmpty(media)) {
         return (
             <PageContainer >
                 <Grid item xs={12} sx={{ padding: "2rem" }}>
@@ -67,7 +66,7 @@ const MultimediaPage = () => {
         )
     }
 
-    if (!isLoadingMedia && !isEmpty(media)) {
+    if (!isEmpty(media)) {
         return (
             <Grid container sx={{ justifyContent: { lg: "center", xs: "flex-end" } }}>
                 <Grid item xs={12}>
@@ -89,11 +88,12 @@ const MultimediaPage = () => {
                         originalAudio={media.OriginalAudio}
                     />
                 </Grid>
-                {isLoadingMediaList && isEmpty(mediaList) && (
+                {mediaList === null && (
                     <Grid item xs={12}>
                         <Loader />
                     </Grid>
                 )}
+
                 {!isLoadingMediaList && !isEmpty(mediaList) && (
                     <Grid container justifyContent="flex-end" lg={12} xs={11.5} mt="2rem" >
                         <Grid item lg={11.2} justifyContent="flex-end">

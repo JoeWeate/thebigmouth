@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Paper, styled } from "@mui/material";
+import EmbedVideo from "./EmbedVideo";
 
 const VideoImageContainer = styled(Paper)(
   ({ theme, isContainerHovered, isMainImageHovered }) => ({
-    minHeight: "700px",
     backgroundColor: "#000",
     textAlign: "center",
     position: "relative",
-    maxHeight: "800px",
-    transition: "filter 0.5s ease", // Increased transition duration
+    transition: "filter 0.5s ease",
     "&:hover": {
       filter: isMainImageHovered
         ? "none"
@@ -18,16 +17,6 @@ const VideoImageContainer = styled(Paper)(
     },
   })
 );
-
-const Video = styled("video")({
-  height: "90%",
-  width: "100%",
-  objectFit: "cover",
-  transition: "filter 0.5s ease", // Increased transition duration
-  transform: "scaleY(1.1)",
-  cursor: "pointer",
-});
-
 const PlayButton = styled("div")(({ theme }) => ({
   position: "absolute",
   top: "50%",
@@ -55,8 +44,8 @@ const SIcon = styled("img")(({ theme, isHovered }) => ({
   top: isHovered ? "50%" : "49.3%",
   left: isHovered ? "50.4%" : "50.3%",
   transform: "translate(-50%, -50%)",
-  transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s", // Increased transition duration
-  fontSize: isHovered ? "100px" : "100px",
+  transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s",
+  fontSize: "100px",
 }));
 
 const CircleIcon = styled("img")(({ theme, isHovered }) => ({
@@ -64,52 +53,60 @@ const CircleIcon = styled("img")(({ theme, isHovered }) => ({
   height: isHovered ? "83px" : "105px",
   position: "absolute",
   top: "50%",
-  left: isHovered ? "50%" : "50%",
-  transform: isHovered ? "translate(-50%, -50%)" : "translate(-50%, -50%)",
-  transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s", // Increased transition duration
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s",
 }));
 
-const VideoBanner = () => {
+const VideoBanner = ({ videoUrl, videoImg }) => {
   const [isContainerHovered, setContainerHovered] = useState(false);
   const [isMainImageHovered, setMainImageHovered] = useState(false);
-
+  const [playVideo, setPlayVideo] = useState(false);
   return (
-    <VideoImageContainer
-      isContainerHovered={isContainerHovered}
-      isMainImageHovered={isMainImageHovered}
-      onMouseEnter={() => setContainerHovered(true)}
-      onMouseLeave={() => setContainerHovered(false)}
-    >
-      <Video
-        poster="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/video-banner.png"
-        onMouseEnter={() => setMainImageHovered(true)}
-        onMouseLeave={() => setMainImageHovered(false)}
-      ></Video>
-      <PlayButton>
-        <Image
-          src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/y-p.png"
-          alt="Play Button"
-        />
-        <CircleIcon
-          src="https://tbh.flipclip.co.in/p-c.png"
-          alt="Circle Icon"
-          isHovered={isMainImageHovered}
+    <>
+      <VideoImageContainer
+        isContainerHovered={isContainerHovered}
+        isMainImageHovered={isMainImageHovered}
+        onMouseEnter={() => setContainerHovered(true)}
+        onMouseLeave={() => setContainerHovered(false)}
+      >
+        <EmbedVideo
+          videoUrl={videoUrl}
+          videoImg={videoImg}
+          playVideo={playVideo}
+          setPlayVideo={setPlayVideo}
           onMouseEnter={() => setMainImageHovered(true)}
           onMouseLeave={() => setMainImageHovered(false)}
         />
-        <SIcon
-          src={
-            isMainImageHovered
-              ? "https://thebigmouth-frontend.s3.eu-west-2.amazonaws.com/play-pink.png"
-              : "https://tbh.flipclip.co.in/ics.png"
-          }
-          alt="S Icon"
-          isHovered={isMainImageHovered}
-          onMouseEnter={() => setMainImageHovered(true)}
-          onMouseLeave={() => setMainImageHovered(false)}
-        />
-      </PlayButton>
-    </VideoImageContainer>
+
+        {!playVideo && (
+          <PlayButton onClick={() => setPlayVideo(true)}>
+            <Image
+              src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/y-p.png"
+              alt="Play Button"
+            />
+            <CircleIcon
+              src="https://tbh.flipclip.co.in/p-c.png"
+              alt="Circle Icon"
+              isHovered={isMainImageHovered}
+              onMouseEnter={() => setMainImageHovered(true)}
+              onMouseLeave={() => setMainImageHovered(false)}
+            />
+            <SIcon
+              src={
+                isMainImageHovered
+                  ? "https://thebigmouth-frontend.s3.eu-west-2.amazonaws.com/play-pink.png"
+                  : "https://tbh.flipclip.co.in/ics.png"
+              }
+              alt="S Icon"
+              isHovered={isMainImageHovered}
+              onMouseEnter={() => setMainImageHovered(true)}
+              onMouseLeave={() => setMainImageHovered(false)}
+            />
+          </PlayButton>
+        )}
+      </VideoImageContainer>
+    </>
   );
 };
 
