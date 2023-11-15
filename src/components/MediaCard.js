@@ -51,9 +51,13 @@ export default function MediaCard({ sectionTitle, multimediaData }) {
                     fontWeight: "bold",
                   }}
                 >
-                  <InLineText title={item.Name} />
-                  {/* <GraffitiText title={item.Name} /> */}
-                  {/* <JumpingWords title={item.Name} /> */}
+                  {item.TitleStyle === "Inline" ? (
+                    <InLineText title={item.Name} />
+                  ) : item.TitleStyle === "Graffiti" ? (
+                    <GraffitiText title={item.Name} />
+                  ) : item.TitleStyle === "JumpingWords" ? (
+                    <JumpingWords title={item.Name} />
+                  ) : <p>{item.Name}</p>}
                 </Typography>
               </Box>
             </Link>
