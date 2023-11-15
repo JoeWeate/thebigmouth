@@ -204,12 +204,12 @@ function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {isAuthenticated &&
+              {/* {isAuthenticated &&
                 settingsLogin.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                ))}
+                ))} */}
               <MenuItem>
                 {isAuthenticated ? <LogoutButton /> : <LoginButton />}
               </MenuItem>
