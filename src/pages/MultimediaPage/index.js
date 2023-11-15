@@ -15,11 +15,10 @@ import VideoSection from "../HomePage/VideoSection";
 const MultimediaPage = () => {
     const params = useParams();
     const {ID} = params;
-    const [media, setMedia] = useState({});
-    const [mediaList, setMediaList] = useState({});
+    const [media, setMedia] = useState(null);
+    const [mediaList, setMediaList] = useState(null);
     const [episodes, setEpisodes] = useState([]);
-    const [isLoadingMedia, setIsLoadingMedia] = useState(true);
-    const [isLoadingMediaList, setIsLoadingMediaList] = useState(true);
+
 
     useEffect(() => {
         try {
@@ -29,8 +28,6 @@ const MultimediaPage = () => {
             });
         } catch (error) {
             console.log({error});
-        } finally {
-            setIsLoadingMedia(false);
         }
     }, [])
 
@@ -41,12 +38,10 @@ const MultimediaPage = () => {
             });
         } catch (error) {
             console.log({error});
-        } finally {
-            setIsLoadingMediaList(false);
         }
     }, []);
 
-    if (isLoadingMedia && isEmpty(media)) {
+    if (media === null) {
         return (
             <PageContainer>
                 <Grid item xs={12} sx={{padding: "2rem"}}>
@@ -56,7 +51,7 @@ const MultimediaPage = () => {
         )
     }
 
-    if (!isLoadingMedia && isEmpty(media)) {
+    if (isEmpty(media)) {
         return (
             <PageContainer>
                 <Grid item xs={12} sx={{padding: "2rem"}}>
@@ -66,7 +61,7 @@ const MultimediaPage = () => {
         )
     }
 
-    if (!isLoadingMedia && !isEmpty(media)) {
+    if (!isEmpty(media)) {
         return (
             <PageContainer>
                 <Grid item xs={12}>
@@ -86,12 +81,12 @@ const MultimediaPage = () => {
                         originalAudio={media.OriginalAudio}
                     />
                 </Grid>
-                {isLoadingMediaList && isEmpty(mediaList) && (
+                {mediaList === null && (
                     <Grid item xs={12}>
                         <Loader/>
                     </Grid>
                 )}
-                {!isLoadingMediaList && !isEmpty(mediaList) && (
+                {!isEmpty(mediaList) && (
                     <Grid item xs={12}>
                         <VideoSection sectionTitle="Related" multimediaData={mediaList}/>
                     </Grid>

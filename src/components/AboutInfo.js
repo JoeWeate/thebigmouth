@@ -18,8 +18,8 @@ const AboutInfo = ({ episode }) => {
       <Grid container direction="row" sx={{ width: "90%", marginTop: "2rem" }}>
         <Grid item xs={6} ></Grid>
         <Grid item xs={6} sx={{ padding: "2rem" }}>
-        <Typography variant="h3" sx={{ color: "white", marginLeft: "0.5rem" }}>About</Typography>
-        <Typography sx={{ color: "white", marginLeft: "0.5rem" }}>{episode}</Typography>
+          <Typography variant="h3" sx={{ color: "white", marginLeft: "0.5rem" }}>About</Typography>
+          <Typography sx={{ color: "white", marginLeft: "0.5rem" }}>{episode}</Typography>
           <Collapse in={moreOpen}>
             <Typography sx={{ color: "white", padding: "0.5rem" }}>
               <p>{episode}</p>
