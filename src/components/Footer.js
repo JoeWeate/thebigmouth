@@ -150,7 +150,7 @@ const Footer = () => {
               width: "100%",
               gap: {
                 xs: "2.6rem",
-                sm: "1.5rem",
+                sm: "1rem",
                 md: "2.6rem",
               },
               mb: { xs: "2rem", sm: "7rem" },
