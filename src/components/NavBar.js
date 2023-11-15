@@ -25,7 +25,7 @@ const pages = [
   "TBH MEANS BUSINESS",
   "THE BIG MOUTH",
 ];
-const settingsLogin = ["Profile", "My videos", "Dashboard"];
+const settingsLogin = ["Profile"];
 function NavBar() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth0();
@@ -63,6 +63,9 @@ function NavBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
+            onClick={() => {
+              navigate("/");
+            }}
             component="img"
             sx={{
               width: 50,
@@ -123,7 +126,16 @@ function NavBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    onClick={() =>
+                      navigate(
+                        page === "HOME" || page === "THE BIG MOUTH" ? "/" : "#"
+                      )
+                    }
+                    textAlign="center"
+                  >
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -137,7 +149,12 @@ function NavBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => {
+                  handleCloseNavMenu();
+                  navigate(
+                    page === "HOME" || page === "THE BIG MOUTH" ? "/" : "#"
+                  );
+                }}
                 sx={{
                   my: 2,
                   ml: 7,
@@ -204,12 +221,19 @@ function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {/* {isAuthenticated &&
+              {isAuthenticated &&
                 settingsLogin.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography
+                      onClick={() =>
+                        navigate(setting === "Profile" ? "/profile" : "#")
+                      }
+                      textAlign="center"
+                    >
+                      {setting}
+                    </Typography>
                   </MenuItem>
-                ))} */}
+                ))}
               <MenuItem>
                 {isAuthenticated ? <LogoutButton /> : <LoginButton />}
               </MenuItem>
