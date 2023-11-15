@@ -20,13 +20,6 @@ const CopyrightContainer = styled(Box)`
   justify-content: center;
   letter-spacing: 0.36px;
   line-height: 20px;
-
-  @media (min-width: ${theme.breakpoints.values.xs}px) {
-    // width: 100vh;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-  }
 `;
 const Footer = () => {
   const src =
@@ -131,6 +124,7 @@ const Footer = () => {
               gap: {
                 xs: "2.6rem",
                 sm: "0.5rem",
+                md: "2.6rem",
               },
               mb: "1rem",
             }}
