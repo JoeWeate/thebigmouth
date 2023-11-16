@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import {isEmpty} from "lodash";
-import {getMultimedia, getOneMultimedia} from "../../api/multimedia";
+import { isEmpty } from "lodash";
+import { getMultimedia, getOneMultimedia } from "../../api/multimedia";
 import BannerMultimedia from "./BannerMultimedia";
 import AboutInfo from "../../components/AboutInfo";
 import EmptyState from "./EmptyState";
@@ -10,10 +10,11 @@ import Information from "./Information";
 import Loader from "./Loader";
 import PageContainer from "./PageContainer";
 import EpisodeCardsList from "./EpisodeCardsList";
-import VideoSection from "../HomePage/VideoSection";
+import MediaCard from "../../components/MediaCard";
 
 const MultimediaPage = () => {
     const params = useParams();
+
     const {ID} = params;
     const [media, setMedia] = useState(null);
     const [mediaList, setMediaList] = useState(null);
@@ -44,8 +45,8 @@ const MultimediaPage = () => {
     if (media === null) {
         return (
             <PageContainer>
-                <Grid item xs={12} sx={{padding: "2rem"}}>
-                    <Loader/>
+                <Grid item xs={12} sx={{ padding: "2rem" }}>
+                    <Loader />
                 </Grid>
             </PageContainer>
         )
@@ -53,8 +54,8 @@ const MultimediaPage = () => {
 
     if (isEmpty(media)) {
         return (
-            <PageContainer>
-                <Grid item xs={12} sx={{padding: "2rem"}}>
+            <PageContainer >
+                <Grid item xs={12} sx={{ padding: "2rem" }}>
                     <EmptyState>Try another ID! There is no media with ID {ID}</EmptyState>
                 </Grid>
             </PageContainer>
@@ -63,17 +64,17 @@ const MultimediaPage = () => {
 
     if (!isEmpty(media)) {
         return (
-            <PageContainer>
+            <Grid container sx={{ justifyContent: { lg: "center", xs: "flex-end" } }}>
                 <Grid item xs={12}>
-                    <BannerMultimedia src={media.Images} alt={media.Name}/>
+                    <BannerMultimedia src={media.Images} alt={media.Name} />
                 </Grid>
                 <Grid item xs={12}>
-                    <AboutInfo episode={media.Description}/>
+                    <AboutInfo episode={media.Description} />
                 </Grid>
                 <Grid item xs={12}>
                     <EpisodeCardsList episodes={episodes} seriesId={ID}/>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item lg={11.5} xs={12} justifySelf="center">
                     <Information
                         released={media.Released}
                         rated={media.Rated}
@@ -83,15 +84,20 @@ const MultimediaPage = () => {
                 </Grid>
                 {mediaList === null && (
                     <Grid item xs={12}>
-                        <Loader/>
+                        <Loader />
                     </Grid>
                 )}
+
                 {!isEmpty(mediaList) && (
-                    <Grid item xs={12}>
-                        <VideoSection sectionTitle="Related" multimediaData={mediaList}/>
+                    <Grid container justifyContent="flex-end" lg={12} xs={11.5} mt="2rem" >
+                        <Grid item lg={11.2} justifyContent="flex-end">
+                            <MediaCard sectionTitle="Related" multimediaData={mediaList} />
+                        </Grid>
+
                     </Grid>
-                )}
-            </PageContainer>
+                )
+                }
+            </Grid >
         )
     }
 };
