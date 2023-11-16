@@ -6,10 +6,10 @@ import EpisodeCardMedia from "./EpisodeCardMedia";
 
 const EpisodeCard = ({episode}) => {
 
-    const {EpisodeId, Image, Title, Description} = episode;
+    const {EpisodeId, Image, Title, Description, SeriesId} = episode;
 
     return (
-        <Link component={RouterLink} to={`/episode/${EpisodeId}`} underline="none" aria-label="To learn more, visit the Episode page which opens in a new window.">
+        <Link component={RouterLink} to={`/episode/${SeriesId}/${EpisodeId}`} underline="none" aria-label="To learn more, visit the Episode page which opens in a new window.">
             <Paper
                 square={true}
                 elevation={0}
