@@ -49,7 +49,7 @@ ReactDOM.render(
             <Route exact path="/" element={<App />}>
               <Route path="" element={<Home />} />
               <Route path="/multimedia/:ID" element={<Multimedia />} />
-              <Route path="/episode/:id" element={<Episode />} />
+              <Route path="/episode/:EpisodeId" element={<Episode />} />
               <Route path="login" element={<PostAuthentication />} />
               <Route
                 path="profile"

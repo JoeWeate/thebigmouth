@@ -16,7 +16,7 @@ function App() {
       }}
     >
       <NavBar />
-      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start" }}>
+      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start", maxWidth: "100%" }}>
         <Outlet />
       </main>
       {/* <ShowMore /> */}
