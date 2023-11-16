@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
-import triangleIcon from "../../assets/images/triangle-icon.svg";
+import ScrollDownBtn from "../../components/ScrollDownBtn";
 import styles from './BannerMultimedia.module.css';
 
 const BannerMultimedia = (props) => {
@@ -10,7 +10,7 @@ const BannerMultimedia = (props) => {
         <Grid container>
             <Grid item xs={12} className={styles.imgWrapper}>
                 <img src={src} alt={alt} className={styles.img}/>
-                <img src={triangleIcon} alt="triangle" className={styles.triangle} width="73" height="70"/>
+                <ScrollDownBtn targetRef={props.targetRef}/>
             </Grid>
         </Grid>
     )

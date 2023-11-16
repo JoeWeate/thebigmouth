@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { isEmpty } from "lodash";
@@ -37,6 +37,7 @@ const MultimediaPage = () => {
         return episodesObj;
     }
 
+    const targetRef= useRef(null);
 
     useEffect(() => {
         try {
@@ -88,9 +89,9 @@ const MultimediaPage = () => {
         return (
             <Grid container>
                 <Grid item xs={12}>
-                    <BannerMultimedia src={media.Images} alt={media.Name} />
+                    <BannerMultimedia src={media.Images} alt={media.Name} targetRef={targetRef}/>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} ref={targetRef}>
                     <AboutInfo episode={media.Description} />
                 </Grid>
                 {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
