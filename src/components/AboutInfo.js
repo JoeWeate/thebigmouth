@@ -3,7 +3,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from "react";
 
-const AboutInfo = ({ episode }) => {
+const AboutInfo = ({ episode, targetRef }) => {
   const [moreOpen, setMoreOpen] = useState(false);
 
   const handleClick = () => {
@@ -15,7 +15,7 @@ const AboutInfo = ({ episode }) => {
   }
   return (
     <div>
-      <Grid container direction="row" sx={{ width: "90%", marginTop: "2rem" }}>
+      <Grid container direction="row" sx={{ width: "90%", marginTop: "2rem" }} ref={targetRef}>
         <Grid item xs={6} ></Grid>
         <Grid item xs={6} sx={{ padding: "2rem" }}>
           <Typography variant="h3" sx={{ color: "white", marginLeft: "0.5rem" }}>About</Typography>
