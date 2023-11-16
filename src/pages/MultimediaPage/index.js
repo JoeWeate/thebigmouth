@@ -34,7 +34,6 @@ const MultimediaPage = () => {
         seasonSet.forEach(s => {
             episodesObj[s] = episodesList.filter(e => e.SeasonNumber === s);
         });
-        console.log({episodesObj})
         return episodesObj;
     }
 
@@ -43,10 +42,12 @@ const MultimediaPage = () => {
         try {
             getOneMultimedia(ID).then(data => {
                 setMedia(data.multimedia);
-                const seasonsSet = getSeasonNumbersSetFromEpisodes(data.episodes);
-                const episodesObj = getEpisodesBySeasonNumber(data.episodes, seasonsSet);
-                setSeasons(seasonsSet);
-                setEpisodes(episodesObj);
+                if(data.episodes) {
+                    const seasonsSet = getSeasonNumbersSetFromEpisodes(data.episodes);
+                    const episodesObj = getEpisodesBySeasonNumber(data.episodes, seasonsSet);
+                    setSeasons(seasonsSet);
+                    setEpisodes(episodesObj);
+                }
             });
         } catch (error) {
             console.log({error});
@@ -85,7 +86,7 @@ const MultimediaPage = () => {
 
     if (!isEmpty(media)) {
         return (
-            <Grid container sx={{ justifyContent: { lg: "center", xs: "flex-end" } }}>
+            <Grid container>
                 <Grid item xs={12}>
                     <BannerMultimedia src={media.Images} alt={media.Name} />
                 </Grid>
