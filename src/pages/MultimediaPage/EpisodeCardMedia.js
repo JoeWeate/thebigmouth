@@ -1,5 +1,6 @@
 import {Box, CardMedia, useTheme} from "@mui/material";
 import React from 'react';
+import ImageOverlay from "../../components/ImageOverlay";
 import EpisodeCardMediaPlayBtn from "./EpisodeCardMediaPlayBtn";
 
 const EpisodeCardMedia = ({episodeId, imageUrl}) => {
@@ -25,7 +26,7 @@ const EpisodeCardMedia = ({episodeId, imageUrl}) => {
                 },
                 "&:hover #episodeCardPlayButton .pinkTriangle":  {
                             transform: "translate(-17px, -11px)",
-                }
+                },
             }]}>
             <CardMedia
                 component="img"
@@ -38,6 +39,7 @@ const EpisodeCardMedia = ({episodeId, imageUrl}) => {
                 }}
                 image={imageUrl}
             />
+            <ImageOverlay/>
             {/* decorative overlay with button */}
             <Box
                 className="yellowFrame"
@@ -60,6 +62,8 @@ const EpisodeCardMedia = ({episodeId, imageUrl}) => {
                         xs: 139,
                         md: 264,
                     },
+                    zIndex: '2',
+                    pointerEvents: 'none',
                 }}/>
             <Box
                 className="pinkFrame"
@@ -82,8 +86,10 @@ const EpisodeCardMedia = ({episodeId, imageUrl}) => {
                         xs: 139,
                         md: 264,
                     },
+                    zIndex: '2',
+                    pointerEvents: 'none',
                 }}/>
-            <EpisodeCardMediaPlayBtn/>
+            <EpisodeCardMediaPlayBtn sx={{pointerEvents: 'none', zIndex: '3' }}/>
         </Box>
 
     )

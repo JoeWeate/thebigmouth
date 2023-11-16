@@ -19,6 +19,7 @@ const EpisodeCard = ({episode}) => {
                     backgroundColor: "inherit",
                     color: "white",
                     position: "relative",
+                    paddingBottom: 3,
                 }}>
                 <EpisodeCardMedia episodeId={EpisodeId} imageUrl={Image}/>
                 <CardContent

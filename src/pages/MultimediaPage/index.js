@@ -6,10 +6,10 @@ import { getMultimedia, getOneMultimedia } from "../../api/multimedia";
 import BannerMultimedia from "./BannerMultimedia";
 import AboutInfo from "../../components/AboutInfo";
 import EmptyState from "./EmptyState";
+import EpisodesAccordion from "./EpisodesAccordion";
 import Information from "./Information";
 import Loader from "./Loader";
-import PageContainer from "./PageContainer";
-import EpisodeCardsList from "./EpisodeCardsList";
+import SectionContent from "../../components/SectionContent";
 import MediaCard from "../../components/MediaCard";
 
 const MultimediaPage = () => {
@@ -18,14 +18,35 @@ const MultimediaPage = () => {
     const {ID} = params;
     const [media, setMedia] = useState(null);
     const [mediaList, setMediaList] = useState(null);
-    const [episodes, setEpisodes] = useState([]);
+    const [episodes, setEpisodes] = useState(null);
+    const [seasons, setSeasons] = useState([]);
+
+    const getSeasonNumbersSetFromEpisodes = (episodesList) => {
+        const seasonsSet = new Set();
+        episodesList.forEach((episode) => {
+            seasonsSet.add(episode.SeasonNumber);
+        });
+        return [...seasonsSet];
+    }
+
+    const getEpisodesBySeasonNumber = (episodesList, seasonSet) => {
+        const episodesObj = {};
+        seasonSet.forEach(s => {
+            episodesObj[s] = episodesList.filter(e => e.SeasonNumber === s);
+        });
+        console.log({episodesObj})
+        return episodesObj;
+    }
 
 
     useEffect(() => {
         try {
             getOneMultimedia(ID).then(data => {
                 setMedia(data.multimedia);
-                setEpisodes(data.episodes);
+                const seasonsSet = getSeasonNumbersSetFromEpisodes(data.episodes);
+                const episodesObj = getEpisodesBySeasonNumber(data.episodes, seasonsSet);
+                setSeasons(seasonsSet);
+                setEpisodes(episodesObj);
             });
         } catch (error) {
             console.log({error});
@@ -44,21 +65,21 @@ const MultimediaPage = () => {
 
     if (media === null) {
         return (
-            <PageContainer>
+            <SectionContent>
                 <Grid item xs={12} sx={{ padding: "2rem" }}>
                     <Loader />
                 </Grid>
-            </PageContainer>
+            </SectionContent>
         )
     }
 
     if (isEmpty(media)) {
         return (
-            <PageContainer >
+            <SectionContent >
                 <Grid item xs={12} sx={{ padding: "2rem" }}>
                     <EmptyState>Try another ID! There is no media with ID {ID}</EmptyState>
                 </Grid>
-            </PageContainer>
+            </SectionContent>
         )
     }
 
@@ -71,9 +92,18 @@ const MultimediaPage = () => {
                 <Grid item xs={12}>
                     <AboutInfo episode={media.Description} />
                 </Grid>
-                <Grid item xs={12}>
-                    <EpisodeCardsList episodes={episodes} seriesId={ID}/>
-                </Grid>
+                {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
+                    <Grid item xs={12}>
+                        <EpisodesAccordion episodes={episodes} seasons={seasons}/>
+                    </Grid>
+                )}
+                {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
+                    seasons.map((s, index) => (
+                        <Grid item xs={12} key={s}>
+                            <EpisodesAccordion episodes={episodes[s]} seasonNumber={s} expanded={index === 0}/>
+                        </Grid>
+                    ))
+                )}
                 <Grid item lg={11.5} xs={12} justifySelf="center">
                     <Information
                         released={media.Released}
