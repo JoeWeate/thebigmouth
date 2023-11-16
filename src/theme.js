@@ -80,6 +80,24 @@ const theme = createTheme({
   //     }
   //   }
   // },
+  MuiAccordion: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        backgroundColor: theme.palette.background.default,
+        color: "white",
+        boxShadow: "none",
+        "&:not(:last-child)": {
+          borderBottom: 0,
+        },
+        "&:before": {
+          display: "none",
+        },
+        "&$expanded": {
+          margin: "auto",
+        },
+      }),
+    },
+  },
   //   MuiAccordion: {
   //     styleOverrides: {
   //       root: {
@@ -157,7 +175,6 @@ const theme = createTheme({
   //       }
   //     }
   //   }
-  // }
 });
 
 export default responsiveFontSizes(theme);

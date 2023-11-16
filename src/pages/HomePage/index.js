@@ -1,24 +1,38 @@
-import React, { Grid} from "@mui/material";
+import React, { Grid } from "@mui/material";
 import { TitleComponent } from "../../components/TitleComponent";
 import VideoBanner from "./VideoBanner";
 import SideBySide from "./SideBySide";
 import Banner from "./Banner";
 import MultiMediaSection from "./MultimediaSection";
 import ShowMore from "../../components/ShowMore";
+import { useRef } from "react";
+
 export default function HomePage() {
+  const targetRef = useRef(null);
+  const videoBannerData = {
+    videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
+    videoImg:
+      "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/video-banner.png",
+  };
+
+  const handleScrollDown = () => {
+    targetRef.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <Grid
       container
+      direction="column"
       style={{
-        display: "flex",
-        flexDirection: "column",
         backgroundColor: "black",
       }}
     >
       <TitleComponent title="TheBigMouth" description="" />
-      <Banner />
-      <SideBySide />
-      <VideoBanner />
+      <Banner handleScrollDown={handleScrollDown} />
+      <SideBySide targetRef={targetRef} />
+      <VideoBanner
+        videoUrl={videoBannerData.videoUrl}
+        videoImg={videoBannerData.videoImg}
+      />
       <MultiMediaSection />
       <ShowMore />
 

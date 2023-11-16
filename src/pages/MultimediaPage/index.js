@@ -2,131 +2,135 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { isEmpty } from "lodash";
+import { getMultimedia, getOneMultimedia } from "../../api/multimedia";
 import BannerMultimedia from "./BannerMultimedia";
 import AboutInfo from "../../components/AboutInfo";
+import EmptyState from "./EmptyState";
+import EpisodesAccordion from "./EpisodesAccordion";
 import Information from "./Information";
-import configureAxios from "../../api/configureAxios";
-
-import ScrollMultimedia from "./ScrollMultimedia"; // Import ScrollMultimedia component
-import axios from "axios";
-import { Link } from "react-router-dom";
-import VideoSection from "../HomePage/VideoSection";
-import styles from "./index.module.css";
+import Loader from "./Loader";
+import SectionContent from "../../components/SectionContent";
+import MediaCard from "../../components/MediaCard";
 
 const MultimediaPage = () => {
-  const params = useParams();
-  const { ID } = params;
-  const [media, setMedia] = useState({});
-  const [episodes, setEpisodes] = useState([]);
-  const [isLoadingMedia, setIsLoadingMedia] = useState(true);
+    const params = useParams();
 
-  useEffect(() => {
-    const axios = configureAxios();
-    axios
-      .get(`/multimedia`)
-      .then((response) => {
-        const { multimedia } = response.data || {};
-        const selectedMedia = multimedia.find((item) => item.ID === ID);
-        setMedia(selectedMedia);
-        setEpisodes(selectedMedia.episodes);
-        setIsLoadingMedia(false);
-      })
-      .catch((error) => {
-        console.log("Error fetching multimedia data:", error);
-        setIsLoadingMedia(false);
-      });
-  }, [ID]);
+    const {ID} = params;
+    const [media, setMedia] = useState(null);
+    const [mediaList, setMediaList] = useState(null);
+    const [episodes, setEpisodes] = useState(null);
+    const [seasons, setSeasons] = useState([]);
 
-
-  useEffect(() => {
-    const fetchDetailedData = async () => {
-      try {
-        const response = await axios.get(
-          `https://bthgkjfail.execute-api.eu-west-2.amazonaws.com/v1/multimedia/${ID}`
-        );
-        const { episodes: detailedEpisodes, multimedia: detailedMedia } =
-          response.data || {};
-        setEpisodes(detailedEpisodes);
-        const selectedMedia = detailedMedia.find((item) => item.ID === ID);
-        setMedia(selectedMedia);
-        setIsLoadingMedia(false);
-      } catch (error) {
-        console.error("Error fetching detailed multimedia data:", error);
-        setIsLoadingMedia(false);
-      }
-    };
-
-    if (ID) {
-      fetchDetailedData();
+    const getSeasonNumbersSetFromEpisodes = (episodesList) => {
+        const seasonsSet = new Set();
+        episodesList.forEach((episode) => {
+            seasonsSet.add(episode.SeasonNumber);
+        });
+        return [...seasonsSet];
     }
-  }, [ID]);
 
-  const [multimediaData, setMultimediaData] = useState([]);
+    const getEpisodesBySeasonNumber = (episodesList, seasonSet) => {
+        const episodesObj = {};
+        seasonSet.forEach(s => {
+            episodesObj[s] = episodesList.filter(e => e.SeasonNumber === s);
+        });
+        return episodesObj;
+    }
 
-  useEffect(() => {
-    const axios = configureAxios();
-    axios
-      .get(`/multimedia`)
-      .then((response) => {
-        if (response.data) {
-          setMultimediaData(response.data.multimedia);
-          console.log("Fetched Multimedia Data:", response.data.multimedia);
+
+    useEffect(() => {
+        try {
+            getOneMultimedia(ID).then(data => {
+                setMedia(data.multimedia);
+                if(data.episodes) {
+                    const seasonsSet = getSeasonNumbersSetFromEpisodes(data.episodes);
+                    const episodesObj = getEpisodesBySeasonNumber(data.episodes, seasonsSet);
+                    setSeasons(seasonsSet);
+                    setEpisodes(episodesObj);
+                }
+            });
+        } catch (error) {
+            console.log({error});
         }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+    }, [])
 
+    useEffect(() => {
+        try {
+            getMultimedia().then(data => {
+                setMediaList(data.multimedia)
+            });
+        } catch (error) {
+            console.log({error});
+        }
+    }, []);
 
-  return (
-    <>
-      <Grid
-        container
-        sx={{ backgroundColor: "#2B2B2B" }}
-        className={styles.container}
-      >
-        <Grid item xs={12}>
-          {!isLoadingMedia && isEmpty(media) && (
-            <p>Try another ID! There is no media with ID {ID}</p>
-          )}
-          {!isLoadingMedia && !isEmpty(media) && (
-            <BannerMultimedia src={media.Images} alt={media.Name} />
-          )}
-        </Grid>
-        <Grid item xs={12}>
-        <AboutInfo episode={media.Description} />
-        {/* <p >{media.Description?.S}</p> */}
-      </Grid>
+    if (media === null) {
+        return (
+            <SectionContent>
+                <Grid item xs={12} sx={{ padding: "2rem" }}>
+                    <Loader />
+                </Grid>
+            </SectionContent>
+        )
+    }
 
+    if (isEmpty(media)) {
+        return (
+            <SectionContent >
+                <Grid item xs={12} sx={{ padding: "2rem" }}>
+                    <EmptyState>Try another ID! There is no media with ID {ID}</EmptyState>
+                </Grid>
+            </SectionContent>
+        )
+    }
 
-        <Grid item xs={12}>
+    if (!isEmpty(media)) {
+        return (
+            <Grid container>
+                <Grid item xs={12}>
+                    <BannerMultimedia src={media.Images} alt={media.Name} />
+                </Grid>
+                <Grid item xs={12}>
+                    <AboutInfo episode={media.Description} />
+                </Grid>
+                {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
+                    <Grid item xs={12}>
+                        <EpisodesAccordion episodes={episodes} seasons={seasons}/>
+                    </Grid>
+                )}
+                {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
+                    seasons.map((s, index) => (
+                        <Grid item xs={12} key={s}>
+                            <EpisodesAccordion episodes={episodes[s]} seasonNumber={s} expanded={index === 0}/>
+                        </Grid>
+                    ))
+                )}
+                <Grid item lg={11.5} xs={12} justifySelf="center">
+                    <Information
+                        released={media.Released}
+                        rated={media.Rated}
+                        regionOfOrigin={media.RegionOfOrigin}
+                        originalAudio={media.OriginalAudio}
+                    />
+                </Grid>
+                {mediaList === null && (
+                    <Grid item xs={12}>
+                        <Loader />
+                    </Grid>
+                )}
 
-          {!isLoadingMedia && !isEmpty(media) && (
-            <Link to={`/episode/${media.ID}?episode_id=S01E01`}>
-            <ScrollMultimedia episodes={episodes} seriesId={media.ID} />
-            </Link>
-          )}
-        </Grid>
+                {!isEmpty(mediaList) && (
+                    <Grid container justifyContent="flex-end" lg={12} xs={11.5} mt="2rem" >
+                        <Grid item lg={11.2} justifyContent="flex-end">
+                            <MediaCard sectionTitle="Related" multimediaData={mediaList} />
+                        </Grid>
 
-
-    <Grid item xs={12}>
-    {!isLoadingMedia && !isEmpty(media) && (
-      <Information
-        released={media.Released}
-        rated={media.Rated}
-        regionOfOrigin={media.RegionOfOrigin}
-        originalAudio={media.OriginalAudio}
-      />
-    )}
-  </Grid>
-     <VideoSection
-        sectionTitle="Related"
-        multimediaData={multimediaData}
-      />
-      </Grid>
-    </>
-  );
+                    </Grid>
+                )
+                }
+            </Grid >
+        )
+    }
 };
 
 export default MultimediaPage;
