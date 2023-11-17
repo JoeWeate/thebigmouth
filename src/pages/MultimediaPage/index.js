@@ -53,7 +53,7 @@ const MultimediaPage = () => {
         } catch (error) {
             console.log({error});
         }
-    }, [])
+    }, [ID])
 
     useEffect(() => {
         try {
@@ -63,7 +63,7 @@ const MultimediaPage = () => {
         } catch (error) {
             console.log({error});
         }
-    }, []);
+    }, [ID]);
 
     if (media === null) {
         return (
