@@ -24,3 +24,11 @@ export const episodesMocks = [
         Description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
     }
 ];
+
+export const videoUrlMocks = "https://www.youtube.com/watch?v=DpPzA4OBVqo";
+export const episodeInfoMocks = {
+    Released: "Released",
+    Rated: "Rated",
+    RegionOfOrigin: "Region of Origin",
+    OriginalAudio: "Original Audio"
+};
