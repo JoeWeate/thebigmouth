@@ -1,85 +1,33 @@
 import React, { useState } from "react";
+import { Grid } from "@mui/material";
+import styles from "./SowMore.module.css";
 
-const ShowMore = () => {
+function ShowMore() {
   const [showContent, setShowContent] = useState(false);
 
-  const toggleContent = () => {
-    setShowContent(!showContent);
-  };
-
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "50vh",
-        fontSize: "small",
-        background: "black", // Transparent background
-      }}
+    <Grid container item justifyContent="center" direction="column" alignItems="center" sx={{ height: "10rem", }}
     >
-      <div>
-        <button
-          onClick={toggleContent}
-          style={{
-            background: "transparent", // Transparent button background
-            border: "none", // Remove button border
-          }}
-        >
-          {showContent ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="50"
-              height="50"
-              viewBox="0 0 100 100"
-            >
-              <line
-                fill="none"
-                stroke="white" // White plus sign color
-                stroke-width="8"
-                x1="10"
-                y1="50"
-                x2="90"
-                y2="50"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100"
-              height="100"
-              viewBox="0 0 100 100"
-            >
-              <line
-                fill="none"
-                stroke="white"
-                stroke-width="8"
-                x1="10"
-                y1="50"
-                x2="90"
-                y2="50"
-              />
-              <line
-                fill="none"
-                stroke="white"
-                stroke-width="8"
-                x1="50"
-                y1="10"
-                x2="50"
-                y2="90"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
-      <p style={{ color: "white" }}>
-        {showContent
-          ? "This is the additional content to show when clicked."
-          : "Show More"}
-      </p>
-    </div>
+      <Grid container justifyContent="center" direction="column" gap={4} alignItems="center" sx={{ height: "8rem", width: "8rem" }}
+        onMouseEnter={() => setShowContent(true)}
+        onMouseLeave={() => setShowContent(false)}
+      >
+        <div className={`${styles["cross-style"]}`}>
+          <div className={`${showContent ? styles["vertical-bar-style-hover"] : styles["vertical-bar-style"]}`}></div>
+          <div className={`${showContent ? styles["horizontal-bar-style-hover"] : styles["horizontal-bar-style"]}`}></div>
+          <div
+            className={`${styles["left-line"]} ${showContent ? styles["left-line-animation"] : ""}`}
+          ></div>
+          <div className={`${styles["right-line"]} ${showContent ? styles["right-line-animation"] : ""}`}></div>
+
+        </div>
+        <div style={showContent ? { color: "rgb(10, 210, 183)" } : { color: "white" }}>SHOW MORE</div>
+
+      </Grid>
+    </Grid >
+
   );
-};
+
+}
 
 export default ShowMore;
