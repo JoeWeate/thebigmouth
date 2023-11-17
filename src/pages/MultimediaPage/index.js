@@ -15,7 +15,7 @@ import MediaCard from "../../components/MediaCard";
 const MultimediaPage = () => {
     const params = useParams();
 
-    const {ID} = params;
+    const { ID } = params;
     const [media, setMedia] = useState(null);
     const [mediaList, setMediaList] = useState(null);
     const [episodes, setEpisodes] = useState(null);
@@ -42,7 +42,7 @@ const MultimediaPage = () => {
         try {
             getOneMultimedia(ID).then(data => {
                 setMedia(data.multimedia);
-                if(data.episodes) {
+                if (data.episodes) {
                     const seasonsSet = getSeasonNumbersSetFromEpisodes(data.episodes);
                     const episodesObj = getEpisodesBySeasonNumber(data.episodes, seasonsSet);
                     setSeasons(seasonsSet);
@@ -50,7 +50,7 @@ const MultimediaPage = () => {
                 }
             });
         } catch (error) {
-            console.log({error});
+            console.log({ error });
         }
     }, [])
 
@@ -60,7 +60,7 @@ const MultimediaPage = () => {
                 setMediaList(data.multimedia)
             });
         } catch (error) {
-            console.log({error});
+            console.log({ error });
         }
     }, []);
 
@@ -95,23 +95,25 @@ const MultimediaPage = () => {
                 </Grid>
                 {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
                     <Grid item xs={12}>
-                        <EpisodesAccordion episodes={episodes} seasons={seasons}/>
+                        <EpisodesAccordion episodes={episodes} seasons={seasons} />
                     </Grid>
                 )}
                 {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
                     seasons.map((s, index) => (
                         <Grid item xs={12} key={s}>
-                            <EpisodesAccordion episodes={episodes[s]} seasonNumber={s} expanded={index === 0}/>
+                            <EpisodesAccordion episodes={episodes[s]} seasonNumber={s} expanded={index === 0} />
                         </Grid>
                     ))
                 )}
-                <Grid item lg={11.5} xs={12} justifySelf="center">
-                    <Information
-                        released={media.Released}
-                        rated={media.Rated}
-                        regionOfOrigin={media.RegionOfOrigin}
-                        originalAudio={media.OriginalAudio}
-                    />
+                <Grid container lg={12} xs={12} justifyContent="center">
+                    <Grid item lg={11}>
+                        <Information
+                            released={media.Released}
+                            rated={media.Rated}
+                            regionOfOrigin={media.RegionOfOrigin}
+                            originalAudio={media.OriginalAudio}
+                        />
+                    </Grid>
                 </Grid>
                 {mediaList === null && (
                     <Grid item xs={12}>

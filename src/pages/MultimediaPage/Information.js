@@ -29,7 +29,7 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
                 }}
 
             >
-                <Grid container direction="row" mt={4} mb={3.5} justifyContent="center" flexWrap="nowrap" gap="1rem">
+                <Grid container direction="row" mt={4} mb={3.5} justifyContent="center" gap="1rem" alignItems="center">
                     <Grid item>
                         <Typography className="info" sx={{ fontSize: 18, color: 'white' }}>
                             <p>INFORMATION</p>
