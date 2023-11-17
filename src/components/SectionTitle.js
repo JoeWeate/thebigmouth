@@ -1,7 +1,7 @@
 import Typography from "@mui/material/Typography";
 import React from 'react';
 
-const SectionTitle = ({title, uppercase}) => {
+const SectionTitle = ({title, uppercase, sx}) => {
 
     return (
         <Typography
@@ -15,6 +15,7 @@ const SectionTitle = ({title, uppercase}) => {
                     md: 30
                 },
                 textTransform: uppercase ? "uppercase" : "none",
+                ...sx
             }}>
             {title}
         </Typography>

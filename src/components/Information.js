@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {Button, Typography, Collapse, Grid, Container, Box} from '@mui/material';
+import {Button, Typography, Collapse, Grid, Box} from '@mui/material';
 import Divider from "./Divider";
+import SectionContent from "./SectionContent";
 import SectionTitle from "./SectionTitle";
 
 
@@ -16,9 +17,9 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
     const disableButton = !rated;
 
     return (
-        <Container sx={{ width: { lg: "100%", xs: "90%" } }}>
+        <SectionContent >
+            <Grid item xs={12}>
             <Divider />
-
             <Button
                 disabled={disableButton}
                 variant="text"
@@ -33,7 +34,7 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
             >
                 <Grid container direction="row" mt={4} mb={3.5} justifyContent="center" flexWrap="nowrap" gap="1rem">
                     <Grid item sx={{display: "flex", alignItems: "center"}}>
-                        <SectionTitle uppercase title="Information" />
+                        <SectionTitle uppercase title="Information" sx={{ marginRight: '1rem'}}/>
                         <svg
                             fill={isHovered ? '#E8FC02' : 'white'}
                             width="1.2rem"
@@ -44,8 +45,7 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
                             xmlSpace="preserve"
                             style={{
                                 transform: `rotate(${open ? '180deg' : '0deg'})`,
-                                transition: 'fill 0.3s ease',
-                                marginLeft: '0.5rem',
+                                transition: 'all 0.3s ease',
                             }}
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
@@ -90,7 +90,8 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
             </Collapse>
 
             <Divider sx={{ marginBottom: '1rem' }} />
-        </Container >
+            </Grid>
+        </SectionContent >
     );
 };
 
