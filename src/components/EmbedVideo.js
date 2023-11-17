@@ -14,7 +14,7 @@ const EmbedVideo = ({ playVideo, setPlayVideo, videoUrl, videoImg }) => {
           <Box
               sx={{
                   position: "relative",
-                  paddingBottom: "56.2344%",
+                  paddingBottom: {xs: "56.25%", md: "45.2344%"},
               }}
           >
               <ReactPlayer
@@ -22,12 +22,17 @@ const EmbedVideo = ({ playVideo, setPlayVideo, videoUrl, videoImg }) => {
                   playing
                   controls
                   onEnded={handleEnded}
-                  width="100%"
+                  width ="100%"
                   height="100%"
                   style={{
                       position: "absolute",
-                      left: 0,
-                      top: 0,
+                      left: "50%",
+                      top: "50%",
+                      transform: "translate(-50%, -50%)",
+                      width:"auto",
+                      height: "100%",
+                      maxWidth:"100%",
+                      maxHeight:"100%"
                   }}
               />
           </Box>

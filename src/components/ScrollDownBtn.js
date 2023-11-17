@@ -23,7 +23,7 @@ const ScrollDownBtn = ({targetRef, sx}) => {
             left: "50%",
             transform: "translateX(-50%)",
             cursor: "pointer",
-            zIndex: "10",
+            zIndex: "100",
             paddingTop: 0,
             "&:hover img": {
                 transform: "translateY(10px)"
