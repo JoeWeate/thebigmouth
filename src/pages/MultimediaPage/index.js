@@ -91,9 +91,9 @@ const MultimediaPage = () => {
                 <Grid item xs={12}>
                     <BannerMultimedia src={media.Images} alt={media.Name} targetRef={targetRef}/>
                 </Grid>
-                <Grid item xs={12} ref={targetRef}>
-                    <AboutInfo episode={media.Description} />
-                </Grid>
+
+                 <AboutInfo episode={media.Description} />
+
                 {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
                     <Grid item xs={12}>
                         <EpisodesAccordion episodes={episodes} seasons={seasons}/>
