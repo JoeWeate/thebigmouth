@@ -14,7 +14,7 @@ import MediaCard from "../../components/MediaCard";
 
 const MultimediaPage = () => {
     const params = useParams();
-
+    const targetRef= useRef(null);
     const {ID} = params;
     const [media, setMedia] = useState(null);
     const [mediaList, setMediaList] = useState(null);
@@ -37,7 +37,6 @@ const MultimediaPage = () => {
         return episodesObj;
     }
 
-    const targetRef= useRef(null);
 
     useEffect(() => {
         try {
@@ -92,7 +91,7 @@ const MultimediaPage = () => {
                     <BannerMultimedia src={media.Images} alt={media.Name} targetRef={targetRef}/>
                 </Grid>
 
-                 <AboutInfo episode={media.Description} />
+                 <AboutInfo episode={media.Description} targetRef={targetRef}/>
 
                 {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
                     <Grid item xs={12}>

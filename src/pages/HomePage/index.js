@@ -18,7 +18,6 @@ export default function HomePage() {
   return (
     <Grid
       container
-      direction="column"
       style={{
         backgroundColor: "black",
       }}
@@ -26,10 +25,12 @@ export default function HomePage() {
       <TitleComponent title="TheBigMouth" description="" />
       <Banner targetRef={targetRef} />
       <SideBySide targetRef={targetRef} />
-      <VideoBanner
-        videoUrl={videoBannerData.videoUrl}
-        videoImg={videoBannerData.videoImg}
-      />
+      <Grid item xs={12}>
+        <VideoBanner
+          videoUrl={videoBannerData.videoUrl}
+          videoImg={videoBannerData.videoImg}
+        />
+      </Grid>
       <MultiMediaSection />
       <ShowMore />
 

@@ -6,7 +6,7 @@ const ScrollDownBtn = ({targetRef, sx}) => {
     const handleScrollDown = (ev) => {
         ev.stopPropagation();
         window.scrollTo({
-            top: targetRef.current.offsetTop,
+            top: targetRef.current.offsetTop - 60,
             behavior: 'smooth',
         });
     };

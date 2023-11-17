@@ -16,7 +16,7 @@ const AboutInfo = ({ episode, targetRef }) => {
     setMoreOpen(false)
   }
   return (
-      <SectionContent ref={targetRef} sx={{my: {xs: 9, md: 11}, marginLeft: "0.5rem" }}>
+      <SectionContent targetRef={targetRef} sx={{my: {xs: 9, md: 11}, marginLeft: "0.5rem" }}>
         <Grid item xs={0} md={6} ></Grid>
         <Grid item xs={12} md={6} >
           <SectionTitle uppercase title="About"/>
