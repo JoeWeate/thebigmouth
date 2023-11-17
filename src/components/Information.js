@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Divider, Typography, Collapse, Grid, Container, Box } from '@mui/material';
+import {Button, Typography, Collapse, Grid, Container, Box} from '@mui/material';
+import Divider from "./Divider";
+import SectionTitle from "./SectionTitle";
 
 
 const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
@@ -15,7 +17,7 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
 
     return (
         <Container sx={{ width: { lg: "100%", xs: "90%" } }}>
-            {open ? <Divider sx={{ backgroundColor: 'white' }} /> : ""}
+            <Divider />
 
             <Button
                 disabled={disableButton}
@@ -30,12 +32,8 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
 
             >
                 <Grid container direction="row" mt={4} mb={3.5} justifyContent="center" flexWrap="nowrap" gap="1rem">
-                    <Grid item>
-                        <Typography className="info" sx={{ fontSize: 18, color: 'white' }}>
-                            <p>INFORMATION</p>
-                        </Typography>
-                    </Grid>
-                    <Grid item sx={{ pt: "0.2rem" }}>
+                    <Grid item sx={{display: "flex", alignItems: "center"}}>
+                        <SectionTitle uppercase title="Information" />
                         <svg
                             fill={isHovered ? '#E8FC02' : 'white'}
                             width="1.2rem"
@@ -47,6 +45,7 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
                             style={{
                                 transform: `rotate(${open ? '180deg' : '0deg'})`,
                                 transition: 'fill 0.3s ease',
+                                marginLeft: '0.5rem',
                             }}
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
@@ -62,7 +61,7 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
 
 
             <Collapse in={open}>
-                <Divider sx={{ marginBottom: '1rem', backgroundColor: 'white' }} />
+                <Divider sx={{ marginBottom: '1rem' }} />
 
                 <Box sx={{ mt: "3rem" }}>
                     <Typography variant="h7" sx={{ fontSize: 16, color: 'white' }}>
@@ -90,7 +89,7 @@ const Information = ({ released, rated, regionOfOrigin, originalAudio }) => {
                 </Box>
             </Collapse>
 
-            <Divider sx={{ marginBottom: '1rem', backgroundColor: 'white' }} />
+            <Divider sx={{ marginBottom: '1rem' }} />
         </Container >
     );
 };

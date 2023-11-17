@@ -2,6 +2,7 @@ import { Typography, Grid, Button, Collapse } from "@mui/material"
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from "react";
+import SectionTitle from "./SectionTitle";
 
 const AboutInfo = ({ episode, targetRef }) => {
   const [moreOpen, setMoreOpen] = useState(false);
@@ -18,7 +19,7 @@ const AboutInfo = ({ episode, targetRef }) => {
       <Grid container direction="row" sx={{ width: "90%", marginTop: "2rem" }} ref={targetRef}>
         <Grid item xs={6} ></Grid>
         <Grid item xs={6} sx={{ padding: "2rem" }}>
-          <Typography variant="h3" sx={{ color: "white", marginLeft: "0.5rem" }}>About</Typography>
+          <SectionTitle uppercase title="About"/>
           <Typography sx={{ color: "white", marginLeft: "0.5rem" }}>{episode}</Typography>
           <Collapse in={moreOpen}>
             <Typography sx={{ color: "white", padding: "0.5rem" }}>
