@@ -7,7 +7,7 @@ import BannerMultimedia from "./BannerMultimedia";
 import AboutInfo from "../../components/AboutInfo";
 import EmptyState from "./EmptyState";
 import EpisodesAccordion from "./EpisodesAccordion";
-import Information from "./Information";
+import Information from "../../components/Information";
 import Loader from "./Loader";
 import SectionContent from "../../components/SectionContent";
 import MediaCard from "../../components/MediaCard";
