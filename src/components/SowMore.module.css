@@ -1,0 +1,200 @@
+.cross-style {
+    width: 45px;
+    height: 3px;
+    background: white;
+    position: relative;
+}
+
+.line-style {
+    position: absolute;
+    width: 70%;
+    height: 3px;
+    background: white;
+    overflow: hidden;
+}
+
+.vertical-bar-style {
+    width: 45px;
+    height: 3px;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.vertical-bar-style-hover {
+    width: 45px;
+    height: 3px;
+    background: rgb(10, 210, 183);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.horizontal-bar-style {
+    width: 45px;
+    height: 3px;
+    background: white;
+    position: absolute;
+    transform: rotate(90deg);
+}
+
+.horizontal-bar-style-hover {
+    width: 45px;
+    height: 3px;
+    background: rgb(10, 210, 183);
+    position: absolute;
+    transform: rotate(90deg);
+}
+
+.right-line {
+    position: absolute;
+    width: 70%;
+    height: 3px;
+    background: transparent;
+    bottom: -23px;
+    right: 22px;
+    transform-origin: bottom right;
+    transform: rotate(135deg) scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.right-line.right-line-animation {
+    animation: rightLineHover 0.2s linear forwards;
+    transform: rotate(45deg) scaleX(-1);
+    background: white;
+}
+
+/* .right-line:not(.right-line-animation) {
+    transition: transform 0.2s ease;
+}
+
+.right-line:not(.right-line-animation):hover {
+    animation: rightLineUnhover 0.2s linear backwards;
+    transform: scaleX(1);
+} */
+
+@keyframes rightLineHover {
+    0% {
+        transform: rotate(-45deg) scaleX(0);
+    }
+
+    100% {
+        transform: rotate(-45deg) scaleX(-1);
+    }
+}
+
+.left-line {
+    width: 70%;
+    height: 3px;
+    background: transparent;
+    position: absolute;
+    bottom: -23px;
+    left: 22px;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+}
+
+.left-line.left-line-animation {
+    animation: leftLineHover 0.2s linear both;
+    transform: rotate(45deg) scaleX(-1);
+    background: white;
+}
+
+@keyframes leftLineHover {
+    0% {
+        transform: rotate(45deg) scaleX(0);
+    }
+
+    100% {
+        transform: rotate(45deg) scaleX(-1);
+    }
+}
+
+.line-style {
+    position: absolute;
+    width: 70%;
+    height: 3px;
+    background: white;
+}
+
+.vertical-bar-style {
+    width: 45px;
+    height: 3px;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.horizontal-bar-style {
+    width: 45px;
+    height: 3px;
+    background: white;
+    position: absolute;
+    transform: rotate(90deg);
+}
+
+
+.right-line {
+    position: absolute;
+    width: 70%;
+    height: 3px;
+    background: transparent;
+    bottom: -23px;
+    right: 22px;
+    transform-origin: bottom right;
+    transform: rotate(135deg) scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.right-line.right-line-animation {
+    animation: rightLineHover 0.2s linear forwards;
+    transform: rotate(45deg) scaleX(-1);
+    background: white;
+}
+
+@keyframes rightLineHover {
+    0% {
+        transform: rotate(-45deg) scaleX(0);
+    }
+
+    100% {
+        transform: rotate(-45deg) scaleX(-1);
+        background: rgb(10, 210, 183);
+    }
+}
+
+
+.left-line {
+    width: 70%;
+    height: 3px;
+    background: transparent;
+    position: absolute;
+    bottom: -23px;
+    left: 22px;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+}
+
+.left-line.left-line-animation {
+    animation: leftLineHover 0.2s linear both;
+    transform: rotate(45deg) scaleX(0);
+    background: white;
+}
+
+@keyframes leftLineHover {
+    0% {
+        transform: rotate(45deg) scaleX(0);
+    }
+
+    100% {
+        transform: rotate(45deg) scaleX(-1);
+        background-color: rgb(10, 210, 183);
+    }
+}
