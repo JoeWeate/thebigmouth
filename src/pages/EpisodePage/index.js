@@ -82,10 +82,10 @@ function EpisodePage() {
                     </Grid>
                 )}
                 {!isEmpty(mediaList) && (
-                    <Grid item justifyContent="flex-end">
+                    <SectionContent sx={{marginTop: "2rem"}}>
                         <MediaCard sectionTitle="Related" multimediaData={mediaList} />
-                    </Grid>
-                )
+                    </SectionContent>
+                    )
                 }
             </Grid>
         )

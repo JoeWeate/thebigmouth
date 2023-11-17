@@ -121,12 +121,9 @@ const MultimediaPage = () => {
                 )}
 
                 {!isEmpty(mediaList) && (
-                    <Grid container justifyContent="flex-end" lg={12} xs={11.5} mt="2rem" >
-                        <Grid item lg={11.2} justifyContent="flex-end">
-                            <MediaCard sectionTitle="Related" multimediaData={mediaList} />
-                        </Grid>
-
-                    </Grid>
+                    <SectionContent sx={{marginTop: "2rem"}}>
+                        <MediaCard sectionTitle="Related" multimediaData={mediaList} />
+                    </SectionContent>
                 )
                 }
             </Grid >
