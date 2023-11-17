@@ -44,7 +44,7 @@ export default function MediaCard({ sectionTitle, multimediaData }) {
                   sx={{
                     fontSize: "2.4rem",
                     position: "absolute",
-                    top: "35%",
+                    top: "25%",
                     left: "12%",
                     textAlign: "left",
                     color: "#FFFFFF",

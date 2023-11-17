@@ -1,7 +1,7 @@
 const JumpingWords = ({ title }) => {
     let arrayWithWords = title.split(" ");
     return (
-        <p>
+        <p >
             {arrayWithWords.map((word, index) => (
                 <span
                     key={index}

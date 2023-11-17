@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 const GraffitiText = ({ title }) => {
     let arrayWithWords = title.split(" ");
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", marginTop: "-1rem" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", mt: "0.5rem", fontSize: "3rem", lineHeight: "1.4" }}>
             {arrayWithWords.map((word, index) => (
                 <span
                     key={index}
