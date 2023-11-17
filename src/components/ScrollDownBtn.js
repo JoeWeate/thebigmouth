@@ -1,7 +1,7 @@
 import React, {Box} from "@mui/material";
 import triangleIcon from "../assets/images/triangle-icon.svg";
 
-const ScrollDownBtn = ({targetRef}) => {
+const ScrollDownBtn = ({targetRef, sx}) => {
 
     const handleScrollDown = (ev) => {
         ev.stopPropagation();
@@ -18,18 +18,19 @@ const ScrollDownBtn = ({targetRef}) => {
                 src={triangleIcon}
                 sx={{
                     display: "block",
-                    width: "73px",
+                    width: "70px",
                     height: "auto",
                     position: "absolute",
-                    bottom: {xs: '90px', md: '130px'},
+                    bottom: {xs: '20px', md: '60px'},
                     left: "50%",
                     transform: "translateX(-50%)",
                     transition: "bottom 0.3s ease",
                     cursor: "pointer",
                     zIndex: "10",
                     "&:hover": {
-                        bottom: {xs: '88px', md: '115px'},
-                    }
+                        bottom: {xs: '10px', md: '40px'},
+                    },
+                    ...sx
                 }}
                 onClick={handleScrollDown}
             />
