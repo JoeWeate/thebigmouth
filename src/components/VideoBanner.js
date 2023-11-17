@@ -101,7 +101,7 @@ const VideoBanner = ({ videoUrl, videoImg, targetRef, title }) => {
             />
           </PlayButton>
         )}
-        {targetRef && (
+        {!playVideo && targetRef && (
             <ScrollDownBtn targetRef={targetRef} sx={{display: {xs: 'none', md: 'block'}}}/>
         )}
         {!playVideo && title && <Typography component="h1" sx={{fontSize: {xs: "2.5rem", md: "10rem"}, lineHeight: "1", color: 'white', position: 'absolute', top: '50%', left: '5vw', transform: 'translateY(-50%)', zIndex: '10', maxWidth: '30vw', textAlign: 'left'}}>{title}</Typography>}
