@@ -12,28 +12,40 @@ const ScrollDownBtn = ({targetRef, sx}) => {
     };
 
     return (
+        <Box
+        comsponent='div'
+        sx={{
+            display: "block",
+            width: "70px",
+            height: "70px",
+            position: "absolute",
+            bottom: {xs: '20px', md: '60px'},
+            left: "50%",
+            transform: "translateX(-50%)",
+            cursor: "pointer",
+            zIndex: "10",
+            paddingTop: 0,
+            "&:hover img": {
+                transform: "translateY(10px)"
+        },
+            ...sx
+        }}
+            onClick={handleScrollDown}
+        >
             <Box
                 component="img"
                 alt="triangle"
                 src={triangleIcon}
                 sx={{
+                    position: "relative",
+                    top: 0,
                     display: "block",
-                    width: "70px",
+                    maxWidth: "100%",
                     height: "auto",
-                    position: "absolute",
-                    bottom: {xs: '20px', md: '60px'},
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    transition: "bottom 0.3s ease",
-                    cursor: "pointer",
-                    zIndex: "10",
-                    "&:hover": {
-                        bottom: {xs: '10px', md: '40px'},
-                    },
-                    ...sx
+                    transition: "all 0.2s linear",
                 }}
-                onClick={handleScrollDown}
             />
+        </Box>
     )
 };
 
