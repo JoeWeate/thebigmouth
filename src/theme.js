@@ -54,7 +54,7 @@ const theme = createTheme({
   //     color: '#232323'
   //   }
   // },
-  // components: {
+  components: {
   //   MuiButton: {
   //     styleOverrides: {
   //       root: {
@@ -174,7 +174,7 @@ const theme = createTheme({
   //         fontSize: '1rem'
   //       }
   //     }
-  //   }
+    }
 });
 
 export default responsiveFontSizes(theme);
