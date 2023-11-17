@@ -1,18 +1,18 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles'
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     background: {
-      default: "#2B2B2B"
+      default: "#2B2B2B",
     },
     primary: {
-      main: 'rgba(0, 0, 0, 1)'
+      main: "rgba(0, 0, 0, 1)",
     },
     text: {
-      main: '#232323'
-    }
+      main: "#232323",
+    },
   },
   typography: {
-    fontFamily: 'Core Sans',
+    fontFamily: "Core Sans",
   },
   //   color: '#232323',
   //   h6: {
@@ -54,7 +54,7 @@ const theme = createTheme({
   //     color: '#232323'
   //   }
   // },
-  components: {
+  // components: {
   //   MuiButton: {
   //     styleOverrides: {
   //       root: {
@@ -80,55 +80,55 @@ const theme = createTheme({
   //     }
   //   }
   // },
-    MuiAccordion: {
-      styleOverrides: {
-        root: ({theme}) => ({
-          backgroundColor: theme.palette.background.default,
-          color: "white",
-          boxShadow: 'none',
-          '&:not(:last-child)': {
-            borderBottom: 0
-          },
-          '&:before': {
-            display: 'none'
-          },
-          '&$expanded': {
-            margin: 'auto'
-          }
-        }),
-      },
+  MuiAccordion: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        backgroundColor: theme.palette.background.default,
+        color: "white",
+        boxShadow: "none",
+        "&:not(:last-child)": {
+          borderBottom: 0,
+        },
+        "&:before": {
+          display: "none",
+        },
+        "&$expanded": {
+          margin: "auto",
+        },
+      }),
     },
-    //   MuiAccordion: {
-    //     styleOverrides: {
-    //       root: {
-    //         boxShadow: 'none',
-    //         '&:not(:last-child)': {
-    //           borderBottom: 0
-    //         },
-    //         '&:before': {
-    //           display: 'none'
-    //         },
-    //         '&$expanded': {
-    //           margin: 'auto'
-    //         }
-    //       },
-    //       expanded: {}
-    //     }
-    //   },
-    //   MuiAccordionSummary: {
-    //     styleOverrides: {
-    //       root: {
-    //         padding: 0,
-    //         paddingRight: 5
-    //       },
-    //       content: {
-    //         '&$expanded': {
-    //           margin: '12px 0'
-    //         }
-    //       },
-    //       expanded: {}
-    //     }
-    //   },
+  },
+  //   MuiAccordion: {
+  //     styleOverrides: {
+  //       root: {
+  //         boxShadow: 'none',
+  //         '&:not(:last-child)': {
+  //           borderBottom: 0
+  //         },
+  //         '&:before': {
+  //           display: 'none'
+  //         },
+  //         '&$expanded': {
+  //           margin: 'auto'
+  //         }
+  //       },
+  //       expanded: {}
+  //     }
+  //   },
+  //   MuiAccordionSummary: {
+  //     styleOverrides: {
+  //       root: {
+  //         padding: 0,
+  //         paddingRight: 5
+  //       },
+  //       content: {
+  //         '&$expanded': {
+  //           margin: '12px 0'
+  //         }
+  //       },
+  //       expanded: {}
+  //     }
+  //   },
   //   MuiAccordionDetails: {
   //     styleOverrides: {
   //       root: {
@@ -175,7 +175,6 @@ const theme = createTheme({
   //       }
   //     }
   //   }
-  }
-})
+});
 
-export default responsiveFontSizes(theme)
+export default responsiveFontSizes(theme);

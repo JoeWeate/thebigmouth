@@ -1,123 +1,257 @@
 import React from "react";
-import { Container, Grid, Box, CssBaseline } from "@mui/material";
+import { Grid, Box, CardMedia, Typography, Paper, Hidden } from "@mui/material";
 import Link from "@mui/material/Link";
+import theme from "../theme";
+import { styled, width } from "@mui/system";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import tiktok from "../assets/images/tiktok.svg";
 
+const CopyrightContainer = styled(Box)`
+  background-color: #2b2b2b;
+  color: #ffffff;
+  font-size: 12px;
+  height: 56px;
+  width: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.36px;
+  line-height: 20px;
+`;
 const Footer = () => {
+  const src =
+    "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png";
+  const title = "THE BIG MOUTH";
+  const tiktokUrl = "https://www.tiktok.com/@bighousetheatre";
+  const fbUrl = "https://www.facebook.com/BigHouseTheatre/?locale=en_GB";
+  const instUrl = "https://www.instagram.com/_thebighouse_/?hl=en-gb";
+  const twitterUrl = "https://twitter.com/BigHouseTheatre";
+  const lnkdUrl =
+    "https://www.linkedin.com/company/the-big-house-theatre-company/";
   return (
-    <footer
-      style={{
-        backgroundColor: "#E6007E",
+    <Paper
+      sx={{
+        marginTop: "calc(10% + 60px)",
         width: "100%",
-        display: "flex",
-        alignItems: "flex-end",
-        top: "5690px",
-        left: "0",
-        height: "279.72px",
+        position: "relative",
+        bottom: 0,
       }}
+      component="footer"
+      square
+      // variant="outlined"
     >
-      <CssBaseline />
-      <Container maxWidth="lg" style={{ height: "100%" }}>
-        <Grid container alignItems="center" style={{ height: "100%" }}>
-          <Grid item xs={12} md={4}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              height="100%"
-              paddingRight="30px"
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="space-around"
+        lg={12}
+        sx={{
+          backgroundColor: "#E6007E",
+          flexDirection: "row",
+          height: { lg: "280px", md: "400px", sm: "500px" },
+        }}
+      >
+        <Grid
+          item
+          lg={4}
+          xs={12}
+          // alignItems="center"
+          // justifyConten="center"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            [theme.breakpoints.down("sm")]: {
+              flexDirection: "row",
+              alignItems: "right",
+            },
+            [theme.breakpoints.up("md")]: {
+              flexDirection: "row",
+              justifyContent: "space-around",
+            },
+          }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              justifyConten: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              [theme.breakpoints.down("sm", "md")]: {
+                textAlign: "right",
+              },
+            }}
+          >
+            <CardMedia
+              component="img"
+              src={src}
+              alt={title}
+              sx={{
+                alignSelf: "center",
+                maxWidth: {
+                  xs: "30%",
+                  sm: "25%",
+                  md: "20%",
+                  lg: "30%",
+                },
+                paddingBottom: {
+                  lg: "3em",
+                },
+                marginBottom: {
+                  md: "1em",
+                },
+              }}
+            ></CardMedia>
+            <Typography
+              variant="h8"
+              sx={{
+                position: "absolute",
+                paddingLeft: "1rem",
+                paddingRight: "1rem",
+                background: "rgba(230, 0, 126, 0.73)",
+                fontWeight: "bold",
+                backdropFilter: "blur(5px)",
+                color: "white",
+                letterSpacing: " -2.04px",
+                textAlign: "center",
+                whiteSpace: "nowrap",
+                fontSize: {
+                  xs: "1.5rem",
+                  sm: "2.5rem",
+                  md: "2.5rem",
+                  lg: "2.5rem",
+                },
+                mb: {
+                  xs: "0.3em",
+                  md: "1em",
+                },
+              }}
             >
-              <div style={{ position: "relative", marginRight: "4em" }}>
-                <img
-                  className="logo-image"
-                  src="https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png"
-                  alt="Logo"
-                  width="237"
-                  height="273"
-                  style={{
-                    background:
-                      "var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box",
-                    opacity: "1",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    width: "386px",
-                    height: "79px",
-                    background: "#E6007E",
-                    opacity: 0.77,
-                    backdropFilter: "blur(5px)",
-                    fontFamily: "Uni Sans Bold",
-                    fontSize: "51px",
-                    fontWeight: "bold",
-                    color: "#FFFFFF",
-                    whiteSpace: "nowrap",
-                    letterSpacing: "-2.04px",
-                    zIndex: 1,
-                  }}
-                >
-                  THE BIG MOUTH
-                </div>
-              </div>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-around"
-              height="100%"
-              flexDirection="row"
-              marginLeft="3em"
+              {title}
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item xs={4} sm={8} md={8} lg={8}>
+          <Grid
+            container
+            direction={{ xs: "column", sm: "column", md: "row", lg: "row" }}
+            justifyContent={{
+              xs: "center",
+              sm: "flex-start",
+              md: "center",
+            }}
+            alignItems="center"
+            sx={{
+              width: "100%",
+              gap: {
+                xs: "2.6rem",
+                sm: "1rem",
+                md: "2.6rem",
+              },
+              mb: { xs: "2rem", sm: "7rem" },
+              mt: {
+                lg: "4rem",
+              },
+              pr: {
+                md: "2em",
+              },
+            }}
+          >
+            <Link
+              sx={{
+                textAlign: { xs: "center", sm: "left" },
+                color: "white",
+                textDecoration: "none",
+              }}
+              href="/back-to-the-big-mouth"
             >
-              <Link
-                style={{
-                  fontFamily: "Core Sans D 45 Medium W01 Rg",
-                  color: "#E0E0E0",
-                  textDecoration: "none",
-                }}
-                href="/back-to-the-big-mouth"
-              >
-                Back to The Big Mouth
-              </Link>
-              <Link
-                style={{
-                  fontFamily: "Core Sans D 45 Medium W01 Rg",
-                  color: "#E0E0E0",
-                  textDecoration: "none",
-                }}
-                href="/become-a-member"
-              >
-                Become a member
-              </Link>
-              <Link
-                style={{
-                  fontFamily: "Core Sans D 45 Medium W01 Rg",
-                  color: "#E0E0E0",
-                  textDecoration: "none",
-                }}
-                href="/contact"
-              >
-                Contact
-              </Link>
-              <Link
-                style={{
-                  fontFamily: "Core Sans D 45 Medium W01 Rg",
-                  color: "#E0E0E0",
-                  textDecoration: "none",
-                }}
-                href="/talent-enquiry"
-              >
-                Talent Enquiry
-              </Link>
-            </Box>
+              Back to The Big Mouth
+            </Link>
+            <Link
+              href="/become-a-member"
+              sx={{
+                textAlign: { xs: "center", sm: "right", md: "right" },
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              Become a member
+            </Link>
+            <Link
+              href="/contact"
+              sx={{
+                textAlign: { xs: "center", sm: "right", md: "right" },
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              Contact
+            </Link>
+            <Link
+              href="/talent-enquiry"
+              sx={{
+                textAlign: { xs: "center", sm: "right", md: "right" },
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              Talent Enquiry
+            </Link>
           </Grid>
         </Grid>
-      </Container>
-    </footer>
+        <Hidden smUp>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            sm={12}
+            sx={{
+              mt: "1rem",
+              mb: "4rem",
+              ml: "6rem",
+              mr: "4rem",
+              zIndex: 1,
+            }}
+          >
+            <Link href={tiktokUrl} target="_blank" rel="noopener noreferrer">
+              <img src={tiktok} alt="TikTok" width="30" height="35" />
+            </Link>
+            <Link href={fbUrl} target="_blank" rel="noopener noreferrer">
+              <FacebookIcon style={{ fontSize: "2rem", color: "white" }} />
+            </Link>
+            <Link href={twitterUrl} target="_blank" rel="noopener noreferrer">
+              <TwitterIcon style={{ fontSize: "2rem", color: "white" }} />
+            </Link>
+            <Link href={instUrl} target="_blank" rel="noopener noreferrer">
+              <InstagramIcon style={{ fontSize: "2rem", color: "white" }} />
+            </Link>
+            <Link href={lnkdUrl} target="_blank" rel="noopener noreferrer">
+              <LinkedInIcon style={{ fontSize: "2rem", color: "white" }} />
+            </Link>
+          </Grid>
+        </Hidden>
+
+        <Grid
+          item
+          xs={12}
+          lg={0}
+          sx={{
+            bottom: 0,
+            width: "100%",
+            position: "absolute",
+          }}
+        >
+          <CopyrightContainer>
+            © The Big House Theatre | Charity Number 1151106.
+          </CopyrightContainer>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 
