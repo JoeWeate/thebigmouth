@@ -10,7 +10,7 @@ import EpisodesAccordion from "./EpisodesAccordion";
 import Information from "../../components/Information";
 import Loader from "./Loader";
 import SectionContent from "../../components/SectionContent";
-import MediaCard from "../../components/MediaCard";
+import MediaCard from "../../components/MediaCardList";
 
 const MultimediaPage = () => {
     const params = useParams();

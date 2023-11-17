@@ -1,4 +1,5 @@
 import React, { Grid } from "@mui/material";
+import SectionContent from "../../components/SectionContent";
 import { TitleComponent } from "../../components/TitleComponent";
 import VideoBanner from "../../components/VideoBanner";
 import SideBySide from "./SideBySide";
@@ -31,8 +32,14 @@ export default function HomePage() {
           videoImg={videoBannerData.videoImg}
         />
       </Grid>
-      <MultiMediaSection />
-      <ShowMore />
+      <Grid item xs={12}>
+        <SectionContent>
+          <MultiMediaSection />
+        </SectionContent>
+      </Grid>
+      <Grid item xs={12}>
+        <ShowMore />
+      </Grid>
 
       {/* <img
            src={`https://${env_config.s3.BUCKET}.s3.amazonaws.com/public/big-mouth.png`}

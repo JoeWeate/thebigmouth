@@ -6,7 +6,7 @@ import JumpingWords from './TextStyles/JumpingWords';
 import GraffitiText from './TextStyles/GraffitiText';
 import InLineText from './TextStyles/InLineText';
 
-export default function MediaCard({ sectionTitle, multimediaData }) {
+export default function MediaCardList({ sectionTitle, multimediaData }) {
   return (
     <Grid container sx={{ pb: 4, flexDirection: 'column' }} lg={12} >
       <Typography variant='h5' sx={{ fontWeight: 'bold', color: 'white', pb: 1 }}>{sectionTitle}

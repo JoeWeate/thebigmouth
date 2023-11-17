@@ -2,7 +2,7 @@ import {getOneEpisode} from "../../api/episodes";
 import {episodeInfoMocks, videoUrlMocks} from "../../api/mocks";
 import {getMultimedia} from "../../api/multimedia";
 import AboutInfo from "../../components/AboutInfo";
-import MediaCard from "../../components/MediaCard";
+import MediaCard from "../../components/MediaCardList";
 import SectionContent from "../../components/SectionContent";
 import EmptyState from "../MultimediaPage/EmptyState";
 import Information from "../../components/Information";
