@@ -3,6 +3,7 @@ import * as React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import Divider from "../../components/Divider";
 import SectionContent from "../../components/SectionContent";
 import SectionTitle from "../../components/SectionTitle";
 import theme from "../../theme";
@@ -59,6 +60,7 @@ export default function EpisodesAccordion({seasons = [], episodes = []}) {
                             <EpisodeCardsList seasonNumber={seasonNumber} episodes={episodes[seasonNumber]}/>
                         </AccordionDetails>
                     </Accordion>
+                    <Divider/>
                 </Grid>
             ))}
         </SectionContent>
