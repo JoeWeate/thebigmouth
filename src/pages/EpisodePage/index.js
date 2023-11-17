@@ -2,7 +2,7 @@ import {getOneEpisode} from "../../api/episodes";
 import {episodeInfoMocks, videoUrlMocks} from "../../api/mocks";
 import {getMultimedia} from "../../api/multimedia";
 import AboutInfo from "../../components/AboutInfo";
-import MediaCard from "../../components/MediaCardList";
+import MediaCardList from "../../components/MediaCardList";
 import SectionContent from "../../components/SectionContent";
 import EmptyState from "../MultimediaPage/EmptyState";
 import Information from "../../components/Information";
@@ -82,8 +82,8 @@ function EpisodePage() {
                     </Grid>
                 )}
                 {!isEmpty(mediaList) && (
-                    <SectionContent sx={{marginTop: "2rem"}}>
-                        <MediaCard sectionTitle="Related" multimediaData={mediaList} />
+                    <SectionContent sx={{marginTop: "2rem",paddingRight: {xs: 0, md: 0}}}>
+                        <MediaCardList sectionTitle="Related" multimediaData={mediaList} />
                     </SectionContent>
                     )
                 }

@@ -12,7 +12,7 @@ export default function MediaCardList({ sectionTitle, multimediaData }) {
       <Typography variant='h5' sx={{ fontWeight: 'bold', color: 'white', pb: 1 }}>{sectionTitle}
       </Typography>
 
-      <Grid container className="noscroll" mt="1.5rem" sx={{ display: 'flex', direction: 'row', flexWrap: 'nowrap', overflowX: 'auto' }}>
+      <Grid container className="noscroll" mt="1.5rem" sx={{ display: 'flex', direction: 'row', flexWrap: 'nowrap', overflowX: 'auto', overflowY: 'hidden' }}>
 
         {multimediaData.map((item, index) => (
           <Grid item xs={12} sm={6} md={4} key={index} sx={{ pr: 3, width: '100%', flex: "auto 0 0" }}>

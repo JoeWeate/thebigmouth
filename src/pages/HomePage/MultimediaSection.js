@@ -1,6 +1,6 @@
 import configureAxios from "../../api/configureAxios";
 import React, { useState, useEffect } from "react";
-import MediaCard from "../../components/MediaCardList";
+import MediaCardList from "../../components/MediaCardList";
 import { Grid, Divider } from "@mui/material";
 
 function MultimediaSection() {
@@ -25,21 +25,21 @@ function MultimediaSection() {
     <Grid container alignSelf="flex-end" direction="column" sx={{
       marginTop: "4rem"
     }}>
-      <MediaCard
+      <MediaCardList
         sectionTitle="New to the Bigmouth"
         multimediaData={multimediaData}
       />
       <Divider sx={{
         backgroundColor: "#838383", mr: { lg: "5rem", xs: "2rem" }, mb: "2rem"
       }} />
-      <MediaCard
+      <MediaCardList
         sectionTitle="Behind the Scenes"
         multimediaData={multimediaData}
       />
       <Divider sx={{
         backgroundColor: "#838383", mr: { lg: "5rem", xs: "2rem" }, mb: "2rem"
       }} />
-      <MediaCard sectionTitle="Short" multimediaData={multimediaData} />
+      <MediaCardList sectionTitle="Short" multimediaData={multimediaData} />
       <Divider sx={{
         backgroundColor: "#838383", mr: { lg: "5rem", xs: "2rem" }, mb: "2rem"
       }} />

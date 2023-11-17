@@ -33,7 +33,7 @@ export default function HomePage() {
         />
       </Grid>
       <Grid item xs={12}>
-        <SectionContent>
+        <SectionContent sx={{paddingRight: {xs: 0, md: 0}}}>
           <MultiMediaSection />
         </SectionContent>
       </Grid>

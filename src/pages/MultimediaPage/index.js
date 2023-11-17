@@ -10,7 +10,7 @@ import EpisodesAccordion from "./EpisodesAccordion";
 import Information from "../../components/Information";
 import Loader from "./Loader";
 import SectionContent from "../../components/SectionContent";
-import MediaCard from "../../components/MediaCardList";
+import MediaCardList from "../../components/MediaCardList";
 
 const MultimediaPage = () => {
     const params = useParams();
@@ -120,8 +120,8 @@ const MultimediaPage = () => {
                 )}
 
                 {!isEmpty(mediaList) && (
-                    <SectionContent sx={{marginTop: "2rem"}}>
-                        <MediaCard sectionTitle="Related" multimediaData={mediaList} />
+                    <SectionContent sx={{marginTop: "2rem", paddingRight: {xs: 0, md: 0}}}>
+                        <MediaCardList sectionTitle="Related" multimediaData={mediaList} />
                     </SectionContent>
                 )
                 }
