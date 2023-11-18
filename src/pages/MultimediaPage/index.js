@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { isEmpty } from "lodash";
@@ -7,14 +7,14 @@ import BannerMultimedia from "./BannerMultimedia";
 import AboutInfo from "../../components/AboutInfo";
 import EmptyState from "./EmptyState";
 import EpisodesAccordion from "./EpisodesAccordion";
-import Information from "./Information";
+import Information from "../../components/Information";
 import Loader from "./Loader";
 import SectionContent from "../../components/SectionContent";
-import MediaCard from "../../components/MediaCard";
+import MediaCardList from "../../components/MediaCardList";
 
 const MultimediaPage = () => {
     const params = useParams();
-
+    const targetRef= useRef(null);
     const {ID} = params;
     const [media, setMedia] = useState(null);
     const [mediaList, setMediaList] = useState(null);
@@ -52,7 +52,7 @@ const MultimediaPage = () => {
         } catch (error) {
             console.log({error});
         }
-    }, [])
+    }, [ID])
 
     useEffect(() => {
         try {
@@ -62,7 +62,7 @@ const MultimediaPage = () => {
         } catch (error) {
             console.log({error});
         }
-    }, []);
+    }, [ID]);
 
     if (media === null) {
         return (
@@ -88,11 +88,11 @@ const MultimediaPage = () => {
         return (
             <Grid container>
                 <Grid item xs={12}>
-                    <BannerMultimedia src={media.Images} alt={media.Name} />
+                    <BannerMultimedia src={media.Images} alt={media.Name} targetRef={targetRef}/>
                 </Grid>
-                <Grid item xs={12}>
-                    <AboutInfo episode={media.Description} />
-                </Grid>
+
+                 <AboutInfo episode={media.Description} targetRef={targetRef}/>
+
                 {episodes && !isEmpty(episodes) && seasons && !isEmpty(seasons) && (
                     <Grid item xs={12}>
                         <EpisodesAccordion episodes={episodes} seasons={seasons}/>
@@ -120,12 +120,9 @@ const MultimediaPage = () => {
                 )}
 
                 {!isEmpty(mediaList) && (
-                    <Grid container justifyContent="flex-end" lg={12} xs={11.5} mt="2rem" >
-                        <Grid item lg={11.2} justifyContent="flex-end">
-                            <MediaCard sectionTitle="Related" multimediaData={mediaList} />
-                        </Grid>
-
-                    </Grid>
+                    <SectionContent sx={{marginTop: "2rem", paddingRight: {xs: 0, md: 0}}}>
+                        <MediaCardList sectionTitle="Related" multimediaData={mediaList} />
+                    </SectionContent>
                 )
                 }
             </Grid >

@@ -1,64 +1,95 @@
+import {getOneEpisode} from "../../api/episodes";
+import {episodeInfoMocks, videoUrlMocks} from "../../api/mocks";
+import {getMultimedia} from "../../api/multimedia";
 import AboutInfo from "../../components/AboutInfo";
-import VideoBanner from "./PlaceholderVideo";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { isEmpty } from "lodash";
-import queryString from "query-string";
-import { Grid, } from "@mui/material";
-import configureAxios from "../../api/configureAxios";
+import MediaCardList from "../../components/MediaCardList";
+import SectionContent from "../../components/SectionContent";
+import EmptyState from "../MultimediaPage/EmptyState";
+import Information from "../../components/Information";
+import Loader from "../MultimediaPage/Loader";
+import VideoBanner from "../../components/VideoBanner";
+import React, {useEffect, useRef, useState} from "react";
+import {useParams} from "react-router-dom";
+import {isEmpty} from "lodash";
+import {Grid,} from "@mui/material";
 
 function EpisodePage() {
-  const params = useParams();
-  const { id } = params;
-  const [episode, setEpisode] = useState({});
-  const { search } = useLocation();
-  const { user, isLoading } = useAuth0();
-  const [isLoadingEpisode, setIsLoadingEpisode] = useState(true);
-  const [status, setStatus] = useState(true);
-  const parsedQuery = queryString.parse(search, {
-    decodeURIComponent: (str) => str,
-  });
-  const episodeID = parsedQuery.episode_id;
-  const [media, setMedia] = useState({});
-  const [loadingMedia, setLoadingMedia] = useState(true);
+    const params = useParams();
+    const {SeriesId, EpisodeId} = params;
+    const [episode, setEpisode] = useState(null);
+    const [mediaList, setMedialist] = useState(null);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const axios = configureAxios();
-    axios
-      .get(`/episodes/${id}`, { params: { episode_id: episodeID } })
-      .then((data) => {
-        const newEpisode = data.data.episode;
-        setEpisode(newEpisode);
-        setIsLoadingEpisode(false)
-      })
-      .catch((error) => {
-        console.log("Error fetching Episode:", error);
-      })
-      .finally(() => setLoadingMedia(false));
-  }, [id, episodeID]);
+    const targetRef = useRef(null);
 
-  return (
-    <Grid container sx={{ minHeight: "100vh", width: "100vw", color: "white" }}>
-      <Grid item xs={12}>
-        {!isLoading && !isLoadingEpisode && isEmpty(episode) && (
-          <p>
-            Try another ID! There is no Episode with ID {id} or {episodeID}
-          </p>
-        )}
-        {!isLoadingEpisode && !isEmpty(episode) && (
-          <VideoBanner episode={episode} />
-        )}
-        </Grid>
-        <Grid item xs={12}>
-        {!isLoading && !isEmpty(episode) && (
-          <div>
-            <AboutInfo episode={episode.description} />
-          </div>
-        )}
-        </Grid>
-    </Grid>
-  );
+    useEffect(() => {
+        getOneEpisode({SeriesId, EpisodeId})
+            .then(data => {
+                setEpisode(data.episode)})
+            .catch( error => {
+                setError(error)
+            });
+
+        getMultimedia()
+            .then(data => {
+                setMedialist(data.multimedia);
+            });
+    }, []);
+
+    if (!error && episode === null) {
+        return (
+            <SectionContent>
+                <Grid item xs={12} sx={{padding: "2rem"}}>
+                    <Loader/>
+                </Grid>
+            </SectionContent>
+        )
+    }
+
+    if (error || isEmpty(episode)) {
+        return (
+            <SectionContent>
+                <Grid item xs={12} sx={{padding: "2rem"}}>
+                    <EmptyState>Sorry!There is no any data for this Episode</EmptyState>
+                </Grid>
+            </SectionContent>
+        )
+    }
+
+    if (episode && !isEmpty(episode)) {
+        const {Released, Rated, RegionOfOrigin, OriginalAudio} = episodeInfoMocks;
+        return (
+            <Grid container>
+                <Grid item xs={12}>
+                    <VideoBanner videoUrl={videoUrlMocks} videoImg={episode.Image} targetRef={targetRef}
+                                 title={episode.Title}/>
+                </Grid>
+                <Grid item xs={12}>
+                    <AboutInfo episode={episode.Description} targetRef={targetRef} title={episode.Name}/>
+                </Grid>
+                    <Grid item xs={12}>
+                        <Information
+                            released={Released}
+                            rated={Rated}
+                            regionOfOrigin={RegionOfOrigin}
+                            originalAudio={OriginalAudio}
+                        />
+                    </Grid>
+
+                {mediaList === null && (
+                    <Grid item xs={12}>
+                        <Loader/>
+                    </Grid>
+                )}
+                {!isEmpty(mediaList) && (
+                    <SectionContent sx={{marginTop: "2rem",paddingRight: {xs: 0, md: 0}}}>
+                        <MediaCardList sectionTitle="Related" multimediaData={mediaList} />
+                    </SectionContent>
+                    )
+                }
+            </Grid>
+        )
+    }
 }
 
 export default EpisodePage;

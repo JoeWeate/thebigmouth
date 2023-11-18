@@ -1,7 +1,7 @@
 import {Grid} from "@mui/material";
 import React from "react";
 
-const SectionContent = ({children, sx, component="section"}) => {
+const SectionContent = ({children, sx, targetRef, component="section"}) => {
 
     return (
         <Grid
@@ -9,6 +9,7 @@ const SectionContent = ({children, sx, component="section"}) => {
             px={{xs: 4, md: 12}}
             component={component}
             sx={sx}
+            ref={targetRef}
         >
             {children}
         </Grid>

@@ -1,9 +1,7 @@
 import { Typography, Paper, CardMedia, Box } from "@mui/material";
-import triangleIcon from "../../assets/images/triangle-icon.svg";
+import ScrollDownBtn from "../../components/ScrollDownBtn";
 
-
-
-const Banner = ({ handleScrollDown }) => {
+const Banner = ({ targetRef }) => {
 
     const logoMouth = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png";
     const title = "THE BIG MOUTH";
@@ -63,29 +61,7 @@ const Banner = ({ handleScrollDown }) => {
                     {title}
                 </Typography>
             </Box>
-            <img
-                alt="triangle"
-                src={triangleIcon}
-
-                style={{
-                    width: "63px",
-                    height: "66px",
-                    position: "absolute",
-                    alignSelf: "flex-end",
-                    marginBottom: "3rem",
-                    transition: "margin-bottom 0.3s ease",
-                    cursor: "pointer",
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.marginBottom = "2rem";
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.marginBottom = "3rem";
-                }}
-                onClick={handleScrollDown}
-            />
-
-
+            <ScrollDownBtn targetRef={targetRef} />
         </Paper >
     )
 };

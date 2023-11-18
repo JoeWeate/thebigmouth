@@ -3,8 +3,9 @@ import * as React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
+import Divider from "../../components/Divider";
 import SectionContent from "../../components/SectionContent";
+import SectionTitle from "../../components/SectionTitle";
 import theme from "../../theme";
 import EpisodeCardsList from './EpisodeCardsList';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -53,24 +54,13 @@ export default function EpisodesAccordion({seasons = [], episodes = []}) {
                                 },
                             }}
                         >
-                            <Typography
-                                sx={{
-                                    fontWeight: "bold",
-                                    color: "white",
-                                    fontSize: {
-                                        xs: 26,
-                                        md: 30
-                                    }
-                                }}
-                                component="h6"
-                            >
-                                Season {seasonNumber}
-                            </Typography>
+                            <SectionTitle title={`Season ${seasonNumber}`}/>
                         </AccordionSummary>
                         <AccordionDetails sx={{paddingRight: 0}}>
                             <EpisodeCardsList seasonNumber={seasonNumber} episodes={episodes[seasonNumber]}/>
                         </AccordionDetails>
                     </Accordion>
+                    <Divider/>
                 </Grid>
             ))}
         </SectionContent>

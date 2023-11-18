@@ -1,23 +1,20 @@
 import React, { useState } from "react";
-import { Paper, styled } from "@mui/material";
+import {Box, styled, Typography} from "@mui/material";
+import ScrollDownBtn from "./ScrollDownBtn";
 import EmbedVideo from "./EmbedVideo";
 
-const VideoImageContainer = styled(Paper)(
-  ({ theme, isContainerHovered, isMainImageHovered }) => ({
-    backgroundColor: "#000",
+const VideoImageContainer = styled(Box)(
+  () => ({
+    display: 'block',
     textAlign: "center",
     position: "relative",
-    transition: "filter 0.5s ease",
-    "&:hover": {
-      filter: isMainImageHovered
-        ? "none"
-        : isContainerHovered
-        ? "brightness(50%)"
-        : "none",
-    },
-  })
+    marginBottom: "30px",
+    height: "auto",
+    maxHeight: "90vh",
+    overflow: "hidden",
+    })
 );
-const PlayButton = styled("div")(({ theme }) => ({
+const PlayButton = styled("div")(({  }) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -27,8 +24,7 @@ const PlayButton = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   zIndex: 1,
-  width: "100%",
-  height: "100%",
+  cursor: "pointer",
 }));
 
 const Image = styled("img")({
@@ -37,7 +33,7 @@ const Image = styled("img")({
   margin: "0 10px",
 });
 
-const SIcon = styled("img")(({ theme, isHovered }) => ({
+const SIcon = styled("img")(({ isHovered }) => ({
   width: isHovered ? "45px" : "40px",
   height: isHovered ? "45px" : "40px",
   position: "absolute",
@@ -48,7 +44,7 @@ const SIcon = styled("img")(({ theme, isHovered }) => ({
   fontSize: "100px",
 }));
 
-const CircleIcon = styled("img")(({ theme, isHovered }) => ({
+const CircleIcon = styled("img")(({ isHovered }) => ({
   width: isHovered ? "83px" : "105px",
   height: isHovered ? "83px" : "105px",
   position: "absolute",
@@ -58,7 +54,7 @@ const CircleIcon = styled("img")(({ theme, isHovered }) => ({
   transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s",
 }));
 
-const VideoBanner = ({ videoUrl, videoImg }) => {
+const VideoBanner = ({ videoUrl, videoImg, targetRef, title }) => {
   const [isContainerHovered, setContainerHovered] = useState(false);
   const [isMainImageHovered, setMainImageHovered] = useState(false);
   const [playVideo, setPlayVideo] = useState(false);
@@ -105,6 +101,10 @@ const VideoBanner = ({ videoUrl, videoImg }) => {
             />
           </PlayButton>
         )}
+        {!playVideo && targetRef && (
+            <ScrollDownBtn targetRef={targetRef} sx={{display: {xs: 'none', md: 'block'}}}/>
+        )}
+        {!playVideo && title && <Typography component="h1" sx={{fontSize: {xs: "2.5rem", md: "10rem"}, lineHeight: "1", color: 'white', position: 'absolute', top: '50%', left: '5vw', transform: 'translateY(-50%)', zIndex: '10', maxWidth: '30vw', textAlign: 'left'}}>{title}</Typography>}
       </VideoImageContainer>
     </>
   );

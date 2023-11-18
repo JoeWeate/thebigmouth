@@ -34,10 +34,9 @@ const Footer = () => {
   return (
     <Paper
       sx={{
-        marginTop: "calc(10% + 60px)",
         width: "100%",
         position: "relative",
-        bottom: 0,
+        flexGrow: "0",
       }}
       component="footer"
       square
@@ -52,6 +51,10 @@ const Footer = () => {
           backgroundColor: "#E6007E",
           flexDirection: "row",
           height: { lg: "280px", md: "400px", sm: "500px" },
+            pt: {
+                xs: 3,
+                lg: 0,
+            }
         }}
       >
         <Grid
@@ -213,7 +216,7 @@ const Footer = () => {
             sx={{
               mt: "1rem",
               mb: "4rem",
-              ml: "6rem",
+              ml: "4rem",
               mr: "4rem",
               zIndex: 1,
             }}

@@ -1,6 +1,7 @@
 import React, { Grid } from "@mui/material";
+import SectionContent from "../../components/SectionContent";
 import { TitleComponent } from "../../components/TitleComponent";
-import VideoBanner from "./VideoBanner";
+import VideoBanner from "../../components/VideoBanner";
 import SideBySide from "./SideBySide";
 import Banner from "./Banner";
 import MultiMediaSection from "./MultimediaSection";
@@ -15,26 +16,30 @@ export default function HomePage() {
       "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/video-banner.png",
   };
 
-  const handleScrollDown = () => {
-    targetRef.current.scrollIntoView({ behavior: "smooth" });
-  };
   return (
     <Grid
       container
-      direction="column"
       style={{
         backgroundColor: "black",
       }}
     >
       <TitleComponent title="TheBigMouth" description="" />
-      <Banner handleScrollDown={handleScrollDown} />
+      <Banner targetRef={targetRef} />
       <SideBySide targetRef={targetRef} />
-      <VideoBanner
-        videoUrl={videoBannerData.videoUrl}
-        videoImg={videoBannerData.videoImg}
-      />
-      <MultiMediaSection />
-      <ShowMore />
+      <Grid item xs={12}>
+        <VideoBanner
+          videoUrl={videoBannerData.videoUrl}
+          videoImg={videoBannerData.videoImg}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <SectionContent sx={{paddingRight: {xs: 0, md: 0}}}>
+          <MultiMediaSection />
+        </SectionContent>
+      </Grid>
+      <Grid item xs={12}>
+        <ShowMore />
+      </Grid>
 
       {/* <img
            src={`https://${env_config.s3.BUCKET}.s3.amazonaws.com/public/big-mouth.png`}
