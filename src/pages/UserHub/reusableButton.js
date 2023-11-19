@@ -1,9 +1,9 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-const MuiButton = ({ text, action, color }) => {
+const MuiButton = ({ text, action, color, size }) => {
   return (
-    <Button onClick={action} color={color} variant="contained">
+    <Button onClick={action} color={color} size={size} variant="contained">
       {text}
     </Button>
   );
