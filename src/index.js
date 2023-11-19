@@ -9,6 +9,7 @@ import Home from "./pages/HomePage";
 import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
+import DummyHomePage from "./pages/DummyHomePage";
 
 import Theme from "./theme";
 import App from "./App";
@@ -51,10 +52,11 @@ ReactDOM.render(
               <Route path="/multimedia/:ID" element={<Multimedia />} />
               <Route path="/episode/:SeriesId/:EpisodeId" element={<Episode />} />
               <Route path="login" element={<PostAuthentication />} />
+              <Route path="dummyHomePage" element={<DummyHomePage />}></Route>
               <Route
                 path="profile"
                 element={
-                  <Profile/>
+                  <Profile />
                 }
               />
               <Route path="*" element={<Error />} />
