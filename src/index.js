@@ -1,7 +1,7 @@
+import {CircularProgress, Grid} from "@mui/material";
 import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Grid, CircularProgress } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Auth0Provider } from "@auth0/auth0-react";
 import env_config from "./env_config";
@@ -20,7 +20,9 @@ import Episode from "./pages/EpisodePage";
 
 import "./index.css";
 
-ReactDOM.render(
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(
   <ThemeProvider theme={Theme}>
     <Auth0Provider
       domain={env_config.auth0.domain}
@@ -65,7 +67,5 @@ ReactDOM.render(
         </BrowserRouter>
       </Suspense>
     </Auth0Provider>
-  </ThemeProvider>,
-  document.getElementById("root")
-);
+  </ThemeProvider>);
 reportWebVitals();
