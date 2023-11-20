@@ -27,6 +27,7 @@ const VideoBox = ({videoUrl, videoImg, maxWidth = "600px", children }) => {
                 cursor: "pointer",
                 margin: "0 auto",
                 textAlign: "center",
+                overflow: "hidden"
             }}
             onMouseEnter={()=>setHover(true)}
             onMouseLeave={()=>setHover(false)}
@@ -54,7 +55,7 @@ const VideoBox = ({videoUrl, videoImg, maxWidth = "600px", children }) => {
                         transform: "translate(-50%, -50%)",
                     }}/>
                 {videoImg && !playVideo && <CardMedia component="img" image={videoImg} alt="Cover"
-                                        sx={{position: "absolute", top: 0, left: 0, height: '100vh', width: '100vw', objectFit: 'cover'}}/>}
+                                        sx={{position: "absolute", top: 0, left: 0, height: '100%', width: '100%', objectFit: 'cover'}}/>}
                 {children(playVideo, hover, videoImg)}
             </Box>
         </Box>
