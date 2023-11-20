@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Grid, CircularProgress } from "@mui/material";
+import { Grid, CircularProgress, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Auth0Provider } from "@auth0/auth0-react";
 import env_config from "./env_config";
@@ -22,6 +22,7 @@ import "./index.css";
 
 ReactDOM.render(
   <ThemeProvider theme={Theme}>
+    <CssBaseline />
     <Auth0Provider
       domain={env_config.auth0.domain}
       clientId={env_config.auth0.clientId}
