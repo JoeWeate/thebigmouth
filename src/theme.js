@@ -8,7 +8,15 @@ const theme = createTheme({
       main: "rgba(0, 0, 0, 1)",
     },
     text: {
-      main: "#232323",
+      main: "rgba(0, 0, 0, 1)",
+      primary: "#fff",
+      secondary: "#8c8c8c",
+    },
+    yellow:{
+      main: "#C4FF00",
+    },
+    pink: {
+      main: "#FF0080",
     },
   },
   typography: {
