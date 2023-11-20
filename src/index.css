@@ -12,6 +12,10 @@
   src: local("Reactive-3zz73"), url("./assets/fonts/Reactive-3zz73.ttf") format("truetype");
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: "Core Sans", sans-serif;
