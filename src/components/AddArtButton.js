@@ -10,7 +10,7 @@ const AddArtButton = () => {
                 <span></span>
                 <span></span>
                 <span></span>
-                Add Your Art
+                Share Your Art
             </a>
         </Box>
     );
