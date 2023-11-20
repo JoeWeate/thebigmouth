@@ -1,15 +1,11 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
+    mode: "dark",
     background: {
       default: "#2B2B2B",
     },
-    primary: {
-      main: "rgba(0, 0, 0, 1)",
-    },
     text: {
-      main: "rgba(0, 0, 0, 1)",
-      primary: "#fff",
       secondary: "#8c8c8c",
     },
     yellow:{
@@ -92,6 +88,7 @@ const theme = createTheme({
     styleOverrides: {
       root: ({ theme }) => ({
         backgroundColor: theme.palette.background.default,
+        backgroundImage: "none",
         color: "white",
         boxShadow: "none",
         "&:not(:last-child)": {
