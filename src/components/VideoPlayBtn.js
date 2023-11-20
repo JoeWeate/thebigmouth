@@ -38,7 +38,7 @@ const VideoPlayBtn = ({sx, smallerOnMobile = true, hover, withFilledPinkTriangle
                 <path  className="pinkTriangle" d="M57.344,81.218V44.6L90.3,63.444Z" transform={`translate(${hover ? "-18 -12" : "-22.286 -18.345"})`} fill={hover && withFilledPinkTriangleOnHover ? "#e6007e" : "none"} stroke="#e6007e" strokeWidth="2"/>
                 <g className='pinkCircle' fill="none" stroke="#e6007e" strokeWidth="2">
                     <circle cx="50" cy="50" r={hover ? "40" : "50"} stroke="none"/>
-                    <circle cx="50" cy="50" r="49" fill="none"/>
+                    <circle cx="50" cy="50" r={hover ? "40" : "49"} fill="none"/>
                 </g>
             </svg>
         </SvgIcon>
