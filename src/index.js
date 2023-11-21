@@ -57,7 +57,7 @@ ReactDOM.render(
               />
               <Route path="login" element={<PostAuthentication />} />
               <Route path="dummyHomePage" element={<DummyHomePage />}></Route>
-              <Route path="Dashboard" element={<Dashboard />}></Route>
+              <Route path="dashboard" element={<Dashboard />}></Route>
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
             </Route>
