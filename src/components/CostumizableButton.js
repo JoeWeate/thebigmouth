@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
 
 const CostumizableButton = styled(Button)(
-  ({ theme, backgroundColor, variant, color, action }) => ({
+  ({ theme, backgroundColor, variant, color, onClick }) => ({
     background:
       variant === "outlined"
         ? "transparent"
