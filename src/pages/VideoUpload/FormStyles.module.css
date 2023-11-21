@@ -13,9 +13,8 @@
 }
 .h2Shine {
   color: pink;
-  font-size: 2em;
-  font-weight: bold;
-  letter-spacing: 0.2em;
+
+  letter-spacing: 0.1em;
   cursor: pointer;
   text-transform: uppercase;
   background: linear-gradient(
@@ -26,5 +25,5 @@
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 5s infinite linear;
+  animation: shine 6s infinite linear;
 }

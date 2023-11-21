@@ -14,6 +14,7 @@ const VideoUploadPage = () => {
         backgroundColor: "white",
         mb: {
           lg: "5rem",
+          sm: "4rem",
         },
       }}
       justifyContent="center"
@@ -32,11 +33,17 @@ const VideoUploadPage = () => {
           alignContent={"center"}
           justifyContent={"center"}
         >
-          <Typography variant="h3" className={FormStyles.h2Shine}>
-            Share your Art
+          <Typography variant="h5" sx={{ padding: "0.5em" }}>
+            Please provide the link to the
+            <span className={FormStyles.h2Shine}> video</span> you'd like to
+            upload on the form below
           </Typography>
-          <Typography variant="p" sx={{ padding: "1em" }}>
-            Unleash your creativity and let your art shine!
+          <Typography
+            variant="p"
+            sx={{ padding: "1.5em" }}
+            className={FormStyles.h2Shine}
+          >
+            Let your art shine!
           </Typography>
         </Box>
       </Grid>

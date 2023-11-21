@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import CostumizableButton from "../../components/CostumizableButton.js";
+import Button from "../../components/Button.js";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import styles from "./SubmitStyles.module.css";
@@ -18,14 +18,14 @@ const VideoForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    youtubeUrl: "",
+    VideoLink: "",
     message: "",
   });
 
   const [formErrors, setFormErrors] = useState({
     title: false,
     description: false,
-    youtubeUrl: false,
+    VideoLink: false,
     message: false,
   });
 
@@ -64,7 +64,7 @@ const VideoForm = () => {
         sx={{
           width: {
             lg: "60vh",
-            md: "60vh",
+            // md: "60vh",
           },
           height: {
             lg: "50vh",
@@ -96,16 +96,16 @@ const VideoForm = () => {
 
         <TextField
           fullWidth
-          placeholder="Video Url"
-          label="URL"
-          id="VideoUrl"
-          name="VideoUrl"
-          value={formData.youtubeUrl}
+          placeholder="Video Link"
+          label="Link"
+          id="VideoLink"
+          name="VideoLink"
+          value={formData.VideoLink}
           onChange={handleChange}
           margin="normal"
           required
           error={formErrors.youtubeUrl}
-          helperText={formErrors.youtubeUrl && "Video URL is required"}
+          helperText={formErrors.youtubeUrl && "Video Link is required"}
         />
         <TextField
           fullWidth
@@ -133,16 +133,16 @@ const VideoForm = () => {
           rows={3}
           defaultValue="Default Value"
         />
-        <CostumizableButton
+        <Button
           className={styles["glow-on-hover"]}
           variant="outlined"
           onClick={handleSubmit}
           size="large"
-          sx={{ marginTop: "2rem" }}
+          sx={{ marginTop: "2.5rem", marginBottom: "2em" }}
           action={{ cursor: "pointer" }}
         >
           Submit
-        </CostumizableButton>
+        </Button>
       </Box>
     </ThemeProvider>
   );
