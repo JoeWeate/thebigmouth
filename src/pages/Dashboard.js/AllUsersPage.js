@@ -1,10 +1,10 @@
 import React from "react";
 
-const Videos = ({ state }) => {
+const AllUsersPage = ({ state }) => {
   return (
     <div
       style={{
-        backgroundColor: "grey",
+        backgroundColor: "green",
       }}
     >
       {state}
@@ -12,4 +12,4 @@ const Videos = ({ state }) => {
   );
 };
 
-export default Videos;
+export default AllUsersPage;

@@ -8,18 +8,18 @@ import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import GroupIcon from "@mui/icons-material/Group";
 import { Typography, Box } from "@mui/material";
-import Videos from "./Videos";
-import AllUsers from "./AllUsers";
+import VideosPage from "./VideosPage";
+import AllUsersPage from "./AllUsersPage";
 
 function Dashboard({ user, data }) {
   user = "user";
   const [collapsed, setCollapsed] = useState(false);
-  const [menuItemState, setMenuItemState] = useState(
+  const [videoState, setVideoState] = useState(
     user === "user" ? "All my videos" : "All Users"
   );
 
   const adminMenuItems = [
-    { icon: <GroupIcon />, text: "All Users", state: "user" },
+    { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
     {
       icon: <OndemandVideoIcon />,
       text: "All User Videos",
@@ -81,7 +81,7 @@ function Dashboard({ user, data }) {
   };
 
   const handleMenuClick = (state) => {
-    setMenuItemState(state);
+    setVideoState(state);
   };
 
   const menuItems = user === "admin" ? adminMenuItems : userMenuItems;
@@ -148,10 +148,10 @@ function Dashboard({ user, data }) {
           backgroundColor: "white",
         }}
       >
-        {menuItemState === "user" ? (
-          <AllUsers state={menuItemState} />
+        {videoState === "allUsers" ? (
+          <AllUsersPage state={videoState} />
         ) : (
-          <Videos state={menuItemState} user={user} data={data} />
+          <VideosPage state={videoState} user={user} data={data} />
         )}
       </main>
     </Box>
