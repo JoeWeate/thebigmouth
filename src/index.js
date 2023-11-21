@@ -1,7 +1,7 @@
-import {CircularProgress, Grid} from "@mui/material";
 import React, { Suspense } from "react";
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Grid, CircularProgress, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Auth0Provider } from "@auth0/auth0-react";
 import env_config from "./env_config";
@@ -24,6 +24,7 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <ThemeProvider theme={Theme}>
+    <CssBaseline />
     <Auth0Provider
       domain={env_config.auth0.domain}
       clientId={env_config.auth0.clientId}
