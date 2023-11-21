@@ -19,6 +19,7 @@ import reportWebVitals from "./reportWebVitals";
 import Episode from "./pages/EpisodePage";
 
 import "./index.css";
+import Dashboard from "./pages/Dashboard.js";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -53,15 +54,14 @@ root.render(
             <Route exact path="/" element={<App />}>
               <Route path="" element={<Home />} />
               <Route path="/multimedia/:ID" element={<Multimedia />} />
-              <Route path="/episode/:SeriesId/:EpisodeId" element={<Episode />} />
+              <Route
+                path="/episode/:SeriesId/:EpisodeId"
+                element={<Episode />}
+              />
               <Route path="login" element={<PostAuthentication />} />
               <Route path="dummyHomePage" element={<DummyHomePage />}></Route>
-              <Route
-                path="profile"
-                element={
-                  <Profile />
-                }
-              />
+              <Route path="Dashboard" element={<Dashboard />}></Route>
+              <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
             </Route>
           </Routes>
