@@ -2,6 +2,8 @@ import React from "react";
 import VideoForm from "../VideoUpload/VideoForm";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import FormStyles from "./FormStyles.module.css";
 
 const VideoUploadPage = () => {
   return (
@@ -30,8 +32,12 @@ const VideoUploadPage = () => {
           alignContent={"center"}
           justifyContent={"center"}
         >
-          <h2>Share your Art</h2>
-          <p>Unleash your creativity and let your art shine!</p>
+          <Typography variant="h3" className={FormStyles.h2Shine}>
+            Share your Art
+          </Typography>
+          <Typography variant="p" sx={{ padding: "1em" }}>
+            Unleash your creativity and let your art shine!
+          </Typography>
         </Box>
       </Grid>
       <Grid

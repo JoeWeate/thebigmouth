@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import CostumizableButton from "../../components/CostumizableButton.js";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import styles from "./SubmitStyles.module.css";
 
 const theme = createTheme({
   palette: {
@@ -63,6 +64,7 @@ const VideoForm = () => {
         sx={{
           width: {
             lg: "60vh",
+            md: "60vh",
           },
           height: {
             lg: "50vh",
@@ -73,7 +75,7 @@ const VideoForm = () => {
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "white",
-          padding: "2rem",
+          padding: "3rem",
           // border: `1px solid ${grey[300]}`,
           paddingBottom: "3rem",
         }}
@@ -94,16 +96,16 @@ const VideoForm = () => {
 
         <TextField
           fullWidth
-          placeholder="Youtube Url"
+          placeholder="Video Url"
           label="URL"
-          id="youtubeUrl"
-          name="youtubeUrl"
+          id="VideoUrl"
+          name="VideoUrl"
           value={formData.youtubeUrl}
           onChange={handleChange}
           margin="normal"
           required
           error={formErrors.youtubeUrl}
-          helperText={formErrors.youtubeUrl && "Youtube URL is required"}
+          helperText={formErrors.youtubeUrl && "Video URL is required"}
         />
         <TextField
           fullWidth
@@ -132,6 +134,7 @@ const VideoForm = () => {
           defaultValue="Default Value"
         />
         <CostumizableButton
+          className={styles["glow-on-hover"]}
           variant="outlined"
           onClick={handleSubmit}
           size="large"
