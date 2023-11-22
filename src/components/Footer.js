@@ -14,7 +14,7 @@ const CopyrightContainer = styled(Box)`
   color: #ffffff;
   font-size: 12px;
   height: 56px;
-  width: 100;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,6 +37,7 @@ const Footer = () => {
         width: "100%",
         position: "relative",
         flexGrow: "0",
+        overflow: "hidden",
       }}
       component="footer"
       square

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Grid, CircularProgress, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -19,8 +19,11 @@ import reportWebVitals from "./reportWebVitals";
 import Episode from "./pages/EpisodePage";
 
 import "./index.css";
+import Dashboard from "./pages/Dashboard.js";
 
-ReactDOM.render(
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(
   <ThemeProvider theme={Theme}>
     <CssBaseline />
     <Auth0Provider
@@ -51,22 +54,19 @@ ReactDOM.render(
             <Route exact path="/" element={<App />}>
               <Route path="" element={<Home />} />
               <Route path="/multimedia/:ID" element={<Multimedia />} />
-              <Route path="/episode/:SeriesId/:EpisodeId" element={<Episode />} />
+              <Route
+                path="/episode/:SeriesId/:EpisodeId"
+                element={<Episode />}
+              />
               <Route path="login" element={<PostAuthentication />} />
               <Route path="dummyHomePage" element={<DummyHomePage />}></Route>
-              <Route
-                path="profile"
-                element={
-                  <Profile />
-                }
-              />
+              <Route path="Dashboard" element={<Dashboard />}></Route>
+              <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
             </Route>
           </Routes>
         </BrowserRouter>
       </Suspense>
     </Auth0Provider>
-  </ThemeProvider>,
-  document.getElementById("root")
-);
+  </ThemeProvider>);
 reportWebVitals();
