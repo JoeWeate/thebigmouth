@@ -1,5 +1,5 @@
 import { Container } from "@mui/material"
-import AddArtButton from "../../components/AddArtButton"
+import AddArtButton from "../../components/userHub/AddArtButton"
 
 const DummyHomePage = () => {
     return (

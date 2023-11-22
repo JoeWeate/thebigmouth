@@ -1,4 +1,4 @@
-a {
+.box a {
     position: relative;
     display: inline-block;
     font-size: 1.2rem;
@@ -9,30 +9,21 @@ a {
     padding: 10px 30px 10px 30px;
 }
 
-/* a::before {
-    content: "";
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    bottom: 1px;
-    left: 1px;
 
-} */
-
-a:hover {
+.box a:hover {
     color: #E6007E;
     background: rgba(0, 0, 0);
     transition: 0.2s;
     transition-delay: 0.3s;
 }
 
-a span {
+.box a span {
     position: absolute;
     display: block;
     background-color: #E8FC02;
 }
 
-a span:nth-child(1) {
+.box a span:nth-child(1) {
     left: 0;
     top: 0;
     width: 100%;
@@ -43,13 +34,13 @@ a span:nth-child(1) {
     transition-delay: 0.45s;
 }
 
-a:hover span:nth-child(1) {
+.box a:hover span:nth-child(1) {
     transition: transform 0.2s;
     transform: scaleX(1);
 }
 
 
-a span:nth-child(2) {
+.box a span:nth-child(2) {
     right: 0;
     top: 0;
     width: 1px;
@@ -60,13 +51,13 @@ a span:nth-child(2) {
     transition-delay: 0.3s;
 }
 
-a:hover span:nth-child(2) {
+.box a:hover span:nth-child(2) {
     transform: scaleY(1);
     transition: transform 0.2s;
     transition-delay: 0.1s;
 }
 
-a span:nth-child(3) {
+.box a span:nth-child(3) {
     left: 0;
     bottom: 0;
     width: 100%;
@@ -77,13 +68,13 @@ a span:nth-child(3) {
     transition-delay: 0.15s;
 }
 
-a:hover span:nth-child(3) {
+.box a:hover span:nth-child(3) {
     transform: scaleX(1);
     transition: transform 0.2s;
     transition-delay: 0.2s;
 }
 
-a span:nth-child(4) {
+.box a span:nth-child(4) {
     left: 0;
     bottom: 0;
     width: 1px;
@@ -93,7 +84,7 @@ a span:nth-child(4) {
     transition: transform 0.2s;
 }
 
-a:hover span:nth-child(4) {
+.box a:hover span:nth-child(4) {
     transform: scaleY(1);
     transition: transform 0.2s;
     transition-delay: 0.3s;
