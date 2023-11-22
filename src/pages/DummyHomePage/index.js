@@ -7,14 +7,17 @@ const DummyHomePage = () => {
     return (
 
         <Grid container direction="column" justifyContent="center" alignItems="center">
-            <Grid item lg={12} mb="2rem" >
+            <Grid item lg={12} mb="2rem" sx={{ mt: { xs: "1rem" }, mb: { xs: "1rem", lg: "2rem" } }} >
                 <Grid container direction="column" alignItems="center">
-                    <Typography variant="h5" sx={{ textTransform: "uppercase", fontWeight: "600", fontSize: { lg: "45pt", sm: "35pt", xs: "30pt" } }}  >
+                    <Typography variant="h5" sx={{ textAlign: "center", textTransform: "uppercase", fontWeight: "600", fontSize: { lg: "50pt", sm: "40pt", xs: "20pt" } }}  >
                         <p >Welcome to <span style={{ color: "#E6007E" }}>Video</span>Hub</p>
                     </Typography>
 
-                    <Typography variant="h4" sx={{ fontSize: { sm: "14pt", md: "24pt" }, marginTop: "-3rem", marginBottom: "4rem" }}>
-                        Your Ultimate Destination for Awesome Content Experiences!
+                    <Typography variant="h4" sx={{ textAlign: "center", fontSize: { xs: "13pt", sm: "14pt", md: "24pt" }, marginTop: { lg: "-5rem", xs: "-2rem" }, marginBottom: { xs: "2rem", lg: "4rem" } }}>
+                        <p>
+                            Your Ultimate Destination for Awesome Content Experiences!
+                        </p>
+
                     </Typography>
 
                     <AddArtButton />
@@ -24,9 +27,9 @@ const DummyHomePage = () => {
                 <Grid container justifyContent="center" sx={{ marginBottom: { lg: "4rem", sm: 0 } }}>
                     {userHubVideoListMocks.map((video) => {
                         let withVideoInfo = true;
-                        let maxWidth = "600px";
+                        let maxWidth = "800px";
                         return (
-                            <Grid item lg={4} md={6} xs={12} key={video.id} sx={{ padding: { lg: "1rem", md: "1rem", sm: 0 }, paddingBottom: { sm: "2rem" } }}>
+                            <Grid item lg={4} md={6} xs={12} key={video.id} sx={{ padding: { lg: "1rem", md: "1rem", sm: 0 }, paddingBottom: { sm: "2rem", xs: "1rem" } }}>
                                 <UserVideo video={video} maxWidth={maxWidth} withVideoInfo={withVideoInfo} />
                             </Grid>
                         )
