@@ -8,11 +8,11 @@ function App() {
     <Grid
       container
       display="flex"
-      flexDirection="column"
+      direction="column"
       id="root"
       style={{
         paddingTop: 60,
-        minHeight: "calc(100vh - 60px)",
+        minHeight: "100vh",
       }}
     >
       <NavBar />
