@@ -37,7 +37,7 @@ const VideoForm = () => {
   };
 
   const handleSubmit = () => {
-    const requiredFields = ["title", "description", "youtubeUrl"];
+    const requiredFields = ["title", "description", "VideoLink"];
     const newFormErrors = {};
     let isValid = true;
 
@@ -76,7 +76,6 @@ const VideoForm = () => {
           alignItems: "center",
           backgroundColor: "white",
           padding: "3rem",
-          // border: `1px solid ${grey[300]}`,
           paddingBottom: "3rem",
         }}
       >
@@ -104,8 +103,11 @@ const VideoForm = () => {
           onChange={handleChange}
           margin="normal"
           required
-          error={formErrors.youtubeUrl}
-          helperText={formErrors.youtubeUrl && "Video Link is required"}
+          error={formErrors.VideoLink}
+          helperText={formErrors.VideoLink && "Video Link is required"}
+          inputProps={{
+            style: { backgroundColor: "#EB038F" },
+          }}
         />
         <TextField
           fullWidth

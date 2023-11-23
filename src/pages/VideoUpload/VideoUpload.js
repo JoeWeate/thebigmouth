@@ -34,9 +34,9 @@ const VideoUploadPage = () => {
           justifyContent={"center"}
         >
           <Typography variant="h5" sx={{ padding: "0.5em" }}>
-            Please provide the link to the
-            <span className={FormStyles.h2Shine}> video</span> you'd like to
-            upload on the form below
+            PLEASE PROVIDE A LINK TO THE
+            <span style={{ color: "#EB038F" }}> VIDEO</span> YOU'D LIKE TO
+            UPLOAD
           </Typography>
           <Typography
             variant="p"
