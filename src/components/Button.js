@@ -1,26 +1,43 @@
-import { Button as MuiButton } from "@mui/material";
-import { styled } from "@mui/system";
+import React from "react";
+import Button from "@mui/material/Button";
+import { useTheme } from "@mui/system";
 
-const getColor = (template, theme) => {
-  switch (template) {
-    case "approve":
-      return theme.palette.success.main;
-    case "decline":
-      return theme.palette.error.main;
-    case "submit":
-      return theme.palette.primary.main;
-    default:
-      return theme.palette.primary.main;
-  }
+const getColor = ({ template, theme }) => {
+  const colorMap = {
+    pink: {
+      bg: theme.palette.pink.main,
+      color: "white",
+    },
+    yellow: {
+      bg: theme.palette.yellow.main,
+      color: "black",
+    },
+  };
+  return colorMap[template];
 };
 
-const Button = styled(MuiButton)(({ theme, template, onClick }) => ({
-  background: getColor(template, theme),
-  color: theme.palette.getContrastText(getColor(template, theme)),
-  border: `1px solid ${getColor(template, theme)}`,
-  "&:hover": {
-    background: theme.palette.action.hover,
-  },
-}));
-
-export default Button;
+const MyButton = ({ template, onClick, children, variant }) => {
+  const theme = useTheme();
+  console.log(theme);
+  const styles = getColor({ template, theme });
+  const buttonStyles =
+    variant === "contained"
+      ? {
+          backgroundColor: styles.bg,
+          color: styles.color,
+          ":hover": {
+            backgroundColor: styles.bg,
+          },
+        }
+      : {
+          backgroundColor: "transparent",
+          color: styles.bg,
+          border: `2px solid ${styles.bg}`,
+        };
+  return (
+    <Button sx={buttonStyles} onClick={onClick}>
+      {children}
+    </Button>
+  );
+};
+export default MyButton;

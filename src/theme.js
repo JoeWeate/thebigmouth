@@ -1,14 +1,18 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
+    mode: "dark",
     background: {
       default: "#2B2B2B",
     },
-    primary: {
-      main: "rgba(0, 0, 0, 1)",
-    },
     text: {
-      main: "#232323",
+      secondary: "#8c8c8c",
+    },
+    yellow: {
+      main: "#C4FF00",
+    },
+    pink: {
+      main: "#FF0080",
     },
   },
   typography: {
@@ -55,126 +59,127 @@ const theme = createTheme({
   //   }
   // },
   components: {
-  //   MuiButton: {
-  //     styleOverrides: {
-  //       root: {
-  //         fontFamily: 'Source Sans Pro',
-  //         textTransform: 'none',
-  //         borderRadius: 25,
-  //         padding: '10px 12px',
-  //         color: '#232323',
-  //         fontWeight: 'bold'
-  //       },
-  //       contained: {
-  //         color: 'white'
-  //       },
-  //       outlined: {
-  //         borderColor: '#232323'
-  //       }
-  //     }
-  // },
-  // MuiSvgIcon: {
-  //   styleOverrides: {
-  //     root: {
-  //       color: '#232323'
-  //     }
-  //   }
-  // },
-  MuiAccordion: {
-    styleOverrides: {
-      root: ({ theme }) => ({
-        backgroundColor: theme.palette.background.default,
-        color: "white",
-        boxShadow: "none",
-        "&:not(:last-child)": {
-          borderBottom: 0,
-        },
-        "&:before": {
-          display: "none",
-        },
-        "&$expanded": {
-          margin: "auto",
-        },
-      }),
+    //   MuiButton: {
+    //     styleOverrides: {
+    //       root: {
+    //         fontFamily: 'Source Sans Pro',
+    //         textTransform: 'none',
+    //         borderRadius: 25,
+    //         padding: '10px 12px',
+    //         color: '#232323',
+    //         fontWeight: 'bold'
+    //       },
+    //       contained: {
+    //         color: 'white'
+    //       },
+    //       outlined: {
+    //         borderColor: '#232323'
+    //       }
+    //     }
+    // },
+    // MuiSvgIcon: {
+    //   styleOverrides: {
+    //     root: {
+    //       color: '#232323'
+    //     }
+    //   }
+    // },
+    MuiAccordion: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.background.default,
+          backgroundImage: "none",
+          color: "white",
+          boxShadow: "none",
+          "&:not(:last-child)": {
+            borderBottom: 0,
+          },
+          "&:before": {
+            display: "none",
+          },
+          "&$expanded": {
+            margin: "auto",
+          },
+        }),
+      },
     },
+    //   MuiAccordion: {
+    //     styleOverrides: {
+    //       root: {
+    //         boxShadow: 'none',
+    //         '&:not(:last-child)': {
+    //           borderBottom: 0
+    //         },
+    //         '&:before': {
+    //           display: 'none'
+    //         },
+    //         '&$expanded': {
+    //           margin: 'auto'
+    //         }
+    //       },
+    //       expanded: {}
+    //     }
+    //   },
+    //   MuiAccordionSummary: {
+    //     styleOverrides: {
+    //       root: {
+    //         padding: 0,
+    //         paddingRight: 5
+    //       },
+    //       content: {
+    //         '&$expanded': {
+    //           margin: '12px 0'
+    //         }
+    //       },
+    //       expanded: {}
+    //     }
+    //   },
+    //   MuiAccordionDetails: {
+    //     styleOverrides: {
+    //       root: {
+    //         paddingTop: 0,
+    //         paddingBottom: 0
+    //       }
+    //     }
+    //   },
+    //   MuiTab: {
+    //     styleOverrides: {
+    //       root: {
+    //         fontFamily: 'Source Sans Pro',
+    //         fontWeight: 800,
+    //         textTransform: 'capitalize'
+    //       }
+    //     }
+    //   },
+    //   MuiSnackbarContent: {
+    //     styleOverrides: {
+    //       root: {
+    //         padding: 0,
+    //         display: 'flex',
+    //         flexGrow: 1,
+    //         borderRadius: 50
+    //       },
+    //       message: {
+    //         padding: 0,
+    //         flexGrow: 1,
+    //         borderRadius: 50
+    //       }
+    //     }
+    //   },
+    //   MuiListItem: {
+    //     styleOverrides: {
+    //       root: {
+    //         borderRadius: 5
+    //       }
+    //     }
+    //   },
+    //   MuiListItemText: {
+    //     styleOverrides: {
+    //       primary: {
+    //         fontSize: '1rem'
+    //       }
+    //     }
   },
-  //   MuiAccordion: {
-  //     styleOverrides: {
-  //       root: {
-  //         boxShadow: 'none',
-  //         '&:not(:last-child)': {
-  //           borderBottom: 0
-  //         },
-  //         '&:before': {
-  //           display: 'none'
-  //         },
-  //         '&$expanded': {
-  //           margin: 'auto'
-  //         }
-  //       },
-  //       expanded: {}
-  //     }
-  //   },
-  //   MuiAccordionSummary: {
-  //     styleOverrides: {
-  //       root: {
-  //         padding: 0,
-  //         paddingRight: 5
-  //       },
-  //       content: {
-  //         '&$expanded': {
-  //           margin: '12px 0'
-  //         }
-  //       },
-  //       expanded: {}
-  //     }
-  //   },
-  //   MuiAccordionDetails: {
-  //     styleOverrides: {
-  //       root: {
-  //         paddingTop: 0,
-  //         paddingBottom: 0
-  //       }
-  //     }
-  //   },
-  //   MuiTab: {
-  //     styleOverrides: {
-  //       root: {
-  //         fontFamily: 'Source Sans Pro',
-  //         fontWeight: 800,
-  //         textTransform: 'capitalize'
-  //       }
-  //     }
-  //   },
-  //   MuiSnackbarContent: {
-  //     styleOverrides: {
-  //       root: {
-  //         padding: 0,
-  //         display: 'flex',
-  //         flexGrow: 1,
-  //         borderRadius: 50
-  //       },
-  //       message: {
-  //         padding: 0,
-  //         flexGrow: 1,
-  //         borderRadius: 50
-  //       }
-  //     }
-  //   },
-  //   MuiListItem: {
-  //     styleOverrides: {
-  //       root: {
-  //         borderRadius: 5
-  //       }
-  //     }
-  //   },
-  //   MuiListItemText: {
-  //     styleOverrides: {
-  //       primary: {
-  //         fontSize: '1rem'
-  //       }
-  //     }
-    }
 });
 
 export default responsiveFontSizes(theme);
