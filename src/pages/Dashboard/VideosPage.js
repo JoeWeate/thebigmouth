@@ -1,6 +1,7 @@
 import React from "react";
-import VideoDeshboard from "../../components/dashboard/VideoDeshboard";
+import PandingVideo from "../../components/dashboard/PendingVideo";
 import { userHubVideoListMocks } from "../../api/mocks";
+import ApprovedVideo from "../../components/dashboard/ApprovedVideo";
 
 const VideosPage = ({ state }) => {
   console.log("userHubVideoListMocks", userHubVideoListMocks)
@@ -11,7 +12,9 @@ const VideosPage = ({ state }) => {
       }}
     >
       {userHubVideoListMocks.map((video) => (
-        <VideoDeshboard video={video} />
+        video.state !== "approved" ?
+          <PandingVideo video={video} state={state} /> :
+          <ApprovedVideo />
       ))}
 
       {state}
