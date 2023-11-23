@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "@mui/material/Button";
-
 const getColor = ({ template, variant, theme }) => {
   const colorMap = {
     approve: {
@@ -27,10 +26,8 @@ const getColor = ({ template, variant, theme }) => {
       outlined: "#E8FA36",
     },
   };
-
   return colorMap[template]?.[variant] || "";
 };
-
 function MyButton({ template, variant, theme, onClick, children }) {
   const color = getColor({ template, variant, theme });
   const buttonVariant = variant === "contained" ? "contained" : "outlined";
@@ -44,5 +41,4 @@ function MyButton({ template, variant, theme, onClick, children }) {
     </Button>
   );
 }
-
 export default MyButton;
