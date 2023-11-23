@@ -14,7 +14,7 @@ const VideosPage = ({ state }) => {
       {userHubVideoListMocks.map((video) => (
         video.state !== "approved" ?
           <PandingVideo video={video} state={state} /> :
-          <ApprovedVideo />
+          <ApprovedVideo video={video} withVideoInfo={true} maxWidth="400px" />
       ))}
 
       {state}

@@ -1,6 +1,12 @@
-const ApprovedVideo = () => {
+import { Box } from "@mui/material"
+import UserVideo from "../userHub/UserVideo"
+
+const ApprovedVideo = ({ video, withVideoInfo, maxWidth }) => {
     return (
-        <div>Hello</div>
+        <Box sx={{ padding: "1rem" }}>
+            <UserVideo video={video} withVideoInfo={withVideoInfo} maxWidth={maxWidth} />
+        </Box>
+
     )
 }
 

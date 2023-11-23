@@ -16,7 +16,7 @@ const UserInfoPending = ({ videoInfo, state }) => {
                     <TitleVideoDash title={title} fontSizeTitle="30pt" />
                     <Divider sx={{ mt: "0.5rem" }} />
                     {state === "pending" && <StillPending />}
-                    {state == "draft" && <DescriptionDash fontSizeDescription="12pt" description={description} />}
+                    {state === "draft" && <DescriptionDash fontSizeDescription="12pt" description={description} />}
 
                     {message && <Message message={message} />}
                 </Typography>
