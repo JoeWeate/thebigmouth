@@ -1,9 +1,9 @@
 import Divider from "../Divider"
 import { Typography, Grid } from "@mui/material";
-import TitleVideoDash from "./TitleVideoDesh";
+import TitleVideoDash from "./TitleVideoDash";
 import DescriptionDash from "./DescriptionDash";
 import Message from "./Message";
-import DateDash from "./DateDesh";
+import DateDash from "./DateDash";
 import AuthorDash from "./AuthorDash";
 import StillPending from "./StillPending";
 import MyButton from "../Button";
