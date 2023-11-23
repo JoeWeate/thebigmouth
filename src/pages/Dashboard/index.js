@@ -10,8 +10,10 @@ import GroupIcon from "@mui/icons-material/Group";
 import { Typography, Box } from "@mui/material";
 import VideosPage from "./VideosPage";
 import AllUsersPage from "./AllUsersPage";
+import { useTheme } from "@mui/material";
 
 function Dashboard({ user, data }) {
+  const theme = useTheme();
   user = "user";
   const [collapsed, setCollapsed] = useState(false);
   const [videoState, setVideoState] = useState(
@@ -145,7 +147,7 @@ function Dashboard({ user, data }) {
           transition: "margin-left 0.3s",
           width: "100%",
           padding: "10px",
-          backgroundColor: "white",
+          backgroundColor: theme.palette.background.default,
         }}
       >
         {videoState === "allUsers" ? (

@@ -1,5 +1,5 @@
 import React from "react";
-import VideoDeshboard from "./VideoDeshboard";
+import VideoDeshboard from "../../components/dashboard/VideoDeshboard";
 import { userHubVideoListMocks } from "../../api/mocks";
 
 const VideosPage = ({ state }) => {

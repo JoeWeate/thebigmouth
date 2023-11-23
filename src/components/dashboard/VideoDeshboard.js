@@ -1,4 +1,4 @@
-import VideoBox from "../../components/userHub/VideoBox";
+import VideoBox from "../userHub/VideoBox";
 import { Box, Grid } from "@mui/material"
 import UserVideoInfoDashboard from "./UserVideoInfoDashboard";
 import cross from "../../assets/images/cross.svg"
@@ -23,7 +23,6 @@ const TopCover = ({ maxWidth }) => {
                 textAlign: "center",
                 overflow: "hidden",
                 position: "absolute",
-                zIndex: 1,
                 maxWidth,
                 border: "solid white 1px"
             }}

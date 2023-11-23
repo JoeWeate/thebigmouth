@@ -1,4 +1,4 @@
-import Divider from "../../components/Divider"
+import Divider from "../Divider"
 import { Typography, Grid } from "@mui/material";
 
 const UserVideoInfoDashboard = ({ videoInfo }) => {
