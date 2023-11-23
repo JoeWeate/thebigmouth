@@ -1,33 +1,25 @@
-import {Box, CardMedia, useTheme} from "@mui/material";
+import {Box, CardMedia} from "@mui/material";
 import React from 'react';
 import ImageOverlay from "../../components/ImageOverlay";
-import EpisodeCardMediaPlayBtn from "./EpisodeCardMediaPlayBtn";
+import VideoDecor from "../../components/userHub/VideoDecor";
+import VideoPlayBtn from "../../components/VideoPlayBtn";
 
 const EpisodeCardMedia = ({episodeId, imageUrl}) => {
-    const theme = useTheme();
+    const [hover, setHover] = React.useState(false);
 
     return (
         <Box
             id='epsodeCardMedia'
-            sx={[{
+            sx={{
                 position: "relative",
                 height: {
                     xs: 179,
                     md: 304,
                 },
-                "&:hover .pinkFrame": {
-                    transform: "translate(-11px, 11px)",
-                },
-                "&:hover .yellowFrame": {
-                    transform: "translate(11px, -11px)",
-                },
-                "&:hover #episodeCardPlayButton .pinkCircle circle": {
-                    r: "40",
-                },
-                "&:hover #episodeCardPlayButton .pinkTriangle":  {
-                            transform: "translate(-17px, -11px)",
-                },
-            }]}>
+            }}
+            onMouseEnter={()=>setHover(true)}
+            onMouseLeave={()=>setHover(false)}
+        >
             <CardMedia
                 component="img"
                 alt={`Episode ${episodeId}`}
@@ -39,57 +31,9 @@ const EpisodeCardMedia = ({episodeId, imageUrl}) => {
                 }}
                 image={imageUrl}
             />
-            <ImageOverlay/>
-            {/* decorative overlay with button */}
-            <Box
-                className="yellowFrame"
-                sx={{
-                    position: "absolute",
-                    top: "15px",
-                    left: "25px",
-                    bottom: "25px",
-                    right: "15px",
-                    background: "transparent",
-                    border: "1px solid #C4FF00",
-                    transition: `${theme.transitions.create(['transform'], {
-                        duration: theme.transitions.duration.standard,
-                    })}`,
-                    width: {
-                        xs: 277,
-                        md: 500,
-                    },
-                    height: {
-                        xs: 139,
-                        md: 264,
-                    },
-                    zIndex: '2',
-                    pointerEvents: 'none',
-                }}/>
-            <Box
-                className="pinkFrame"
-                sx={{
-                    position: "absolute",
-                    top: "25px",
-                    right: "25px",
-                    bottom: "15px",
-                    left: "15px",
-                    background: "transparent",
-                    border: "1px solid #E6007E",
-                    transition: `${theme.transitions.create(['transform'], {
-                        duration: theme.transitions.duration.standard,
-                    })}`,
-                    width: {
-                        xs: 277,
-                        md: 500,
-                    },
-                    height: {
-                        xs: 139,
-                        md: 264,
-                    },
-                    zIndex: '2',
-                    pointerEvents: 'none',
-                }}/>
-            <EpisodeCardMediaPlayBtn sx={{pointerEvents: 'none', zIndex: '3' }}/>
+            <ImageOverlay hover={hover}/>
+            <VideoDecor hover={hover}/>
+            <VideoPlayBtn sx={{pointerEvents: 'none', zIndex: '3' }} hover={hover}/>
         </Box>
 
     )

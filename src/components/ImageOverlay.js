@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from 'react';
 
-const ImageOverlay = () => {
+const ImageOverlay = ({hover, opacity = 0.3}) => {
 
     return (
         <Box
@@ -13,15 +13,12 @@ const ImageOverlay = () => {
             right: 0,
             height: "100%",
             width: "100%",
-            opacity: 0,
+            opacity: hover ? opacity  : 0,
             transition: "0.3s ease",
             backgroundColor: "#000",
             zIndex: '1',
-                "&:hover": {
-                    opacity: "0.3",
-                }
+            pointerEvents: "none",
         }}>
-
         </Box>
     )
 };
