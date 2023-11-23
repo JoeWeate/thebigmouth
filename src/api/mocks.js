@@ -33,6 +33,19 @@ export const episodeInfoMocks = {
     OriginalAudio: "Original Audio"
 };
 
+export const auth0userMocks = {
+    "given_name": "Iryna",
+    "family_name": "Lypnyk",
+    "nickname": "iryna.lypnyk",
+    "name": "Iryna Lypnyk",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocLXvgVxefMa7fB63tZ5VAtFHJf-NUVbtFMz6RArKllCGWI=s96-c",
+    "locale": "uk",
+    "updated_at": "2023-11-21T21:13:40.295Z",
+    "email": "iryna.lypnyk@gmail.com",
+    "email_verified": true,
+    "sub": "google-oauth2|104664712040360930109"
+}
+
 export const imgMocks = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/media-banner-lg-10.png";
 export const userHubVideoInfoMocks =  {
     author: "Name Secondname",
