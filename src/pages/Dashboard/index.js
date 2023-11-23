@@ -10,14 +10,28 @@ import GroupIcon from "@mui/icons-material/Group";
 import { Typography, Box } from "@mui/material";
 import VideosPage from "./VideosPage";
 import AllUsersPage from "./AllUsersPage";
-
-function Dashboard({ user, data }) {
-  user = "user";
-  const [collapsed, setCollapsed] = useState(false);
+import { getVideos } from "../../api/userHubVideos";
+function Dashboard({ user }) {
+  user = { UserID: "user1", Name: "Name", Role: "Admin" }; //test object
+  const [videoList, setVideoList] = useState(null);
   const [videoState, setVideoState] = useState(
-    user === "user" ? "All my videos" : "All Users"
+    user.Role === "User" ? "All my videos" : "All Users"
   );
-
+  const [collapsed, setCollapsed] = useState(false);
+  useEffect(() => {
+    try {
+      getVideos().then((data) => {
+        user.Role === "Admin"
+          ? setVideoList(data.videos)
+          : setVideoList(
+              data.videos.filter((video) => video.UserID === user.UserID)
+            );
+      });
+    } catch (error) {
+      console.log({ error });
+    }
+  }, []);
+  console.log(videoList);
   const adminMenuItems = [
     { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
     {
@@ -33,7 +47,7 @@ function Dashboard({ user, data }) {
     {
       icon: <DoNotDisturbOnIcon />,
       text: "Restricted",
-      state: "blocked",
+      state: "rejected",
     },
   ];
 
@@ -57,7 +71,7 @@ function Dashboard({ user, data }) {
     {
       icon: <DoNotDisturbOnIcon />,
       text: "Restricted",
-      state: "blocked",
+      state: "rejected",
     },
   ];
 
@@ -84,7 +98,7 @@ function Dashboard({ user, data }) {
     setVideoState(state);
   };
 
-  const menuItems = user === "admin" ? adminMenuItems : userMenuItems;
+  const menuItems = user.Role === "Admin" ? adminMenuItems : userMenuItems;
 
   return (
     <Box
@@ -139,8 +153,8 @@ function Dashboard({ user, data }) {
           ))}
         </Menu>
       </Sidebar>
-      <main
-        style={{
+      <Box
+        sx={{
           flexGrow: 0,
           transition: "margin-left 0.3s",
           width: "100%",
@@ -151,9 +165,15 @@ function Dashboard({ user, data }) {
         {videoState === "allUsers" ? (
           <AllUsersPage state={videoState} />
         ) : (
-          <VideosPage state={videoState} user={user} data={data} />
+          <VideosPage
+            state={videoState}
+            data={
+              videoList &&
+              videoList.filter((video) => video.State === videoState)
+            }
+          />
         )}
-      </main>
+      </Box>
     </Box>
   );
 }

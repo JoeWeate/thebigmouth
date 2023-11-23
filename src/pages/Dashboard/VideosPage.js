@@ -1,6 +1,6 @@
 import React from "react";
 
-const VideosPage = ({ state }) => {
+const VideosPage = ({ state, data }) => {
   return (
     <div
       style={{
