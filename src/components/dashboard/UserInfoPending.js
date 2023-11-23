@@ -6,9 +6,16 @@ import Message from "./Message";
 import DateDash from "./DateDesh";
 import AuthorDash from "./AuthorDash";
 import StillPending from "./StillPending";
+import MyButton from "../Button";
+import RestrictedMessage from "./RestrctedMessage";
 
 const UserInfoPending = ({ videoInfo, state }) => {
     const { author, title, description, date, message } = videoInfo;
+    const handleDelete = () => {
+    }
+
+    const handleSend = () => {
+    }
     return (
         <Grid container direction="column" justifyContent="space-between" sx={{ minHeight: { lg: "230px", md: "160px" } }}>
             <Grid item>
@@ -17,16 +24,27 @@ const UserInfoPending = ({ videoInfo, state }) => {
                     <Divider sx={{ mt: "0.5rem" }} />
                     {state === "pending" && <StillPending />}
                     {state === "draft" && <DescriptionDash fontSizeDescription="12pt" description={description} />}
-
-                    {message && <Message message={message} />}
+                    {state === "restricted" &&
+                        <>
+                            <RestrictedMessage />
+                            <Message message={message} />
+                        </>
+                    }
+                    {state !== "restricted" &&
+                        <span>
+                            <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
+                        </span>}
+                    {state === "pending" && <MyButton template="yellow" onClick={handleSend} children="Send" variant="outlined" />}
                 </Typography>
             </Grid>
             <Grid item sx={{ bottom: 0 }}>
                 <Typography>
-                    <Grid container direction="row" justifyContent="space-between">
-                        <AuthorDash author={author} />
-                        <DateDash date={date} />
-                    </Grid>
+                    {state !== "restricted" ? <DateDash date={date} /> :
+                        <Grid container direction="row" justifyContent="space-between">
+                            <AuthorDash author={author} />
+                            <DateDash date={date} />
+                        </Grid>
+                    }
                 </Typography>
             </Grid>
 

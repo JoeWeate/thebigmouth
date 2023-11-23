@@ -58,7 +58,7 @@ export const userHubVideoListMocks = [
         title: "Some Video Title Two",
         description: "Some short description and some more text to add several lines and more more more lines to add several lines and more more more lines to add several lines",
         date: "2023-07-01",
-        message: "Lorem ipsum” dummy text is used by many web-developers to test how their HTML templates will look with real data. Often, developers use third-party services to generate “Lorem ipsum” text, but now you can do that right in your editor.",
+        message: "Lorem ipsum” dummy text is used by many web-developers to test how their HTML templates will look with real data. ",
         state: "restricted"
     },
     {
@@ -86,7 +86,7 @@ export const userHubVideoListMocks = [
         title: "The best video ever",
         description: "Some short description and some more text to add several lines",
         date: "2023-07-01",
-        message: "Lorem ipsum” dummy text is used by many web-developers to test how their HTML templates will look with real data. Often, developers use third-party services to generate “Lorem ipsum” text, but now you can do that right in your editor.",
+        message: "Lorem ipsum” dummy text is used by many web-developers to test how their HTML templates will look with real data. Often, developers.",
         state: "restricted"
     }
 ];
