@@ -1,48 +1,43 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import { useTheme } from "@mui/system";
 
-const getColor = ({ template, variant, theme }) => {
+const getColor = ({ template, theme }) => {
   const colorMap = {
-    approve: {
-      contained: "#6B8E50",
-      outlined: theme.palette.success.light,
+    pink: {
+      bg: theme.palette.pink.main,
+      color: "white",
     },
-    "send back to draft": {
-      contained: "#CEA511",
-      outlined: theme.palette.success.main,
-    },
-    "send to draft": {
-      contained: "#E8FA36",
-      outlined: theme.palette.success.main,
-    },
-    decline: {
-      contained: "#FF0000",
-      outlined: theme.palette.error.main,
-    },
-    delete: {
-      contained: "#EB038F",
-      outlined: theme.palette.primary.main,
-    },
-    send: {
-      outlined: "#E8FA36",
+    yellow: {
+      bg: theme.palette.yellow.main,
+      color: "black",
     },
   };
-
-  return colorMap[template]?.[variant] || "";
+  return colorMap[template];
 };
 
-function MyButton({ template, variant, theme, onClick, children }) {
-  const color = getColor({ template, variant, theme });
-  const buttonVariant = variant === "contained" ? "contained" : "outlined";
+const MyButton = ({ template, onClick, children, variant }) => {
+  const theme = useTheme();
+  console.log(theme);
+  const styles = getColor({ template, theme });
+  const buttonStyles =
+    variant === "contained"
+      ? {
+        backgroundColor: styles.bg,
+        color: styles.color,
+        ":hover": {
+          backgroundColor: styles.bg,
+        },
+      }
+      : {
+        backgroundColor: "transparent",
+        color: styles.bg,
+        border: `2px solid ${styles.bg}`,
+      };
   return (
-    <Button
-      style={{ backgroundColor: color }}
-      variant={buttonVariant}
-      onClick={onClick}
-    >
+    <Button sx={buttonStyles} onClick={onClick}>
       {children}
     </Button>
   );
-}
-
+};
 export default MyButton;
