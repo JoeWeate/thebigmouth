@@ -1,26 +1,48 @@
-import { Button as MuiButton } from "@mui/material";
-import { styled } from "@mui/system";
+import React from "react";
+import Button from "@mui/material/Button";
 
-const getColor = (template, theme) => {
-  switch (template) {
-    case "approve":
-      return theme.palette.success.main;
-    case "decline":
-      return theme.palette.error.main;
-    case "submit":
-      return theme.palette.primary.main;
-    default:
-      return theme.palette.primary.main;
-  }
+const getColor = ({ template, variant, theme }) => {
+  const colorMap = {
+    approve: {
+      contained: "#6B8E50",
+      outlined: theme.palette.success.light,
+    },
+    "send back to draft": {
+      contained: "#CEA511",
+      outlined: theme.palette.success.main,
+    },
+    "send to draft": {
+      contained: "#E8FA36",
+      outlined: theme.palette.success.main,
+    },
+    decline: {
+      contained: "#FF0000",
+      outlined: theme.palette.error.main,
+    },
+    delete: {
+      contained: "#EB038F",
+      outlined: theme.palette.primary.main,
+    },
+    send: {
+      outlined: "#E8FA36",
+    },
+  };
+
+  return colorMap[template]?.[variant] || "";
 };
 
-const Button = styled(MuiButton)(({ theme, template, onClick }) => ({
-  background: getColor(template, theme),
-  color: theme.palette.getContrastText(getColor(template, theme)),
-  border: `1px solid ${getColor(template, theme)}`,
-  "&:hover": {
-    background: theme.palette.action.hover,
-  },
-}));
+function MyButton({ template, variant, theme, onClick, children }) {
+  const color = getColor({ template, variant, theme });
+  const buttonVariant = variant === "contained" ? "contained" : "outlined";
+  return (
+    <Button
+      style={{ backgroundColor: color }}
+      variant={buttonVariant}
+      onClick={onClick}
+    >
+      {children}
+    </Button>
+  );
+}
 
-export default Button;
+export default MyButton;
