@@ -10,7 +10,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import { Typography, Box } from "@mui/material";
 import VideosPage from "./VideosPage";
 import AllUsersPage from "./AllUsersPage";
-import { getVideos } from "../../api/userHubVideos";
+import { getVideos } from "../../api/videos";
 function Dashboard({ user }) {
   user = { UserID: "user1", Name: "Name", Role: "Admin" }; //test object
   const [videoList, setVideoList] = useState(null);
