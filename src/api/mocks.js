@@ -82,6 +82,24 @@ export const userHubVideoListMocks = [
     {
         videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
         videoImg: "",
+        author: "Name Secondname Two",
+        title: "Some Video Title Two",
+        description: "Some short description and some more text to add several lines",
+        date: "2023-07-01",
+        state: "approved"
+    },
+    {
+        videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
+        videoImg: "",
+        author: "Name Secondname Two",
+        title: "Some Video Title Two",
+        description: "Some short description and some more text to add several lines",
+        date: "2023-07-01",
+        state: "approved"
+    },
+    {
+        videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
+        videoImg: "",
         author: "Olha",
         title: "The best video ever",
         description: "Some short description and some more text to add several lines",

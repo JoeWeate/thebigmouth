@@ -19,7 +19,8 @@ function Dashboard({ user, data }) {
   const [videoState, setVideoState] = useState(
     user === "user" ? "All my videos" : "All Users"
   );
-  const defaultState = "pending"
+  const defaultState = "approved"
+
   const adminMenuItems = [
     { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
     {

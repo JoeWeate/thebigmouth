@@ -11,37 +11,38 @@ const getFilteredVideos = (state) => {
 }
 
 const VideosPage = ({ state, videosByState = getFilteredVideos(state) }) => {
-  console.log("userHubVideoListMocks", userHubVideoListMocks)
-  console.log("state", state);
   return (
     <div
       style={{
         backgroundColor: "#2B2B2B",
       }}
     >
-      {state !== "approved" ?
+      <Typography variant="h5">{state}</Typography>
+      {state !== "approved" && videosByState.length > 0 ? (
         videosByState.map((video) => (
           <PendingVideo key={video.id} video={video} state={state} />
-        )) :
-        <Grid container>
+        ))
+      ) : state !== "approved" && videosByState.length === 0 ? (
+        <Typography>
+          No {state} videos available.
+        </Typography>
+      ) : (
+        <Grid container sx={{ gap: { lg: 1, md: 0 } }}>
           {videosByState.map((video) => (
-            <Grid item lg={5} xs={11} sx={{ padding: "1rem" }} key={video.id}>
-              <ApprovedVideo video={state} withVideoInfo={true} maxWidth="400px" />
+            <Grid item lg={5} md={11} xs={11} sx={{ padding: "1rem" }} key={video.id}>
+              <ApprovedVideo video={video} withVideoInfo={true} maxWidth="600px" />
             </Grid>
           ))}
         </Grid>
-      }
+      )}
 
-      {state === "All my videos" &&
+      {state === "approved" && videosByState.length === 0 &&
         <Typography>
-          No videos are in the {state} section
+          No approved videos available.
         </Typography>
       }
 
 
-
-
-      {state}
     </div>
   );
 };

@@ -11,7 +11,7 @@ const TopCover = ({ maxWidth, state }) => {
                 alignItems: "center",
                 width: "100%",
                 height: "100%",
-                backgroundColor: "rgba(128, 128, 128, 0.9)",
+                backgroundColor: "rgba(59,59,59,0.9)",
                 margin: "0 auto",
                 top: 0,
                 bottom: 0,

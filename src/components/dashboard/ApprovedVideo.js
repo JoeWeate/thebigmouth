@@ -11,7 +11,6 @@ const ApprovedVideo = ({ video, withVideoInfo, maxWidth }) => {
     return (
         <Box p="1rem">
             <UserVideo video={video} withVideoInfo={withVideoInfo} maxWidth={maxWidth} />
-
             <span><MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" /></span>
             <span><MyButton template="yellow" onClick={handleSendToDraft} children="Send to Draft" variant="contained" /></span>
         </Box>
