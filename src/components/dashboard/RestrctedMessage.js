@@ -1,5 +1,6 @@
 import { Box } from "@mui/material"
 import { useTheme } from "@emotion/react"
+
 const RestrictedMessage = () => {
     const theme = useTheme()
     return (

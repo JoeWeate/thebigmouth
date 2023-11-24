@@ -34,7 +34,7 @@ const UserInfoPending = ({ videoInfo, state }) => {
                         <span>
                             <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         </span>}
-                    {state === "pending" && <MyButton template="yellow" onClick={handleSend} children="Send" variant="outlined" />}
+                    {state === "draft" && <MyButton template="yellow" onClick={handleSend} children="Send" variant="outlined" />}
                 </Typography>
             </Grid>
             <Grid item sx={{ bottom: 0 }}>
