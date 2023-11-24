@@ -19,7 +19,7 @@ function Dashboard({ user, data }) {
   const [videoState, setVideoState] = useState(
     user === "user" ? "All my videos" : "All Users"
   );
-
+  const defaultState = "pending"
   const adminMenuItems = [
     { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
     {
@@ -153,7 +153,7 @@ function Dashboard({ user, data }) {
         {videoState === "allUsers" ? (
           <AllUsersPage state={videoState} />
         ) : (
-          <VideosPage state={videoState} user={user} data={data} />
+          <VideosPage state={defaultState} user={user} data={data} />
         )}
       </main>
     </Box>

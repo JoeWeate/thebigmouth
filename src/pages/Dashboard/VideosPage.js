@@ -4,14 +4,15 @@ import { userHubVideoListMocks } from "../../api/mocks";
 import ApprovedVideo from "../../components/dashboard/ApprovedVideo";
 import { Grid, Typography } from "@mui/material"
 
-const VideosPage = () => {
-  let state = "pending"
-  console.log("userHubVideoListMocks", userHubVideoListMocks)
-  console.log("state", state);
-
-  let filteredVideos = userHubVideoListMocks.filter((video) => (
+const getFilteredVideos = (state) => {
+  return userHubVideoListMocks.filter((video) => (
     video.state === state
   ))
+}
+
+const VideosPage = ({ state, videosByState = getFilteredVideos(state) }) => {
+  console.log("userHubVideoListMocks", userHubVideoListMocks)
+  console.log("state", state);
   return (
     <div
       style={{
@@ -19,11 +20,11 @@ const VideosPage = () => {
       }}
     >
       {state !== "approved" ?
-        filteredVideos.map((video) => (
+        videosByState.map((video) => (
           <PendingVideo key={video.id} video={video} state={state} />
         )) :
         <Grid container>
-          {filteredVideos.map((video) => (
+          {videosByState.map((video) => (
             <Grid item lg={5} xs={11} sx={{ padding: "1rem" }} key={video.id}>
               <ApprovedVideo video={state} withVideoInfo={true} maxWidth="400px" />
             </Grid>
