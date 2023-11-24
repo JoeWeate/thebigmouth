@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 const AddArtButton = () => {
     return (
         <Box className={styles.box} >
-            <a href="#">
+            <a href="/videoUpload">
                 <span></span>
                 <span></span>
                 <span></span>
