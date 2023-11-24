@@ -20,7 +20,7 @@ function App() {
         <Outlet />
       </main>
       {/* <ShowMore /> */}
-      <Footer />
+      {/* <Footer /> */}
     </Grid>
   );
 }

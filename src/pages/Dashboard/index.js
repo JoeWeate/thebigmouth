@@ -10,9 +10,11 @@ import GroupIcon from "@mui/icons-material/Group";
 import { Typography, Box } from "@mui/material";
 import VideosPage from "./VideosPage";
 import AllUsersPage from "./AllUsersPage";
+import { useTheme } from "@mui/material";
 import { getVideos } from "../../api/userHubVideos";
 function Dashboard({ user }) {
-  user = { UserID: "user1", Name: "Name", Role: "Admin" }; //test object
+  const theme = useTheme();
+  user = { UserID: "user1", Name: "Name", Role: "User" }; //test object
   const [videoList, setVideoList] = useState(null);
   const [videoState, setVideoState] = useState(
     user.Role === "User" ? "All my videos" : "All Users"
@@ -159,7 +161,7 @@ function Dashboard({ user }) {
           transition: "margin-left 0.3s",
           width: "100%",
           padding: "10px",
-          backgroundColor: "white",
+          backgroundColor: theme.palette.background.default,
         }}
       >
         {videoState === "allUsers" ? (

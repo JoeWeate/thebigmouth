@@ -1,10 +1,10 @@
 import { Box, CardMedia } from "@mui/material";
 import React from 'react';
 import ReactPlayer from 'react-player';
-import {videoUrlMocks} from "../../api/mocks";
+import { videoUrlMocks } from "../../api/mocks";
 
 
-const VideoBox = ({videoUrl, videoImg, maxWidth = "600px", children }) => {
+const VideoBox = ({ videoUrl, videoImg, maxWidth, children }) => {
     const [hover, setHover] = React.useState(false);
     const [playVideo, setPlayVideo] = React.useState(false);
 
@@ -27,10 +27,10 @@ const VideoBox = ({videoUrl, videoImg, maxWidth = "600px", children }) => {
                 cursor: "pointer",
                 margin: "0 auto",
                 textAlign: "center",
-                overflow: "hidden"
+                overflow: "hidden",
             }}
-            onMouseEnter={()=>setHover(true)}
-            onMouseLeave={()=>setHover(false)}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
             onClick={togglePlaying}
         >
             <Box
@@ -53,10 +53,10 @@ const VideoBox = ({videoUrl, videoImg, maxWidth = "600px", children }) => {
                         left: "50%",
                         top: "50%",
                         transform: "translate(-50%, -50%)",
-                    }}/>
+                    }} />
                 {videoImg && !playVideo && <CardMedia component="img" image={videoImg} alt="Cover"
-                                        sx={{position: "absolute", top: 0, left: 0, height: '100%', width: '100%', objectFit: 'cover'}}/>}
-                {children(playVideo, hover, videoImg)}
+                    sx={{ position: "absolute", top: 0, left: 0, height: '100%', width: '100%', objectFit: 'cover' }} />}
+                {children && children({ playVideo }, { hover }, { videoImg })}
             </Box>
         </Box>
     )
