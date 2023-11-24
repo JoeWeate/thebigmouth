@@ -20,22 +20,25 @@ const MyButton = ({ template, onClick, children, variant }) => {
   const theme = useTheme();
   console.log(theme);
   const styles = getColor({ template, theme });
-  const buttonStyles =
-    variant === "contained"
-      ? {
-          backgroundColor: styles.bg,
-          color: styles.color,
-          ":hover": {
-            backgroundColor: styles.bg,
-          },
-        }
-      : {
-          backgroundColor: "transparent",
-          color: styles.bg,
-          border: `2px solid ${styles.bg}`,
-        };
   return (
-    <Button sx={buttonStyles} onClick={onClick}>
+    <Button
+      sx={
+        variant === "contained"
+          ? {
+              backgroundColor: styles.bg,
+              color: styles.color,
+              ":hover": {
+                backgroundColor: styles.bg,
+              },
+            }
+          : {
+              backgroundColor: "transparent",
+              color: styles.bg,
+              border: `2px solid ${styles.bg}`,
+            }
+      }
+      onClick={onClick}
+    >
       {children}
     </Button>
   );

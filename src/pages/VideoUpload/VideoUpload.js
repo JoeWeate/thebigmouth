@@ -11,7 +11,7 @@ const VideoUploadPage = () => {
       container
       style={{
         height: "100vh",
-        backgroundColor: "white",
+        // backgroundColor: "",
         mb: {
           lg: "5rem",
           sm: "4rem",
@@ -24,7 +24,7 @@ const VideoUploadPage = () => {
         <Box
           sx={{
             paddingTop: "2em",
-            backgroundColor: "white",
+            // backgroundColor: "white",
             borderRadius: "8px",
             textAlign: "center",
           }}
@@ -33,13 +33,13 @@ const VideoUploadPage = () => {
           alignContent={"center"}
           justifyContent={"center"}
         >
-          <Typography variant="h5" sx={{ padding: "0.5em" }}>
+          <Typography variant="h5" sx={{ padding: "0.5em", color: "white" }}>
             PLEASE PROVIDE A LINK TO THE
             <span style={{ color: "#EB038F" }}> VIDEO</span> YOU'D LIKE TO
             UPLOAD
           </Typography>
           <Typography
-            variant="p"
+            variant="h6"
             sx={{ padding: "1.5em" }}
             className={FormStyles.h2Shine}
           >
