@@ -1,20 +1,56 @@
 .box a {
     position: relative;
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-decoration: none;
     text-transform: uppercase;
     color: #E8FC02;
     background: transparent;
     padding: 10px 30px 10px 30px;
+    animation: combinedAnimation 10s linear infinite;
+}
+
+@keyframes combinedAnimation {
+
+    0%,
+    4%,
+    100% {
+        transform: rotate(0deg) translateX(0px);
+    }
+
+    5%,
+    7%,
+    9%,
+    11% {
+        transform: rotate(-3deg) translateX(-5px);
+
+    }
+
+    6%,
+    8%,
+    10%,
+    12% {
+        transform: rotate(3deg) translateX(5px);
+
+    }
+
+    13% {
+        transform: rotate(0deg) translateX(0px);
+        text-shadow: none;
+
+    }
 }
 
 
+
+
+
 .box a:hover {
-    color: #E6007E;
+    color: #E6007E !important;
     background: rgba(0, 0, 0);
     transition: 0.2s;
-    transition-delay: 0.3s;
+    transition-delay: 0.4s !important;
+    animation-play-state: paused;
 }
 
 .box a span {
