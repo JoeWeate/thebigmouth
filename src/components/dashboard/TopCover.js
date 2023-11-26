@@ -1,6 +1,9 @@
-import { Box } from "@mui/material";
-import CrossIcon from "./CrossIcon";
-import LockIcon from "./LockIcon";
+import { Box } from "@mui/material"
+import cross from "../../assets/images/cross.svg"
+import lockIcon from "../../assets/images/lock-icon.svg"
+import { Avatar } from "@mui/material"
+
+
 
 const TopCover = ({ maxWidth, state }) => {
     return (
@@ -24,8 +27,18 @@ const TopCover = ({ maxWidth, state }) => {
                 border: "solid white 1px"
             }}
         >
-            {state === 'pending' && <LockIcon />}
-            {state === 'rejected' && <CrossIcon />}
+            {state === 'pending' &&
+                <Avatar
+                    alt="lock-icon"
+                    src={lockIcon}
+                    sx={{ width: "6rem", height: "6rem", }}
+                    variant="rounded"
+                />}
+            {state === 'rejected' && <Avatar
+                alt="cross-icon"
+                src={cross}
+                sx={{ width: "6rem", height: "6rem" }}
+            />}
         </Box>
     );
 }

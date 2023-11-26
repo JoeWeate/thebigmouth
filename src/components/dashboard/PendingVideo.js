@@ -4,6 +4,7 @@ import UserInfoPending from "./UserInfoPending";
 import TopCover from "./TopCover";
 
 
+
 const PendingVideo = ({ video }) => {
     const { videoUrl, state, videoImg, ...videoInfo } = video;
     const maxWidth = "500px";
@@ -15,9 +16,7 @@ const PendingVideo = ({ video }) => {
                     <VideoBox videoUrl={videoUrl} maxWidth={maxWidth} videoImg={videoImg} />
                     {state === "pending" || state === "rejected" ? (
                         <TopCover maxWidth={maxWidth} state={state} />
-                    ) : (
-                        console.log("TopCover not rendered. State:", state)
-                    )}
+                    ) : ""}
                 </div>
             </Grid>
             <Grid item lg={6} xs={11} p="1rem" sx={{ marginTop: { lg: 0, xs: "-1.5rem" } }}>
