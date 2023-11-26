@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import {Box, styled, Typography} from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 import ScrollDownBtn from "./ScrollDownBtn";
 import EmbedVideo from "./EmbedVideo";
 
-const VideoImageContainer = styled(Box)(
-  () => ({
-    display: 'block',
-    textAlign: "center",
-    position: "relative",
-    marginBottom: "30px",
-    height: "auto",
-    maxHeight: "90vh",
-    overflow: "hidden",
-    })
-);
-const PlayButton = styled("div")(({  }) => ({
+const VideoImageContainer = styled(Box)(() => ({
+  display: "block",
+  textAlign: "center",
+  position: "relative",
+  marginBottom: "30px",
+  height: "auto",
+  maxHeight: "90vh",
+  overflow: "hidden",
+}));
+const PlayButton = styled("div")(({}) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -38,7 +36,7 @@ const SIcon = styled("img")(({ isHovered }) => ({
   height: isHovered ? "45px" : "40px",
   position: "absolute",
   top: isHovered ? "50%" : "49.3%",
-  left: isHovered ? "50.4%" : "50.3%",
+  left: isHovered ? "53%" : "50.3%",
   transform: "translate(-50%, -50%)",
   transition: "width 0.5s, height 0.5s, left 0.5s, top 0.5s",
   fontSize: "100px",
@@ -91,7 +89,7 @@ const VideoBanner = ({ videoUrl, videoImg, targetRef, title }) => {
             <SIcon
               src={
                 isMainImageHovered
-                  ? "https://thebigmouth-frontend.s3.eu-west-2.amazonaws.com/play-pink.png"
+                  ? "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/play-pink.png"
                   : "https://tbh.flipclip.co.in/ics.png"
               }
               alt="S Icon"
@@ -102,9 +100,30 @@ const VideoBanner = ({ videoUrl, videoImg, targetRef, title }) => {
           </PlayButton>
         )}
         {!playVideo && targetRef && (
-            <ScrollDownBtn targetRef={targetRef} sx={{display: {xs: 'none', md: 'block'}}}/>
+          <ScrollDownBtn
+            targetRef={targetRef}
+            sx={{ display: { xs: "none", md: "block" } }}
+          />
         )}
-        {!playVideo && title && <Typography component="h1" sx={{fontSize: {xs: "2.5rem", md: "10rem"}, lineHeight: "1", color: 'white', position: 'absolute', top: '50%', left: '5vw', transform: 'translateY(-50%)', zIndex: '10', maxWidth: '30vw', textAlign: 'left'}}>{title}</Typography>}
+        {!playVideo && title && (
+          <Typography
+            component="h1"
+            sx={{
+              fontSize: { xs: "2.5rem", md: "10rem" },
+              lineHeight: "1",
+              color: "white",
+              position: "absolute",
+              top: "50%",
+              left: "5vw",
+              transform: "translateY(-50%)",
+              zIndex: "10",
+              maxWidth: "30vw",
+              textAlign: "left",
+            }}
+          >
+            {title}
+          </Typography>
+        )}
       </VideoImageContainer>
     </>
   );
