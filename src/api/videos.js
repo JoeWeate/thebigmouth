@@ -10,9 +10,9 @@ export const getVideos = () => {
       console.log(error);
     });
 };
-export const getOneVideo = (userId) => {
+export const getAllVideoByUserID = (UserID) => {
   return api
-    .get(`/videos/${userId}`)
+    .get(`/videos/${UserID}`)
     .then((data) => {
       return Promise.resolve(data.data);
     })
