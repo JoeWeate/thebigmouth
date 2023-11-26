@@ -28,7 +28,7 @@ const pages = [
 const settingsLogin = ["Profile"];
 function NavBar() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -201,7 +201,11 @@ function NavBar() {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt="User Icon"
-                  src="https://thebigmouth-frontend.s3.eu-west-2.amazonaws.com/user.png"
+                  src={
+                    user
+                      ? user.picture
+                      : "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/user.png"
+                  }
                 />
               </IconButton>
             </Tooltip>
@@ -221,19 +225,26 @@ function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {isAuthenticated &&
-                settingsLogin.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography
-                      onClick={() =>
-                        navigate(setting === "Profile" ? "/profile" : "#")
-                      }
-                      textAlign="center"
-                    >
-                      {setting}
-                    </Typography>
-                  </MenuItem>
-                ))}
+              {isAuthenticated && (
+                <>
+                  <Typography sx={{ textAlign: "center", color: "grey" }}>
+                    Hi, {user.given_name}!
+                  </Typography>
+                  {settingsLogin.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography
+                        onClick={() =>
+                          navigate(setting === "Profile" ? "/profile" : "#")
+                        }
+                        textAlign="center"
+                      >
+                        {setting}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </>
+              )}
+
               <MenuItem>
                 {isAuthenticated ? <LogoutButton /> : <LoginButton />}
               </MenuItem>
