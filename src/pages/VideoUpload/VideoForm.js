@@ -6,7 +6,7 @@ import { uploadVideo } from "../../api/videos.js";
 
 const isUrlValid = (url) => {
   const urlRegex =
-    /http:\/\/(?:www.)?(?:(vimeo).com\/(.*)|(youtube).com\/watch\?v=(.*?)&)/;
+    /^(https?:\/\/)?(?:www\.)?(vimeo\.com\/(\d+)|youtube\.com\/watch\?v=([a-zA-Z0-9_-]+))/;
 
   return urlRegex.test(url);
 };
