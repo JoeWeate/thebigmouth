@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Grid, CircularProgress, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -19,7 +19,7 @@ import reportWebVitals from "./reportWebVitals";
 import Episode from "./pages/EpisodePage";
 
 import "./index.css";
-import Dashboard from "./pages/Dashboard.js";
+import Dashboard from "./pages/Dashboard";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -68,5 +68,6 @@ root.render(
         </BrowserRouter>
       </Suspense>
     </Auth0Provider>
-  </ThemeProvider>);
+  </ThemeProvider>
+);
 reportWebVitals();
