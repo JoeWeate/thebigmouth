@@ -9,7 +9,7 @@ import Home from "./pages/HomePage";
 import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
-import DummyHomePage from "./pages/DummyHomePage";
+import DummyHomePage from "./pages/dummyHomePage";
 
 import Theme from "./theme";
 import App from "./App";
