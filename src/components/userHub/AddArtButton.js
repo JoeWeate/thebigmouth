@@ -10,12 +10,12 @@ const AddArtButton = () => {
     const navigate = useNavigate();
 
     const handleCheckLogIn = () => {
-        isAuthenticated ? navigate("/profile") : loginWithRedirect();
+        isAuthenticated ? navigate("/VideoUpload") : loginWithRedirect();
     }
 
     return (
         <Box className={styles.box}>
-            <a href="/VideoUpload" onClick={handleCheckLogIn}>
+            <a href="" onClick={handleCheckLogIn}>
                 <span></span>
                 <span></span>
                 <span></span>
