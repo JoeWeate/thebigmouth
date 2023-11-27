@@ -1,6 +1,5 @@
 
 import { Grid, Typography } from "@mui/material";
-import AddArtButton from "../../components/userHub/AddArtButton";
 
 const PageTitleComponent = ({ title, fontSize }) => {
     const { mainTitle, subtitle } = title;
@@ -43,7 +42,7 @@ const PageTitleComponent = ({ title, fontSize }) => {
                 {subtitle}
             </Typography>
 
-            <AddArtButton />
+
         </Grid>
     );
 };
