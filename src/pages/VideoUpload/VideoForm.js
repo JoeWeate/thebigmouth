@@ -68,20 +68,18 @@ const VideoForm = () => {
       component="form"
       sx={{
         width: {
-          lg: "70vh",
+          maxWidth: "700px",
         },
         height: {
-          lg: "50vh",
+          maxHeight: "500px",
         },
         margin: "auto",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        // backgroundColor: "white",
         padding: "3rem",
         paddingBottom: "3rem",
-        border: `2px solid ${theme.palette.primary}`,
       }}
     >
       <TextField
@@ -96,10 +94,15 @@ const VideoForm = () => {
         required
         error={formErrors.title}
         helperText={formErrors.title && "Title is required"}
-        sx={{
-          borderColor: formErrors.title && "rgb(235, 3, 143)",
-          "&:hover, &:focus": {
-            borderColor: formErrors.title && "rgb(235, 3, 143)",
+        InputLabelProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.root,
+          },
+        }}
+        InputProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.input,
+            backgroundColor: "#5D5D5D",
           },
         }}
       />
@@ -116,6 +119,17 @@ const VideoForm = () => {
         required
         error={formErrors.videoLink}
         helperText={formErrors.videoLink && "Video Link is required"}
+        InputLabelProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.root,
+          },
+        }}
+        InputProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.input,
+            backgroundColor: "rgba(235, 3, 143, 0.6)",
+          },
+        }}
       />
       <TextField
         fullWidth
@@ -129,6 +143,17 @@ const VideoForm = () => {
         required
         error={formErrors.description}
         helperText={formErrors.description && "Description is required"}
+        InputLabelProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.root,
+          },
+        }}
+        InputProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.input,
+            backgroundColor: "#5D5D5D",
+          },
+        }}
       />
       <TextField
         fullWidth
@@ -142,8 +167,19 @@ const VideoForm = () => {
         multiline
         rows={3}
         defaultValue="Default Value"
+        InputLabelProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.root,
+          },
+        }}
+        InputProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.input,
+            backgroundColor: "#5D5D5D",
+          },
+        }}
       />
-      <Button template="pink" variant="outlined" onClick={handleSubmit}>
+      <Button template="yellow" variant="outlined" onClick={handleSubmit}>
         Submit
       </Button>
     </Box>

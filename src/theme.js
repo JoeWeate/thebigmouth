@@ -1,5 +1,6 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -18,10 +19,44 @@ const theme = createTheme({
     primary: {
       main: grey[300],
     },
+    error: {
+      main: "#EB038F",
+    },
   },
   typography: {
     fontFamily: "Core Sans",
   },
+  overrides: {
+    MuiOutlinedInput: {
+      root: {
+        "&.Mui-error $notchedOutline": {
+          borderColor: "$error.main !important",
+        },
+        "&:not($disabled):hover $notchedOutline": {
+          borderColor: "$error.main !important",
+        },
+        "&$focused$notchedOutline": {
+          borderColor: "$error.main !important",
+        },
+      },
+      input: {
+        "&:not(.Mui-disabled)": {
+          color: "$error.main",
+        },
+        "&::placeholder": {
+          color: "$error.main",
+        },
+      },
+    },
+    MuiFormLabel: {
+      root: {
+        "&.Mui-error": {
+          color: "$error.main !important",
+        },
+      },
+    },
+  },
+
   //   color: '#232323',
   //   h6: {
   //     fontFamily: 'Recoleta',
