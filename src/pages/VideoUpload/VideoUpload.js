@@ -41,7 +41,7 @@ const VideoUploadPage = () => {
             sx={{ padding: "1.5em" }}
             className={FormStyles.h2Shine}
           >
-            Let your art shine!
+            We're excited to check it out!
           </Typography>
         </Box>
       </Grid>
