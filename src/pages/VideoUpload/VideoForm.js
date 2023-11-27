@@ -5,7 +5,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { uploadVideo } from "../../api/videos.js";
 
 const isUrlValid = (url) => {
-  const urlRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?$/;
+  const urlRegex =
+    /http:\/\/(?:www.)?(?:(vimeo).com\/(.*)|(youtube).com\/watch\?v=(.*?)&)/;
+
   return urlRegex.test(url);
 };
 
