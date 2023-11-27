@@ -4,10 +4,10 @@ const AllUsersPage = ({ state }) => {
   return (
     <div
       style={{
-        backgroundColor: "green",
+        color: "black",
       }}
     >
-      {state}
+      Coming soon....
     </div>
   );
 };

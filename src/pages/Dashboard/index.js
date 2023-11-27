@@ -7,59 +7,90 @@ import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import GroupIcon from "@mui/icons-material/Group";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, CircularProgress } from "@mui/material";
 import VideosPage from "./VideosPage";
 import AllUsersPage from "./AllUsersPage";
+import { getAllVideoByUserID, getVideos } from "../../api/videos";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getUserById } from "../../api/users";
+import { useTheme } from "@emotion/react";
 
-function Dashboard({ user, data }) {
-  user = "user";
+const adminMenuItems = [
+  { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
+  {
+    icon: <OndemandVideoIcon />,
+    text: "All User Videos",
+    state: "approved",
+  },
+  {
+    icon: <HourglassBottomIcon />,
+    text: "Waiting List",
+    state: "pending",
+  },
+  {
+    icon: <DoNotDisturbOnIcon />,
+    text: "Restricted",
+    state: "rejected",
+  },
+];
+
+const userMenuItems = [
+  {
+    icon: <OndemandVideoIcon />,
+    text: "All My Live Videos",
+    component: "videos",
+    state: "approved",
+  },
+  {
+    icon: <EditNoteIcon />,
+    text: "Draft",
+    state: "draft",
+  },
+  {
+    icon: <HourglassBottomIcon />,
+    text: "Pending",
+    state: "pending",
+  },
+  {
+    icon: <DoNotDisturbOnIcon />,
+    text: "Restricted",
+    state: "rejected",
+  },
+];
+
+function Dashboard() {
+  const theme = useTheme();
+  const { user, isLoading } = useAuth0();
+  const [videoList, setVideoList] = useState(null);
+  const [videoState, setVideoState] = useState("loading");
   const [collapsed, setCollapsed] = useState(false);
-  const [videoState, setVideoState] = useState(
-    user === "user" ? "All my videos" : "All Users"
-  );
+  const [role, setRole] = useState("");
+  useEffect(() => {
+    const fetchData = async () => {
+      if (isLoading || !user || !user.sub) {
+        return;
+      }
+      try {
+        const userData = await getUserById(user.sub);
+        setRole(userData.user.Role);
+        if (role === "Admin") {
+          const videosData = await getVideos();
+          setVideoState("allUsers");
+          setVideoList(videosData.videos);
+        } else {
+          const videosUserData = await getAllVideoByUserID(
+            userData.user.UserID
+          );
+          setVideoList(videosUserData.videos);
+          setVideoState("approved");
+        }
+      } catch (error) {
+        console.error({ error });
+      }
+    };
 
-  const adminMenuItems = [
-    { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
-    {
-      icon: <OndemandVideoIcon />,
-      text: "All User Videos",
-      state: "approved",
-    },
-    {
-      icon: <HourglassBottomIcon />,
-      text: "Waiting List",
-      state: "pending",
-    },
-    {
-      icon: <DoNotDisturbOnIcon />,
-      text: "Restricted",
-      state: "blocked",
-    },
-  ];
-
-  const userMenuItems = [
-    {
-      icon: <OndemandVideoIcon />,
-      text: "All My Live Videos",
-      component: "videos",
-      state: "approved",
-    },
-    {
-      icon: <EditNoteIcon />,
-      text: "Draft",
-      state: "draft",
-    },
-    {
-      icon: <HourglassBottomIcon />,
-      text: "Pending",
-      state: "pending",
-    },
-    {
-      icon: <DoNotDisturbOnIcon />,
-      text: "Restricted",
-      state: "blocked",
-    },
-  ];
+    fetchData();
+  }, [isLoading, user]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,7 +115,7 @@ function Dashboard({ user, data }) {
     setVideoState(state);
   };
 
-  const menuItems = user === "admin" ? adminMenuItems : userMenuItems;
+  const menuItems = role === "Admin" ? adminMenuItems : userMenuItems;
 
   return (
     <Box
@@ -99,7 +130,13 @@ function Dashboard({ user, data }) {
         },
       }}
     >
-      <Sidebar collapsed={collapsed} backgroundColor="rgba(0, 0, 0, 1)">
+      <Sidebar
+        collapsed={collapsed}
+        backgroundColor="#0a100d"
+        rootStyles={{
+          borderColor: "#2B2B2B",
+        }}
+      >
         <Menu>
           <MenuItem
             rootStyles={{
@@ -139,21 +176,29 @@ function Dashboard({ user, data }) {
           ))}
         </Menu>
       </Sidebar>
-      <main
-        style={{
+      <Box
+        sx={{
           flexGrow: 0,
           transition: "margin-left 0.3s",
           width: "100%",
           padding: "10px",
-          backgroundColor: "white",
+          backgroundColor: theme.palette.background.default,
         }}
       >
         {videoState === "allUsers" ? (
           <AllUsersPage state={videoState} />
+        ) : videoState === "loading" ? (
+          <CircularProgress />
         ) : (
-          <VideosPage state={videoState} user={user} data={data} />
+          <VideosPage
+            state={videoState}
+            data={
+              videoList &&
+              videoList.filter((video) => video.State === videoState)
+            }
+          />
         )}
-      </main>
+      </Box>
     </Box>
   );
 }
