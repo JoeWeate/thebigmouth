@@ -12,6 +12,10 @@ const UserInfoPending = ({ videoInfo, state }) => {
 
     const handleSend = () => {
     }
+
+    const handleEdit = () => {
+
+    }
     return (
         <Grid container direction="column" justifyContent="space-between" sx={{ minHeight: { lg: "230px", md: "160px" } }}>
             <Grid item>
@@ -32,13 +36,16 @@ const UserInfoPending = ({ videoInfo, state }) => {
                             <Box sx={{ padding: "1rem", border: "solid 1px", borderColor: theme.palette.pink.main, backgroundColor: "black", mt: "0.5rem", mb: "0.5rem" }}>
                                 {message}
                             </Box>
+                            <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         </>
                     }
-                    {state !== "rejected" &&
-                        <span>
-                            <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
-                        </span>}
-                    {state === "draft" && <MyButton template="yellow" onClick={handleSend} children="Send" variant="outlined" />}
+
+                    {state === "draft" && <>
+                        <MyButton template="yellow" onClick={handleEdit} children="Edit" variant="contained" />
+                        <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
+                        <MyButton template="yellow" onClick={handleSend} children="Send" variant="outlined" />
+
+                    </>}
                 </Typography>
             </Grid>
             <Grid item sx={{ bottom: 0 }}>
