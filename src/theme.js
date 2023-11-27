@@ -29,7 +29,7 @@ const theme = createTheme({
   overrides: {
     MuiOutlinedInput: {
       root: {
-        "&.Mui-error $notchedOutline": {
+        "&.MuiError $notchedOutline.": {
           borderColor: "$error.main !important",
         },
         "&:not($disabled):hover $notchedOutline": {
@@ -40,7 +40,7 @@ const theme = createTheme({
         },
       },
       input: {
-        "&:not(.Mui-disabled)": {
+        "&:not(.MuiDisabled)": {
           color: "$error.main",
         },
         "&::placeholder": {

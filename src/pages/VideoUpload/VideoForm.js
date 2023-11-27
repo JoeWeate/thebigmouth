@@ -4,25 +4,29 @@ import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import { uploadVideo } from "../../api/videos.js";
 
+const isUrlValid = (url) => {
+  const urlRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?$/;
+  return urlRegex.test(url);
+};
+
 const VideoForm = () => {
   const { user } = useAuth0();
   const theme = useTheme();
   const [data, setData] = useState({
     title: "",
-    description: "",
+    shortDescription: "",
     videoLink: "",
-    message: "",
+    description: "",
   });
 
   const [formErrors, setFormErrors] = useState({
     title: false,
-    description: false,
+    shortDescription: false,
     videoLink: false,
-    message: false,
+    description: false,
   });
 
   const handleChange = (event) => {
-    console.log(event.target.name);
     setData({
       ...data,
       [event.target.name]: event.target.value,
@@ -30,6 +34,13 @@ const VideoForm = () => {
   };
 
   const handleSubmit = async () => {
+    console.log("Submitting form:", data);
+
+    if (!isUrlValid(data.videoLink)) {
+      console.error("Invalid URL");
+      setFormErrors({ ...formErrors, videoLink: true });
+      return;
+    }
     const requiredFields = ["title", "description", "videoLink"];
     const newFormErrors = {};
     let isValid = true;
@@ -50,14 +61,12 @@ const VideoForm = () => {
         console.log("Form data:", data);
         await uploadVideo({ ...data, userId: user.sub });
 
-        // Reset form data
         setData({
           title: "",
-          description: "",
+          shortDescription: "",
           videoLink: "",
-          message: "",
+          description: "",
         });
-        console.log("Form data submitted:", data);
       } catch (error) {
         console.error("Error submitting form:", error);
       }
@@ -118,7 +127,7 @@ const VideoForm = () => {
         margin="normal"
         required
         error={formErrors.videoLink}
-        helperText={formErrors.videoLink && "Video Link is required"}
+        helperText={formErrors.videoLink && "Invalid video link"}
         InputLabelProps={{
           style: {
             ...theme.overrides.MuiOutlinedInput.root,
@@ -128,16 +137,19 @@ const VideoForm = () => {
           style: {
             ...theme.overrides.MuiOutlinedInput.input,
             backgroundColor: "rgba(235, 3, 143, 0.6)",
+            borderColor: formErrors.videoLink
+              ? "#EB038F"
+              : theme.overrides.MuiOutlinedInput.input.borderColor,
           },
         }}
       />
       <TextField
         fullWidth
-        placeholder="Add a video description"
-        label="Add a description"
-        id="description"
-        name="description"
-        value={data.description}
+        placeholder="Add a short video description"
+        label="Short Description"
+        id="shortDescription"
+        name="shortDescription"
+        value={data.shortDescription}
         onChange={handleChange}
         margin="normal"
         required
@@ -157,11 +169,11 @@ const VideoForm = () => {
       />
       <TextField
         fullWidth
-        placeholder="Leave a message"
-        label="Message"
-        id="message"
-        name="message"
-        value={data.message}
+        placeholder="Add a detailed video description"
+        label="Long Description"
+        id="description"
+        name="description"
+        value={data.description}
         onChange={handleChange}
         margin="normal"
         multiline
