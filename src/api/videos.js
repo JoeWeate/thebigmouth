@@ -1,13 +1,23 @@
 import configureAxios from "./configureAxios";
 
 const api = configureAxios({});
-
-export const videos = async (formData) => {
-  try {
-    const response = await api.post("/videos", formData, {});
-    return response.data;
-  } catch (error) {
-    console.error("Error uploading video:", error);
-    throw error;
-  }
+export const getVideos = () => {
+  return api
+    .get(`/videos`, {})
+    .then((data) => {
+      return Promise.resolve(data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+export const getAllVideoByUserID = (UserID) => {
+  return api
+    .get(`/videos/${UserID}`)
+    .then((data) => {
+      return Promise.resolve(data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
