@@ -1,12 +1,9 @@
 
 import { Grid, Typography } from "@mui/material";
-import AddArtButton from "../../components/userHub/AddArtButton";
 
 const PageTitleComponent = ({ title, fontSize }) => {
-    const { mainTitle, subtitle } = title;
-    const { titleFontSize, subtitleFontSize } = fontSize;
 
-    const lowerCaseTitle = mainTitle.toLowerCase();
+    const lowerCaseTitle = title.toLowerCase();
     const firstVideoIndex = lowerCaseTitle.indexOf("video");
 
     return (
@@ -17,33 +14,19 @@ const PageTitleComponent = ({ title, fontSize }) => {
                     textAlign: "center",
                     textTransform: "uppercase",
                     fontWeight: "600",
-                    fontSize: { lg: `${titleFontSize}`, sm: "40pt", xs: "20pt" },
+                    fontSize: { lg: `${fontSize}`, sm: "40pt", xs: "20pt" },
                 }}
             >
                 {firstVideoIndex !== -1 && (
                     <span>
-                        {mainTitle.slice(0, firstVideoIndex)}
+                        {title.slice(0, firstVideoIndex)}
                         <span style={{ color: "#E6007E" }}>
-                            {mainTitle.slice(firstVideoIndex, firstVideoIndex + 5)}
+                            {title.slice(firstVideoIndex, firstVideoIndex + 5)}
                         </span>
-                        {mainTitle.slice(firstVideoIndex + 5)}
+                        {title.slice(firstVideoIndex + 5)}
                     </span>
                 )}
             </Typography>
-
-            <Typography
-                variant="h4"
-                sx={{
-                    textAlign: "center",
-                    fontSize: { xs: "13pt", sm: "18pt", lg: `${subtitleFontSize}` },
-                    marginTop: 0,
-                    marginBottom: { xs: "2rem", lg: "4rem" },
-                }}
-            >
-                {subtitle}
-            </Typography>
-
-            <AddArtButton />
         </Grid>
     );
 };
