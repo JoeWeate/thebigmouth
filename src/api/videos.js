@@ -11,3 +11,13 @@ export const videos = async (formData) => {
     throw error;
   }
 };
+
+export const updateVideo = async ({ userId, videoId, formData }) => {
+  try {
+    const response = await api.put(`/videos/${userId}/${videoId}`, formData, {});
+    return response.data;
+  } catch (error) {
+    console.error("Error update the video:", error);
+    throw error;
+  }
+};

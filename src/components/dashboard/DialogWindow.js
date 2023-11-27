@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dialog, DialogContentText, DialogContent, DialogActions } from "@mui/material";
+import { Dialog, DialogContentText, DialogContent, DialogActions, Box } from "@mui/material";
 import PageTitleComponent from '../../pages/dummyHomePage/PageTitleComponent';
 import MyButton from '../Button';
 // import VideoForm from "./pages/VideoUpload/VideoForm";
@@ -9,7 +9,10 @@ const DialogWindow = ({ openEdit, handleClose, titleDialog, dialogTextDescriptio
     return (
         <React.Fragment>
             <Dialog open={openEdit} onClose={handleClose} >
-                <PageTitleComponent title={titleDialog} fontSize="20pt" />
+                <Box sx={{ mt: "2rem" }}>
+                    <PageTitleComponent title={titleDialog} fontSize="20pt" />
+
+                </Box>
                 <DialogContent>
                     <DialogContentText>
                         {dialogTextDescription}
