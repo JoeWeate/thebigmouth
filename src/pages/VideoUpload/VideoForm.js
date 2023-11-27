@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, TextField, useTheme } from "@mui/material";
 import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { videos } from "../../api/videos.js";
+import { getVideos } from "../../api/videos.js";
 
 const VideoForm = () => {
   const { user, getAccessTokenSilently } = useAuth0();
@@ -47,7 +47,7 @@ const VideoForm = () => {
     if (isValid) {
       try {
         const accessToken = await getAccessTokenSilently();
-        await videos(formData, accessToken);
+        await getVideos(formData, accessToken);
         console.log("Form data submitted:", formData);
       } catch (error) {
         console.error("Error submitting form:", error);

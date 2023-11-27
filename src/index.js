@@ -60,7 +60,7 @@ root.render(
               <Route path="login" element={<PostAuthentication />} />
               <Route path="dummyHomePage" element={<DummyHomePage />}></Route>
               <Route path="dashboard" element={<Dashboard />}></Route>
-
+              <Route path="videoUploadPage" element={<VideoUploadPage />}></Route>
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
             </Route>
