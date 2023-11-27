@@ -11,7 +11,7 @@ const theme = createTheme({
       secondary: "#8c8c8c",
     },
     yellow: {
-      main: "#C4FF00",
+      main: "#E8FA36",
     },
     pink: {
       main: "#EB038F",

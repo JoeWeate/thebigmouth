@@ -3,7 +3,6 @@ import VideoForm from "../VideoUpload/VideoForm";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import FormStyles from "./FormStyles.module.css";
 
 const VideoUploadPage = () => {
   return (
@@ -36,11 +35,7 @@ const VideoUploadPage = () => {
             <span style={{ color: "#EB038F" }}> VIDEO</span> YOU'D LIKE TO
             UPLOAD
           </Typography>
-          <Typography
-            variant="h6"
-            sx={{ padding: "1.5em" }}
-            className={FormStyles.h2Shine}
-          >
+          <Typography variant="h5" sx={{ padding: "1.5em", color: "#E8FA36" }}>
             We're excited to check it out!
           </Typography>
         </Box>
