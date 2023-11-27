@@ -10,9 +10,9 @@ import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
 import DummyHomePage from "./pages/DummyHomePage"
-// import VideoUploadPage from "./pages/VideoUpload/VideoUpload";
 import Theme from "./theme";
 import App from "./App";
+import VideoUploadPage from "./pages/VideoUpload/VideoUpload";
 import PostAuthentication from "./components/PostAuthentication";
 import reportWebVitals from "./reportWebVitals";
 import Episode from "./pages/EpisodePage";
@@ -60,8 +60,7 @@ root.render(
               <Route path="login" element={<PostAuthentication />} />
               <Route path="dummyHomePage" element={<DummyHomePage />}></Route>
               <Route path="dashboard" element={<Dashboard />}></Route>
-              {/* <Route path="VideoUpload" element={<VideoUploadPage />}></Route> */}
-
+              <Route path="VideoUpload" element={<VideoUploadPage />}></Route>
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
             </Route>
