@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Box, TextField, useTheme } from "@mui/material";
 import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { videos } from "../../api/videos.js";
+import { uploadVideo } from "../../api/videos.js";
 
 const VideoForm = () => {
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { user } = useAuth0();
   const theme = useTheme();
-  const [formData, setFormData] = useState({
+  const [data, setData] = useState({
     title: "",
     description: "",
-    VideoLink: "",
+    videoLink: "",
     message: "",
   });
 
@@ -22,8 +22,9 @@ const VideoForm = () => {
   });
 
   const handleChange = (event) => {
-    setFormData({
-      ...formData,
+    console.log(event.target.name);
+    setData({
+      ...data,
       [event.target.name]: event.target.value,
     });
   };
@@ -34,7 +35,7 @@ const VideoForm = () => {
     let isValid = true;
 
     requiredFields.forEach((field) => {
-      if (!formData[field]) {
+      if (!data[field]) {
         newFormErrors[field] = true;
         isValid = false;
       } else {
@@ -46,9 +47,17 @@ const VideoForm = () => {
 
     if (isValid) {
       try {
-        const accessToken = await getAccessTokenSilently();
-        await videos(formData, accessToken);
-        console.log("Form data submitted:", formData);
+        console.log("Form data:", data);
+        await uploadVideo({ ...data, userId: user.sub });
+
+        // Reset form data
+        setData({
+          title: "",
+          description: "",
+          videoLink: "",
+          message: "",
+        });
+        console.log("Form data submitted:", data);
       } catch (error) {
         console.error("Error submitting form:", error);
       }
@@ -81,12 +90,18 @@ const VideoForm = () => {
         label="Title"
         id="title"
         name="title"
-        value={formData.title}
+        value={data.title}
         onChange={handleChange}
         margin="normal"
         required
         error={formErrors.title}
         helperText={formErrors.title && "Title is required"}
+        sx={{
+          borderColor: formErrors.title && "rgb(235, 3, 143)",
+          "&:hover, &:focus": {
+            borderColor: formErrors.title && "rgb(235, 3, 143)",
+          },
+        }}
       />
 
       <TextField
@@ -94,8 +109,8 @@ const VideoForm = () => {
         placeholder="Video Link"
         label="Link"
         id="VideoLink"
-        name="VideoLink"
-        value={formData.videoLink}
+        name="videoLink"
+        value={data.videoLink}
         onChange={handleChange}
         margin="normal"
         required
@@ -108,7 +123,7 @@ const VideoForm = () => {
         label="Add a description"
         id="description"
         name="description"
-        value={formData.description}
+        value={data.description}
         onChange={handleChange}
         margin="normal"
         required
@@ -121,7 +136,7 @@ const VideoForm = () => {
         label="Message"
         id="message"
         name="message"
-        value={formData.message}
+        value={data.message}
         onChange={handleChange}
         margin="normal"
         multiline

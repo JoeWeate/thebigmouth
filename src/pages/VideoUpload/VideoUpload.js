@@ -11,7 +11,6 @@ const VideoUploadPage = () => {
       container
       style={{
         height: "100vh",
-        // backgroundColor: "",
         mb: {
           lg: "5rem",
           sm: "4rem",
@@ -24,7 +23,6 @@ const VideoUploadPage = () => {
         <Box
           sx={{
             paddingTop: "2em",
-            // backgroundColor: "white",
             borderRadius: "8px",
             textAlign: "center",
           }}
