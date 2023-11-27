@@ -2,9 +2,13 @@ import Divider from "../Divider"
 import { Typography, Grid, Box } from "@mui/material";
 import MyButton from "../Button";
 import { useTheme } from "@emotion/react"
+import { useState } from "react";
+import DialogWindow from "./DialogWindow";
 
 const UserInfoPending = ({ videoInfo, state }) => {
     const theme = useTheme();
+    const [openEdit, setOpenEdit] = useState(false);
+    const dialogTextDescription = "If you would like to make changes to the details of the video you've shared, please fill in the form."
 
     const { author, title, description, date, message } = videoInfo;
     const handleDelete = () => {
@@ -12,9 +16,12 @@ const UserInfoPending = ({ videoInfo, state }) => {
 
     const handleSend = () => {
     }
+    const handleClose = () => {
+        setOpenEdit(false);
+    };
 
-    const handleEdit = () => {
-
+    const handleEditOpen = () => {
+        setOpenEdit(true)
     }
     return (
         <Grid container direction="column" justifyContent="space-between" sx={{ minHeight: { lg: "230px", md: "160px" } }}>
@@ -41,7 +48,8 @@ const UserInfoPending = ({ videoInfo, state }) => {
                     }
 
                     {state === "draft" && <>
-                        <MyButton template="yellow" onClick={handleEdit} children="Edit" variant="contained" />
+                        <MyButton template="yellow" onClick={handleEditOpen} children="Edit" variant="contained" />
+                        {openEdit && <DialogWindow openEdit={openEdit} handleClose={handleClose} titleDialog="Edit the video details" dialogTextDescription={dialogTextDescription} />}
                         <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         <MyButton template="yellow" onClick={handleSend} children="Send" variant="outlined" />
 
