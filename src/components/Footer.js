@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Box, CardMedia, Typography, Paper, Hidden } from "@mui/material";
 import Link from "@mui/material/Link";
 import theme from "../theme";
-import { styled, width } from "@mui/system";
+import { styled } from "@mui/system";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -41,7 +41,6 @@ const Footer = () => {
       }}
       component="footer"
       square
-      // variant="outlined"
     >
       <Grid
         container
@@ -52,18 +51,20 @@ const Footer = () => {
           backgroundColor: "#E6007E",
           flexDirection: "row",
           height: { lg: "280px", md: "400px", sm: "500px" },
-            pt: {
-                xs: 3,
-                lg: 0,
-            }
+          pt: {
+            xs: 1,
+            lg: 0,
+          },
+          pb: {
+            xs: "1.5rem",
+            s: "0.5rem",
+          },
         }}
       >
         <Grid
           item
           lg={4}
           xs={12}
-          // alignItems="center"
-          // justifyConten="center"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -81,10 +82,9 @@ const Footer = () => {
             sx={{
               width: "100%",
               height: "100%",
-              justifyConten: "center",
+              justifyContent: "center",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
               flexDirection: "column",
               [theme.breakpoints.down("sm", "md")]: {
                 textAlign: "right",
@@ -98,13 +98,13 @@ const Footer = () => {
               sx={{
                 alignSelf: "center",
                 maxWidth: {
-                  xs: "30%",
-                  sm: "25%",
-                  md: "20%",
-                  lg: "30%",
+                  xs: "10rem",
+                  sm: "13rem",
+                  md: "13rem",
+                  lg: "12rem",
                 },
                 paddingBottom: {
-                  lg: "3em",
+                  lg: "2.7rem",
                 },
                 marginBottom: {
                   md: "1em",
@@ -117,7 +117,7 @@ const Footer = () => {
                 position: "absolute",
                 paddingLeft: "1rem",
                 paddingRight: "1rem",
-                background: "rgba(230, 0, 126, 0.73)",
+                backgroundColor: "rgba(224,3,146, 0.6)",
                 fontWeight: "bold",
                 backdropFilter: "blur(5px)",
                 color: "white",
@@ -125,14 +125,16 @@ const Footer = () => {
                 textAlign: "center",
                 whiteSpace: "nowrap",
                 fontSize: {
-                  xs: "1.5rem",
+                  xs: "2.2rem",
                   sm: "2.5rem",
-                  md: "2.5rem",
+                  // md: "2.5rem",
                   lg: "2.5rem",
                 },
                 mb: {
-                  xs: "0.3em",
-                  md: "1em",
+                  xs: "0.3rem",
+                  sm: "0.7rem",
+                  md: "1.5rem",
+                  lg: "4rem",
                 },
               }}
             >
@@ -153,9 +155,10 @@ const Footer = () => {
             sx={{
               width: "100%",
               gap: {
-                xs: "2.6rem",
-                sm: "1rem",
+                xs: "2.4rem",
+                sm: "1.2rem",
                 md: "2.6rem",
+                lg: "4rem",
               },
               mb: { xs: "2rem", sm: "7rem" },
               mt: {
