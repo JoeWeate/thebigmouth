@@ -16,7 +16,7 @@ const AllUsersPage = ({ state }) => {
       <Typography
         variant="h3"
         sx={{
-          color: "#ff5d8f",
+          color: "#E6007E",
           textShadow: "1px 1px 2px rgba(0, 0, 0, 0.3)",
           animation: "pulse 2s infinite ease-in-out",
         }}
