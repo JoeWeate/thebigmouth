@@ -25,7 +25,7 @@ const pages = [
   "TBH MEANS BUSINESS",
   "THE BIG MOUTH",
 ];
-const settingsLogin = ["Profile"];
+const settingsLogin = ["Profile", "Dashboard"];
 function NavBar() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
@@ -162,11 +162,22 @@ function NavBar() {
                   display: "block",
                   fontWeight: "600",
                   fontSize: { md: "default", sm: "small" },
-                  "&:hover": {
-                    textDecoration: "underline",
-                    textDecorationColor: "#ff5d8f",
-                    textUnderlineOffset: "3px",
-                    textDecorationThickness: "2px",
+                  position: "relative",
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    width: "100%",
+                    height: "2px",
+                    bottom: "-3px",
+                    right: 0,
+                    backgroundColor: "#E6007E",
+                    visibility: "hidden",
+                    transform: "scaleX(0)",
+                    transition: "all 0.3s ease-in-out",
+                  },
+                  "&:hover::after": {
+                    visibility: "visible",
+                    transform: "scaleX(1)",
                   },
                   "@media (max-width: 1210px)": {
                     ml: 6,
@@ -179,6 +190,10 @@ function NavBar() {
                   },
                   "@media (max-width: 1010px)": {
                     ml: 0.6,
+                  },
+                  "@media (max-width: 900px)": {
+                    ml: 0.5,
+                    fontSize: "smaller",
                   },
                 }}
               >
@@ -226,25 +241,31 @@ function NavBar() {
               onClose={handleCloseUserMenu}
             >
               {isAuthenticated && (
-                <>
+                <MenuItem disabled>
                   <Typography sx={{ textAlign: "center", color: "grey" }}>
                     Hi, {user.given_name}!
                   </Typography>
-                  {settingsLogin.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography
-                        onClick={() =>
-                          navigate(setting === "Profile" ? "/profile" : "#")
-                        }
-                        textAlign="center"
-                      >
-                        {setting}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </>
+                </MenuItem>
               )}
-
+              {isAuthenticated &&
+                settingsLogin.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography
+                      onClick={() =>
+                        navigate(
+                          setting === "Profile"
+                            ? "/profile"
+                            : setting === "Dashboard"
+                            ? "/dashboard"
+                            : "#"
+                        )
+                      }
+                      textAlign="center"
+                    >
+                      {setting}
+                    </Typography>
+                  </MenuItem>
+                ))}
               <MenuItem>
                 {isAuthenticated ? <LogoutButton /> : <LoginButton />}
               </MenuItem>
