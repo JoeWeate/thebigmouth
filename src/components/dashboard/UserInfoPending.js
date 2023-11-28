@@ -34,7 +34,7 @@ const UserInfoPending = ({ videoInfo, state }) => {
                             </Box>
                         </>
                     }
-                    {state !== "rejected" &&
+                    {state &&
                         <span>
                             <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         </span>}
