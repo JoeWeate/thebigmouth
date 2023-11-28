@@ -120,7 +120,7 @@ const VideoForm = () => {
 
       <TextField
         fullWidth
-        placeholder="Video Link"
+        placeholder="Add your YouTube or Vimeo URL"
         label="Link"
         id="VideoLink"
         name="videoLink"
@@ -129,7 +129,9 @@ const VideoForm = () => {
         margin="normal"
         required
         error={formErrors.videoLink}
-        helperText={formErrors.videoLink && "Invalid video link"}
+        helperText={
+          formErrors.videoLink && "Provide a valid YouTube or Vimeo url."
+        }
         InputLabelProps={{
           style: {
             ...theme.overrides.MuiOutlinedInput.root,
