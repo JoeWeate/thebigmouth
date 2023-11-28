@@ -38,12 +38,12 @@ export const auth0userMocks = {
     "family_name": "Lypnyk",
     "nickname": "iryna.lypnyk",
     "name": "Iryna Lypnyk",
-    "picture": "https://lh3.googleusercontent.com/a/ACrKllCGWI=s9c",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocLXvgV",
     "locale": "uk",
     "updated_at": "2023-11-21T21:13:40.295Z",
     "email": "iryna.lypnyk@gmail.com",
     "email_verified": true,
-    "sub": "google-oauth2|104664109"
+    "sub": "gouth2|46647109"
 }
 
 export const imgMocks = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/media-banner-lg-10.png";

@@ -11,6 +11,7 @@ const DummyHomePage = () => {
     let title = "Welcome to VideoHub";
     let subtitle = "Your Ultimate Destination for Awesome Content Experiences!"
 
+
     return (
 
         <Grid container direction="column" justifyContent="center" alignItems="center">
@@ -19,6 +20,7 @@ const DummyHomePage = () => {
                 <SubtitleComponent subtitle={subtitle} fontSize="24pt" />
             </Grid>
             <Grid item><AddArtButton /></Grid>
+
             <Grid item sx={{ width: "90%", marginTop: "2rem", marginBottom: "2rem" }}>
                 <Grid container justifyContent="center" sx={{ marginBottom: { lg: "4rem", sm: 0 } }}>
                     {userHubVideoListMocks.map((video) => {
@@ -36,5 +38,4 @@ const DummyHomePage = () => {
         </Grid >
     )
 }
-
 export default DummyHomePage;
