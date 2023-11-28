@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-
 import { Grid } from "@mui/material";
 import { getUserById, registerNewUser } from "../api/users";
+import { useNavigate } from "react-router";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
 export default function PostAuthenticate() {
   const navigate = useNavigate();
@@ -38,6 +37,5 @@ export default function PostAuthenticate() {
         .catch((error) => console.log(error));
     }
   }, [user]);
-
   return <Grid>Loading..</Grid>;
 }

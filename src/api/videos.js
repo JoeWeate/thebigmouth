@@ -1,4 +1,5 @@
 import configureAxios from "./configureAxios";
+
 const api = configureAxios({});
 export const getVideos = () => {
   return api

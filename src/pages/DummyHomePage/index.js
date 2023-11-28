@@ -1,12 +1,8 @@
-
 import { Grid } from "@mui/material"
 import UserVideo from "../../components/userHub/UserVideo"
 import { userHubVideoListMocks } from "../../api/mocks"
-import PageTitleComponent from "./PageTitleComponent"
+import PageTitleComponent from "./PageTitleComponent";
 import AddArtButton from "../../components/userHub/AddArtButton";
-
-
-
 const DummyHomePage = () => {
     let title =
     {
@@ -45,5 +41,4 @@ const DummyHomePage = () => {
         </Grid >
     )
 }
-
-export default DummyHomePage
+export default DummyHomePage;

@@ -47,21 +47,22 @@ export const auth0userMocks = {
 }
 
 export const imgMocks = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/media-banner-lg-10.png";
-export const userHubVideoInfoMocks =  {
+export const userHubVideoInfoMocks = {
     author: "Name Secondname",
     title: "Some Video Title",
     description: "Some short description and some more text to add several lines",
     date: "2022-01-01"
 };
 
-export const userHubVideoListMocks =  [
+export const userHubVideoListMocks = [
     {
         videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
         videoImg: "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/media-banner-lg-10.png",
         author: "Name Secondname",
         title: "Some Video Title",
         description: "Some short description and some more text to add several lines",
-        date: "2022-01-01"
+        date: "2022-01-01",
+        state: "draft"
     },
     {
         videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
@@ -69,7 +70,9 @@ export const userHubVideoListMocks =  [
         author: "Name Secondname Two",
         title: "Some Video Title Two",
         description: "Some short description and some more text to add several lines and more more more lines to add several lines and more more more lines to add several lines",
-        date: "2023-07-01"
+        date: "2023-07-01",
+        message: "Lorem ipsum” dummy text is used by many web-developers to test how their HTML templates will look with real data. ",
+        state: "rejected"
     },
     {
         videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
@@ -77,7 +80,8 @@ export const userHubVideoListMocks =  [
         author: "Name Secondname Two",
         title: "Some Video Title Two",
         description: "Some short description and some more text to add several lines",
-        date: "2023-07-01"
+        date: "2023-07-01",
+        state: "pending"
     },
     {
         videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
@@ -85,10 +89,35 @@ export const userHubVideoListMocks =  [
         author: "Name Secondname Two",
         title: "Some Video Title Two",
         description: "Some short description and some more text to add several lines",
-        date: "2023-07-01"
+        date: "2023-07-01",
+        state: "approved"
     },
     {
         videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
         videoImg: "",
+        author: "Name Secondname Two",
+        title: "Some Video Title Two",
+        description: "Some short description and some more text to add several lines",
+        date: "2023-07-01",
+        state: "approved"
+    },
+    {
+        videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
+        videoImg: "",
+        author: "Name Secondname Two",
+        title: "Some Video Title Two",
+        description: "Some short description and some more text to add several lines",
+        date: "2023-07-01",
+        state: "approved"
+    },
+    {
+        videoUrl: "https://www.youtube.com/watch?v=DpPzA4OBVqo",
+        videoImg: "",
+        author: "Olha",
+        title: "The best video ever",
+        description: "Some short description and some more text to add several lines",
+        date: "2023-07-01",
+        message: "Lorem ipsum” dummy text is used by many web-developers to test how their HTML templates will look with real data. Often, developers.",
+        state: "rejected"
     }
 ];

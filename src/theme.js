@@ -1,4 +1,5 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -12,7 +13,10 @@ const theme = createTheme({
       main: "#C4FF00",
     },
     pink: {
-      main: "#FF0080",
+      main: "#EB038F",
+    },
+    primary: {
+      main: grey[300],
     },
   },
   typography: {

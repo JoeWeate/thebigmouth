@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Box, CardMedia, Typography, Paper, Hidden } from "@mui/material";
 import Link from "@mui/material/Link";
 import theme from "../theme";
-import { styled, width } from "@mui/system";
+import { styled } from "@mui/system";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -52,10 +52,10 @@ const Footer = () => {
           backgroundColor: "#E6007E",
           flexDirection: "row",
           height: { lg: "280px", md: "400px", sm: "500px" },
-            pt: {
-                xs: 3,
-                lg: 0,
-            }
+          pt: {
+            xs: 3,
+            lg: 0,
+          },
         }}
       >
         <Grid
