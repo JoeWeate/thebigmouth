@@ -1,5 +1,6 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -10,7 +11,7 @@ const theme = createTheme({
       secondary: "#8c8c8c",
     },
     yellow: {
-      main: "#C4FF00",
+      main: "#E8FA36",
     },
     pink: {
       main: "#EB038F",
@@ -18,9 +19,42 @@ const theme = createTheme({
     primary: {
       main: grey[300],
     },
+    error: {
+      main: "#EB038F",
+    },
   },
   typography: {
     fontFamily: "Core Sans",
+  },
+  overrides: {
+    MuiOutlinedInput: {
+      root: {
+        "&.MuiError $notchedOutline.": {
+          borderColor: "$error.main !important",
+        },
+        "&:not($disabled):hover $notchedOutline": {
+          borderColor: "$error.main !important",
+        },
+        "&$focused$notchedOutline": {
+          borderColor: "$error.main !important",
+        },
+      },
+      input: {
+        "&:not(.MuiDisabled)": {
+          color: "$error.main",
+        },
+        "&::placeholder": {
+          color: "$error.main",
+        },
+      },
+    },
+    MuiFormLabel: {
+      root: {
+        "&.Mui-error": {
+          color: "$error.main !important",
+        },
+      },
+    },
   },
 
   components: {
