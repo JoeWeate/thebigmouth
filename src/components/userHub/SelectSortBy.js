@@ -34,13 +34,13 @@ export default function SelectSortBy({ setVideoData, videoData }) {
     const sortedData = [...videoData];
 
     switch (event.target.value) {
-      case 10:
+      case "user name":
         sortedData.sort((a, b) => a.author.localeCompare(b.author));
         break;
-      case 20:
+      case "title":
         sortedData.sort((a, b) => a.title.localeCompare(b.title));
         break;
-      case 30:
+      case "upload Date":
         sortedData.sort((a, b) => new Date(a.date) - new Date(b.date));
         break;
     }
@@ -66,9 +66,9 @@ export default function SelectSortBy({ setVideoData, videoData }) {
           <MenuItem value="" disabled>
             Sort by
           </MenuItem>
-          <MenuItem value={10}>Author</MenuItem>
-          <MenuItem value={20}>Title</MenuItem>
-          <MenuItem value={30}>Upload date</MenuItem>
+          <MenuItem value="user name">Author</MenuItem>
+          <MenuItem value="title">Title</MenuItem>
+          <MenuItem value="upload Date">Upload date</MenuItem>
         </CustomSelect>
       </FormControl>
     </Box>
