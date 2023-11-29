@@ -1,9 +1,14 @@
 import { Grid } from "@mui/material"
+import React, {useContext} from "react";
+import {MyContext} from "../../App";
 import UserVideo from "../../components/userHub/UserVideo"
-import { userHubVideoListMocks } from "../../api/mocks"
+import {irynaVideoMock, userHubVideoListMocks} from "../../api/mocks"
+import VideoActionButton from "../../components/VideoActionButton";
+import {ADMIN_ACTIONS, USER_ACTIONS, USER_ROLE} from "../../utils/constants";
 import PageTitleComponent from "./PageTitleComponent";
 import AddArtButton from "../../components/userHub/AddArtButton";
 const DummyHomePage = () => {
+    const { userRole } = useContext(MyContext);
     let title =
     {
         mainTitle: "Welcome to VideoHub",
@@ -37,6 +42,11 @@ const DummyHomePage = () => {
                     })}
                 </Grid>
 
+            </Grid>
+            <Grid item>
+                <div>All buttons added temporally just for testing</div>
+                {userRole === USER_ROLE.USER && USER_ACTIONS.map(action => <VideoActionButton key={action.action} videoData={irynaVideoMock} action={action.action}/>)}
+                {userRole !== USER_ROLE.ADMIN && ADMIN_ACTIONS.map(action => <VideoActionButton key={action.action} videoData={irynaVideoMock} action={action.action}/>)}
             </Grid>
         </Grid >
     )
