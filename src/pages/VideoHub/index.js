@@ -6,7 +6,7 @@ import AddArtButton from "../../components/userHub/AddArtButton";
 import SelectSortBy from "../../components/userHub/SelectSortBy";
 import { useState } from "react";
 
-const DummyHomePage = () => {
+const VideoHub = () => {
   const [videoData, setVideoData] = useState(userHubVideoListMocks);
   let title = {
     mainTitle: "Welcome to VideoHub",
@@ -74,4 +74,4 @@ const DummyHomePage = () => {
     </Grid>
   );
 };
-export default DummyHomePage;
+export default VideoHub;

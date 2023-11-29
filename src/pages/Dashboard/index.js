@@ -184,11 +184,7 @@ function Dashboard() {
               )}
             </ListItemIcon>
           </ListItem>
-          <ListItem
-            button
-            key="user-hub"
-            onClick={() => navigate("/dummyHomePage")}
-          >
+          <ListItem button key="user-hub" onClick={() => navigate("/videohub")}>
             <ListItemIcon
               sx={{
                 minWidth: collapsed ? "auto" : "40px",
