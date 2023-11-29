@@ -121,3 +121,18 @@ export const userHubVideoListMocks = [
         state: "rejected"
     }
 ];
+
+export const irynaVideoMock =   {
+    "UserID": "google-oauth2|104634712040360930109",
+    "Title": "Sample Title",
+    "Timestamp": 1700667173773,
+    "VideoID": "0eb0bbe7-a822-4499-a8e0-6cc7a498e7e",
+    "Description": "Sample Video Description",
+    "ShortDescription": "Sample Video Description",
+    "State": "pending",
+    "Messages": [
+        "Message 1",
+        "Message 2"
+    ],
+    "URL": "https://www.youtube.com/watch?v=a3ICNMQW7Ok"
+}

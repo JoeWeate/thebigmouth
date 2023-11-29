@@ -1,6 +1,6 @@
 import configureAxios from "./configureAxios";
-
 const api = configureAxios({});
+import {VIDEO_DATA_KEYS} from "../utils/constants";
 
 export const uploadVideo = async (data) => {
   try {
@@ -30,4 +30,19 @@ export const getAllVideoByUserID = (UserID) => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+export const apiUpdateVideo = (updatedVideo, handleSnackbar) => {
+    const videoId = updatedVideo[VIDEO_DATA_KEYS.VIDEO_ID];
+    const userId = updatedVideo[VIDEO_DATA_KEYS.USER_ID];
+    return api
+        .put(`/videos/${userId}/${videoId}`, updatedVideo)
+        .then((data) => {
+            handleSnackbar("success");
+            return Promise.resolve(data.data);
+        })
+        .catch((error) => {
+            console.log("putUpdatedVideo", {error});
+            handleSnackbar("error");
+        });
 };
