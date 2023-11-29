@@ -25,7 +25,7 @@ const pages = [
   "TBH MEANS BUSINESS",
   "THE BIG MOUTH",
 ];
-const settingsLogin = ["Profile", "Dashboard"];
+const settingsLogin = ["Profile"];
 function NavBar() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
