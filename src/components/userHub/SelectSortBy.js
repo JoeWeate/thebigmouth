@@ -6,7 +6,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
+const userName = "user name";
+const title = "title";
+const uploadDate = "upload Date";
 const CustomSelect = styled(Select)(({ theme }) => ({
   "& .MuiSelect-select": {
     backgroundColor: "black",
@@ -34,13 +36,13 @@ export default function SelectSortBy({ setVideoData, videoData }) {
     const sortedData = [...videoData];
 
     switch (event.target.value) {
-      case "user name":
+      case userName:
         sortedData.sort((a, b) => a.author.localeCompare(b.author));
         break;
-      case "title":
+      case title:
         sortedData.sort((a, b) => a.title.localeCompare(b.title));
         break;
-      case "upload Date":
+      case uploadDate:
         sortedData.sort((a, b) => new Date(a.date) - new Date(b.date));
         break;
     }
@@ -66,9 +68,9 @@ export default function SelectSortBy({ setVideoData, videoData }) {
           <MenuItem value="" disabled>
             Sort by
           </MenuItem>
-          <MenuItem value="user name">Author</MenuItem>
-          <MenuItem value="title">Title</MenuItem>
-          <MenuItem value="upload Date">Upload date</MenuItem>
+          <MenuItem value={userName}>Author</MenuItem>
+          <MenuItem value={title}>Title</MenuItem>
+          <MenuItem value={uploadDate}>Upload date</MenuItem>
         </CustomSelect>
       </FormControl>
     </Box>

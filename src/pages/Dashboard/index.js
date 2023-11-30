@@ -108,7 +108,7 @@ function Dashboard() {
         ];
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", zIndex: 0 }}>
+    <Box sx={{ display: "flex", height: "100vh", zIndex: 0, width: "100%" }}>
       <Drawer
         PaperProps={{
           sx: {
