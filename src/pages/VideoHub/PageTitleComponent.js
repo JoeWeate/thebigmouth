@@ -9,7 +9,7 @@ const PageTitleComponent = ({ title, titleFontSize }) => {
     return (
         <Grid container direction="column" alignItems="center">
             <Typography
-                variant="h5"
+                variant="h6"
                 sx={{
                     textAlign: "center",
                     textTransform: "uppercase",

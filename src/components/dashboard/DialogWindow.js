@@ -10,7 +10,7 @@ const DialogWindow = ({ openEdit, handleClose, titleDialog, dialogTextDescriptio
         <React.Fragment>
             <Dialog open={openEdit} onClose={handleClose} >
                 <Box sx={{ mt: "2rem" }}>
-                    <PageTitleComponent title={titleDialog} fontSize="20pt" />
+                    <PageTitleComponent title={titleDialog} titleFontSize="28pt" />
 
                 </Box>
                 <DialogContent>

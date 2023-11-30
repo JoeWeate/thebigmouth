@@ -6,6 +6,7 @@ import { Grid, Typography } from "@mui/material"
 
 const VideosPage = ({ state, data }) => {
   console.log("state", state)
+  console.log("data", data)
   return (
     <div
       style={{

@@ -11,7 +11,9 @@ const isUrlValid = (url) => {
   return urlRegex.test(url);
 };
 
-const VideoForm = () => {
+const VideoForm = (videoInfo) => {
+  const { title } = videoInfo;
+  //, description, shortDescription, url,
   const { user } = useAuth0();
   const theme = useTheme();
   const [data, setData] = useState({
@@ -95,7 +97,7 @@ const VideoForm = () => {
     >
       <TextField
         fullWidth
-        placeholder="Title"
+        placeholder={title ? title : "Title"}
         label="Title"
         id="title"
         name="title"

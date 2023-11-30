@@ -10,7 +10,7 @@ const AddArtButton = () => {
     const navigate = useNavigate();
 
     const handleCheckLogIn = () => {
-        isAuthenticated ? navigate("./videoupload") : loginWithRedirect();
+        isAuthenticated ? navigate("/videoupload") : loginWithRedirect();
     }
 
     return (
