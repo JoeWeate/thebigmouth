@@ -9,7 +9,6 @@ import Home from "./pages/HomePage";
 import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
-import DummyHomePage from "./pages/dummyHomePage";
 import Theme from "./theme";
 import App from "./App";
 import PostAuthentication from "./components/PostAuthentication";
@@ -17,7 +16,8 @@ import reportWebVitals from "./reportWebVitals";
 import Episode from "./pages/EpisodePage";
 
 import "./index.css";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/Dashboard";
+import VideoHub from "./pages/VideoHub";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -57,7 +57,7 @@ root.render(
                 element={<Episode />}
               />
               <Route path="login" element={<PostAuthentication />} />
-              <Route path="dummyHomePage" element={<DummyHomePage />}></Route>
+              <Route path="videohub" element={<VideoHub />}></Route>
               <Route path="dashboard" element={<Dashboard />}></Route>
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
