@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 
+
 const PageTitleComponent = ({ title, titleFontSize }) => {
 
     const lowerCaseTitle = title.toLowerCase();
@@ -29,5 +30,4 @@ const PageTitleComponent = ({ title, titleFontSize }) => {
         </Grid>
     );
 };
-
-export default PageTitleComponent;
+export default PageTitleComponent
