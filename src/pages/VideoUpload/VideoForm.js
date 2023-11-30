@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, TextField, useTheme } from "@mui/material";
 import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { uploadVideo } from "../../api/videos.js";
+import { uploadVideo, updateVideo } from "../../api/videos.js";
+
+
 
 const isUrlValid = (url) => {
   const urlRegex =
@@ -11,11 +13,11 @@ const isUrlValid = (url) => {
   return urlRegex.test(url);
 };
 
-const VideoForm = (videoInfo) => {
-  const { title } = videoInfo;
-  //, description, shortDescription, url,
+
+const VideoForm = ({ videoInfo, URL, VideoID, UserID, setOpenEdit }) => {
   const { user } = useAuth0();
   const theme = useTheme();
+
   const [data, setData] = useState({
     title: "",
     shortDescription: "",
@@ -30,12 +32,69 @@ const VideoForm = (videoInfo) => {
     description: false,
   });
 
+  useEffect(() => {
+    if (videoInfo) {
+      setData({
+        title: videoInfo.Title || "",
+        shortDescription: videoInfo.ShortDescription || "",
+        videoLink: URL || "",
+        description: videoInfo.Description || "",
+      });
+    } else {
+      setData({
+        title: "",
+        shortDescription: "",
+        videoLink: "",
+        description: "",
+      });
+    }
+  }, [videoInfo]);
+
   const handleChange = (event) => {
     setData({
       ...data,
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleEdit = async () => {
+    console.log("Submitting form:", data);
+
+    if (!isUrlValid(data.videoLink)) {
+      console.error("Invalid URL");
+      setFormErrors({ ...formErrors, videoLink: true });
+      return;
+    }
+    const requiredFields = ["title", "description", "videoLink"];
+    const newFormErrors = {};
+    let isValid = true;
+
+    requiredFields.forEach((field) => {
+      if (!data[field]) {
+        newFormErrors[field] = true;
+        isValid = false;
+      } else {
+        newFormErrors[field] = false;
+      }
+    });
+    setFormErrors(newFormErrors);
+    if (isValid) {
+      try {
+        console.log("Form data:", data);
+        await updateVideo({ ...data, VideoID, UserID });
+        setData({
+          title: "",
+          shortDescription: "",
+          videoLink: "",
+          description: "",
+        });
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
+    }
+    setOpenEdit(false)
+  }
+
 
   const handleSubmit = async () => {
     console.log("Submitting form:", data);
@@ -79,6 +138,7 @@ const VideoForm = (videoInfo) => {
   return (
     <Box
       component="form"
+      autoComplete="off"
       sx={{
         width: {
           maxWidth: "700px",
@@ -97,11 +157,12 @@ const VideoForm = (videoInfo) => {
     >
       <TextField
         fullWidth
-        placeholder={title ? title : "Title"}
+        placeholder="Title"
         label="Title"
         id="title"
         name="title"
         value={data.title}
+        defaultValue={data.title}
         onChange={handleChange}
         margin="normal"
         required
@@ -120,6 +181,7 @@ const VideoForm = (videoInfo) => {
         }}
       />
 
+
       <TextField
         fullWidth
         placeholder="Add your YouTube or Vimeo URL"
@@ -127,6 +189,7 @@ const VideoForm = (videoInfo) => {
         id="VideoLink"
         name="videoLink"
         value={data.videoLink}
+        defaultValue={data.videoLink}
         onChange={handleChange}
         margin="normal"
         required
@@ -156,6 +219,7 @@ const VideoForm = (videoInfo) => {
         id="shortDescription"
         name="shortDescription"
         value={data.shortDescription}
+        defaultValue={data.shortDescription}
         onChange={handleChange}
         margin="normal"
         required
@@ -180,11 +244,11 @@ const VideoForm = (videoInfo) => {
         id="description"
         name="description"
         value={data.description}
+        defaultValue={data.description}
         onChange={handleChange}
         margin="normal"
         multiline
         rows={3}
-        defaultValue="Default Value"
         InputLabelProps={{
           style: {
             ...theme.overrides.MuiOutlinedInput.root,
@@ -197,7 +261,12 @@ const VideoForm = (videoInfo) => {
           },
         }}
       />
-      <Button template="yellow" variant="outlined" onClick={handleSubmit}>
+
+      <Button
+        template="yellow"
+        variant="outlined"
+        onClick={videoInfo ? handleEdit : handleSubmit}
+      >
         Submit
       </Button>
     </Box>

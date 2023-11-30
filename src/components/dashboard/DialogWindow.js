@@ -1,29 +1,52 @@
 import * as React from 'react';
-import { Dialog, DialogContentText, DialogContent, DialogActions, Box } from "@mui/material";
+import { Dialog, DialogContentText, DialogContent, Box } from "@mui/material";
+import { styled } from '@mui/material/styles';
 import PageTitleComponent from "../../pages/VideoHub/PageTitleComponent"
-import MyButton from '../Button';
+import IconButton from '@mui/material/IconButton';
 import VideoForm from "../../pages/VideoUpload/VideoForm";
+import CloseIcon from '@mui/icons-material/Close';
 
-const DialogWindow = ({ openEdit, handleClose, titleDialog, dialogTextDescription }) => {
+
+const DialogWindow = ({ videoInfo, openEdit, URL, handleClose, titleDialog, dialogTextDescription, VideoID, UserID, setOpenEdit }) => {
+    const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+        '& .MuiDialogContent-root': {
+            padding: theme.spacing(2),
+        },
+        '& .MuiDialogActions-root': {
+            padding: theme.spacing(1),
+        },
+    }));
 
     return (
         <React.Fragment>
-            <Dialog open={openEdit} onClose={handleClose} >
+            <BootstrapDialog
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={openEdit}
+            >
                 <Box sx={{ mt: "2rem" }}>
                     <PageTitleComponent title={titleDialog} titleFontSize="28pt" />
-
+                    <IconButton
+                        aria-label="close"
+                        onClick={handleClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                 </Box>
+
                 <DialogContent>
-                    <DialogContentText>
+                    <DialogContentText sx={{ pl: "1rem" }}>
                         {dialogTextDescription}
                     </DialogContentText>
-                    <VideoForm />
+                    <VideoForm videoInfo={videoInfo} URL={URL} VideoID={VideoID} UserID={UserID} setOpenEdit={setOpenEdit} />
                 </DialogContent>
-                <DialogActions>
-                    <MyButton template="pink" onClick={handleClose} children="Close" variant="contained" />
-                    <MyButton template="yellow" onClick={handleClose} children="Submit" variant="outlined" />
-                </DialogActions>
-            </Dialog>
+            </BootstrapDialog>
         </React.Fragment>
     );
 }
