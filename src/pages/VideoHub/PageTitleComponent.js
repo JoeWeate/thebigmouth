@@ -1,7 +1,6 @@
-
 import { Grid, Typography } from "@mui/material";
 
-const PageTitleComponent = ({ title, fontSize }) => {
+const PageTitleComponent = ({ title, titleFontSize }) => {
 
     const lowerCaseTitle = title.toLowerCase();
     const firstVideoIndex = lowerCaseTitle.indexOf("video");
@@ -14,7 +13,7 @@ const PageTitleComponent = ({ title, fontSize }) => {
                     textAlign: "center",
                     textTransform: "uppercase",
                     fontWeight: "600",
-                    fontSize: { lg: `${fontSize}`, sm: "40pt", xs: "20pt" },
+                    fontSize: { lg: `${titleFontSize}`, sm: "40pt", xs: "20pt" },
                 }}
             >
                 {firstVideoIndex !== -1 && (

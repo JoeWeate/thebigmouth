@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Dialog, DialogContentText, DialogContent, DialogActions, Box } from "@mui/material";
-import PageTitleComponent from '../../pages/dummyHomePage/PageTitleComponent';
+import PageTitleComponent from "../../pages/VideoHub/PageTitleComponent"
 import MyButton from '../Button';
-// import VideoForm from "./pages/VideoUpload/VideoForm";
+import VideoForm from "../../pages/VideoUpload/VideoForm";
 
 const DialogWindow = ({ openEdit, handleClose, titleDialog, dialogTextDescription }) => {
 
@@ -17,7 +17,7 @@ const DialogWindow = ({ openEdit, handleClose, titleDialog, dialogTextDescriptio
                     <DialogContentText>
                         {dialogTextDescription}
                     </DialogContentText>
-                    {/* <VideoForm /> */}
+                    <VideoForm />
                 </DialogContent>
                 <DialogActions>
                     <MyButton template="pink" onClick={handleClose} children="Close" variant="contained" />

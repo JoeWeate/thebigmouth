@@ -9,6 +9,7 @@ import Home from "./pages/HomePage";
 import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
+
 import Theme from "./theme";
 import App from "./App";
 import PostAuthentication from "./components/PostAuthentication";
