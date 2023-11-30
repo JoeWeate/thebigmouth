@@ -5,8 +5,8 @@ import TopCover from "./TopCover";
 
 
 
-const PendingVideo = ({ video }) => {
-    const { videoUrl, state, videoImg, ...videoInfo } = video;
+const PendingVideo = ({ video, state }) => {
+    const { videoUrl, videoImg, ...videoInfo } = video;
     const maxWidth = "500px";
 
     return (
