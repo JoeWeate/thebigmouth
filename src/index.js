@@ -14,7 +14,7 @@ import App from "./App";
 import PostAuthentication from "./components/PostAuthentication";
 import reportWebVitals from "./reportWebVitals";
 import Episode from "./pages/EpisodePage";
-
+import VideoUpload from "./pages/VideoUpload/VideoUpload";
 import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import VideoHub from "./pages/VideoHub";
@@ -58,10 +58,13 @@ root.render(
               />
               <Route path="login" element={<PostAuthentication />} />
               <Route path="videohub" element={<VideoHub />}></Route>
+              <Route path="videoupload" element={<VideoUpload />}></Route>
+
               <Route path="dashboard" element={<Dashboard />}></Route>
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
             </Route>
+            s
           </Routes>
         </BrowserRouter>
       </Suspense>
