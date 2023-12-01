@@ -150,7 +150,7 @@ export const irynaVideoMock =   {
     "VideoID": "0eb0bbe7-a822-4499-a8e0-6cc7a498e7e",
     "Description": "Sample Video Description",
     "ShortDescription": "Sample Video Description",
-    "State": "pending",
+    "State": "inReview",
     "Messages": [
         "Message 1",
         "Message 2"

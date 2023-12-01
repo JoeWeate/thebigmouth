@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {apiUpdateVideo} from "../api/videos";
+import {apiUpdateVideo, uploadVideo} from "../api/videos";
 import Snackbar from "../components/Snackbar";
 import {ACTION_NAME} from "../utils/constants";
 import {validateChangeState} from "../utils/validateChangeState";
@@ -9,7 +9,7 @@ import {BUTTON_TEMPLATE, BUTTON_VARIANT} from "./Button";
 
 
 export const VIDEO_ACTION_BUTTONS = {
-    [ACTION_NAME.MOVE_TO_PENDING]: {
+    [ACTION_NAME.SEND_FOR_REVIEW]: {
         label: "SEND",
         template: BUTTON_TEMPLATE.YELLOW,
         variant: BUTTON_VARIANT.OUTLINED,
@@ -25,7 +25,7 @@ export const VIDEO_ACTION_BUTTONS = {
         variant: BUTTON_VARIANT.CONTAINED,
     },
     [ACTION_NAME.EDIT]: {
-        label: "EDIT",
+        label: "UPDATE",
         template: BUTTON_TEMPLATE.YELLOW,
         variant: BUTTON_VARIANT.CONTAINED,
     },
@@ -50,7 +50,7 @@ export const VIDEO_ACTION_BUTTONS = {
         variant: BUTTON_VARIANT.CONTAINED,
     },
 }
-const VideoActionButton = (props) => {
+const UpdateVideoStateButton = (props) => {
     const {videoData, action} = props;
     const { userRole } = useContext(MyContext);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -72,16 +72,20 @@ const VideoActionButton = (props) => {
     };
 
     const handleClick = () => {
-        if(action === ACTION_NAME.UPLOAD){
-            console.log('move to page to upload form')
-        } else if(action === ACTION_NAME.EDIT){
-            console.log('first need to go somewhere to edit')
-        } else if(action === ACTION_NAME.DELETE){
-            console.log('add delete confirmation and axios request')
-        } else {
-            const nextState = validateChangeState({videoData, action, userRole});
-            console.log({curState: videoData.State, action, nextState})
-            if(nextState) {apiUpdateVideo({...videoData, State: nextState}, handleSnackbar)};
+        const nextState = validateChangeState({videoData, action, userRole});
+        console.log({curState: videoData.State, action, nextState})
+        if(nextState){
+            if(action === ACTION_NAME.UPLOAD){
+                uploadVideo({...videoData, State:nextState}, handleSnackbar).then(() => {
+                    console.log('video uploaded')
+                    //navigate to somewhere
+                });
+            } else if(action === ACTION_NAME.DELETE){
+                console.log('add delete confirmation and axios request')
+                //send axios request to delete video
+            } else {
+                apiUpdateVideo({...videoData, State: nextState}, handleSnackbar);
+            }
         }
     };
 
@@ -97,4 +101,4 @@ const VideoActionButton = (props) => {
     );
 }
 
-export default VideoActionButton;
+export default UpdateVideoStateButton;

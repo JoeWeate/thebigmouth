@@ -31,50 +31,44 @@ export const VIDEO_STATES = [
     VIDEO_STATE.APPROVED,
     VIDEO_STATE.BLOCKED
 ]
-export const USER_ACTIONS = [
-    {//POST
-        action: ACTION_NAME.UPLOAD,
-        currentState: null,
-        nextSate: VIDEO_STATE.DRAFT
+export const VIDEO_STATE_UPDATE_ACTIONS = {
+    [USER_ROLE.USER] : {
+        [ACTION_NAME.UPLOAD]: {
+            validate: (currentState) => currentState === undefined,
+            nextSate: VIDEO_STATE.DRAFT
+        },
+        [ACTION_NAME.SEND_FOR_REVIEW]: {//PUT
+            validate: (currentState) => currentState === VIDEO_STATE.DRAFT,
+            nextSate: VIDEO_STATE.IN_REVIEW,
+        },
+        [ACTION_NAME.EDIT]:{//PUT
+            validate: (currentState) => currentState === VIDEO_STATE.DRAFT,
+            nextSate: VIDEO_STATE.DRAFT,
+        },
+        [ACTION_NAME.DELETE]:{//DELETE
+            validate: (currentState) => currentState === VIDEO_STATE.DRAFT,
+            nextSate: null,
+        },
+        [ACTION_NAME.MOVE_TO_DRAFT]:{//PUT
+            validate: (currentState) => currentState === VIDEO_STATE.IN_REVIEW || currentState === VIDEO_STATE.APPROVED,
+            nextSate: VIDEO_STATE.DRAFT
+        }
     },
-    {//PUT
-        action: ACTION_NAME.SEND_FOR_REVIEW,
-        currentState: VIDEO_STATE.DRAFT,
-        nextSate: VIDEO_STATE.IN_REVIEW,
-    },
-    {//PUT
-        action: ACTION_NAME.EDIT,
-        currentState: VIDEO_STATE.DRAFT,
-        nextSate: VIDEO_STATE.DRAFT,
-    },
-    {//DELETE
-        action: ACTION_NAME.DELETE,
-        currentState: VIDEO_STATE.DRAFT,
-        nextSate: null,
-    },
-    {//PUT
-        action: ACTION_NAME.MOVE_TO_DRAFT,
-        currentState: VIDEO_STATE.IN_REVIEW || VIDEO_STATE.APPROVED,
-        nextSate: VIDEO_STATE.DRAFT
+    [USER_ROLE.ADMIN] : {
+        [ACTION_NAME.APPROVE]:{//PUT
+            validate: (currentState) => currentState === VIDEO_STATE.IN_REVIEW,
+            nextSate: VIDEO_STATE.APPROVED
+        },
+        [ACTION_NAME.REJECT]:{//PUT
+            validate: (currentState) => currentState ===  VIDEO_STATE.APPROVED || currentState === VIDEO_STATE.IN_REVIEW,
+            nextSate: VIDEO_STATE.DRAFT//with rejection message
+        },
+        [ACTION_NAME.BLOCK]:{//PUT
+            validate: (currentState) => currentState ===  VIDEO_STATE.APPROVED || currentState === VIDEO_STATE.IN_REVIEW,
+            nextSate: VIDEO_STATE.BLOCKED,
+        },
     }
- ]
-export const ADMIN_ACTIONS = [
-    {//PUT
-        action: ACTION_NAME.APPROVE,
-        currentState: VIDEO_STATE.IN_REVIEW,
-        nextSate: VIDEO_STATE.APPROVED
-    },
-    {//PUT
-        action: ACTION_NAME.REJECT,
-        currentState: VIDEO_STATE.APPROVED || VIDEO_STATE.IN_REVIEW,
-        nextSate: VIDEO_STATE.DRAFT//with rejection message
-    },
-    {//PUT
-        action: ACTION_NAME.BLOCK,
-        currentState: VIDEO_STATE.APPROVED || VIDEO_STATE.IN_REVIEW,
-        nextSate: VIDEO_STATE.BLOCKED,
-    },
-];
+}
 
 export const USER_PAGES = [ //USER PAGES IN DASHBOARD
     {
