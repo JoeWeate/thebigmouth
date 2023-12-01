@@ -5,7 +5,7 @@ export const USER_ROLE = {
 
 export const VIDEO_STATE = {
     DRAFT: 'draft', //[USER: prevState === null (just uploaded)],
-    PENDING: 'pending', //[USER: prevState === DRAFT, ADMIN: prevState === null]
+    IN_REVIEW: 'inReview', //[USER: prevState === DRAFT, ADMIN: prevState === null]
     APPROVED: 'approved',//[USER: prevState === PENDING, ADMIN: prevState === PENDING]
     BLOCKED: 'blocked',//[USER: prevState === PENDING, ADMIN: prevState === PENDING]
 }
@@ -21,10 +21,16 @@ export const ACTION_NAME = {
     BLOCK: 'block',
     EDIT: 'edit',
     DELETE: 'delete',
-    MOVE_TO_PENDING: 'moveToPending',
+    SEND_FOR_REVIEW: 'sendForReview',
     MOVE_TO_DRAFT: 'moveToDraft',
 }
 
+export const VIDEO_STATES = [
+    VIDEO_STATE.DRAFT,
+    VIDEO_STATE.IN_REVIEW,
+    VIDEO_STATE.APPROVED,
+    VIDEO_STATE.BLOCKED
+]
 export const USER_ACTIONS = [
     {//POST
         action: ACTION_NAME.UPLOAD,
@@ -32,9 +38,9 @@ export const USER_ACTIONS = [
         nextSate: VIDEO_STATE.DRAFT
     },
     {//PUT
-        action: ACTION_NAME.MOVE_TO_PENDING,
+        action: ACTION_NAME.SEND_FOR_REVIEW,
         currentState: VIDEO_STATE.DRAFT,
-        nextSate: VIDEO_STATE.PENDING,
+        nextSate: VIDEO_STATE.IN_REVIEW,
     },
     {//PUT
         action: ACTION_NAME.EDIT,
@@ -44,28 +50,28 @@ export const USER_ACTIONS = [
     {//DELETE
         action: ACTION_NAME.DELETE,
         currentState: VIDEO_STATE.DRAFT,
-        nextSate: null,//do we keep it in DB?
+        nextSate: null,
     },
     {//PUT
         action: ACTION_NAME.MOVE_TO_DRAFT,
-        currentState: VIDEO_STATE.PENDING || VIDEO_STATE.APPROVED,
+        currentState: VIDEO_STATE.IN_REVIEW || VIDEO_STATE.APPROVED,
         nextSate: VIDEO_STATE.DRAFT
     }
  ]
 export const ADMIN_ACTIONS = [
     {//PUT
         action: ACTION_NAME.APPROVE,
-        currentState: VIDEO_STATE.PENDING,
+        currentState: VIDEO_STATE.IN_REVIEW,
         nextSate: VIDEO_STATE.APPROVED
     },
     {//PUT
         action: ACTION_NAME.REJECT,
-        currentState: VIDEO_STATE.APPROVED || VIDEO_STATE.PENDING,
+        currentState: VIDEO_STATE.APPROVED || VIDEO_STATE.IN_REVIEW,
         nextSate: VIDEO_STATE.DRAFT//with rejection message
     },
     {//PUT
         action: ACTION_NAME.BLOCK,
-        currentState: VIDEO_STATE.APPROVED || VIDEO_STATE.PENDING,
+        currentState: VIDEO_STATE.APPROVED || VIDEO_STATE.IN_REVIEW,
         nextSate: VIDEO_STATE.BLOCKED,
     },
 ];
@@ -81,7 +87,7 @@ export const USER_PAGES = [ //USER PAGES IN DASHBOARD
     },
     {
         page: 'Pendings',
-        videoState:  [VIDEO_STATE.PENDING]
+        videoState:  [VIDEO_STATE.IN_REVIEW]
     },
     {
         page: 'Restricted',
@@ -92,7 +98,7 @@ export const USER_PAGES = [ //USER PAGES IN DASHBOARD
 export const ADMIN_PAGES = [//ADMIN PAGES IN DASHBOARD
     {
         page: 'Waiting list',//all videos with filter by user????
-        videoState: [VIDEO_STATE.PENDING]
+        videoState: [VIDEO_STATE.IN_REVIEW]
     },
     {
         page: 'ALL videos',
