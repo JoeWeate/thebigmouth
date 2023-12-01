@@ -1,40 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Grid } from '@mui/material';
-import { Box, Avatar } from '@mui/material';
+import XRayMocks from '../api/mocks';
+import PosterComponent from './PosterComponent';
 
 const VIDEO_SRC = 'https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/multimedia/longer_movie.mp4';
 
-const PosterComponent = ({ isFullScreen }) => {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        position: "absolute",
-        justifyContent: "center",
-        alignItems: "center",
-        margin: "0 auto",
-        bottom: 0,
-        left: 0,
-        maxWidth: isFullScreen ? "100%" : "640px",
-        height: "150px",
-        backgroundColor: "rgba(59, 59, 59, 0.7)",
-        border: "solid red 1px"
-      }}
-    >
-      <Grid container direction="row" lg={10} gap={4}>
-        <Grid item lg={2} sx={{ marginBottom: "5rem" }}>
-          <Avatar src="https://images.unsplash.com/photo-1580518337843-f959e992563b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWN0b3JzfGVufDB8fDB8fHww" sx={{ width: 104, height: 104, borderRadius: 1, border: "solid #E60077 1px" }}></Avatar>
-        </Grid>
-        <Grid item lg={9} sx={{ marginTop: "1.5rem" }}>
-          <Typography variant="h6">Andre Sebastian</Typography>
-          <Typography sx={{ fontSize: "10pt" }}>
-            We and our partners store and/or access information on a device, such as cookies and process personal data, such as unique identifiers
-          </Typography>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-};
+console.log(XRayMocks, XRayMocks)
 
 export default function VideoPlayer() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -73,7 +44,7 @@ export default function VideoPlayer() {
       }
 
     };
-    console.log("full-screen", isFullScreen)
+
     videoElement.addEventListener('timeupdate', onTimeUpdate);
     videoElement.addEventListener('play', onPlay);
     videoElement.addEventListener('pause', onPause);
@@ -96,10 +67,9 @@ export default function VideoPlayer() {
     console.log("currentTime:", currentTime);
 
     if (overlayId === "overlay-fullscreen") {
-      console.log("overlayId", overlayId)
-      overlay.style.display = (isFullScreen && !isPlaying && currentTime >= 521 && currentTime <= 562) ? 'none' : 'block';
+      overlay.style.display = (!isFullScreen && isPlaying ? 'block' : 'none')
     } else {
-      overlay.style.display = (isPlaying && currentTime >= 521 && currentTime <= 562) ? 'block' : 'none';
+      overlay.style.display = (isPlaying ? 'block' : 'none');
     }
   };
 
@@ -109,26 +79,11 @@ export default function VideoPlayer() {
       <Typography>Current Time: {currentTime}</Typography>
       <Typography>Duration Time: {duration}</Typography>
       <div id="overlay" className="overlay" onClick={toggleOverlay}>
-        {isPlaying ? null : <PosterComponent isFullScreen={isFullScreen} />}
+        {isPlaying ? null : <PosterComponent XRayMocks={XRayMocks} currentTime={currentTime} isFullScreen={isFullScreen} />}
       </div>
-      <div id="overlay-fullscreen" className="overlay-fullscreen" onClick={toggleOverlay} style={{
-        objectFit: 'contain',
-        userSelect: 'text',
-        position: 'fixed',
-        boxSizing: 'border-box',
-        minWidth: '0px',
-        maxWidth: 'none',
-        minHeight: '0px',
-        maxHeight: 'none',
-        width: '100%',
-        height: '100%',
-        transform: 'none',
-        inset: '0px',
-        margin: '0px',
-      }}>
-        {isFullScreen && !isPlaying && <PosterComponent isFullScreen={isFullScreen} />}
+      <div id="overlay-fullscreen" className="overlay-fullscreen" onClick={toggleOverlay}>
+        {isFullScreen && !isPlaying && <PosterComponent XRayMocks={XRayMocks} currentTime={currentTime} isFullScreen={isFullScreen} />}
       </div>
-
       <video
         id="video-active"
         width="640"
