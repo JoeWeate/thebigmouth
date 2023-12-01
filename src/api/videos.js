@@ -32,9 +32,10 @@ export const getAllVideoByUserID = (UserID) => {
     });
 };
 
-export const updateVideo = async ({ userId, videoId, data }) => {
+export const updateVideo = async ({ userID, videoID, data }) => {
   try {
-    const response = await api.put(`/videos/${userId}/${videoId}`, data);
+    const response = await api.put(`/videos/${userID}/${videoID}`, data);
+    console.log("data API", data)
     return response.data;
   } catch (error) {
     console.error("Error update the video:", error);

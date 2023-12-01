@@ -15,6 +15,7 @@ const isUrlValid = (url) => {
 
 
 const VideoForm = ({ videoInfo, URL, VideoID, UserID, setOpenEdit }) => {
+  console.log("videoInfo", videoInfo)
   const { user } = useAuth0();
   const theme = useTheme();
 
@@ -39,13 +40,15 @@ const VideoForm = ({ videoInfo, URL, VideoID, UserID, setOpenEdit }) => {
         shortDescription: videoInfo.ShortDescription || "",
         videoLink: URL || "",
         description: videoInfo.Description || "",
+        timestamp: videoInfo.Timestamp || "",
+        state: videoInfo.State || ""
       });
     } else {
       setData({
         title: "",
         shortDescription: "",
         videoLink: "",
-        description: "",
+        url: "",
       });
     }
   }, [videoInfo]);
@@ -59,12 +62,15 @@ const VideoForm = ({ videoInfo, URL, VideoID, UserID, setOpenEdit }) => {
 
   const handleEdit = async () => {
     console.log("Submitting form:", data);
+    console.log("VideoID:", VideoID);
+    console.log("UserID:", UserID);
 
     if (!isUrlValid(data.videoLink)) {
       console.error("Invalid URL");
       setFormErrors({ ...formErrors, videoLink: true });
       return;
     }
+
     const requiredFields = ["title", "description", "videoLink"];
     const newFormErrors = {};
     let isValid = true;
@@ -77,10 +83,11 @@ const VideoForm = ({ videoInfo, URL, VideoID, UserID, setOpenEdit }) => {
         newFormErrors[field] = false;
       }
     });
+
     setFormErrors(newFormErrors);
+
     if (isValid) {
       try {
-        console.log("Form data:", data);
         await updateVideo({ ...data, VideoID, UserID });
         setData({
           title: "",
@@ -92,8 +99,9 @@ const VideoForm = ({ videoInfo, URL, VideoID, UserID, setOpenEdit }) => {
         console.error("Error submitting form:", error);
       }
     }
-    setOpenEdit(false)
-  }
+    setOpenEdit(false);
+  };
+
 
 
   const handleSubmit = async () => {
