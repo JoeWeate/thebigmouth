@@ -1,6 +1,6 @@
 import configureAxios from "./configureAxios";
-const api = configureAxios({});
 import {VIDEO_DATA_KEYS} from "../utils/constants";
+const api = configureAxios({});
 
 export const uploadVideo = async (data) => {
   try {
