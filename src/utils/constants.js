@@ -4,10 +4,10 @@ export const USER_ROLE = {
 };
 
 export const VIDEO_STATE = {
-    DRAFT: 'draft', //[USER: prevState === null (just uploaded)],
+    DRAFT: 'draft', //[USER: prevState === null (just uploaded) || prevState === DRAFT (editing)],
     IN_REVIEW: 'inReview', //[USER: prevState === DRAFT, ADMIN: prevState === null]
-    APPROVED: 'approved',//[USER: prevState === PENDING, ADMIN: prevState === PENDING]
-    BLOCKED: 'blocked',//[USER: prevState === PENDING, ADMIN: prevState === PENDING]
+    APPROVED: 'approved',//[USER: prevState === IN_REVIEW, ADMIN: prevState === IN_REVIEW]
+    BLOCKED: 'blocked',//[USER: prevState === IN_REVIEW, ADMIN: prevState === IN_REVIEW]
 }
 
 //VIDEO_STATE.PENDING
