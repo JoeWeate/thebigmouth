@@ -31,3 +31,16 @@ export const getAllVideoByUserID = (UserID) => {
       console.log(error);
     });
 };
+
+export const apiDeleteVideo = (userId, videoId, successCallback, failureCallback) => {
+  return api
+      .delete(`/videos/${userId}/${videoId}`)
+      .then((data) => {
+        if(successCallback && typeof successCallback === 'function')successCallback()
+        return Promise.resolve(data);
+      })
+      .catch((error) => {
+        if(failureCallback && typeof failureCallback === 'function')failureCallback();
+        console.log(error);
+      });
+};
