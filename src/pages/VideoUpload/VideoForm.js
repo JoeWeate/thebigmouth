@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { Box, TextField, useTheme } from "@mui/material";
+import {
+  Box,
+  TextField,
+  useTheme,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import { uploadVideo } from "../../api/videos.js";
-
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 const isUrlValid = (url) => {
   const urlRegex =
     /^(https?:\/\/)?(?:www\.)?(vimeo\.com\/(\d+)|youtube\.com\/watch\?v=([a-zA-Z0-9_-]+))/;
@@ -19,6 +26,8 @@ const VideoForm = () => {
     shortDescription: "",
     videoLink: "",
     description: "",
+    file: null,
+    uploadType: "link", // Added uploadType to track user choice
   });
 
   const [formErrors, setFormErrors] = useState({
@@ -29,21 +38,43 @@ const VideoForm = () => {
   });
 
   const handleChange = (event) => {
-    setData({
-      ...data,
-      [event.target.name]: event.target.value,
-    });
+    console.log("Event:", event);
+
+    const { name, value, files } = event.target;
+    if (name === "uploadType") {
+      setData({
+        ...data,
+        uploadType: value,
+        file: null,
+        videoLink: "",
+      });
+    } else if (name === "file") {
+      setData({
+        ...data,
+        file: files[0],
+        videoLink: "",
+      });
+    } else {
+      setData({
+        ...data,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async () => {
-    console.log("Submitting form:", data);
-
-    if (!isUrlValid(data.videoLink)) {
-      console.error("Invalid URL");
+    if (data.uploadType === "link" && !isUrlValid(data.videoLink)) {
       setFormErrors({ ...formErrors, videoLink: true });
       return;
     }
-    const requiredFields = ["title", "description", "videoLink"];
+
+    const requiredFields = ["title", "description"];
+    if (data.uploadType === "link") {
+      requiredFields.push("videoLink");
+    } else {
+      requiredFields.push("file");
+    }
+
     const newFormErrors = {};
     let isValid = true;
 
@@ -68,6 +99,8 @@ const VideoForm = () => {
           shortDescription: "",
           videoLink: "",
           description: "",
+          file: null,
+          uploadType: "link",
         });
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -114,36 +147,6 @@ const VideoForm = () => {
           style: {
             ...theme.overrides.MuiOutlinedInput.input,
             backgroundColor: "#5D5D5D",
-          },
-        }}
-      />
-
-      <TextField
-        fullWidth
-        placeholder="Add your YouTube or Vimeo URL"
-        label="Link"
-        id="VideoLink"
-        name="videoLink"
-        value={data.videoLink}
-        onChange={handleChange}
-        margin="normal"
-        required
-        error={formErrors.videoLink}
-        helperText={
-          formErrors.videoLink && "Provide a valid YouTube or Vimeo url."
-        }
-        InputLabelProps={{
-          style: {
-            ...theme.overrides.MuiOutlinedInput.root,
-          },
-        }}
-        InputProps={{
-          style: {
-            ...theme.overrides.MuiOutlinedInput.input,
-            backgroundColor: "rgba(235, 3, 143, 0.6)",
-            borderColor: formErrors.videoLink
-              ? "#EB038F"
-              : theme.overrides.MuiOutlinedInput.input.borderColor,
           },
         }}
       />
@@ -195,6 +198,107 @@ const VideoForm = () => {
           },
         }}
       />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <InputLabel
+          id="uploadTypeLabel"
+          sx={{ color: "white", padding: "0.5rem" }}
+        >
+          Choose how you want to upload your video :
+        </InputLabel>
+        <Select
+          labelId="uploadTypeLabel"
+          id="uploadType"
+          value={data.uploadType}
+          onChange={handleChange}
+          label="Upload Type"
+        >
+          <MenuItem value="link">Video Link</MenuItem>
+          <MenuItem value="file">File Upload</MenuItem>
+        </Select>
+      </Box>
+      {data.uploadType === "file" ? (
+        <Box
+          sx={{
+            position: "relative",
+            display: data.uploadType === "file" ? "block" : "none",
+          }}
+        >
+          <input
+            accept="video/*"
+            type="file"
+            onChange={(event) =>
+              handleChange({
+                target: { name: "file", files: [event.target.files[0]] },
+              })
+            }
+            name="file"
+            style={{
+              display: "block",
+              opacity: 1,
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              cursor: "pointer",
+            }}
+            id="fileInput"
+          />
+          <label htmlFor="fileInput">
+            <Button
+              component="span"
+              template="pink"
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+              }}
+            >
+              Upload
+            </Button>
+          </label>
+        </Box>
+      ) : (
+        <TextField
+          fullWidth
+          placeholder="Add your YouTube or Vimeo URL"
+          label="Link"
+          id="VideoLink"
+          name="videoLink"
+          value={data.videoLink}
+          onChange={handleChange}
+          margin="normal"
+          required
+          error={formErrors.videoLink}
+          helperText={
+            formErrors.videoLink && "Provide a valid YouTube or Vimeo url."
+          }
+          InputLabelProps={{
+            style: {
+              ...theme.overrides.MuiOutlinedInput.root,
+            },
+          }}
+          InputProps={{
+            style: {
+              ...theme.overrides.MuiOutlinedInput.input,
+              backgroundColor: "rgba(235, 3, 143, 0.6)",
+              borderColor: formErrors.videoLink
+                ? "#EB038F"
+                : theme.overrides.MuiOutlinedInput.input.borderColor,
+              display: data.uploadType === "file" ? "none" : "block",
+            },
+          }}
+        />
+      )}
       <Button template="yellow" variant="outlined" onClick={handleSubmit}>
         Submit
       </Button>
