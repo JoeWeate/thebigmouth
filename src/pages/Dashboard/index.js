@@ -108,7 +108,7 @@ function Dashboard() {
         ];
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", zIndex: 0, width: "100%" }}>
+    <Box sx={{ display: "flex", height: "100vh", zIndex: 0 }}>
       <Drawer
         PaperProps={{
           sx: {
@@ -184,7 +184,11 @@ function Dashboard() {
               )}
             </ListItemIcon>
           </ListItem>
-          <ListItem button key="user-hub" onClick={() => navigate("/videohub")}>
+          <ListItem
+            button
+            key="user-hub"
+            onClick={() => navigate("/dummyHomePage")}
+          >
             <ListItemIcon
               sx={{
                 minWidth: collapsed ? "auto" : "40px",

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-const VideoUpload = () => {
+const VideoUploadPage = () => {
   return (
     <Grid
       container
@@ -53,4 +53,4 @@ const VideoUpload = () => {
   );
 };
 
-export default VideoUpload;
+export default VideoUploadPage;
