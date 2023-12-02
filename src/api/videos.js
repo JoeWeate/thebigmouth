@@ -38,11 +38,23 @@ export const apiUpdateVideo = (updatedVideo, handleSnackbar) => {
     return api
         .put(`/videos/${userId}/${videoId}`, updatedVideo)
         .then((data) => {
-            handleSnackbar("success");
+          if(handleSnackbar && typeof handleSnackbar === 'function') handleSnackbar("success")
             return Promise.resolve(data.data);
         })
         .catch((error) => {
             console.log("putUpdatedVideo", {error});
-            handleSnackbar("error");
+          if(handleSnackbar && typeof handleSnackbar === 'function') handleSnackbar("error")
         });
+};
+export const apiDeleteVideo = (userId, videoId, successCallback, failureCallback) => {
+  return api
+      .delete(`/videos/${userId}/${videoId}`)
+      .then((data) => {
+        if(successCallback && typeof successCallback === 'function')successCallback()
+        return Promise.resolve(data);
+      })
+      .catch((error) => {
+        if(failureCallback && typeof failureCallback === 'function')failureCallback();
+        console.log(error);
+      });
 };

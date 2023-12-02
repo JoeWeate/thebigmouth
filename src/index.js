@@ -64,7 +64,6 @@ root.render(
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
             </Route>
-            s
           </Routes>
         </BrowserRouter>
       </Suspense>
