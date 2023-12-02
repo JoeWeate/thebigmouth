@@ -2,13 +2,24 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/system";
 
+
+export const BUTTON_TEMPLATE = {
+    PINK: "pink",
+    YELLOW: "yellow",
+}
+
+export const BUTTON_VARIANT = {
+    OUTLINED: "outlined",
+    CONTAINED: "contained",
+}
+
 const getColor = ({ template, theme }) => {
   const colorMap = {
-    pink: {
+      [BUTTON_TEMPLATE.PINK]: {
       bg: theme.palette.pink.main,
       color: "white",
     },
-    yellow: {
+      [BUTTON_TEMPLATE.YELLOW]: {
       bg: theme.palette.yellow.main,
       color: "black",
     },
@@ -18,10 +29,10 @@ const getColor = ({ template, theme }) => {
 
 const MyButton = ({ template, onClick, children, variant }) => {
   const theme = useTheme();
-  console.log(theme);
+
   const styles = getColor({ template, theme });
   const buttonStyles =
-    variant === "contained"
+    variant === BUTTON_VARIANT.CONTAINED
       ? {
           backgroundColor: styles.bg,
           fontSize: "12pt",
