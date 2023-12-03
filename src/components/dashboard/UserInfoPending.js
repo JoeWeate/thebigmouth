@@ -6,7 +6,7 @@ import { useState } from "react";
 import DialogWindow from "./DialogWindow";
 import { isEmpty } from "lodash";
 
-const UserInfoPending = ({ videoInfo }) => {
+const UserInfoPending = ({ videoInfo, setUpdateData }) => {
 
     const theme = useTheme();
     const [openEdit, setOpenEdit] = useState(false);
@@ -40,7 +40,7 @@ const UserInfoPending = ({ videoInfo }) => {
                         {Description}
                     </Box>}
                     {(Messages && !isEmpty(Messages)) && <Box sx={{ padding: "1rem", border: "solid 1px", borderColor: theme.palette.pink.main, backgroundColor: "black", mt: "0.5rem", mb: "0.5rem" }}>
-                        {Messages[0]}
+                        {Messages}
                     </Box>}
                     {State === "rejected" &&
                         <>
@@ -48,14 +48,14 @@ const UserInfoPending = ({ videoInfo }) => {
                                 The video was restricted !
                             </Box>
                             <Box sx={{ padding: "1rem", border: "solid 1px", borderColor: theme.palette.pink.main, backgroundColor: "black", mt: "0.5rem", mb: "0.5rem" }}>
-                                {Messages[0]}
+                                {Messages}
                             </Box>
                             <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         </>
                     }
                     {State === "draft" && <>
                         <MyButton template="yellow" onClick={handleEditOpen} children="Edit" variant="contained" />
-                        {openEdit && <DialogWindow videoInfo={videoInfo} openEdit={openEdit} setOpenEdit={setOpenEdit} handleClose={handleClose} titleDialog="Edit the video details" dialogTextDescription={dialogTextDescription} />}
+                        {openEdit && <DialogWindow setUpdateData={setUpdateData} videoInfo={videoInfo} openEdit={openEdit} setOpenEdit={setOpenEdit} handleClose={handleClose} titleDialog="Edit the video details" dialogTextDescription={dialogTextDescription} />}
                         <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         <MyButton template="yellow" onClick={handleSend} children="Send" variant="outlined" />
 

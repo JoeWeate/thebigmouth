@@ -33,6 +33,7 @@ function Dashboard() {
   const [videoState, setVideoState] = useState("loading");
   const [collapsed, setCollapsed] = useState(false);
   const [role, setRole] = useState("");
+  const [updateData, setUpdateData] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,14 +52,14 @@ function Dashboard() {
             userData.user.UserID
           );
           setVideoList(videosUserData.videos);
-          setVideoState("approved");
+          setVideoState("draft");
         }
       } catch (error) {
         console.error({ error });
       }
     };
     fetchData();
-  }, [isLoading, user]);
+  }, [isLoading, user, updateData]);
 
   useEffect(() => {
     function handleResize() {
@@ -244,7 +245,7 @@ function Dashboard() {
           <CircularProgress />
         ) : (
           <VideosPage
-            state={videoState}
+            state={videoState} setUpdateData={setUpdateData}
             data={videoList.filter((video) => video.State === videoState)}
           />
         )}

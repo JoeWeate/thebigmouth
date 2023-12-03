@@ -19,7 +19,6 @@ import VideoUpload from "./pages/VideoUpload/VideoUpload";
 import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import VideoHub from "./pages/VideoHub";
-import VideoUploadPage from "./pages/VideoUpload";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

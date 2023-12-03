@@ -4,7 +4,7 @@ import ApprovedVideo from "../../components/dashboard/ApprovedVideo";
 import { Grid, Typography } from "@mui/material"
 
 
-const VideosPage = ({ state, data }) => {
+const VideosPage = ({ state, data, setUpdateData }) => {
   console.log("state", state)
   console.log("data", data)
   return (
@@ -16,7 +16,7 @@ const VideosPage = ({ state, data }) => {
       <Typography variant="h5">{state}</Typography>
       {state !== "approved" && data && data.length > 0 ? (
         data.map((video) => (
-          <PendingVideo key={video.id} video={video} state={state} />
+          <PendingVideo key={video.id} video={video} setUpdateData={setUpdateData} state={state} />
         ))
       ) : state !== "approved" && data && data.length === 0 ? (
         <Typography>

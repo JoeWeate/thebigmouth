@@ -4,6 +4,7 @@ import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import { uploadVideo, updateVideo } from "../../api/videos.js";
 import { useNavigate } from 'react-router-dom';
+import { getAllVideoByUserID } from "../../api/videos.js";
 
 
 const isUrlValid = (url) => {
@@ -14,7 +15,7 @@ const isUrlValid = (url) => {
 };
 
 
-const VideoForm = ({ initialData, setOpenEdit }) => {
+const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
 
   const navigate = useNavigate();
   const { user } = useAuth0();
@@ -60,6 +61,7 @@ const VideoForm = ({ initialData, setOpenEdit }) => {
       try {
         if (initialData) {
           await updateVideo({ data });
+          setUpdateData((updateData) => updateData + 1)
           setOpenEdit(false);
         } else {
           await uploadVideo({ ...data, userId: user.sub });

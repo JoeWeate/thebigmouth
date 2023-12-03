@@ -36,13 +36,9 @@ export const getAllVideoByUserID = (UserID) => {
 
 
 export const updateVideo = async ({ data }) => {
-  console.log("data API", data)
-  //need to creating an array with a dummy value "message" to make lambda put working
-  const newData = {
-    ...data, Messages: ["message"]
-  }
+
   try {
-    const response = await api.put(`videos/${data.UserID}/${data.VideoID}`, newData);
+    const response = await api.put(`videos/${data.UserID}/${data.VideoID}`, data);
     return response.data;
   } catch (error) {
     console.error("Error update the video:", error);
