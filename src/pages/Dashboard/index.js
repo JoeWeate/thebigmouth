@@ -75,37 +75,37 @@ function Dashboard() {
   const menuItems =
     role === "Admin"
       ? [
-          { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
-          {
-            icon: <OndemandVideoIcon />,
-            text: "All User Videos",
-            state: "approved",
-          },
-          {
-            icon: <HourglassBottomIcon />,
-            text: "Waiting List",
-            state: "pending",
-          },
-          {
-            icon: <DoNotDisturbOnIcon />,
-            text: "Restricted",
-            state: "rejected",
-          },
-        ]
+        { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
+        {
+          icon: <OndemandVideoIcon />,
+          text: "All User Videos",
+          state: "approved",
+        },
+        {
+          icon: <HourglassBottomIcon />,
+          text: "Waiting List",
+          state: "pending",
+        },
+        {
+          icon: <DoNotDisturbOnIcon />,
+          text: "Restricted",
+          state: "rejected",
+        },
+      ]
       : [
-          {
-            icon: <OndemandVideoIcon />,
-            text: "All My Live Videos",
-            state: "approved",
-          },
-          { icon: <EditNoteIcon />, text: "Draft", state: "draft" },
-          { icon: <HourglassBottomIcon />, text: "Pending", state: "pending" },
-          {
-            icon: <DoNotDisturbOnIcon />,
-            text: "Restricted",
-            state: "rejected",
-          },
-        ];
+        {
+          icon: <OndemandVideoIcon />,
+          text: "All My Live Videos",
+          state: "approved",
+        },
+        { icon: <EditNoteIcon />, text: "Draft", state: "draft" },
+        { icon: <HourglassBottomIcon />, text: "Pending", state: "pending" },
+        {
+          icon: <DoNotDisturbOnIcon />,
+          text: "Restricted",
+          state: "rejected",
+        },
+      ];
 
   return (
     <Box sx={{ display: "flex", height: "100vh", zIndex: 0, width: "100%" }}>
@@ -206,7 +206,9 @@ function Dashboard() {
             <ListItem
               button
               key={index}
-              onClick={() => handleMenuClick(item.state)}
+              onClick={() =>
+                handleMenuClick(item.state)
+              }
             >
               <ListItemIcon
                 sx={{

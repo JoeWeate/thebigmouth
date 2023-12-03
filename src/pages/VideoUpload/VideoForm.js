@@ -3,7 +3,7 @@ import { Box, TextField, useTheme } from "@mui/material";
 import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import { uploadVideo, updateVideo } from "../../api/videos.js";
-
+import { useNavigate } from 'react-router-dom';
 
 
 const isUrlValid = (url) => {
@@ -15,12 +15,11 @@ const isUrlValid = (url) => {
 
 
 const VideoForm = ({ initialData, setOpenEdit }) => {
-  console.log("initialData", initialData)
+
+  const navigate = useNavigate();
   const { user } = useAuth0();
   const theme = useTheme();
-
   const [data, setData] = useState(initialData || {});
-
   const [formErrors, setFormErrors] = useState({
     Title: false,
     ShortDescription: false,
@@ -28,52 +27,12 @@ const VideoForm = ({ initialData, setOpenEdit }) => {
     Description: false,
   });
 
-
-
   const handleChange = (key) => (event) => {
     setData({
       ...data,
       [key]: event.target.value,
     });
   };
-
-  // const handleEdit = async () => {
-  //   console.log("Submitting form:", data);
-
-
-  //   if (!isUrlValid(data.URL)) {
-  //     console.error("Invalid URL");
-  //     setFormErrors({ ...formErrors, URL: true });
-  //     return;
-  //   }
-
-  //   const requiredFields = ["Title", "Description", "URL"];
-  //   const newFormErrors = {};
-  //   let isValid = true;
-
-  //   requiredFields.forEach((field) => {
-  //     if (!data[field]) {
-  //       newFormErrors[field] = true;
-  //       isValid = false;
-  //     } else {
-  //       newFormErrors[field] = false;
-  //     }
-  //   });
-
-  //   setFormErrors(newFormErrors);
-
-  //   if (isValid) {
-  //     try {
-
-
-  //     } catch (error) {
-  //       console.error("Error submitting form:", error);
-  //     }
-  //   }
-
-  // };
-
-
 
   const handleSubmit = async () => {
     console.log("Submitting form:", data);
@@ -97,7 +56,6 @@ const VideoForm = ({ initialData, setOpenEdit }) => {
     });
 
     setFormErrors(newFormErrors);
-
     if (isValid) {
       try {
         if (initialData) {
@@ -105,21 +63,14 @@ const VideoForm = ({ initialData, setOpenEdit }) => {
           setOpenEdit(false);
         } else {
           await uploadVideo({ ...data, userId: user.sub });
-          setData({
-            // title: "",
-            // shortDescription: "",
-            // videoLink: "",
-            // description: "",
-            // state: "draft",
-            // timestamp: "",
-            // messages: "",
-          });
+          navigate("/dashboard")
         }
       } catch (error) {
         console.error("Error submitting form:", error);
       }
     }
   };
+
   return (
     <Box
       component="form"

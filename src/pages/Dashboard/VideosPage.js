@@ -24,10 +24,10 @@ const VideosPage = ({ state, data }) => {
         </Typography>
       ) : (
         <Grid container sx={{ gap: { lg: 1, md: 0 } }}>
-          {data.map((video) => (
-            <Grid item lg={5} md={11} xs={11} sx={{ padding: "1rem" }} key={video.id}>
-              <ApprovedVideo video={video} withVideoInfo={true} maxWidth="600px" />
-            </Grid>
+          {data.map((video) =>
+          (<Grid item lg={5} md={11} xs={11} sx={{ padding: "1rem" }} key={video.id}>
+            <ApprovedVideo video={video} withVideoInfo={true} maxWidth="600px" />
+          </Grid>
           ))}
         </Grid>
       )}

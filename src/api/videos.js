@@ -36,7 +36,9 @@ export const getAllVideoByUserID = (UserID) => {
 
 export const updateVideo = async ({ data }) => {
   console.log("data API", data)
-  const newData = { ...data, Messages: ["message"] }
+  const newData = {
+    ...data, Messages: ["message"]
+  }
   try {
     const response = await api.put(`videos/${data.UserID}/${data.VideoID}`, newData);
     return response.data;

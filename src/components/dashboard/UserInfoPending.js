@@ -13,8 +13,8 @@ const UserInfoPending = ({ videoInfo }) => {
     const dialogTextDescription = "If you would like to make changes to the details of the video you've shared, please fill in the form."
 
     const { Title, Description, State, Timestamp, Messages } = videoInfo;
-    const date = new Date(Timestamp);
-    const formattedDate = date.toLocaleString();
+    const date = new Date(parseFloat(Timestamp))
+
     const handleDelete = () => {
     }
 
@@ -66,12 +66,12 @@ const UserInfoPending = ({ videoInfo }) => {
             <Grid item sx={{ bottom: 0 }}>
                 <Typography>
                     {State !== "rejected" ? <Box sx={{ color: theme.palette.yellow.main }}>
-                        {formattedDate}
+                        {date.toLocaleString()}
                     </Box> :
                         <Grid container direction="row" justifyContent="space-between">
                             <Box>author</Box>
                             <Box sx={{ color: theme.palette.yellow.main }}>
-                                {formattedDate}
+                                {date.toLocaleString()}
                             </Box>
                         </Grid>
                     }
