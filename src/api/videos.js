@@ -36,6 +36,7 @@ export const getAllVideoByUserID = (UserID) => {
 
 export const updateVideo = async ({ data }) => {
   console.log("data API", data)
+  //need to creating an array with a dummy value "message" to make lambda put working
   const newData = {
     ...data, Messages: ["message"]
   }
