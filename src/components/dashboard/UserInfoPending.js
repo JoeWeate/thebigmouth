@@ -53,7 +53,6 @@ const UserInfoPending = ({ videoInfo }) => {
                             <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         </>
                     }
-
                     {State === "draft" && <>
                         <MyButton template="yellow" onClick={handleEditOpen} children="Edit" variant="contained" />
                         {openEdit && <DialogWindow videoInfo={videoInfo} openEdit={openEdit} setOpenEdit={setOpenEdit} handleClose={handleClose} titleDialog="Edit the video details" dialogTextDescription={dialogTextDescription} />}
