@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Box, TextField, useTheme } from "@mui/material";
 import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
-import { uploadVideo, updateVideo } from "../../api/videos.js";
+import { uploadVideo, apiUpdateVideo } from "../../api/videos.js";
 import { useNavigate } from 'react-router-dom';
-import { getAllVideoByUserID } from "../../api/videos.js";
 
 
 const isUrlValid = (url) => {
@@ -27,6 +26,7 @@ const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
     URL: false,
     Description: false,
   });
+
 
   const handleChange = (key) => (event) => {
     setData({
@@ -57,10 +57,12 @@ const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
     });
 
     setFormErrors(newFormErrors);
+    console.log("dataAPI", data)
+    console.log("isValid", isValid)
     if (isValid) {
       try {
         if (initialData) {
-          await updateVideo({ data });
+          await apiUpdateVideo(data)
           setUpdateData((updateData) => updateData + 1)
           setOpenEdit(false);
         } else {

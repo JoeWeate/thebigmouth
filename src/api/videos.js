@@ -34,32 +34,25 @@ export const getAllVideoByUserID = (UserID) => {
     });
 };
 
-
-export const updateVideo = async ({ data }) => {
-
-  try {
-    const response = await api.put(`videos/${data.UserID}/${data.VideoID}`, data);
-    return response.data;
-  } catch (error) {
-    console.error("Error update the video:", error);
-    throw new Error("Failed to update the video.");
-  }
-}
-
-export const apiUpdateVideo = (updatedVideo, handleSnackbar) => {
+export const apiUpdateVideo = (data, handleSnackbar) => {
+  let updatedVideo = data
   const videoId = updatedVideo[VIDEO_DATA_KEYS.VIDEO_ID];
+  console.log("!!!!!", updatedVideo[VIDEO_DATA_KEYS.VIDEO_ID])
   const userId = updatedVideo[VIDEO_DATA_KEYS.USER_ID];
+  console.log("!!!!!", userId)
+  console.log("!!!!!", updatedVideo)
   return api
     .put(`/videos/${userId}/${videoId}`, updatedVideo)
-    .then((data) => {
+    .then((response) => {
       if (handleSnackbar && typeof handleSnackbar === 'function') handleSnackbar("success")
-      return Promise.resolve(data.data);
+      return Promise.resolve(response.data);
     })
     .catch((error) => {
       console.log("putUpdatedVideo", { error });
       if (handleSnackbar && typeof handleSnackbar === 'function') handleSnackbar("error")
     });
 };
+
 
 export const apiDeleteVideo = (userId, videoId, successCallback, failureCallback) => {
   return api
