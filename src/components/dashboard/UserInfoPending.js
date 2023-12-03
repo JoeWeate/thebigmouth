@@ -7,7 +7,7 @@ import DialogWindow from "./DialogWindow";
 import { isEmpty } from "lodash";
 
 const UserInfoPending = ({ videoInfo, setUpdateData, userRole }) => {
-
+    userRole = "Admin"
     const theme = useTheme();
     const [openEdit, setOpenEdit] = useState(false);
     const [openReject, setOpenReject] = useState(false)
@@ -77,7 +77,7 @@ const UserInfoPending = ({ videoInfo, setUpdateData, userRole }) => {
                     </>}
                     {(State === "draft" && userRole === "Admin") && <>
                         <MyButton template="pink" onClick={handleRejectWindowOpen} children="Reject" variant="contained" />
-                        {openReject && <DialogWindow setUpdateData={setUpdateData} videoInfo={videoInfo} setOpenReject={setOpenReject} openReject={openReject} handleClose={handleClose} titleDialog="Put reject message" dialogTextDescription={dialogTextDescriptionReject} />}
+                        {openReject && <DialogWindow setUpdateData={setUpdateData} videoInfo={videoInfo} setOpenReject={setOpenReject} openReject={openReject} handleClose={handleClose} titleDialog="Reject message for Video" dialogTextDescription={dialogTextDescriptionReject} />}
                         <MyButton template="yellow" onClick={handleApprove} children="Approve" variant="outlined" />
                         <MyButton template="pink" onClick={handleBlock} children="Block" variant="contained" />
 

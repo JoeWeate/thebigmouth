@@ -24,8 +24,8 @@ const DialogWindow = ({ videoInfo, openEdit, openReject, setOpenReject, setUpdat
                 aria-labelledby="customized-dialog-title"
                 open={openEdit || openReject}
             >
-                <Box sx={{ mt: "2rem" }}>
-                    <PageTitleComponent title={titleDialog} titleFontSize="28pt" />
+                <Box sx={{ mt: "2rem", ml: "1rem", mr: "1rem" }}>
+                    <PageTitleComponent title={titleDialog} titleFontSize="20pt" />
                     <IconButton
                         aria-label="close"
                         onClick={handleClose}
