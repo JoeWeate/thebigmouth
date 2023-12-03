@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useTheme } from "@mui/material/styles";
 import {
   Box,
@@ -20,10 +20,15 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import GroupIcon from "@mui/icons-material/Group";
 import VideosPage from "./VideosPage";
 import AllUsersPage from "./AllUsersPage";
-import { getAllVideoByUserID, getVideos } from "../../api/videos";
+import {
+  getAllVideoByUserID,
+  getAllVideosByState,
+  getVideos,
+} from "../../api/videos";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUserById } from "../../api/users";
 import { useNavigate } from "react-router-dom";
+import { MyContext } from "../../App";
 
 function Dashboard() {
   const theme = useTheme();
@@ -33,7 +38,8 @@ function Dashboard() {
   const [videoState, setVideoState] = useState("loading");
   const [collapsed, setCollapsed] = useState(false);
   const [role, setRole] = useState("");
-
+  const { userRole } = useContext(MyContext);
+  console.log(userRole);
   useEffect(() => {
     const fetchData = async () => {
       if (isLoading || !user || !user.sub) {
@@ -43,7 +49,7 @@ function Dashboard() {
         const userData = await getUserById(user.sub);
         setRole(userData.user.Role);
         if (role === "Admin") {
-          const videosData = await getVideos();
+          const videosData = await getAllVideosByState(videoState);
           setVideoState("allUsers");
           setVideoList(videosData.videos);
         } else {
@@ -58,7 +64,7 @@ function Dashboard() {
       }
     };
     fetchData();
-  }, [isLoading, user]);
+  }, [isLoading]);
 
   useEffect(() => {
     function handleResize() {
@@ -84,12 +90,12 @@ function Dashboard() {
           {
             icon: <HourglassBottomIcon />,
             text: "Waiting List",
-            state: "pending",
+            state: "inReview",
           },
           {
             icon: <DoNotDisturbOnIcon />,
             text: "Restricted",
-            state: "rejected",
+            state: "blocked",
           },
         ]
       : [
@@ -99,11 +105,15 @@ function Dashboard() {
             state: "approved",
           },
           { icon: <EditNoteIcon />, text: "Draft", state: "draft" },
-          { icon: <HourglassBottomIcon />, text: "Pending", state: "pending" },
+          {
+            icon: <HourglassBottomIcon />,
+            text: "In Review",
+            state: "inReview",
+          },
           {
             icon: <DoNotDisturbOnIcon />,
             text: "Restricted",
-            state: "rejected",
+            state: "blocked",
           },
         ];
 

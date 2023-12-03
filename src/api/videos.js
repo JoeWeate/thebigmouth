@@ -31,3 +31,13 @@ export const getAllVideoByUserID = (UserID) => {
       console.log(error);
     });
 };
+export const getAllVideosByState = (state) => {
+  return api
+    .get(`/videos/${state}`)
+    .then((data) => {
+      return Promise.resolve(data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
