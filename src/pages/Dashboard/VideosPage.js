@@ -2,11 +2,11 @@ import React from "react";
 import PendingVideo from "../../components/dashboard/PendingVideo";
 import ApprovedVideo from "../../components/dashboard/ApprovedVideo";
 import { Grid, Typography } from "@mui/material"
-
+import { useContext } from "react";
+import { MyContext } from "../../App";
 
 const VideosPage = ({ state, data, setUpdateData }) => {
-  console.log("state", state)
-  console.log("data", data)
+  const { userRole } = useContext(MyContext);
   return (
     <div
       style={{
@@ -16,7 +16,7 @@ const VideosPage = ({ state, data, setUpdateData }) => {
       <Typography variant="h5">{state}</Typography>
       {state !== "approved" && data && data.length > 0 ? (
         data.map((video) => (
-          <PendingVideo key={video.id} video={video} setUpdateData={setUpdateData} state={state} />
+          <PendingVideo userRole={userRole} key={video.id} video={video} setUpdateData={setUpdateData} state={state} />
         ))
       ) : state !== "approved" && data && data.length === 0 ? (
         <Typography>

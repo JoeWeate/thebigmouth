@@ -5,9 +5,9 @@ import PageTitleComponent from "../../pages/VideoHub/PageTitleComponent"
 import IconButton from '@mui/material/IconButton';
 import VideoForm from "../../pages/VideoUpload/VideoForm";
 import CloseIcon from '@mui/icons-material/Close';
+import MessagesInputForm from './MessageInputForm';
 
-
-const DialogWindow = ({ videoInfo, openEdit, setUpdateData, handleClose, titleDialog, dialogTextDescription, setOpenEdit }) => {
+const DialogWindow = ({ videoInfo, openEdit, openReject, setOpenReject, setUpdateData, handleClose, titleDialog, dialogTextDescription, setOpenEdit }) => {
     const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
             padding: theme.spacing(2),
@@ -22,7 +22,7 @@ const DialogWindow = ({ videoInfo, openEdit, setUpdateData, handleClose, titleDi
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
-                open={openEdit}
+                open={openEdit || openReject}
             >
                 <Box sx={{ mt: "2rem" }}>
                     <PageTitleComponent title={titleDialog} titleFontSize="28pt" />
@@ -44,7 +44,11 @@ const DialogWindow = ({ videoInfo, openEdit, setUpdateData, handleClose, titleDi
                     <DialogContentText sx={{ pl: "1rem" }}>
                         {dialogTextDescription}
                     </DialogContentText>
-                    <VideoForm setUpdateData={setUpdateData} initialData={videoInfo} setOpenEdit={setOpenEdit} />
+                    {openEdit &&
+                        <VideoForm setUpdateData={setUpdateData} initialData={videoInfo} setOpenEdit={setOpenEdit} />}
+                    {openReject &&
+                        <MessagesInputForm initialData={videoInfo} setUpdateData={setUpdateData} setOpenReject={setOpenReject} />
+                    }
                 </DialogContent>
             </BootstrapDialog>
         </React.Fragment>
