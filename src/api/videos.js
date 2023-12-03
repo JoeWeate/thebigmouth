@@ -11,6 +11,8 @@ export const uploadVideo = async (data) => {
     throw new Error("Failed to upload video. Please try again later.");
   }
 };
+
+
 export const getVideos = () => {
   return api
     .get(`/videos`, {})
@@ -32,10 +34,11 @@ export const getAllVideoByUserID = (UserID) => {
     });
 };
 
-export const updateVideo = async ({ userID, videoID, data }) => {
+export const updateVideo = async ({ data }) => {
+  console.log("data API", data)
+  const newData = { ...data, Messages: ["message"] }
   try {
-    const response = await api.put(`/videos/${userID}/${videoID}`, data);
-    console.log("data API", data)
+    const response = await api.put(`videos/${data.UserID}/${data.VideoID}`, newData);
     return response.data;
   } catch (error) {
     console.error("Error update the video:", error);

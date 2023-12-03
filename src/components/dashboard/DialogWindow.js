@@ -7,7 +7,7 @@ import VideoForm from "../../pages/VideoUpload/VideoForm";
 import CloseIcon from '@mui/icons-material/Close';
 
 
-const DialogWindow = ({ videoInfo, openEdit, URL, handleClose, titleDialog, dialogTextDescription, VideoID, UserID, setOpenEdit }) => {
+const DialogWindow = ({ videoInfo, openEdit, handleClose, titleDialog, dialogTextDescription, setOpenEdit }) => {
     const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
             padding: theme.spacing(2),
@@ -44,7 +44,7 @@ const DialogWindow = ({ videoInfo, openEdit, URL, handleClose, titleDialog, dial
                     <DialogContentText sx={{ pl: "1rem" }}>
                         {dialogTextDescription}
                     </DialogContentText>
-                    <VideoForm videoInfo={videoInfo} URL={URL} VideoID={VideoID} UserID={UserID} setOpenEdit={setOpenEdit} />
+                    <VideoForm initialData={videoInfo} setOpenEdit={setOpenEdit} />
                 </DialogContent>
             </BootstrapDialog>
         </React.Fragment>

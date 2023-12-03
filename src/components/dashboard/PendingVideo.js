@@ -20,7 +20,7 @@ const PendingVideo = ({ video, state }) => {
                 </div>
             </Grid>
             <Grid item lg={6} xs={11} p="1rem" sx={{ marginTop: { lg: 0, xs: "-1.5rem" } }}>
-                <UserInfoPending videoInfo={videoInfo} URL={URL} state={state} VideoID={VideoID} UserID={UserID} />
+                <UserInfoPending videoInfo={video} />
             </Grid>
         </Grid>
     );

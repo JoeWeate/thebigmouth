@@ -4,13 +4,15 @@ import MyButton from "../Button";
 import { useTheme } from "@emotion/react"
 import { useState } from "react";
 import DialogWindow from "./DialogWindow";
+import { isEmpty } from "lodash";
 
-const UserInfoPending = ({ videoInfo, URL, state, VideoID, UserID, }) => {
+const UserInfoPending = ({ videoInfo }) => {
+
     const theme = useTheme();
     const [openEdit, setOpenEdit] = useState(false);
     const dialogTextDescription = "If you would like to make changes to the details of the video you've shared, please fill in the form."
 
-    const { author, Title, Description, Timestamp, message } = videoInfo;
+    const { Title, Description, State, Timestamp, Messages } = videoInfo;
     const date = new Date(Timestamp);
     const formattedDate = date.toLocaleString();
     const handleDelete = () => {
@@ -31,30 +33,30 @@ const UserInfoPending = ({ videoInfo, URL, state, VideoID, UserID, }) => {
                 <Typography>
                     <Box sx={{ fontSize: "30pt" }}>{Title}</Box>
                     <Divider sx={{ mt: "0.5rem" }} />
-                    {state === "pending" && <Box sx={{ color: theme.palette.pink.main, fontSize: "16pt", mt: "0.5rem" }}>
+                    {State === "pending" && <Box sx={{ color: theme.palette.pink.main, fontSize: "16pt", mt: "0.5rem" }}>
                         The video still waiting for approval from admin
                     </Box>}
-                    {state === "draft" && <Box sx={{ fontSize: "12pt", marginTop: "0.7rem" }}>
+                    {State === "draft" && <Box sx={{ fontSize: "12pt", marginTop: "0.7rem" }}>
                         {Description}
                     </Box>}
-                    {message && <Box sx={{ padding: "1rem", border: "solid 1px", borderColor: theme.palette.pink.main, backgroundColor: "black", mt: "0.5rem", mb: "0.5rem" }}>
-                        {message}
+                    {(Messages && !isEmpty(Messages)) && <Box sx={{ padding: "1rem", border: "solid 1px", borderColor: theme.palette.pink.main, backgroundColor: "black", mt: "0.5rem", mb: "0.5rem" }}>
+                        {Messages[0]}
                     </Box>}
-                    {state === "rejected" &&
+                    {State === "rejected" &&
                         <>
                             <Box sx={{ color: theme.palette.pink.main, fontSize: "16pt", mt: "0.5rem" }}>
                                 The video was restricted !
                             </Box>
                             <Box sx={{ padding: "1rem", border: "solid 1px", borderColor: theme.palette.pink.main, backgroundColor: "black", mt: "0.5rem", mb: "0.5rem" }}>
-                                {message}
+                                {Messages[0]}
                             </Box>
                             <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         </>
                     }
 
-                    {state === "draft" && <>
+                    {State === "draft" && <>
                         <MyButton template="yellow" onClick={handleEditOpen} children="Edit" variant="contained" />
-                        {openEdit && <DialogWindow URL={URL} videoInfo={videoInfo} openEdit={openEdit} setOpenEdit={setOpenEdit} handleClose={handleClose} titleDialog="Edit the video details" dialogTextDescription={dialogTextDescription} VideoID={VideoID} UserID={UserID} />}
+                        {openEdit && <DialogWindow videoInfo={videoInfo} openEdit={openEdit} setOpenEdit={setOpenEdit} handleClose={handleClose} titleDialog="Edit the video details" dialogTextDescription={dialogTextDescription} />}
                         <MyButton template="pink" onClick={handleDelete} children="Delete" variant="contained" />
                         <MyButton template="yellow" onClick={handleSend} children="Send" variant="outlined" />
 
@@ -63,11 +65,11 @@ const UserInfoPending = ({ videoInfo, URL, state, VideoID, UserID, }) => {
             </Grid>
             <Grid item sx={{ bottom: 0 }}>
                 <Typography>
-                    {state !== "rejected" ? <Box sx={{ color: theme.palette.yellow.main }}>
+                    {State !== "rejected" ? <Box sx={{ color: theme.palette.yellow.main }}>
                         {formattedDate}
                     </Box> :
                         <Grid container direction="row" justifyContent="space-between">
-                            <Box>{author}</Box>
+                            <Box>author</Box>
                             <Box sx={{ color: theme.palette.yellow.main }}>
                                 {formattedDate}
                             </Box>
