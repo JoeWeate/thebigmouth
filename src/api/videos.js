@@ -34,7 +34,7 @@ export const getAllVideoByUserID = (UserID) => {
 
 export const getAllVideosByState = (state) => {
   return api
-    .get(`/videos/${state}`)
+    .get(`/videos/state/${state}`)
     .then((data) => {
       return Promise.resolve(data.data);
     })

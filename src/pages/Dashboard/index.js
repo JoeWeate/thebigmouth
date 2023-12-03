@@ -26,7 +26,6 @@ import {
   getVideos,
 } from "../../api/videos";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getUserById } from "../../api/users";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 
@@ -35,36 +34,41 @@ function Dashboard() {
   const navigate = useNavigate();
   const { user, isLoading } = useAuth0();
   const [videoList, setVideoList] = useState([]);
-  const [videoState, setVideoState] = useState("loading");
+  const [videoState, setVideoState] = useState("approved");
   const [collapsed, setCollapsed] = useState(false);
-  const [role, setRole] = useState("");
   const { userRole } = useContext(MyContext);
+  const [updateData, setUpdateData] = useState(0);
   console.log(userRole);
   useEffect(() => {
-    const fetchData = async () => {
-      if (isLoading || !user || !user.sub) {
+    const fetchDataAdmin = async () => {
+      if (userRole !== "Admin") {
         return;
       }
       try {
-        const userData = await getUserById(user.sub);
-        setRole(userData.user.Role);
-        if (role === "Admin") {
-          const videosData = await getAllVideosByState(videoState);
-          setVideoState("allUsers");
-          setVideoList(videosData.videos);
-        } else {
-          const videosUserData = await getAllVideoByUserID(
-            userData.user.UserID
-          );
-          setVideoList(videosUserData.videos);
-          setVideoState("approved");
-        }
+        const videosData = await getAllVideosByState(videoState);
+        console.log(videosData.videos);
+        setVideoList(videosData.videos);
+        console.log(videoList);
       } catch (error) {
         console.error({ error });
       }
     };
-    fetchData();
-  }, [isLoading]);
+    fetchDataAdmin();
+  }, [isLoading, videoState, userRole]);
+  useEffect(() => {
+    const fetchDataUser = async () => {
+      if (userRole !== "User" || !user) {
+        return;
+      }
+      try {
+        const videosUserData = await getAllVideoByUserID(user.sub);
+        setVideoList(videosUserData.videos);
+      } catch (error) {
+        console.error({ error });
+      }
+    };
+    fetchDataUser();
+  }, [isLoading, userRole, updateData]);
 
   useEffect(() => {
     function handleResize() {
@@ -77,9 +81,14 @@ function Dashboard() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   const toggleSidebar = () => setCollapsed(!collapsed);
-  const handleMenuClick = (state) => role && setVideoState(state);
+  const handleMenuClick = (state) => {
+    if (userRole) {
+      setVideoState(state);
+      setUpdateData((updateData) => updateData + 1);
+    }
+  };
   const menuItems =
-    role === "Admin"
+    userRole === "Admin"
       ? [
           { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
           {
@@ -116,7 +125,7 @@ function Dashboard() {
             state: "blocked",
           },
         ];
-
+  console.log(videoState);
   return (
     <Box sx={{ display: "flex", height: "100vh", zIndex: 0, width: "100%" }}>
       <Drawer
@@ -248,11 +257,12 @@ function Dashboard() {
       >
         {videoState === "allUsers" ? (
           <AllUsersPage state={videoState} />
-        ) : videoState === "loading" ? (
+        ) : !isLoading && !userRole && !updateData ? (
           <CircularProgress />
         ) : (
           <VideosPage
             state={videoState}
+            setUpdateData={setUpdateData}
             data={videoList.filter((video) => video.State === videoState)}
           />
         )}
