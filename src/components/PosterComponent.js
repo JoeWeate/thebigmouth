@@ -30,7 +30,6 @@ const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
         maxWidth: isFullScreen ? "100%" : "640px",
         height: "200px",
         backgroundColor: "rgba(59, 59, 59, 0.7)",
-        zIndex: 999,
       }}
     >
       {XrayTime.map((actor) => {
@@ -39,11 +38,12 @@ const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
           currentTime >= actor.start && currentTime <= actor.end;
 
         return (
-          isWithinRange && (
+          isWithinRange &&
+          actor.actors.map((index) => (
             <Grid container direction="row" lg={10} gap={4}>
               <Grid item lg={2} sx={{ marginBottom: "5rem" }}>
                 <Avatar
-                  src={seasonActors[actorIndex].actorImgSRC}
+                  src={seasonActors[index].actorImgSRC}
                   sx={{
                     width: 85,
                     height: 104,
@@ -54,20 +54,20 @@ const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
               </Grid>
               <Grid item lg={9} sx={{ marginTop: "1.5rem" }}>
                 <CustomWidthTooltip
-                  title={seasonActors[actorIndex].description}
+                  title={seasonActors[index].description}
                   placement="top"
                   arrow
                 >
                   <Typography variant="h6">
-                    {seasonActors[actorIndex].name}
+                    {seasonActors[index].name}
                   </Typography>
                 </CustomWidthTooltip>
                 <Typography sx={{ fontSize: "10pt" }}>
-                  {seasonActors[actorIndex].description}
+                  {seasonActors[index].description}
                 </Typography>
               </Grid>
             </Grid>
-          )
+          ))
         );
       })}
     </Box>
