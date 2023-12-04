@@ -4,36 +4,106 @@ import ReactPlayer from "react-player";
 import XRayMocks from "../api/mocks";
 import PosterComponent from "./PosterComponent";
 import { Box } from "@mui/system";
+import Controls from "./Controls";
+import { useRef } from "react";
+import { setCurrentTime } from "react";
+
+function formatingTime(time) {
+  if (isNaN(time)) {
+    return "00:00";
+  }
+  const date = new Date(time * 1000);
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  const seconds = date.getUTCSeconds().toString().padStart(2, "0");
+  if (hours) {
+    return `${hours}:${minutes.toString().padStart(2, "0")} `;
+  } else return `${minutes}:${seconds}`;
+};
 
 const VIDEO_SRC =
   "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/multimedia/longer_movie.mp4";
 
 export default function VideoPlayer() {
-  const [currentTime, setCurrentTime] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true);
+  const videoPlayerRef = useRef(null);
+
+  const currentTime = videoPlayerRef.current ? videoPlayerRef.current.getCurrentTime() : "00:00";
+  const duration = videoPlayerRef.current ? videoPlayerRef.current.getDuration() : "00:00";
+
+  const formattedCurrentTime = formatingTime(currentTime);
+  const formattedDuration = formatingTime(duration);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [videoState, setVideoState] = useState({
+    playing: true,
+    muted: false,
+    volume: 0.5,
+    played: 0,
+    seeking: false,
+    Buffer: true
+  });
+  const { playing, muted, volume, playbackRate, played, seeking, buffer } = videoState;
+
 
   const toggleOverlay = () => {
-    setShowOverlay(!showOverlay);
+    if (showOverlay) {
+      setShowOverlay(!showOverlay);
+    } else {
+      setShowOverlay(showOverlay);
+    }
   };
 
   const handleProgress = (progress) => {
     setCurrentTime(progress.playedSeconds);
   };
 
-  const handlePlay = () => {
-    setIsPlaying(true);
-    toggleOverlay();
+
+
+  const playPauseHandler = () => {
+    setVideoState({ ...videoState, playing: !videoState.playing })
+    setShowOverlay(!showOverlay)
   };
 
-  const handlePause = () => {
-    setIsPlaying(false);
-    toggleOverlay();
+  const rewindHandler = () => {
+    videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() - 5);
   };
 
-  const handleFullScreenChange = () => {
-    setIsFullScreen(!!document.fullscreenElement);
+  const handleFastForward = () => {
+    videoPlayerRef.current.seekTo(videoPlayerRef.current.getCurrentTime() + 10);
+  };
+
+  const progressHandler = (state) => {
+    if (!seeking) {
+      setVideoState({ ...videoState, ...state });
+    }
+  };
+
+  const seekHandler = (e, value) => {
+    setVideoState({ ...videoState, played: parseFloat(value) / 100 });
+  };
+
+  const seekMouseUpHandler = (e, value) => {
+    setVideoState({ ...videoState, seeking: false });
+    videoPlayerRef.current.seekTo(value / 100);
+  };
+  const volumeChangeHandler = (e, value) => {
+    const newVolume = parseFloat(value) / 100;
+    setVideoState({
+      ...videoState,
+      volume: newVolume,
+      muted: Number(newVolume) === 0 ? true : false, // volume === 0 then muted
+    })
+
+  };
+  const volumeSeekUpHandler = (e, value) => {
+    const newVolume = parseFloat(value) / 100;
+    setVideoState({
+      ...videoState,
+      volume: newVolume,
+      muted: newVolume === 0 ? true : false,
+    })
+  };
+  const muteHandler = () => {
+    setVideoState({ ...videoState, muted: !videoState.muted });
   };
 
   const formatTime = (time) => {
@@ -42,43 +112,70 @@ export default function VideoPlayer() {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  useEffect(() => {
-    document.addEventListener("fullscreenchange", handleFullScreenChange);
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullScreenChange);
-    };
-  }, []);
-  console.log(isFullScreen);
+
   return (
     <Grid
       container
-      sx={{ display: "flex", flexDirection: "column", position: "relative" }}
+      justifyContent="center"
+      sx={{
+        width: "100%",
+        height: "100%",
+        left: 0,
+        right: 0,
+        position: "relative",
+      }}
     >
-      {showOverlay && !isPlaying && (
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "black",
+          zIndex: -1,
+        }}
+      />
+      {showOverlay && !playing && (
         <Box
-          className={isFullScreen ? "overlay-fullscreen" : "overlay"}
-          onClick={toggleOverlay}
+          className="overlay"
         >
           <PosterComponent
             XRayMocks={XRayMocks}
             currentTime={currentTime}
-            isFullScreen={isFullScreen}
           />
         </Box>
       )}
       <ReactPlayer
+        ref={videoPlayerRef}
         url={VIDEO_SRC}
-        width="640px"
-        height="390px"
-        controls
-        playing={isPlaying}
-        onProgress={handleProgress}
-        onPlay={handlePlay}
-        onPause={handlePause}
-        onEnded={handlePause}
+        width="auto"
+        height="100%"
+        playing={playing}
+        muted={muted}
+        volume={volume}
+        onProgress={progressHandler}
       />
+      <Controls
+        onPlayPause={playPauseHandler}
+        playing={playing}
+        onRewind={rewindHandler}
+        onForward={handleFastForward}
+        played={played}
+        onSeek={seekHandler}
+        onSeekMouseUp={seekMouseUpHandler}
+        Volume={volume}
+        onVolumeChangeHandler={volumeChangeHandler}
+        onVolumeSeekUp={volumeSeekUpHandler}
+        volume={volume}
+        mute={muted}
+        onMute={muteHandler}
+        duration={formattedDuration}
+        currentTime={formattedCurrentTime} />
       <Typography>Current Time seconds: {Math.floor(currentTime)}</Typography>
       <Typography>Current Time minutes: {formatTime(currentTime)}</Typography>
     </Grid>
+
   );
 }
