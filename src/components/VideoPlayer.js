@@ -5,13 +5,13 @@ import XRayMocks from "../api/mocks";
 import PosterComponent from "./PosterComponent";
 import { Box } from "@mui/system";
 
+
 const VIDEO_SRC =
   "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/multimedia/longer_movie.mp4";
 
 export default function VideoPlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isFullScreen, setIsFullScreen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
 
   const toggleOverlay = () => {
@@ -32,9 +32,6 @@ export default function VideoPlayer() {
     toggleOverlay();
   };
 
-  const handleFullScreenChange = () => {
-    setIsFullScreen(!!document.fullscreenElement);
-  };
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
@@ -42,13 +39,6 @@ export default function VideoPlayer() {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  useEffect(() => {
-    document.addEventListener("fullscreenchange", handleFullScreenChange);
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullScreenChange);
-    };
-  }, []);
-  console.log(isFullScreen);
   return (
     <Grid
       container
@@ -56,20 +46,19 @@ export default function VideoPlayer() {
     >
       {showOverlay && !isPlaying && (
         <Box
-          className={isFullScreen ? "overlay-fullscreen" : "overlay"}
           onClick={toggleOverlay}
         >
           <PosterComponent
             XRayMocks={XRayMocks}
             currentTime={currentTime}
-            isFullScreen={isFullScreen}
+            isPlaying={isPlaying}
           />
         </Box>
       )}
       <ReactPlayer
         url={VIDEO_SRC}
         width="100%"
-        height="calc(100vh - 65px)"
+        height="calc(100vh - 65px)" // 56
         controls
         playing={isPlaying}
         onProgress={handleProgress}
@@ -79,7 +68,7 @@ export default function VideoPlayer() {
         config={{
           file: {
             attributes: {
-              controlsList: "nofullscreen",
+              controlsList: "nofullscreend",
             },
           },
         }}

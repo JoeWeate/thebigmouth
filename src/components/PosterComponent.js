@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import {
   Box,
@@ -7,7 +8,8 @@ import {
   Tooltip,
   tooltipClasses,
 } from "@mui/material";
-const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
+const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
+  const theme = useTheme();
   const { seasonActors, XrayTime } = XRayMocks;
   const CustomWidthTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
@@ -17,60 +19,109 @@ const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
     },
   });
   return (
-    <Box
-      sx={{
-        display: "flex",
-        position: "absolute",
-        justifyContent: "center",
-        alignItems: "center",
-        margin: "0 auto",
-        bottom: 44,
-        left: 0,
-        // width: "640px",
-        maxWidth: isFullScreen ? "100%" : "640px",
-        height: "200px",
-        backgroundColor: "rgba(59, 59, 59, 0.7)",
-      }}
-    >
+    <Box>
       {XrayTime.map((actor) => {
-        const actorIndex = actor.actors[0];
         const isWithinRange =
           currentTime >= actor.start && currentTime <= actor.end;
 
+        const moreThanThree = actor.actors.length > 3
         return (
           isWithinRange &&
-          actor.actors.map((index) => (
-            <Grid container direction="row" lg={10} gap={4}>
-              <Grid item lg={2} sx={{ marginBottom: "5rem" }}>
-                <Avatar
-                  src={seasonActors[index].actorImgSRC}
-                  sx={{
-                    width: 85,
-                    height: 104,
-                    borderRadius: 1,
-                    border: "solid #E60077 1px",
-                  }}
-                ></Avatar>
+          <Grid container
+            sx={{
+              display: "flex",
+              position: "absolute",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              margin: "0 auto",
+              bottom: 44,
+              left: 0,
+              width: "100%",
+              height: "220px",
+              backgroundColor: "rgba(59, 59, 59, 0.7)",
+              // zIndex: !isPlaying ? 999 : 0,
+            }}>
+            {actor.actors.map((index) => (
+              <Grid
+                container
+                alignItems="flex-start"
+                justifyContent="space-between"
+                sx={{
+                  ml: "2rem",
+                  mt: !moreThanThree ? "-2rem" : "-5rem",
+                  flexWrap: !moreThanThree ? "nowrap" : "wrap",
+                  direction: !moreThanThree ? "row" : "column",
+                  width: !moreThanThree ? "30%" : "12%",
+                }}
+              >
+                <Grid item sx={{ mr: "1rem", }}>
+                  <Avatar
+                    src={seasonActors[index].actorImgSRC}
+                    sx={{
+                      width: 125,
+                      height: 164,
+                      borderRadius: 1,
+                      border: `solid ${theme.palette.yellow.main} 1px`,
+
+                    }}
+                  ></Avatar>
+                </Grid>
+                {!moreThanThree ?
+                  <Grid item sx={{ mt: "3rem" }}>
+                    <CustomWidthTooltip
+                      title={seasonActors[index].description}
+                      placement="top"
+                      arrow
+                    >
+                      <Typography variant="h5" sx={{ marginBottom: "0.2rem", }}>
+                        <span
+                          style={{
+                            paddingLeft: "0.5rem",
+                            paddingTop: "0.2rem",
+                            paddingBottom: "0.2rem",
+                            paddingRight: "0.5rem",
+                            backgroundColor: theme.palette.pink.main,
+                            opacity: 0.6,
+                            width: "auto",
+                            ':hover': {
+                              opacity: 1,
+                            },
+                          }}
+                        >
+                          {seasonActors[index].name}
+                        </span>
+                      </Typography>
+                    </CustomWidthTooltip>
+                    <Typography sx={{ fontSize: "12pt" }}>
+                      {seasonActors[index].description}
+                    </Typography>
+                  </Grid> :
+                  <Grid item>
+                    <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>
+                      <span
+                        style={{
+                          paddingLeft: "0.5rem",
+                          paddingTop: "0.2rem",
+                          paddingBottom: "0.2rem",
+                          paddingRight: "0.5rem",
+                          backgroundColor: theme.palette.pink.main,
+
+                        }}
+                      >
+                        {seasonActors[index].name}
+                      </span>
+                    </Typography>
+                  </Grid>
+                }
               </Grid>
-              <Grid item lg={9} sx={{ marginTop: "1.5rem" }}>
-                <CustomWidthTooltip
-                  title={seasonActors[index].description}
-                  placement="top"
-                  arrow
-                >
-                  <Typography variant="h6">
-                    {seasonActors[index].name}
-                  </Typography>
-                </CustomWidthTooltip>
-                <Typography sx={{ fontSize: "10pt" }}>
-                  {seasonActors[index].description}
-                </Typography>
-              </Grid>
-            </Grid>
-          ))
+
+            )
+            )
+            }
+          </Grid>
         );
       })}
-    </Box>
+    </Box >
   );
 };
 
