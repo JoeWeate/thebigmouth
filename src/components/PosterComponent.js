@@ -24,10 +24,11 @@ const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
         justifyContent: "center",
         alignItems: "center",
         margin: "0 auto",
-        bottom: 40,
+        bottom: 44,
         left: 0,
+        // width: "640px",
         maxWidth: isFullScreen ? "100%" : "640px",
-        height: "150px",
+        height: "200px",
         backgroundColor: "rgba(59, 59, 59, 0.7)",
         zIndex: 999,
       }}
@@ -54,6 +55,8 @@ const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
               <Grid item lg={9} sx={{ marginTop: "1.5rem" }}>
                 <CustomWidthTooltip
                   title={seasonActors[actorIndex].description}
+                  placement="top"
+                  arrow
                 >
                   <Typography variant="h6">
                     {seasonActors[actorIndex].name}
