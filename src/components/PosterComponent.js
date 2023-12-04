@@ -38,7 +38,7 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
               left: 0,
               width: "100%",
               height: "220px",
-              backgroundColor: "rgba(59, 59, 59, 0.7)",
+              backgroundColor: "rgba(59, 59, 59, 0.5)",
               // zIndex: !isPlaying ? 999 : 0,
             }}>
             {actor.actors.map((index) => (
@@ -61,7 +61,7 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                       width: 125,
                       height: 164,
                       borderRadius: 1,
-                      border: `solid ${theme.palette.yellow.main} 1px`,
+                      border: `solid ${theme.palette.pink.main} 1px`,
 
                     }}
                   ></Avatar>
@@ -73,23 +73,8 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                       placement="top"
                       arrow
                     >
-                      <Typography variant="h5" sx={{ marginBottom: "0.2rem", }}>
-                        <span
-                          style={{
-                            paddingLeft: "0.5rem",
-                            paddingTop: "0.2rem",
-                            paddingBottom: "0.2rem",
-                            paddingRight: "0.5rem",
-                            backgroundColor: theme.palette.pink.main,
-                            opacity: 0.6,
-                            width: "auto",
-                            ':hover': {
-                              opacity: 1,
-                            },
-                          }}
-                        >
-                          {seasonActors[index].name}
-                        </span>
+                      <Typography variant="h5" sx={{ marginBottom: "0.2rem", color: theme.palette.yellow.main }}>
+                        {seasonActors[index].name}
                       </Typography>
                     </CustomWidthTooltip>
                     <Typography sx={{ fontSize: "12pt" }}>
@@ -97,19 +82,8 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                     </Typography>
                   </Grid> :
                   <Grid item>
-                    <Typography variant="h6" sx={{ marginTop: "0.5rem" }}>
-                      <span
-                        style={{
-                          paddingLeft: "0.5rem",
-                          paddingTop: "0.2rem",
-                          paddingBottom: "0.2rem",
-                          paddingRight: "0.5rem",
-                          backgroundColor: theme.palette.pink.main,
-
-                        }}
-                      >
-                        {seasonActors[index].name}
-                      </span>
+                    <Typography variant="h6" sx={{ marginBottom: "0.2rem", color: theme.palette.yellow.main }}>
+                      {seasonActors[index].name}
                     </Typography>
                   </Grid>
                 }
