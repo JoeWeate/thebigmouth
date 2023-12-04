@@ -97,11 +97,11 @@ export const userHubVideoListMocks = [
 ];
 
 const XRayMocks = {
-  actors: [
+  seasonActors: [
     {
       name: "Lionel Boyce",
       actorImgSRC:
-        "https://static.wikia.nocookie.net/the-bear/images/3/3c/LionelBoyce.jpg/revision/latest?cb=20230120075622",
+        "https://hips.hearstapps.com/hmg-prod/images/img0436-r01-034-1-6498d35a298bb.jpg?crop=0.716xw:1.00xh;0.0833xw,0&resize=1200:*",
       link: "https://www.imdb.com/name/nm5152633/?ref_=nm_mv_close",
       description:
         "Lionel Boyce is an actor known for his roles in various comedy projects. He may bring humor and charisma to the character of Marcus.",
@@ -183,178 +183,162 @@ const XRayMocks = {
     {
       start: 15,
       end: 123,
-      actors: [XRayMocks.actors[7]],
+      actors: [0],
     },
     {
       start: 180,
       end: 183,
-      actors: [XRayMocks.actors[1]],
+      actors: [1],
     },
     {
       start: 184,
       end: 186,
-      actors: [XRayMocks.actors[2], XRayMocks.actors[1]],
+      actors: [2, 1],
     },
     {
       start: 192,
       end: 199,
-      actors: [XRayMocks.actors[3]],
+      actors: [3],
     },
     {
       start: 200,
       end: 207,
-      actors: [XRayMocks.actors[4]],
+      actors: [4],
     },
     {
       start: 214,
       end: 217,
-      actors: [XRayMocks.actors[6]],
+      actors: [5],
     },
     {
       start: 218,
       end: 223,
-      actors: [XRayMocks.actors[2]],
+      actors: [2],
     },
     {
       start: 224,
       end: 327,
-      actors: [
-        XRayMocks.actors[1],
-        XRayMocks.actors[8],
-        XRayMocks.actors[4],
-        XRayMocks.actors[2],
-        XRayMocks.actors[1],
-      ],
+      actors: [1, 2, 4, 6, 7],
     },
     {
       start: 337,
       end: 341,
-      actors: [XRayMocks.actors[9]],
+      actors: [8],
     },
     {
       start: 341,
       end: 549,
-      actors: [XRayMocks.actors[9], XRayMocks.actors[1]],
+      actors: [8, 1],
     },
     {
       start: 553,
       end: 601,
-      actors: [XRayMocks.actors[2], XRayMocks.actors[8]],
+      actors: [2, 6],
     },
     {
       start: 602,
       end: 630,
-      actors: [XRayMocks.actors[2], XRayMocks.actors[8], XRayMocks.actors[7]],
+      actors: [2, 6, 0],
     },
     {
       start: 631,
       end: 643,
-      actors: [XRayMocks.actors[8]],
+      actors: [7],
     },
     {
       start: 644,
       end: 658,
-      actors: [XRayMocks.actors[6], XRayMocks.actors[3]],
+      actors: [3, 5],
     },
     {
       start: 659,
       end: 672,
-      actors: [XRayMocks.actors[7]],
+      actors: [0],
     },
     {
       start: 678,
       end: 693,
-      actors: [XRayMocks.actors[2], XRayMocks.actors[9]],
+      actors: [2, 8],
     },
     {
       start: 694,
       end: 751,
-      actors: [XRayMocks.actors[1], XRayMocks.actors[4]],
+      actors: [1, 4],
     },
     {
       start: 752,
       end: 922,
-      actors: [XRayMocks.actors[1], XRayMocks.actors[4], XRayMocks.actors[2]],
+      actors: [1, 4, 2],
     },
     {
       start: 923,
       end: 972,
-      actors: [XRayMocks.actors[1], XRayMocks.actors[4]],
+      actors: [1, 4],
     },
     {
       start: 975,
       end: 995,
-      actors: [XRayMocks.actors[1]],
+      actors: [1],
     },
     {
       start: 995,
       end: 1010,
-      actors: [XRayMocks.actors[2]],
+      actors: [2],
     },
     {
       start: 1010,
       end: 1019,
-      actors: [XRayMocks.actors[4]],
+      actors: [4],
     },
     {
       start: 1020,
       end: 1022,
-      actors: [XRayMocks.actors[10]],
+      actors: [9],
     },
     {
       start: 1023,
       end: 1249,
-      actors: [
-        XRayMocks.actors[10],
-        XRayMocks.actors[1],
-        XRayMocks.actors[4],
-        XRayMocks.actors[2],
-      ],
+      actors: [9, 1, 4, 2],
     },
     {
       start: 1249,
       end: 1326,
-      actors: [
-        XRayMocks.actors[1],
-        XRayMocks.actors[4],
-        XRayMocks.actors[2],
-        XRayMocks.actors[9],
-      ],
+      actors: [1, 4, 2, 8],
     },
     {
       start: 1249,
       end: 1428,
-      actors: [XRayMocks.actors[2], XRayMocks.actors[8]],
+      actors: [2, 6],
     },
     {
       start: 1429,
       end: 1459,
-      actors: [XRayMocks.actors[7], XRayMocks.actors[6]],
+      actors: [0, 5],
     },
     {
       start: 1460,
       end: 1476,
-      actors: [XRayMocks.actors[9]],
+      actors: [8],
     },
     {
       start: 1486,
       end: 1492,
-      actors: [XRayMocks.actors[1], XRayMocks.actors[4], XRayMocks.actors[2]],
+      actors: [1, 4, 2],
     },
     {
       start: 1492,
       end: 1546,
-      actors: [XRayMocks.actors[2], XRayMocks.actors[1]],
+      actors: [2, 1],
     },
     {
       start: 1550,
       end: 1642,
-      actors: [XRayMocks.actors[1]],
+      actors: [1],
     },
     {
       start: 1644,
       end: 1686,
-      actors: [XRayMocks.actors[1], XRayMocks.actors[4], XRayMocks.actors[2]],
+      actors: [1, 4, 2],
     },
   ],
 };

@@ -1,6 +1,21 @@
-import { Box, Grid, Avatar, Typography } from "@mui/material";
-
+import styled from "@emotion/styled";
+import {
+  Box,
+  Grid,
+  Avatar,
+  Typography,
+  Tooltip,
+  tooltipClasses,
+} from "@mui/material";
 const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
+  const { seasonActors, XrayTime } = XRayMocks;
+  const CustomWidthTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))({
+    [`& .${tooltipClasses.tooltip}`]: {
+      maxWidth: 500,
+    },
+  });
   return (
     <Box
       sx={{
@@ -14,16 +29,20 @@ const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
         maxWidth: isFullScreen ? "100%" : "640px",
         height: "150px",
         backgroundColor: "rgba(59, 59, 59, 0.7)",
+        zIndex: 999,
       }}
     >
-      {XRayMocks.map(
-        (actor) =>
-          currentTime >= actor.start &&
-          currentTime <= actor.end && (
+      {XrayTime.map((actor) => {
+        const actorIndex = actor.actors[0];
+        const isWithinRange =
+          currentTime >= actor.start && currentTime <= actor.end;
+
+        return (
+          isWithinRange && (
             <Grid container direction="row" lg={10} gap={4}>
               <Grid item lg={2} sx={{ marginBottom: "5rem" }}>
                 <Avatar
-                  src={actor.actorImgSRC}
+                  src={seasonActors[actorIndex].actorImgSRC}
                   sx={{
                     width: 85,
                     height: 104,
@@ -33,14 +52,21 @@ const PosterComponent = ({ isFullScreen, XRayMocks, currentTime }) => {
                 ></Avatar>
               </Grid>
               <Grid item lg={9} sx={{ marginTop: "1.5rem" }}>
-                <Typography variant="h6">{actor.name}</Typography>
+                <CustomWidthTooltip
+                  title={seasonActors[actorIndex].description}
+                >
+                  <Typography variant="h6">
+                    {seasonActors[actorIndex].name}
+                  </Typography>
+                </CustomWidthTooltip>
                 <Typography sx={{ fontSize: "10pt" }}>
-                  {actor.description}
+                  {seasonActors[actorIndex].description}
                 </Typography>
               </Grid>
             </Grid>
           )
-      )}
+        );
+      })}
     </Box>
   );
 };
