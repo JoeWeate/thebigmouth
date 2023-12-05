@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Typography, Grid } from "@mui/material";
 import ReactPlayer from "react-player";
 import XRayMocks from "../api/mocks";
@@ -58,7 +58,8 @@ export default function VideoPlayer() {
       <ReactPlayer
         url={VIDEO_SRC}
         width="100%"
-        height="calc(100vh - 65px)" // 56
+        height="calc(100vh - 65px)"
+        maxHeight="120vh"
         controls
         playing={isPlaying}
         onProgress={handleProgress}
@@ -68,7 +69,7 @@ export default function VideoPlayer() {
         config={{
           file: {
             attributes: {
-              controlsList: "nofullscreend",
+              controlsList: "nodownload nofullscreen",
             },
           },
         }}

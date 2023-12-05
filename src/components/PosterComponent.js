@@ -33,33 +33,38 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
               position: "absolute",
               justifyContent: "flex-start",
               alignItems: "flex-start",
+              pb: { lg: 0, sm: "4rem", xs: "4rem" },
+              pr: { sm: "1rem", xs: "1rem" },
+              pt: { sm: "1rem", xs: "1rem" },
               margin: "0 auto",
               bottom: 44,
               left: 0,
               width: "100%",
-              height: "220px",
+              height: { lg: "220px", sm: "auto" },
               backgroundColor: "rgba(59, 59, 59, 0.6)",
-              // zIndex: !isPlaying ? 999 : 0,
             }}>
             {actor.actors.map((index) => (
               <Grid
                 container
                 alignItems="flex-start"
-                justifyContent="space-between"
+
                 sx={{
                   ml: "2rem",
-                  mt: !moreThanThree ? "-2rem" : "-5rem",
-                  flexWrap: !moreThanThree ? "nowrap" : "wrap",
+                  justifyContent: !moreThanThree ? { lg: "space-between", sm: "flex-start" } : "flex-start",
+                  mt: !moreThanThree ? { lg: "-2rem", sm: 0 } : { lg: "-3rem", sm: 0 },
+                  flexWrap: "nowrap",
                   direction: !moreThanThree ? "row" : "column",
-                  width: !moreThanThree ? "30%" : "12%",
+                  width: !moreThanThree ? { lg: "30%", md: "30%", sm: "90%" } : { lg: "17%", sm: "50%" },
+                  mb: { sm: "1rem", xs: "1rem" }
+
                 }}
               >
                 <Grid item sx={{ mr: "1rem", }}>
                   <Avatar
                     src={seasonActors[index].actorImgSRC}
                     sx={{
-                      width: 125,
-                      height: 164,
+                      width: { lg: 125, xs: 90 },
+                      height: { lg: 164, xs: 110 },
                       borderRadius: 1,
                       border: `solid ${theme.palette.pink.main} 2px`,
 
@@ -67,7 +72,7 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                   ></Avatar>
                 </Grid>
                 {!moreThanThree ?
-                  <Grid item sx={{ mt: "3rem" }}>
+                  <Grid item sx={{ mt: { lg: "2rem", md: 0, sm: 0 } }}>
                     <CustomWidthTooltip
                       title={seasonActors[index].description}
                       placement="top"
@@ -77,12 +82,12 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                         {seasonActors[index].name}
                       </Typography>
                     </CustomWidthTooltip>
-                    <Typography sx={{ fontSize: "12pt" }}>
+                    <Typography sx={{ fontSize: "10pt" }}>
                       {seasonActors[index].description}
                     </Typography>
                   </Grid> :
                   <Grid item>
-                    <Typography variant="h6" sx={{ marginBottom: "0.2rem", color: theme.palette.yellow.main }}>
+                    <Typography variant="h6" sx={{ marginTop: "3rem", color: theme.palette.yellow.main }}>
                       {seasonActors[index].name}
                     </Typography>
                   </Grid>
