@@ -38,7 +38,8 @@ function Dashboard() {
   const [collapsed, setCollapsed] = useState(false);
   const { userRole } = useContext(MyContext);
   const [updateData, setUpdateData] = useState(0);
-  console.log(userRole);
+  const [activeTab, setActiveTab] = useState(videoState);
+
   useEffect(() => {
     const fetchDataAdmin = async () => {
       if (userRole !== "Admin") {
@@ -46,9 +47,8 @@ function Dashboard() {
       }
       try {
         const videosData = await getAllVideosByState(videoState);
-        console.log(videosData.videos);
+
         setVideoList(videosData.videos);
-        console.log(videoList);
       } catch (error) {
         console.error({ error });
       }
@@ -83,6 +83,7 @@ function Dashboard() {
   const toggleSidebar = () => setCollapsed(!collapsed);
   const handleMenuClick = (state) => {
     if (userRole) {
+      setActiveTab(state);
       setVideoState(state);
       setUpdateData((updateData) => updateData + 1);
     }
@@ -223,6 +224,10 @@ function Dashboard() {
           </ListItem>
           {menuItems.map((item, index) => (
             <ListItem
+              sx={{
+                backgroundColor:
+                  activeTab === item.state ? "#E6007E" : "inherit",
+              }}
               button
               key={index}
               onClick={() => handleMenuClick(item.state)}
