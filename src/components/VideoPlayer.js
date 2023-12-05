@@ -32,12 +32,6 @@ export default function VideoPlayer({ url }) {
   };
 
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-  };
-
   return (
     <Grid
       container
@@ -57,7 +51,7 @@ export default function VideoPlayer({ url }) {
       <ReactPlayer
         url={url}
         width="100%"
-        height="calc(100vh - 80px)"
+        height="calc(100vh - 70px)"
         maxHeight="120vh"
         controls
         playing={isPlaying}
