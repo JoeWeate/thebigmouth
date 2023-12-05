@@ -7,6 +7,7 @@ import {
   Typography,
   Tooltip,
   tooltipClasses,
+  Hidden,
 } from "@mui/material";
 const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
   const theme = useTheme();
@@ -54,7 +55,7 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                   mt: !moreThanThree ? { lg: "-2rem", sm: 0 } : { lg: "-3rem", sm: 0 },
                   flexWrap: "nowrap",
                   direction: !moreThanThree ? "row" : "column",
-                  width: !moreThanThree ? { lg: "30%", md: "30%", sm: "90%" } : { lg: "17%", sm: "50%" },
+                  width: !moreThanThree ? { lg: "30%", md: "30%", sm: "90%" } : { lg: "17%", md: "90%" },
                   mb: { sm: "1rem", xs: "1rem" }
 
                 }}
@@ -87,9 +88,14 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                     </Typography>
                   </Grid> :
                   <Grid item>
-                    <Typography variant="h6" sx={{ marginTop: "3rem", color: theme.palette.yellow.main }}>
+                    <Typography variant="h6" sx={{ marginTop: { lg: "3rem", sm: 0 }, color: theme.palette.yellow.main }}>
                       {seasonActors[index].name}
                     </Typography>
+                    <Hidden mdUp>
+                      <Typography sx={{ fontSize: "10pt" }}>
+                        {seasonActors[index].description}
+                      </Typography>
+                    </Hidden>
                   </Grid>
                 }
               </Grid>
