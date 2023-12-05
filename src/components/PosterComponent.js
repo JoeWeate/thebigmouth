@@ -38,7 +38,7 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
               left: 0,
               width: "100%",
               height: "220px",
-              backgroundColor: "rgba(59, 59, 59, 0.5)",
+              backgroundColor: "rgba(59, 59, 59, 0.6)",
               // zIndex: !isPlaying ? 999 : 0,
             }}>
             {actor.actors.map((index) => (
@@ -61,7 +61,7 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                       width: 125,
                       height: 164,
                       borderRadius: 1,
-                      border: `solid ${theme.palette.pink.main} 1px`,
+                      border: `solid ${theme.palette.pink.main} 2px`,
 
                     }}
                   ></Avatar>
@@ -73,7 +73,7 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
                       placement="top"
                       arrow
                     >
-                      <Typography variant="h5" sx={{ marginBottom: "0.2rem", color: theme.palette.yellow.main }}>
+                      <Typography variant="h5" sx={{ marginBottom: "0.2rem", color: theme.palette.yellow.main, }}>
                         {seasonActors[index].name}
                       </Typography>
                     </CustomWidthTooltip>
