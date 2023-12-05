@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Grid, CircularProgress, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -9,7 +9,7 @@ import Home from "./pages/HomePage";
 import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
-import DummyHomePage from "./pages/dummyHomePage";
+import DummyHomePage from "./pages/DummyHomePage";
 import VideoPlayer from "./components/VideoPlayer";
 import Theme from "./theme";
 import App from "./App";
@@ -69,5 +69,6 @@ root.render(
         </BrowserRouter>
       </Suspense>
     </Auth0Provider>
-  </ThemeProvider>);
+  </ThemeProvider>
+);
 reportWebVitals();

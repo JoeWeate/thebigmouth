@@ -68,14 +68,21 @@ export default function VideoPlayer() {
       )}
       <ReactPlayer
         url={VIDEO_SRC}
-        width="640px"
-        height="390px"
+        width="100%"
+        height="calc(100vh - 65px)"
         controls
         playing={isPlaying}
         onProgress={handleProgress}
         onPlay={handlePlay}
         onPause={handlePause}
         onEnded={handlePause}
+        config={{
+          file: {
+            attributes: {
+              controlsList: "nofullscreen",
+            },
+          },
+        }}
       />
       <Typography>Current Time seconds: {Math.floor(currentTime)}</Typography>
       <Typography>Current Time minutes: {formatTime(currentTime)}</Typography>
