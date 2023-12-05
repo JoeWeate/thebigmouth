@@ -69,7 +69,6 @@ const VideoBanner = ({ videoUrl, videoImg, targetRef, title }) => {
           <Box
             sx={{
               position: "relative",
-
               paddingBottom: { xs: "56.25%", height: '100%', width: '100%', md: "45.2344%" },
             }}
           >

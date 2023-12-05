@@ -18,11 +18,11 @@ export default function MediaCardList({ sectionTitle, multimediaData }) {
           <Grid item xs={12} sm={6} md={4} key={index} sx={{ pr: 3, width: '100%', flex: "auto 0 0" }}>
 
             <Link to={`/multimedia/${item.ID}`}>
-              <Box sx={{ position: "relative", border: "solid red 1px", overflow: "hidden", borderRadius: "0.5rem" }}>
+              <Box sx={{ position: "relative", overflow: "hidden", borderRadius: "0.5rem" }}>
                 <Card sx={{ objectFit: "cover" }}>
                   <img
                     style={{
-                      width: "100%", border: "solid red 1px", height: "auto", position: "relative"
+                      width: "100%", height: "auto", position: "relative"
                     }}
                     src={item.Images}
                     alt={`Image ${item.Name}`
