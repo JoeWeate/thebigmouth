@@ -1,3 +1,4 @@
+import {useContext} from "react";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,6 +13,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useAuth0 } from "@auth0/auth0-react";
+import {MyContext} from "../App";
+import {routes} from "../routes";
+import {USER_ROLE} from "../utils/constants";
 import LogoutButton from "./LogoutButton";
 import LoginButton from "./LoginButton";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +33,7 @@ const settingsLogin = ["Profile", "Dashboard"];
 function NavBar() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
+  const { userRole } = useContext(MyContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -144,9 +149,9 @@ function NavBar() {
                       } else {
                         navigate(
                           page === "HOME" || page === "THE BIG MOUTH"
-                            ? "/"
+                            ? routes.home.path
                             : page === "VIDEOHUB"
-                            ? "/videohub"
+                            ? routes.videoHub.home.path
                             : "#"
                         );
                       }
@@ -181,9 +186,9 @@ function NavBar() {
                   } else {
                     navigate(
                       page === "HOME" || page === "THE BIG MOUTH"
-                        ? "/"
+                        ? routes.home.path
                         : page === "VIDEOHUB"
-                        ? "/videohub"
+                        ? routes.videoHub.home.path
                         : "#"
                     );
                   }
@@ -292,9 +297,9 @@ function NavBar() {
                       onClick={() =>
                         navigate(
                           setting === "Profile"
-                            ? "/profile"
+                            ? routes.videoHub.profile.path
                             : setting === "Dashboard"
-                            ? "/dashboard"
+                                ? routes.dashboard[userRole][userRole === USER_ROLE.ADMIN ? "allUsersVideos" : "approved"].path
                             : "#"
                         )
                       }

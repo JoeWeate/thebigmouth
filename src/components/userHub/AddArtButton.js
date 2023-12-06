@@ -1,4 +1,5 @@
 import React from "react";
+import {routes} from "../../routes";
 import styles from "./AddArtButton.module.css";
 import { Box } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -10,12 +11,12 @@ const AddArtButton = () => {
     const navigate = useNavigate();
 
     const handleCheckLogIn = () => {
-        isAuthenticated ? navigate("/videoupload") : loginWithRedirect();
+        isAuthenticated ? navigate(routes.videoHub.videoUpload.path) : loginWithRedirect();
     }
 
     return (
         <Box className={styles.box}>
-            <a href="./videoupload" onClick={handleCheckLogIn}>
+            <a href={routes.videoHub.videoUpload.path} onClick={handleCheckLogIn}>
                 <span></span>
                 <span></span>
                 <span></span>
