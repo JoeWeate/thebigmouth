@@ -1,69 +1,73 @@
-import { Typography, Paper, CardMedia, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import ScrollDownBtn from "../../components/ScrollDownBtn";
+import ReactPlayer from "react-player";
+import { useState, useRef, useEffect } from "react";
+import { useInView } from 'react-intersection-observer';
 
 const Banner = ({ targetRef }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [ref, inView] = useInView(true);
 
-    const logoMouth = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/big-mouth.png";
-    const title = "THE BIG MOUTH";
-    const backgroundImageUrl = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/banner.png";
+    console.log('isPlaying:', isPlaying);
+    console.log('inView:', inView);
+
+    const playerRef = useRef(null);
+
+    const videoLink = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/latestedit+(1).mp4";
+
+
+    useEffect(() => {
+        if (inView && !isPlaying) {
+            setIsPlaying(true);
+        } else if (!inView && isPlaying) {
+            setIsPlaying(false);
+        }
+    }, [inView, isPlaying]);
+
+    const handleVideoEnd = () => {
+        if (playerRef.current) {
+            playerRef.current.seekTo(0);
+        }
+    };
 
     return (
-        <Paper sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-end",
-            height: "95vh",
-            width: "100%",
-            backgroundImage: `url(${backgroundImageUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            borderRadius: 0,
-        }}>
-            <Box sx={{
-                position: "absolute",
-                width: "100%",
-                height: "80%",
-                justifyContent: "center",
+        <Box
+            sx={{
                 display: "flex",
-                alignItems: "center"
-            }}>
+                justifyContent: "center",
+                alignItems: "flex-end",
+                height: "95vh",
+                width: "100%",
+                borderRadius: 0,
+                position: "relative",
+            }}
+        >
+            <Box
+                sx={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "80%",
+                    justifyContent: "center",
+                    display: "flex",
+                    alignItems: "center",
+                    objectFit: "cover",
+                }} />
 
-                <CardMedia component="img" src={logoMouth} alt={title} sx={{
-                    alignSelf: "center",
-                    width: {
-                        xs: '12rem',
-                        sm: '20rem',
-                        md: '22rem',
-                        lg: '25rem',
-                    }
-                }} >
-                </CardMedia>
-                <Typography
-                    variant="h1"
-                    sx={{
-                        position: "absolute",
-                        paddingLeft: "2rem",
-                        paddingRight: "2rem",
-                        backgroundColor: "rgba(224,3,146, 0.6)",
-                        color: "white",
-                        textAlign: "center",
-                        whiteSpace: "nowrap",
-                        fontWeight: "bold",
-                        fontSize: {
-                            xs: "2.3rem",
-                            sm: "4.5rem",
-                            md: "4.5rem",
-                            lg: "6rem",
-                            xl: "6rem",
-                        },
-                    }}
-                >
-                    {title}
-                </Typography>
-            </Box>
+            <div ref={ref}>
+                <ReactPlayer
+                    ref={playerRef}
+                    url={videoLink}
+                    playing={isPlaying}
+                    onEnded={handleVideoEnd}
+                    width="100%"
+                    height="100vh"
+                    loop
+                    style={{ objectFit: 'cover' }}
+                />
+            </div>
             <ScrollDownBtn targetRef={targetRef} />
-        </Paper >
-    )
+        </Box>
+    );
 };
 
-export default Banner
+export default Banner;
