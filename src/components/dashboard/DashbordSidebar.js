@@ -27,7 +27,6 @@ function DashboardSidebar() {
   const { page } = useParams();
   const [collapsed, setCollapsed] = useState(false);
   const { userRole } = useContext(MyContext);
-  const [activeTab, setActiveTab] = useState(page);
 
   useEffect(() => {
     function handleResize() {
@@ -40,9 +39,7 @@ function DashboardSidebar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(()=>{
-    setActiveTab(page)
-  }, [page])
+
   const toggleSidebar = () => setCollapsed(!collapsed);
   const handleMenuClick = (state) => {
     if (userRole) {
@@ -173,7 +170,7 @@ function DashboardSidebar() {
             <ListItemButton
               sx={{
                 backgroundColor:
-                  activeTab === item.state ? "#E6007E" : "inherit",
+                  page === item.state ? "#E6007E" : "inherit",
               }}
               key={index}
               onClick={() =>
