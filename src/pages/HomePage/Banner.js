@@ -4,8 +4,9 @@ import ReactPlayer from "react-player";
 import { useState, useRef, useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
 
+
 const Banner = ({ targetRef }) => {
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
     const [ref, inView] = useInView(true);
 
     console.log('isPlaying:', isPlaying);
@@ -14,7 +15,6 @@ const Banner = ({ targetRef }) => {
     const playerRef = useRef(null);
 
     const videoLink = "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/latestedit+(1).mp4";
-
 
     useEffect(() => {
         if (inView && !isPlaying) {
@@ -55,13 +55,14 @@ const Banner = ({ targetRef }) => {
 
             <div ref={ref}>
                 <ReactPlayer
-                    ref={playerRef}
+                    // ref={playerRef}
                     url={videoLink}
                     playing={isPlaying}
                     onEnded={handleVideoEnd}
                     width="100%"
                     height="100vh"
-                    loop
+                    muted={true}
+                    loop={true}
                     style={{ objectFit: 'cover' }}
                 />
             </div>
