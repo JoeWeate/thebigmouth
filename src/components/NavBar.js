@@ -21,11 +21,11 @@ const pages = [
   "HOME",
   "ABOUT US",
   "THEATRE",
-  "GET INVOLVED",
   "TBH MEANS BUSINESS",
   "THE BIG MOUTH",
+  "VIDEOHUB",
 ];
-const settingsLogin = ["Profile"];
+const settingsLogin = ["Profile", "Dashboard"];
 function NavBar() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
@@ -89,7 +89,13 @@ function NavBar() {
               color="inherit"
               sx={{ ml: 2, mr: 2 }}
             >
-              <SearchIcon />
+              <SearchIcon
+                onClick={() =>
+                  alert(
+                    "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
+                  )
+                }
+              />
             </IconButton>
             <IconButton
               size="large"
@@ -127,11 +133,25 @@ function NavBar() {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography
-                    onClick={() =>
-                      navigate(
-                        page === "HOME" || page === "THE BIG MOUTH" ? "/" : "#"
-                      )
-                    }
+                    onClick={() => {
+                      if (
+                        page === "ABOUT US" ||
+                        page === "THEATRE" ||
+                        page === "TBH MEANS BUSINESS"
+                      ) {
+                        alert(
+                          "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages, and the USER environment as well."
+                        );
+                      } else {
+                        navigate(
+                          page === "HOME" || page === "THE BIG MOUTH"
+                            ? "/"
+                            : page === "VIDEOHUB"
+                            ? "/videohub"
+                            : "#"
+                        );
+                      }
+                    }}
                     textAlign="center"
                   >
                     {page}
@@ -151,9 +171,23 @@ function NavBar() {
                 key={page}
                 onClick={() => {
                   handleCloseNavMenu();
-                  navigate(
-                    page === "HOME" || page === "THE BIG MOUTH" ? "/" : "#"
-                  );
+                  if (
+                    page === "ABOUT US" ||
+                    page === "THEATRE" ||
+                    page === "TBH MEANS BUSINESS"
+                  ) {
+                    alert(
+                      "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
+                    );
+                  } else {
+                    navigate(
+                      page === "HOME" || page === "THE BIG MOUTH"
+                        ? "/"
+                        : page === "VIDEOHUB"
+                        ? "/videohub"
+                        : "#"
+                    );
+                  }
                 }}
                 sx={{
                   my: 2,
@@ -207,7 +241,13 @@ function NavBar() {
               color="inherit"
               sx={{ ml: 2, mr: 2 }}
             >
-              <SearchIcon />
+              <SearchIcon
+                onClick={() =>
+                  alert(
+                    "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
+                  )
+                }
+              />
             </IconButton>
           </Box>
 
