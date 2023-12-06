@@ -9,7 +9,6 @@ const VideoUpload = () => {
     <Grid
       container
       style={{
-        height: "100vh",
         mb: {
           lg: "5rem",
           sm: "4rem",
