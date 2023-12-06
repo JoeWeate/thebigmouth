@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./LogoutButton";
 import LoginButton from "./LoginButton";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/TheBigHouse.png";
 import SearchIcon from "@mui/icons-material/Search";
 const pages = [
@@ -88,14 +88,13 @@ function NavBar() {
               aria-label="search"
               color="inherit"
               sx={{ ml: 2, mr: 2 }}
-            >
-              <SearchIcon
-                onClick={() =>
+              onClick={() =>
                   alert(
-                    "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
+                      "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
                   )
-                }
-              />
+              }
+            >
+              <SearchIcon/>
             </IconButton>
             <IconButton
               size="large"
@@ -240,14 +239,13 @@ function NavBar() {
               aria-label="search"
               color="inherit"
               sx={{ ml: 2, mr: 2 }}
-            >
-              <SearchIcon
-                onClick={() =>
+              onClick={() =>
                   alert(
-                    "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
+                      "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
                   )
-                }
-              />
+              }
+            >
+              <SearchIcon />
             </IconButton>
           </Box>
 

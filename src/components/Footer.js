@@ -46,7 +46,6 @@ const Footer = () => {
         container
         alignItems="center"
         justifyContent="space-around"
-        lg={12}
         sx={{
           backgroundColor: "#E6007E",
           flexDirection: "row",
@@ -215,7 +214,6 @@ const Footer = () => {
             container
             direction="row"
             justifyContent="space-between"
-            sm={12}
             sx={{
               mt: "1rem",
               mb: "4rem",
