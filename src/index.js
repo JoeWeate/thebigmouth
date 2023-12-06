@@ -18,7 +18,7 @@ import reportWebVitals from "./reportWebVitals";
 import Episode from "./pages/EpisodePage";
 import VideoUpload from "./pages/VideoUpload/VideoUpload";
 import "./index.css";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./components/dashboard/DashbordSidebar";
 import VideoHub from "./pages/VideoHub";
 
 const container = document.getElementById("root");
@@ -61,7 +61,9 @@ root.render(
               <Route path="login" element={<PostAuthentication />} />
               <Route path="videohub" element={<VideoHub />}></Route>
               <Route path="videoupload" element={<VideoUpload />}></Route>
-              <Route path="dashboard" element={<Dashboard />}></Route>
+              <Route path="dashboard">
+                <Route index element={<Dashboard />} />
+              </Route>
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
               <Route path="videoplayer" element={<VideoPlayer />} />

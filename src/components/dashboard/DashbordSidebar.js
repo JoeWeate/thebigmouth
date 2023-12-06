@@ -17,8 +17,8 @@ import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import GroupIcon from "@mui/icons-material/Group";
-import VideosPage from "./VideosPage";
-import AllUsersPage from "./AllUsersPage";
+import VideosPage from "../../pages/Dashboard/VideosPage";
+import AllUsersPage from "../../pages/Dashboard/AllUsersPage";
 import {
   getAllVideoByUserID,
   getAllVideosByState,
