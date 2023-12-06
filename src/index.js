@@ -9,6 +9,7 @@ import Home from "./pages/HomePage";
 import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
+import VideoPlayer from "./components/VideoPlayer";
 
 import Theme from "./theme";
 import App from "./App";
@@ -63,6 +64,7 @@ root.render(
               <Route path="dashboard" element={<Dashboard />}></Route>
               <Route path="profile" element={<Profile />} />
               <Route path="*" element={<Error />} />
+              <Route path="videoplayer" element={<VideoPlayer />} />
             </Route>
           </Routes>
         </BrowserRouter>

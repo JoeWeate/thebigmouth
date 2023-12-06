@@ -20,14 +20,10 @@ const VideoHub = () => {
       });
   }, []);
 
-  let title = {
-    mainTitle: "Welcome to VideoHub",
-    subtitle: "Your Ultimate Destination for Awesome Content Experiences!",
-  };
-  let fontSize = {
-    titleFontSize: "50pt",
-    subtitleFontSize: "24pt",
-  };
+    let title = "Welcome to VideoHub"
+    let subtitle = "Your Ultimate Destination for Awesome Content Experiences!"
+    let titleFontSize = "50pt";
+    let subtitleFontSize = "26pt";
 
     return (
         <Grid
