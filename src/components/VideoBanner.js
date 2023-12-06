@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Box, styled, Typography } from "@mui/material";
+import { Box, styled, Typography, CardMedia } from "@mui/material";
 import ScrollDownBtn from "./ScrollDownBtn";
-import EmbedVideo from "./EmbedVideo";
+import VideoPlayer from "./VideoPlayer";
+import ImageOverlay from "./ImageOverlay";
 
 const VideoImageContainer = styled(Box)(() => ({
   display: "block",
@@ -12,7 +13,7 @@ const VideoImageContainer = styled(Box)(() => ({
   maxHeight: "90vh",
   overflow: "hidden",
 }));
-const PlayButton = styled("div")(({}) => ({
+const PlayButton = styled("div")(({ }) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -64,14 +65,22 @@ const VideoBanner = ({ videoUrl, videoImg, targetRef, title }) => {
         onMouseEnter={() => setContainerHovered(true)}
         onMouseLeave={() => setContainerHovered(false)}
       >
-        <EmbedVideo
-          videoUrl={videoUrl}
-          videoImg={videoImg}
-          playVideo={playVideo}
-          setPlayVideo={setPlayVideo}
-          onMouseEnter={() => setMainImageHovered(true)}
-          onMouseLeave={() => setMainImageHovered(false)}
-        />
+        {playVideo ? (
+          <Box
+            sx={{
+              position: "relative",
+              paddingBottom: { xs: "56.25%", height: '100%', width: '100%', md: "45.2344%" },
+            }}
+          >
+            <VideoPlayer url={videoUrl} />
+          </Box>
+        ) : (
+          <>
+            <CardMedia component="img" image={videoImg} alt="Cover" sx={{ height: '100%', width: '100%', objectFit: 'cover' }} />
+            <ImageOverlay />
+          </>
+        )}
+
 
         {!playVideo && (
           <PlayButton onClick={() => setPlayVideo(true)}>

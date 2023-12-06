@@ -6,10 +6,9 @@ import PosterComponent from "./PosterComponent";
 import { Box } from "@mui/system";
 
 
-const VIDEO_SRC =
-  "https://thebigmouth-media.s3.eu-west-2.amazonaws.com/public/multimedia/longer_movie.mp4";
 
-export default function VideoPlayer() {
+
+export default function VideoPlayer({ url }) {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
@@ -56,9 +55,9 @@ export default function VideoPlayer() {
         </Box>
       )}
       <ReactPlayer
-        url={VIDEO_SRC}
+        url={url}
         width="100%"
-        height="calc(100vh - 65px)"
+        height="calc(100vh - 70px)"
         maxHeight="120vh"
         controls
         playing={isPlaying}

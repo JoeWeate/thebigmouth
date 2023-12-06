@@ -9,7 +9,7 @@ import {
   tooltipClasses,
   Hidden,
 } from "@mui/material";
-const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
+const PosterComponent = ({ XRayMocks, currentTime }) => {
   const theme = useTheme();
   const { seasonActors, XrayTime } = XRayMocks;
   const CustomWidthTooltip = styled(({ className, ...props }) => (
@@ -34,11 +34,12 @@ const PosterComponent = ({ XRayMocks, currentTime, isPlaying }) => {
               position: "absolute",
               justifyContent: "flex-start",
               alignItems: "flex-start",
+              textAlign: "left",
               pb: { lg: 0, sm: "4rem", xs: "4rem" },
               pr: { sm: "1rem", xs: "1rem" },
               pt: { sm: "1rem", xs: "1rem" },
               margin: "0 auto",
-              bottom: 44,
+              bottom: 10,
               left: 0,
               width: "100%",
               height: { lg: "220px", sm: "auto" },

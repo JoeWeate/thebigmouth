@@ -143,6 +143,21 @@ export const userHubVideoListMocks = [
   },
 ];
 
+export const irynaVideoMock = {
+  "UserID": "google-oauth2|104634712040360930109",
+  "Title": "Sample Title",
+  "Timestamp": 1700667173773,
+  "VideoID": "0eb0bbe7-a822-4499-a8e0-6cc7a498e7e",
+  "Description": "Sample Video Description",
+  "ShortDescription": "Sample Video Description",
+  "State": "inReview",
+  "Messages": [
+    "Message 1",
+    "Message 2"
+  ],
+  "URL": "https://www.youtube.com/watch?v=a3ICNMQW7Ok"
+}
+
 const XRayMocks = {
   seasonActors: [
     {
@@ -390,19 +405,4 @@ const XRayMocks = {
   ],
 };
 
-export default XRayMocks;
-
-export const irynaVideoMock =   {
-    "UserID": "google-oauth2|104634712040360930109",
-    "Title": "Sample Title",
-    "Timestamp": 1700667173773,
-    "VideoID": "0eb0bbe7-a822-4499-a8e0-6cc7a498e7e",
-    "Description": "Sample Video Description",
-    "ShortDescription": "Sample Video Description",
-    "State": "inReview",
-    "Messages": [
-        "Message 1",
-        "Message 2"
-    ],
-    "URL": "https://www.youtube.com/watch?v=a3ICNMQW7Ok"
-}
+export default XRayMocks
