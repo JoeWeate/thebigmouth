@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import {
   CircularProgress,
 } from "@mui/material";
-import {useOutletContext} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import VideosPage from "./VideosPage";
 import AllUsersPage from "./AllUsersPage";
 import {
@@ -16,8 +16,8 @@ import { MyContext } from "../../App";
 function DashboardPage() {
   const { user, isLoading } = useAuth0();
   const [videoList, setVideoList] = useState([]);
+  const { page } = useParams();
   const { userRole } = useContext(MyContext);
-  const {videoState, updateData, setUpdateData} = useOutletContext()
 
   useEffect(() => {
     const fetchDataAdmin = async () => {
@@ -25,7 +25,7 @@ function DashboardPage() {
         return;
       }
       try {
-        const videosData = await getAllVideosByState(videoState);
+        const videosData = await getAllVideosByState(page);
 
         setVideoList(videosData.videos);
       } catch (error) {
@@ -33,7 +33,7 @@ function DashboardPage() {
       }
     };
     fetchDataAdmin();
-  }, [isLoading, videoState, userRole]);
+  }, [isLoading, page, userRole]);
   useEffect(() => {
     const fetchDataUser = async () => {
       if (userRole !== "User" || !user) {
@@ -47,19 +47,18 @@ function DashboardPage() {
       }
     };
     fetchDataUser();
-  }, [isLoading, userRole, updateData]);
+  }, [isLoading, userRole, page]);
 
   return (
     <>
-      {videoState === "allUsers" ? (
-          <AllUsersPage state={videoState} />
-      ) : !isLoading && !userRole && !updateData ? (
+      {page === "allUsers" ? (
+          <AllUsersPage state={page} />
+      ) : !isLoading && !userRole  ? (
           <CircularProgress />
       ) : (
           <VideosPage
-              state={videoState}
-              setUpdateData={setUpdateData}
-              data={videoList.filter((video) => video.State === videoState)}
+              state={page}
+              data={videoList.filter((video) => video.State === page)}
           />
       )}
     </>

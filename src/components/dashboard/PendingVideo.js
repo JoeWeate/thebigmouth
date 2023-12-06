@@ -5,7 +5,7 @@ import TopCover from "./TopCover";
 
 
 
-const PendingVideo = ({ video, state, setUpdateData, userRole }) => {
+const PendingVideo = ({ video, state, userRole }) => {
     const { URL, videoImg } = video;
     const maxWidth = "500px";
     return (
@@ -19,7 +19,7 @@ const PendingVideo = ({ video, state, setUpdateData, userRole }) => {
                 </div>
             </Grid>
             <Grid item lg={6} xs={11} p="1rem" sx={{ marginTop: { lg: 0, xs: "-1.5rem" } }}>
-                <UserInfoPending userRole={userRole} setUpdateData={setUpdateData} videoInfo={video} />
+                <UserInfoPending userRole={userRole} videoInfo={video} />
             </Grid>
         </Grid>
     );

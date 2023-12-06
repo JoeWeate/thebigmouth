@@ -16,15 +16,18 @@ import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import GroupIcon from "@mui/icons-material/Group";
 
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { MyContext } from "../../App";
+import {routes} from "../../routes";
+import {USER_ROLE} from "../../utils/constants";
 
-function DashboardSidebar({videoState, setVideoState, setUpdateData}) {
+function DashboardSidebar() {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { page } = useParams();
   const [collapsed, setCollapsed] = useState(false);
   const { userRole } = useContext(MyContext);
-  const [activeTab, setActiveTab] = useState(videoState);
+  const [activeTab, setActiveTab] = useState(page);
 
   useEffect(() => {
     function handleResize() {
@@ -36,16 +39,20 @@ function DashboardSidebar({videoState, setVideoState, setUpdateData}) {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(()=>{
+    setActiveTab(page)
+  }, [page])
   const toggleSidebar = () => setCollapsed(!collapsed);
   const handleMenuClick = (state) => {
     if (userRole) {
-      setActiveTab(state);
-      setVideoState(state);
-      setUpdateData((updateData) => updateData + 1);
+      navigate(`/dashboard/${userRole}/${state}`);
+      // setVideoState(state);
+      // setUpdateData((updateData) => updateData + 1);
     }
   };
   const menuItems =
-    userRole === "Admin"
+    userRole === USER_ROLE.ADMIN
       ? [
           { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
           {
@@ -144,7 +151,7 @@ function DashboardSidebar({videoState, setVideoState, setUpdateData}) {
               )}
             </ListItemIcon>
           </ListItemButton>
-          <ListItemButton key="user-hub" onClick={() => navigate("/videohub")}>
+          <ListItemButton key="user-hub" onClick={() => navigate(routes.videoHub.path)}>
             <ListItemIcon
               sx={{
                 minWidth: collapsed ? "auto" : "40px",

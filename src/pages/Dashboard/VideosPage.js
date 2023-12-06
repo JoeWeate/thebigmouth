@@ -5,14 +5,14 @@ import { Grid, Typography } from "@mui/material"
 import { useContext } from "react";
 import { MyContext } from "../../App";
 
-const VideosPage = ({ state, data, setUpdateData }) => {
+const VideosPage = ({ state, data }) => {
   const { userRole } = useContext(MyContext);
   return (
     <>
       <Typography variant="h5">{state}</Typography>
       {state !== "approved" && data && data.length > 0 ? (
         data.map((video) => (
-          <PendingVideo userRole={userRole} key={video.id} video={video} setUpdateData={setUpdateData} state={state} />
+          <PendingVideo userRole={userRole} key={video.id} video={video}  state={state} />
         ))
       ) : state !== "approved" && data && data.length === 0 ? (
         <Typography>
