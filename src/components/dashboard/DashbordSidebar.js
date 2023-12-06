@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useTheme } from "@mui/material/styles";
 import {
-  Box,
   Drawer,
   List,
   ListItemIcon,
   ListItemText,
-  CircularProgress,
   Tooltip, ListItemButton,
 } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -17,56 +15,16 @@ import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import GroupIcon from "@mui/icons-material/Group";
-import VideosPage from "../../pages/Dashboard/VideosPage";
-import AllUsersPage from "../../pages/Dashboard/AllUsersPage";
-import {
-  getAllVideoByUserID,
-  getAllVideosByState,
-} from "../../api/videos";
-import { useAuth0 } from "@auth0/auth0-react";
+
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 
-function Dashboard() {
+function DashboardSidebar({videoState, setVideoState, setUpdateData}) {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { user, isLoading } = useAuth0();
-  const [videoList, setVideoList] = useState([]);
-  const [videoState, setVideoState] = useState("approved");
   const [collapsed, setCollapsed] = useState(false);
   const { userRole } = useContext(MyContext);
-  const [updateData, setUpdateData] = useState(0);
   const [activeTab, setActiveTab] = useState(videoState);
-
-  useEffect(() => {
-    const fetchDataAdmin = async () => {
-      if (userRole !== "Admin") {
-        return;
-      }
-      try {
-        const videosData = await getAllVideosByState(videoState);
-
-        setVideoList(videosData.videos);
-      } catch (error) {
-        console.error({ error });
-      }
-    };
-    fetchDataAdmin();
-  }, [isLoading, videoState, userRole]);
-  useEffect(() => {
-    const fetchDataUser = async () => {
-      if (userRole !== "User" || !user) {
-        return;
-      }
-      try {
-        const videosUserData = await getAllVideoByUserID(user.sub);
-        setVideoList(videosUserData.videos);
-      } catch (error) {
-        console.error({ error });
-      }
-    };
-    fetchDataUser();
-  }, [isLoading, userRole, updateData]);
 
   useEffect(() => {
     function handleResize() {
@@ -126,7 +84,6 @@ function Dashboard() {
         ];
 
   return (
-    <Box sx={{ display: "flex", flexGrow: 1, zIndex: 0, width: "100%", backgroundColor: "#121212" }}>
       <Drawer
         PaperProps={{
           sx: {
@@ -234,30 +191,6 @@ function Dashboard() {
           ))}
         </List>
       </Drawer>
-      <Box
-        component="div"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          backgroundColor: theme.palette.background.default,
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {videoState === "allUsers" ? (
-          <AllUsersPage state={videoState} />
-        ) : !isLoading && !userRole && !updateData ? (
-          <CircularProgress />
-        ) : (
-          <VideosPage
-            state={videoState}
-            setUpdateData={setUpdateData}
-            data={videoList.filter((video) => video.State === videoState)}
-          />
-        )}
-      </Box>
-    </Box>
   );
 }
-export default Dashboard;
+export default DashboardSidebar;

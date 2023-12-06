@@ -4,12 +4,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Grid, CircularProgress, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Auth0Provider } from "@auth0/auth0-react";
+import DashboardLayout from "./components/dashboard/DashbordLayout";
+import DashboardPage from "./pages/Dashboard";
 import env_config from "./env_config";
 import Home from "./pages/HomePage";
 import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
-import VideoPlayer from "./components/VideoPlayer";
 
 import Theme from "./theme";
 import App from "./App";
@@ -18,11 +19,12 @@ import reportWebVitals from "./reportWebVitals";
 import Episode from "./pages/EpisodePage";
 import VideoUpload from "./pages/VideoUpload/VideoUpload";
 import "./index.css";
-import Dashboard from "./components/dashboard/DashbordSidebar";
 import VideoHub from "./pages/VideoHub";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
+
+
 root.render(
   <ThemeProvider theme={Theme}>
     <CssBaseline />
@@ -52,21 +54,20 @@ root.render(
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<App />}>
-              <Route path="" element={<Home />} />
+              <Route index element={<Home />} />
               <Route path="/multimedia/:ID" element={<Multimedia />} />
               <Route
                 path="/episode/:SeriesId/:EpisodeId"
                 element={<Episode />}
               />
               <Route path="login" element={<PostAuthentication />} />
-              <Route path="videohub" element={<VideoHub />}></Route>
-              <Route path="videoupload" element={<VideoUpload />}></Route>
-              <Route path="dashboard">
-                <Route index element={<Dashboard />} />
-              </Route>
+              <Route path="videohub" element={<VideoHub />}/>
+              <Route path="videoupload" element={<VideoUpload />}/>
               <Route path="profile" element={<Profile />} />
+              <Route element={<DashboardLayout />}>
+                <Route path="dashboard"  element={<DashboardPage />} />
+              </Route>
               <Route path="*" element={<Error />} />
-              <Route path="videoplayer" element={<VideoPlayer />} />
             </Route>
           </Routes>
         </BrowserRouter>
