@@ -12,7 +12,6 @@ export default function PostAuthenticate() {
     if (user) {
       async function storeToken() {
         const accessToken = await getAccessTokenSilently();
-        console.log(accessToken);
         localStorage.setItem("access_token", accessToken);
         navigate("/");
       }

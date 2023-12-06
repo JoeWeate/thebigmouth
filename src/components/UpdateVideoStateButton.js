@@ -73,7 +73,6 @@ const UpdateVideoStateButton = (props) => {
 
     const handleClick = () => {
         const nextState = validateChangeState({videoData, action, userRole});
-        console.log({curState: videoData.State, action, nextState})
         if(nextState){
             if(action === ACTION_NAME.UPLOAD){
                 uploadVideo({...videoData, State:nextState}, handleSnackbar).then(() => {

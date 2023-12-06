@@ -16,9 +16,6 @@ const MessagesInputForm = ({ initialData, setUpdateData, setOpenReject }) => {
     };
 
     const handleSubmit = async () => {
-        console.log("Submitting messages:", data);
-
-        const requiredFields = "Messages";
         let isValid = !!data.Messages; // Check if Messages is truthy
 
         if (!isValid) {

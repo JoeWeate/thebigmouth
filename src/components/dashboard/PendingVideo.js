@@ -6,9 +6,8 @@ import TopCover from "./TopCover";
 
 
 const PendingVideo = ({ video, state, setUpdateData, userRole }) => {
-    const { VideoID, URL, UserID, videoImg, ...videoInfo } = video;
+    const { URL, videoImg } = video;
     const maxWidth = "500px";
-    console.log("videoPending", videoInfo)
     return (
         <Grid container flexWrap="wrap" sx={{ direction: { lg: "row", xs: "column" }, justifyContent: { xs: "center", lg: "flex-start" }, mb: { xs: "1rem", lg: 0 } }}>
             <Grid item lg={4} xs={11} p="1rem" style={{ position: "relative" }}>

@@ -13,7 +13,6 @@ function MultimediaSection() {
       .then((response) => {
         if (response.data) {
           setMultimediaData(response.data.multimedia);
-          console.log("Fetched Multimedia Data:", response.data.multimedia);
         }
       })
       .catch((error) => {

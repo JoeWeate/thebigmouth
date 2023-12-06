@@ -5,8 +5,6 @@ import VideoBoxWithDecor from "./VideoBoxWithDecor";
 
 const UserVideo = ({ video, maxWidth = "600px", withVideoInfo }) => {
   const { URL, ...videoInfo } = video;
-  console.log("allalal", videoInfo);
-  console.log("URL", URL);
   return (
     <Card
       variant="outlined"

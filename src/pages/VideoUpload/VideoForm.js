@@ -36,7 +36,6 @@ const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
   };
 
   const handleSubmit = async () => {
-    console.log("Submitting form:", data);
 
     if (!isUrlValid(data.URL)) {
       console.error("URL");
@@ -57,8 +56,6 @@ const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
     });
 
     setFormErrors(newFormErrors);
-    console.log("dataAPI", data)
-    console.log("isValid", isValid)
     if (isValid) {
       try {
         if (initialData) {

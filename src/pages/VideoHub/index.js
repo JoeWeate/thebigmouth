@@ -12,7 +12,6 @@ const VideoHub = () => {
   useEffect(() => {
     getAllVideosByState("approved")
       .then((videosData) => {
-        console.log(videosData.videos);
         setVideoData(videosData.videos);
       })
       .catch((error) => {

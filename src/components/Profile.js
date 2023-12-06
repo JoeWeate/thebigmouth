@@ -32,7 +32,6 @@ const Profile = () => {
     };
     fetchData();
   }, [isLoading]);
-  console.log(userProfileData);
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />

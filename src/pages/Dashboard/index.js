@@ -4,11 +4,10 @@ import {
   Box,
   Drawer,
   List,
-  ListItem,
   ListItemIcon,
   ListItemText,
   CircularProgress,
-  Tooltip,
+  Tooltip, ListItemButton,
 } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -23,7 +22,6 @@ import AllUsersPage from "./AllUsersPage";
 import {
   getAllVideoByUserID,
   getAllVideosByState,
-  getVideos,
 } from "../../api/videos";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
@@ -126,7 +124,7 @@ function Dashboard() {
             state: "blocked",
           },
         ];
-  console.log(videoState);
+
   return (
     <Box sx={{ display: "flex", height: "100vh", zIndex: 0, width: "100%" }}>
       <Drawer
@@ -165,7 +163,7 @@ function Dashboard() {
       >
         <List
           sx={{
-            "& .MuiListItem-root": {
+            "& .MuiListItemButton-root": {
               cursor: "pointer",
               position: "relative",
               "& .MuiListItemText-root": {
@@ -191,7 +189,7 @@ function Dashboard() {
             },
           }}
         >
-          <ListItem button onClick={toggleSidebar}>
+          <ListItemButton onClick={toggleSidebar}>
             <ListItemIcon>
               {collapsed ? (
                 <Tooltip title="Show Dashboard">
@@ -203,8 +201,8 @@ function Dashboard() {
                 </Tooltip>
               )}
             </ListItemIcon>
-          </ListItem>
-          <ListItem button key="user-hub" onClick={() => navigate("/videohub")}>
+          </ListItemButton>
+          <ListItemButton key="user-hub" onClick={() => navigate("/videohub")}>
             <ListItemIcon
               sx={{
                 minWidth: collapsed ? "auto" : "40px",
@@ -221,14 +219,13 @@ function Dashboard() {
               )}
             </ListItemIcon>
             {!collapsed && <ListItemText primary="Back to VIDEOHUB" />}
-          </ListItem>
+          </ListItemButton>
           {menuItems.map((item, index) => (
-            <ListItem
+            <ListItemButton
               sx={{
                 backgroundColor:
                   activeTab === item.state ? "#E6007E" : "inherit",
               }}
-              button
               key={index}
               onClick={() =>
                 handleMenuClick(item.state)
@@ -248,7 +245,7 @@ function Dashboard() {
                 )}
               </ListItemIcon>
               {!collapsed && <ListItemText primary={item.text} />}
-            </ListItem>
+            </ListItemButton>
           ))}
         </List>
       </Drawer>

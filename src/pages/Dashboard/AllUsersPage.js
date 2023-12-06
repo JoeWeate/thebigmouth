@@ -12,7 +12,7 @@ import {
   CircularProgress,
   Tooltip,
 } from "@mui/material";
-const AllUsersPage = ({ state }) => {
+const AllUsersPage = () => {
   const [usersProfileData, setUsersProfileData] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +25,7 @@ const AllUsersPage = ({ state }) => {
     };
     fetchData();
   }, []);
-  console.log(usersProfileData.users);
+
   return usersProfileData ? (
     <Container component="main">
       <CssBaseline />
