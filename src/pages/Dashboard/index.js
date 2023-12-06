@@ -126,27 +126,12 @@ function Dashboard() {
         ];
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", zIndex: 0, width: "100%" }}>
+    <Box sx={{ display: "flex", flexGrow: 1, zIndex: 0, width: "100%", backgroundColor: "#121212" }}>
       <Drawer
         PaperProps={{
           sx: {
+            position: "relative",
             "&::-webkit-scrollbar": { display: "none" },
-            msOverflowStyle: "none",
-            scrollbarWidth: "none",
-            height: {
-              xs: "calc(100% - 56px)",
-              sm: "calc(100% - 64px)",
-              md: "calc(100% - 64px)",
-              lg: "calc(100% - 64px)",
-              xl: "calc(100% - 64px)",
-            },
-            top: {
-              xs: 56,
-              sm: 64,
-              md: 64,
-              lg: 64,
-              xl: 64,
-            },
           },
         }}
         variant="permanent"
@@ -250,13 +235,14 @@ function Dashboard() {
         </List>
       </Drawer>
       <Box
-        component="main"
+        component="div"
         sx={{
-          height: "100vh",
           flexGrow: 1,
           p: 3,
           backgroundColor: theme.palette.background.default,
           width: "100%",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         {videoState === "allUsers" ? (

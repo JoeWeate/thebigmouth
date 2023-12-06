@@ -31,11 +31,12 @@ function App() {
       id="root"
       style={{
         paddingTop: 60,
-        minHeight: "100vh",
+        minHeight: "100dvh",
+        flexWrap: "nowrap",
       }}
     >
       <NavBar />
-      <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start", maxWidth: "100%" }}>
+      <main style={{ display: "flex", flexDirection: "column", flexGrow: 1, maxWidth: "100%" }}>
         <Outlet />
       </main>
       <Footer/>

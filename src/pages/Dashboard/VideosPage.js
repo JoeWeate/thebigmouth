@@ -8,11 +8,7 @@ import { MyContext } from "../../App";
 const VideosPage = ({ state, data, setUpdateData }) => {
   const { userRole } = useContext(MyContext);
   return (
-    <div
-      style={{
-        backgroundColor: "#2B2B2B",
-      }}
-    >
+    <>
       <Typography variant="h5">{state}</Typography>
       {state !== "approved" && data && data.length > 0 ? (
         data.map((video) => (
@@ -39,7 +35,7 @@ const VideosPage = ({ state, data, setUpdateData }) => {
       }
 
 
-    </div>
+    </>
   );
 };
 
