@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import {createContext, useEffect, useState} from "react";
 import { Outlet } from "react-router-dom";
 import {getUserById} from "./api/users";
+import Footer from "./components/Footer";
 import NavBar from "./components/NavBar.js";
 
 // Create the context
@@ -37,6 +38,7 @@ function App() {
       <main style={{ display: "flex", flexGrow: 1, alignItems: "flex-start", maxWidth: "100%" }}>
         <Outlet />
       </main>
+      <Footer/>
     </Grid>
     </MyContextProvider>
   );
