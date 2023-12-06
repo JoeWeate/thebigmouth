@@ -1,27 +1,28 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import {
   Box,
 } from "@mui/material";
-import {Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
-import {MyContext} from "../../App";
-import {routes} from "../../routes";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { MyContext } from "../../App";
+import { routes } from "../../routes";
 import DashboardSidebar from "./DashbordSidebar";
 
 
 function DashboardLayout() {
   const theme = useTheme();
   const { role } = useParams();
-  const location = useLocation();
-  console.log(location)
   const { userRole } = useContext(MyContext);
-  const { user } = useAuth0();
+  const { user, isLoading } = useAuth0();
   const navigate = useNavigate();
 
-  if(!user || userRole !== role){
-    navigate(routes.videoHub.home.path)
-  } else {
+    useEffect(() => {
+        if(!isLoading && !user || (userRole && (userRole !== role))) {
+            navigate(routes.videoHub.home.path)
+        }
+    }, [isLoading, user, userRole]);
+
       return (
           <Box sx={{ display: "flex", flexGrow: 1, zIndex: 0, width: "100%", backgroundColor: "#121212" }}>
               <DashboardSidebar />
@@ -40,8 +41,6 @@ function DashboardLayout() {
               </Box>
           </Box>
       );
-  }
-
 
 }
 export default DashboardLayout;
