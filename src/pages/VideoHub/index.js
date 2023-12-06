@@ -1,19 +1,33 @@
 import { Grid } from "@mui/material";
 import UserVideo from "../../components/userHub/UserVideo";
-import { userHubVideoListMocks } from "../../api/mocks";
 import PageTitleComponent from "./PageTitleComponent";
 import AddArtButton from "../../components/userHub/AddArtButton";
 import SelectSortBy from "../../components/userHub/SelectSortBy";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAllVideosByState } from "../../api/videos";
 import SubtitleComponent from "./SubtitleComponent";
 
 const VideoHub = () => {
-    const [videoData, setVideoData] = useState(userHubVideoListMocks);
-    let title = "Welcome to VideoHub"
-    let subtitle = "Your Ultimate Destination for Awesome Content Experiences!"
-    let titleFontSize = "50pt";
-    let subtitleFontSize = "26pt";
+  const [videoData, setVideoData] = useState([]);
+  useEffect(() => {
+    getAllVideosByState("approved")
+      .then((videosData) => {
+        console.log(videosData.videos);
+        setVideoData(videosData.videos);
+      })
+      .catch((error) => {
+        console.error({ error });
+      });
+  }, []);
 
+  let title = {
+    mainTitle: "Welcome to VideoHub",
+    subtitle: "Your Ultimate Destination for Awesome Content Experiences!",
+  };
+  let fontSize = {
+    titleFontSize: "50pt",
+    subtitleFontSize: "24pt",
+  };
 
     return (
         <Grid

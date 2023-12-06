@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useTheme } from "@mui/material/styles";
 import {
   Box,
@@ -20,46 +20,55 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import GroupIcon from "@mui/icons-material/Group";
 import VideosPage from "./VideosPage";
 import AllUsersPage from "./AllUsersPage";
-import { getAllVideoByUserID, getVideos } from "../../api/videos";
+import {
+  getAllVideoByUserID,
+  getAllVideosByState,
+  getVideos,
+} from "../../api/videos";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getUserById } from "../../api/users";
 import { useNavigate } from "react-router-dom";
+import { MyContext } from "../../App";
 
 function Dashboard() {
   const theme = useTheme();
   const navigate = useNavigate();
   const { user, isLoading } = useAuth0();
   const [videoList, setVideoList] = useState([]);
-  const [videoState, setVideoState] = useState("loading");
+  const [videoState, setVideoState] = useState("approved");
   const [collapsed, setCollapsed] = useState(false);
-  const [role, setRole] = useState("");
-  const [updateData, setUpdateData] = useState(0)
+  const { userRole } = useContext(MyContext);
+  const [updateData, setUpdateData] = useState(0);
+  const [activeTab, setActiveTab] = useState(videoState);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (isLoading || !user || !user.sub) {
+    const fetchDataAdmin = async () => {
+      if (userRole !== "Admin") {
         return;
       }
       try {
-        const userData = await getUserById(user.sub);
-        setRole(userData.user.Role);
-        if (role === "Admin") {
-          const videosData = await getVideos();
-          setVideoState("allUsers");
-          setVideoList(videosData.videos);
-        } else {
-          const videosUserData = await getAllVideoByUserID(
-            userData.user.UserID
-          );
-          setVideoList(videosUserData.videos);
-          setVideoState("draft");
-        }
+        const videosData = await getAllVideosByState(videoState);
+
+        setVideoList(videosData.videos);
       } catch (error) {
         console.error({ error });
       }
     };
-    fetchData();
-  }, [isLoading, user, updateData]);
+    fetchDataAdmin();
+  }, [isLoading, videoState, userRole]);
+  useEffect(() => {
+    const fetchDataUser = async () => {
+      if (userRole !== "User" || !user) {
+        return;
+      }
+      try {
+        const videosUserData = await getAllVideoByUserID(user.sub);
+        setVideoList(videosUserData.videos);
+      } catch (error) {
+        console.error({ error });
+      }
+    };
+    fetchDataUser();
+  }, [isLoading, userRole, updateData]);
 
   useEffect(() => {
     function handleResize() {
@@ -72,42 +81,52 @@ function Dashboard() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   const toggleSidebar = () => setCollapsed(!collapsed);
-  const handleMenuClick = (state) => role && setVideoState(state);
+  const handleMenuClick = (state) => {
+    if (userRole) {
+      setActiveTab(state);
+      setVideoState(state);
+      setUpdateData((updateData) => updateData + 1);
+    }
+  };
   const menuItems =
-    role === "Admin"
+    userRole === "Admin"
       ? [
-        { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
-        {
-          icon: <OndemandVideoIcon />,
-          text: "All User Videos",
-          state: "approved",
-        },
-        {
-          icon: <HourglassBottomIcon />,
-          text: "Waiting List",
-          state: "pending",
-        },
-        {
-          icon: <DoNotDisturbOnIcon />,
-          text: "Restricted",
-          state: "rejected",
-        },
-      ]
+          { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
+          {
+            icon: <OndemandVideoIcon />,
+            text: "All User Videos",
+            state: "approved",
+          },
+          {
+            icon: <HourglassBottomIcon />,
+            text: "Waiting List",
+            state: "inReview",
+          },
+          {
+            icon: <DoNotDisturbOnIcon />,
+            text: "Restricted",
+            state: "blocked",
+          },
+        ]
       : [
-        {
-          icon: <OndemandVideoIcon />,
-          text: "All My Live Videos",
-          state: "approved",
-        },
-        { icon: <EditNoteIcon />, text: "Draft", state: "draft" },
-        { icon: <HourglassBottomIcon />, text: "Pending", state: "pending" },
-        {
-          icon: <DoNotDisturbOnIcon />,
-          text: "Restricted",
-          state: "rejected",
-        },
-      ];
-
+          {
+            icon: <OndemandVideoIcon />,
+            text: "All My Live Videos",
+            state: "approved",
+          },
+          { icon: <EditNoteIcon />, text: "Draft", state: "draft" },
+          {
+            icon: <HourglassBottomIcon />,
+            text: "In Review",
+            state: "inReview",
+          },
+          {
+            icon: <DoNotDisturbOnIcon />,
+            text: "Restricted",
+            state: "blocked",
+          },
+        ];
+  console.log(videoState);
   return (
     <Box sx={{ display: "flex", height: "100vh", zIndex: 0, width: "100%" }}>
       <Drawer
@@ -205,6 +224,10 @@ function Dashboard() {
           </ListItem>
           {menuItems.map((item, index) => (
             <ListItem
+              sx={{
+                backgroundColor:
+                  activeTab === item.state ? "#E6007E" : "inherit",
+              }}
               button
               key={index}
               onClick={() =>
@@ -241,11 +264,12 @@ function Dashboard() {
       >
         {videoState === "allUsers" ? (
           <AllUsersPage state={videoState} />
-        ) : videoState === "loading" ? (
+        ) : !isLoading && !userRole && !updateData ? (
           <CircularProgress />
         ) : (
           <VideosPage
-            state={videoState} setUpdateData={setUpdateData}
+            state={videoState}
+            setUpdateData={setUpdateData}
             data={videoList.filter((video) => video.State === videoState)}
           />
         )}

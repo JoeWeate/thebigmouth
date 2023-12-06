@@ -34,35 +34,48 @@ export const getAllVideoByUserID = (UserID) => {
     });
 };
 
-export const apiUpdateVideo = (data, handleSnackbar) => {
-  let updatedVideo = data
+export const getAllVideosByState = (state) => {
+  return api
+    .get(`/videos/state/${state}`)
+    .then((data) => {
+      return Promise.resolve(data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+export const apiUpdateVideo = (updatedVideo, handleSnackbar) => {
   const videoId = updatedVideo[VIDEO_DATA_KEYS.VIDEO_ID];
-  console.log("!!!!!", updatedVideo[VIDEO_DATA_KEYS.VIDEO_ID])
   const userId = updatedVideo[VIDEO_DATA_KEYS.USER_ID];
-  console.log("!!!!!", userId)
-  console.log("!!!!!", updatedVideo)
   return api
     .put(`/videos/${userId}/${videoId}`, updatedVideo)
-    .then((response) => {
-      if (handleSnackbar && typeof handleSnackbar === 'function') handleSnackbar("success")
-      return Promise.resolve(response.data);
+    .then((data) => {
+      if (handleSnackbar && typeof handleSnackbar === "function")
+        handleSnackbar("success");
+      return Promise.resolve(data.data);
     })
     .catch((error) => {
       console.log("putUpdatedVideo", { error });
-      if (handleSnackbar && typeof handleSnackbar === 'function') handleSnackbar("error")
+      if (handleSnackbar && typeof handleSnackbar === "function")
+        handleSnackbar("error");
     });
 };
-
-
-export const apiDeleteVideo = (userId, videoId, successCallback, failureCallback) => {
+export const apiDeleteVideo = (
+  userId,
+  videoId,
+  successCallback,
+  failureCallback
+) => {
   return api
     .delete(`/videos/${userId}/${videoId}`)
     .then((data) => {
-      if (successCallback && typeof successCallback === 'function') successCallback()
+      if (successCallback && typeof successCallback === "function")
+        successCallback();
       return Promise.resolve(data);
     })
     .catch((error) => {
-      if (failureCallback && typeof failureCallback === 'function') failureCallback();
+      if (failureCallback && typeof failureCallback === "function")
+        failureCallback();
       console.log(error);
     });
 };
