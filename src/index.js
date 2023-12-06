@@ -11,6 +11,7 @@ import Home from "./pages/HomePage";
 import Error from "./pages/ErrorPage";
 import Multimedia from "./pages/MultimediaPage";
 import Profile from "./pages/ProfilePage";
+import {routes} from "./routes";
 
 import Theme from "./theme";
 import App from "./App";
@@ -53,19 +54,19 @@ root.render(
       >
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<App />}>
+            <Route exact path={routes.home.path} element={<App />}>
               <Route index element={<Home />} />
-              <Route path="/multimedia/:ID" element={<Multimedia />} />
+              <Route path={routes.multimedia.path} element={<Multimedia />} />
               <Route
-                path="/episode/:SeriesId/:EpisodeId"
+                path={routes.episode.path}
                 element={<Episode />}
               />
-              <Route path="login" element={<PostAuthentication />} />
-              <Route path="videohub" element={<VideoHub />}/>
-              <Route path="videoupload" element={<VideoUpload />}/>
-              <Route path="profile" element={<Profile />} />
+              <Route path={routes.login.path} element={<PostAuthentication />} />
+              <Route path={routes.videoHub.home.path} element={<VideoHub />}/>
+              <Route path={routes.videoHub.videoUpload.path} element={<VideoUpload />}/>
+              <Route path={routes.videoHub.profile.path} element={<Profile />} />
               <Route element={<DashboardLayout />}>
-                <Route path="dashboard"  element={<DashboardPage />} />
+                <Route path={routes.dashboard.path}  element={<DashboardPage />} />
               </Route>
               <Route path="*" element={<Error />} />
             </Route>
