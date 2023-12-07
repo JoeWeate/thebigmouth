@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {apiDeleteVideo, apiUpdateVideo, uploadVideo} from "../api/videos";
+import {apiDeleteVideo, apiUpdateVideo, UploadUrlData} from "../api/videos";
 import Snackbar from "../components/Snackbar";
 import {ACTION_NAME} from "../utils/constants";
 import {validateChangeState} from "../utils/validateChangeState";
@@ -105,13 +105,13 @@ const UpdateVideoStateButton = (props) => {
     }
 
     const handleClick = async () => {
-        console.log(videoData, action, userRole)
+
         const nextState = await validateChangeState({videoData, action, userRole});
         if(nextState){
             if(action === ACTION_NAME.UPLOAD){
-                uploadVideo({...videoData, State:nextState}, onSuccessfulUpdate, onFailedUpdate);
+                await UploadUrlData({...videoData, State:nextState}, onSuccessfulUpdate, onFailedUpdate);
             }  else {
-                apiUpdateVideo({...videoData, State: nextState, issuerID: userID}, onSuccessfulUpdate, onFailedUpdate)
+                await apiUpdateVideo({...videoData, State: nextState, issuerID: userID}, onSuccessfulUpdate, onFailedUpdate)
             }
         } else if(action === ACTION_NAME.DELETE){
             apiDeleteVideo(videoData.UserID, videoData.VideoID, onSuccessfulUpdate, onFailedUpdate);
