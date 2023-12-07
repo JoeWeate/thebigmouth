@@ -1,10 +1,10 @@
 import { getOneEpisode } from "../../api/episodes";
-import { episodeInfoMocks, videoUrlMocks } from "../../api/mocks";
+import { episodeInfoMocks } from "../../api/mocks";
 import { getMultimedia } from "../../api/multimedia";
 import AboutInfo from "../../components/AboutInfo";
 import MediaCardList from "../../components/MediaCardList";
 import SectionContent from "../../components/SectionContent";
-import EmptyState from "../MultimediaPage/EmptyState";
+import EmptyState from "../../components/EmptyState";
 import Information from "../../components/Information";
 import Loader from "../MultimediaPage/Loader";
 import VideoBanner from "../../components/VideoBanner";

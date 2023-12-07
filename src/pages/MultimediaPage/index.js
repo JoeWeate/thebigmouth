@@ -5,7 +5,7 @@ import { isEmpty } from "lodash";
 import { getMultimedia, getOneMultimedia } from "../../api/multimedia";
 import BannerMultimedia from "./BannerMultimedia";
 import AboutInfo from "../../components/AboutInfo";
-import EmptyState from "./EmptyState";
+import EmptyState from "../../components/EmptyState";
 import EpisodesAccordion from "./EpisodesAccordion";
 import Information from "../../components/Information";
 import Loader from "./Loader";

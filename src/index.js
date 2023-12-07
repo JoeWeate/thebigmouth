@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Grid, CircularProgress, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { Auth0Provider } from "@auth0/auth0-react";
-import DashboardLayout from "./components/dashboard/DashbordLayout";
+import DashboardLayout from "./pages/Dashboard/DashbordLayout";
 import DashboardPage from "./pages/Dashboard";
 import env_config from "./env_config";
 import Home from "./pages/HomePage";
@@ -65,8 +65,8 @@ root.render(
               <Route path={routes.videoHub.home.path} element={<VideoHub />}/>
               <Route path={routes.videoHub.videoUpload.path} element={<VideoUpload />}/>
               <Route path={routes.videoHub.profile.path} element={<Profile />} />
-              <Route element={<DashboardLayout />}>
-                <Route path={routes.dashboard.path}  element={<DashboardPage />} />
+              <Route path={routes.dashboard.basePath} element={<DashboardLayout />}>
+                  <Route path=':role/:page'  element={<DashboardPage />} />
               </Route>
               <Route path="*" element={<Error />} />
             </Route>

@@ -1,67 +1,37 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  CircularProgress,
-} from "@mui/material";
-import { useParams } from "react-router-dom";
-import VideosPage from "./VideosPage";
-import AllUsersPage from "./AllUsersPage";
-import {
-  getAllVideoByUserID,
-  getAllVideosByState,
-} from "../../api/videos";
-import { useAuth0 } from "@auth0/auth0-react";
+
+import {useAuth0} from "@auth0/auth0-react";
+import {CircularProgress} from "@mui/material";
+import React, { useContext } from "react";
+import {useParams} from "react-router-dom";
+
+import {USER_ROLE} from "../../utils/constants";
+import AdminVideosPage from "./admin/AdminVideosPage";
+import UserVideosPage from "./user/UserVideosPage";
+import AllUsersPage from "./admin/AllUsersPage";
 import { MyContext } from "../../App";
 
 
 function DashboardPage() {
   const { user, isLoading } = useAuth0();
-  const [videoList, setVideoList] = useState([]);
-  const { page } = useParams();
+  const { role, page } = useParams();
   const { userRole } = useContext(MyContext);
 
-  useEffect(() => {
-    const fetchDataAdmin = async () => {
-      if (userRole !== "Admin") {
-        return;
-      }
-      try {
-        const videosData = await getAllVideosByState(page);
+  if(isLoading && (!user || !userRole)) {
+    return <CircularProgress />
+  } else if((!isLoading && (!user || !userRole)) || (userRole && (userRole !== role))) {
+    return <div>User is not authorized to access this resource</div>
+  }
 
-        setVideoList(videosData.videos);
-      } catch (error) {
-        console.error({ error });
+  if(user && userRole && (userRole === role)) {
+    if(role === USER_ROLE.ADMIN) {
+      if(page === "all-users") {
+        return <AllUsersPage />
+      } else {
+        return <AdminVideosPage />
       }
-    };
-    fetchDataAdmin();
-  }, [isLoading, page, userRole]);
-  useEffect(() => {
-    const fetchDataUser = async () => {
-      if (userRole !== "User" || !user) {
-        return;
-      }
-      try {
-        const videosUserData = await getAllVideoByUserID(user.sub);
-        setVideoList(videosUserData.videos);
-      } catch (error) {
-        console.error({ error });
-      }
-    };
-    fetchDataUser();
-  }, [isLoading, userRole, page]);
-
-  return (
-    <>
-      {page === "allUsers" ? (
-          <AllUsersPage state={page} />
-      ) : !isLoading && !userRole  ? (
-          <CircularProgress />
-      ) : (
-          <VideosPage
-              state={page}
-              data={videoList.filter((video) => video.State === page)}
-          />
-      )}
-    </>
-  );
+    } else if(role === USER_ROLE.USER) {
+      return <UserVideosPage userId={user.sub}/>
+    }
+  }
 }
 export default DashboardPage;

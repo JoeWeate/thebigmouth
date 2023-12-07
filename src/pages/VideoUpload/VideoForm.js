@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Box, TextField, useTheme } from "@mui/material";
-import Button from "../../components/Button.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import { uploadVideo, apiUpdateVideo } from "../../api/videos.js";
 import { useNavigate } from 'react-router-dom';
+import Snackbar from "../../components/Snackbar";
+import UpdateVideoStateButton from "../../components/UpdateVideoStateButton";
+import {routes} from "../../routes";
+import {ACTION_NAME as VIDEO_ACTION} from "../../utils/constants";
 
 
 const isUrlValid = (url) => {
@@ -14,8 +17,8 @@ const isUrlValid = (url) => {
 };
 
 
-const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
-
+const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
+  const isEditForm = initialData;
   const navigate = useNavigate();
   const { user } = useAuth0();
   const theme = useTheme();
@@ -26,7 +29,9 @@ const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
     URL: false,
     Description: false,
   });
-
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('');
 
   const handleChange = (key) => (event) => {
     setData({
@@ -35,10 +40,40 @@ const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
     });
   };
 
+  const handleSuccessSnackbarOpen = () => {
+    setSnackbarOpen(true);
+    setSnackbarMessage('Success!');
+    setSnackbarSeverity('success')
+  };
+
+  const handleErrorSnackbarOpen = () => {
+    setSnackbarOpen(true);
+    setSnackbarSeverity('error')
+    setSnackbarMessage('Error');
+  };
+
+  const onSuccessfulSubmit = () => {
+    handleSuccessSnackbarOpen();
+    getUpdatedVideos();
+    if(isEditForm) {
+      setOpenEdit(false);
+    } else {
+      navigate(routes.dashboard.User.draft.path)
+    }
+  }
+  const onFailedSubmit = () => {
+    handleErrorSnackbarOpen()
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
   const handleSubmit = async () => {
 
     if (!isUrlValid(data.URL)) {
-      console.error("URL");
       setFormErrors({ ...formErrors, URL: true });
       return;
     }
@@ -58,13 +93,10 @@ const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
     setFormErrors(newFormErrors);
     if (isValid) {
       try {
-        if (initialData) {
-          await apiUpdateVideo(data)
-          setUpdateData((updateData) => updateData + 1)
-          setOpenEdit(false);
+        if (isEditForm) {
+          await apiUpdateVideo(data, onSuccessfulSubmit, onFailedSubmit);
         } else {
-          await uploadVideo({ ...data, userId: user.sub });
-          navigate("/dashboard")
+          await uploadVideo({ ...data, userId: user.sub, userName: user.name }, onSuccessfulSubmit, onFailedSubmit);
         }
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -199,13 +231,13 @@ const VideoForm = ({ initialData, setUpdateData, setOpenEdit }) => {
         }}
       />
 
-      <Button
-        template="yellow"
-        variant="outlined"
-        onClick={handleSubmit}
-      >
-        Submit
-      </Button>
+        <UpdateVideoStateButton videoData={data} action={initialData ? VIDEO_ACTION.EDIT : VIDEO_ACTION.UPLOAD} onClick={handleSubmit} />
+        <Snackbar
+            open={snackbarOpen}
+            handleClose={handleClose}
+            severity={snackbarSeverity}
+            message={snackbarMessage}/>
+
     </Box>
   );
 };

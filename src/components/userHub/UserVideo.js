@@ -1,10 +1,11 @@
 import { Card } from "@mui/material";
 import React from "react";
 import UserVideoInfo from "./UserVideoInfo";
-import VideoBoxWithDecor from "./VideoBoxWithDecor";
+import VideoBox from "./VideoBox";
 
 const UserVideo = ({ video, maxWidth = "600px", withVideoInfo }) => {
   const { URL, ...videoInfo } = video;
+
   return (
     <Card
       variant="outlined"
@@ -16,7 +17,7 @@ const UserVideo = ({ video, maxWidth = "600px", withVideoInfo }) => {
         maxWidth,
       }}
     >
-      <VideoBoxWithDecor videoUrl={URL} videoImg="" maxWidth={maxWidth} />
+      <VideoBox videoUrl={URL} maxWidth={maxWidth} />
       {withVideoInfo && <UserVideoInfo videoInfo={videoInfo} />}
     </Card>
   );

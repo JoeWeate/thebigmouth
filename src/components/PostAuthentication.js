@@ -3,6 +3,7 @@ import { getUserById, registerNewUser } from "../api/users";
 import { useNavigate } from "react-router";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
+import {routes} from "../routes";
 
 export default function PostAuthenticate() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function PostAuthenticate() {
       async function storeToken() {
         const accessToken = await getAccessTokenSilently();
         localStorage.setItem("access_token", accessToken);
-        navigate("/");
+        navigate(routes.videoHub.home.path);
       }
 
       async function checkIfUserExist() {

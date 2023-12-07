@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUsers } from "../../api/users";
+import { getUsers } from "../../../api/users";
 import {
   Avatar,
   Button,

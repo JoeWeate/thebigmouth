@@ -19,14 +19,17 @@ import GroupIcon from "@mui/icons-material/Group";
 import {useNavigate, useParams} from "react-router-dom";
 import { MyContext } from "../../App";
 import {routes} from "../../routes";
-import {USER_ROLE} from "../../utils/constants";
+import {USER_ROLE, VIDEO_STATE} from "../../utils/constants";
 
 function DashboardSidebar() {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { page } = useParams();
+  const { role, page } = useParams();
+
   const [collapsed, setCollapsed] = useState(false);
+
   const { userRole } = useContext(MyContext);
+
 
   useEffect(() => {
     function handleResize() {
@@ -42,48 +45,46 @@ function DashboardSidebar() {
 
   const toggleSidebar = () => setCollapsed(!collapsed);
   const handleMenuClick = (state) => {
-    if (userRole) {
-      navigate(`/dashboard/${userRole}/${state}`);
-      // setVideoState(state);
-      // setUpdateData((updateData) => updateData + 1);
+    if (userRole && (userRole === role)) {
+      navigate(`/dashboard/${role}/${state}`);
     }
   };
   const menuItems =
     userRole === USER_ROLE.ADMIN
       ? [
-          { icon: <GroupIcon />, text: "All Users", state: "allUsers" },
+          { icon: <GroupIcon />, text: "All Users", state: "all-users" },
           {
             icon: <OndemandVideoIcon />,
             text: "All User Videos",
-            state: "approved",
+            state: VIDEO_STATE.APPROVED,
           },
           {
             icon: <HourglassBottomIcon />,
             text: "Waiting List",
-            state: "inReview",
+            state: VIDEO_STATE.IN_REVIEW,
           },
           {
             icon: <DoNotDisturbOnIcon />,
             text: "Restricted",
-            state: "blocked",
+            state: VIDEO_STATE.BLOCKED,
           },
         ]
       : [
           {
             icon: <OndemandVideoIcon />,
             text: "All My Live Videos",
-            state: "approved",
+            state: VIDEO_STATE.APPROVED,
           },
           { icon: <EditNoteIcon />, text: "Draft", state: "draft" },
           {
             icon: <HourglassBottomIcon />,
             text: "In Review",
-            state: "inReview",
+            state: VIDEO_STATE.IN_REVIEW,
           },
           {
             icon: <DoNotDisturbOnIcon />,
             text: "Restricted",
-            state: "blocked",
+            state: VIDEO_STATE.BLOCKED,
           },
         ];
 
@@ -121,7 +122,7 @@ function DashboardSidebar() {
                   height: "2px",
                   bottom: "-3px",
                   right: 0,
-                  backgroundColor: "#E6007E",
+                  backgroundColor: theme.palette.error.main,
                   visibility: "hidden",
                   transform: "scaleX(0)",
                   transition: "all 0.3s ease-in-out",
@@ -166,13 +167,13 @@ function DashboardSidebar() {
             </ListItemIcon>
             {!collapsed && <ListItemText primary="Back to VIDEOHUB" />}
           </ListItemButton>
-          {menuItems.map((item, index) => (
+          {menuItems.map(item => (
             <ListItemButton
               sx={{
                 backgroundColor:
-                  page === item.state ? "#E6007E" : "inherit",
+                  page === item.state ? theme.palette.error.main : "inherit",
               }}
-              key={index}
+              key={`${item.text}-${role}`}
               onClick={() =>
                 handleMenuClick(item.state)
               }
