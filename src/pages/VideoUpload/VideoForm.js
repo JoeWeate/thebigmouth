@@ -22,10 +22,10 @@ const VisuallyHiddenInput = styled.input({
   opacity: 0,
 });
 
-function isUrlValid(url) {
+function isUrlValid(videoLink) {
   const urlRegex =
     /^(https?:\/\/)?(?:www\.)?(youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)|vimeo\.com\/(\d+))/;
-  return urlRegex.test(url);
+  return urlRegex.test(videoLink);
 }
 
 const VideoForm = () => {
@@ -54,7 +54,6 @@ const VideoForm = () => {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    console.log("Selected file:", selectedFile);
     setFile(selectedFile);
     setFileName(selectedFile.name);
   };
@@ -241,7 +240,7 @@ const VideoForm = () => {
           formErrors[selectedOption] === true
             ? selectedOption === "file"
               ? "Please select a file"
-              : selectedOption === "url"
+              : selectedOption === "videoLink"
               ? "Video link is required"
               : ""
             : ""
