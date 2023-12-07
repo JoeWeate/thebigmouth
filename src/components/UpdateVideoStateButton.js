@@ -63,7 +63,7 @@ export const VIDEO_ACTION_BUTTONS = {
 }
 const UpdateVideoStateButton = (props) => {
     const {videoData, action, getUpdatedVideos, onClick, disabled, additionalCbs = {}} = props;
-    const { userRole } = useContext(MyContext);
+    const { userRole, userID } = useContext(MyContext);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('success');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
@@ -111,7 +111,7 @@ const UpdateVideoStateButton = (props) => {
             if(action === ACTION_NAME.UPLOAD){
                 uploadVideo({...videoData, State:nextState}, onSuccessfulUpdate, onFailedUpdate);
             }  else {
-                apiUpdateVideo({...videoData, State: nextState}, onSuccessfulUpdate, onFailedUpdate)
+                apiUpdateVideo({...videoData, State: nextState, issuerID: userID}, onSuccessfulUpdate, onFailedUpdate)
             }
         } else if(action === ACTION_NAME.DELETE){
             apiDeleteVideo(videoData.UserID, videoData.VideoID, onSuccessfulUpdate, onFailedUpdate);

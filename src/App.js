@@ -11,12 +11,12 @@ export const MyContext = createContext();
 
 function MyContextProvider({ children }) {
     const {user} = useAuth0();
-    const [contextValue, setContextValue] = useState({userRole: null});
+    const [contextValue, setContextValue] = useState({userRole: null, userID: null});
     console.log({user})
 
     useEffect(() => {
        if(user){
-           getUserById(user?.sub).then(data => setContextValue({userRole: data.user?.Role})).catch(error => console.log(error));
+           getUserById(user?.sub).then(data => setContextValue({userRole: data.user?.Role, userID: user.sub})).catch(error => console.log(error));
        }
     }, [user]);
     return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;
