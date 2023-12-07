@@ -25,8 +25,8 @@ const VideoActionsAdmin = ({ page, video, getUpdatedVideos }) => {
             )}
             {page === VIDEO_STATE.IN_REVIEW && (
                 <Box>
-                    <UpdateVideoStateButton action={ACTION_NAME.REJECT} videoData={video} getUpdatedVideos={getUpdatedVideos} onClick={handleRejectWindowOpen}/>
-                    {openReject && <DialogWindow videoInfo={video} openReject={openReject} setOpenEdit={setOpenReject} handleClose={handleClose} titleDialog="Reject message for Video" dialogTextDescription={dialogTextDescriptionReject} getUpdatedVideos={getUpdatedVideos}/>}
+                    <UpdateVideoStateButton action='OPEN_REJECT_FORM' videoData={video} getUpdatedVideos={getUpdatedVideos} onClick={handleRejectWindowOpen}/>
+                    {openReject && <DialogWindow videoInfo={video} openReject={openReject} setOpenReject={setOpenReject} handleClose={handleClose} titleDialog="Reject message for Video" dialogTextDescription={dialogTextDescriptionReject} getUpdatedVideos={getUpdatedVideos}/>}
                     <UpdateVideoStateButton action={ACTION_NAME.APPROVE} videoData={video} getUpdatedVideos={getUpdatedVideos}/>
                     <UpdateVideoStateButton action={ACTION_NAME.BLOCK} videoData={video} getUpdatedVideos={getUpdatedVideos}/>
                 </Box>

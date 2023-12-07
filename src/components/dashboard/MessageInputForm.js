@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Box, TextField, useTheme } from "@mui/material";
-import Button from "../../components/Button.js";
-import { apiUpdateVideo } from "../../api/videos.js";
+import {ACTION_NAME} from "../../utils/constants";
+import UpdateVideoStateButton from "../UpdateVideoStateButton";
 
-const MessagesInputForm = ({ initialData, setUpdateData, setOpenReject }) => {
+const MessagesInputForm = ({ initialData, getUpdatedVideos, setOpenReject }) => {
     const [formError, setFormError] = useState("");
     const theme = useTheme();
     const [data, setData] = useState(initialData || {});
@@ -15,21 +15,8 @@ const MessagesInputForm = ({ initialData, setUpdateData, setOpenReject }) => {
         });
     };
 
-    const handleSubmit = async () => {
-        let isValid = !!data.Messages; // Check if Messages is truthy
-
-        if (!isValid) {
-            setFormError("Message is required");
-            return;
-        }
-
-        try {
-            await apiUpdateVideo(data);
-            setUpdateData((updateData) => updateData + 1);
-            setOpenReject(false);
-        } catch (error) {
-            console.error("Error submitting form:", error);
-        }
+    const closeDialog = () => {
+        setOpenReject(false);
     };
 
     return (
@@ -77,13 +64,7 @@ const MessagesInputForm = ({ initialData, setUpdateData, setOpenReject }) => {
                     },
                 }}
             />
-            <Button
-                template="yellow"
-                variant="outlined"
-                onClick={handleSubmit}
-            >
-                Submit
-            </Button>
+            <UpdateVideoStateButton action={ACTION_NAME.REJECT} disabled={!data.Messages} videoData={data} getUpdatedVideos={getUpdatedVideos} additionalCbs={{success: closeDialog}}/>
         </Box>
     );
 };

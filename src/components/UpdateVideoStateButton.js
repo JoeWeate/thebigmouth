@@ -40,9 +40,9 @@ export const VIDEO_ACTION_BUTTONS = {
         variant: BUTTON_VARIANT.OUTLINED,
     },
     [ACTION_NAME.REJECT]: {
-        label: "REJECT",
-        template: BUTTON_TEMPLATE.PINK,
-        variant: BUTTON_VARIANT.CONTAINED,
+        label: "SUBMIT",
+        template: BUTTON_TEMPLATE.YELLOW,
+        variant: BUTTON_VARIANT.OUTLINED,
     },
     [ACTION_NAME.BLOCK]: {
         label: "BLOCK",
@@ -53,14 +53,20 @@ export const VIDEO_ACTION_BUTTONS = {
         label: "UPDATE",
         template: BUTTON_TEMPLATE.YELLOW,
         variant: BUTTON_VARIANT.CONTAINED,
+    },
+    OPEN_REJECT_FORM: {
+        label: "REJECT",
+        template: BUTTON_TEMPLATE.PINK,
+        variant: BUTTON_VARIANT.CONTAINED,
     }
+
 }
 const UpdateVideoStateButton = (props) => {
-    const {videoData, action, getUpdatedVideos, onClick} = props;
+    const {videoData, action, getUpdatedVideos, onClick, disabled, additionalCbs = {}} = props;
     const { userRole } = useContext(MyContext);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('');
+    const [snackbarMessage, setSnackbarMessage] = useState('success');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
     const template = VIDEO_ACTION_BUTTONS[action].template;
     const variant = VIDEO_ACTION_BUTTONS[action].variant;
     const label = VIDEO_ACTION_BUTTONS[action].label;
@@ -74,32 +80,37 @@ const UpdateVideoStateButton = (props) => {
 
     const handleSuccessSnackbarOpen = () => {
         setSnackbarOpen(true);
+        setSnackbarSeverity('success');
         setSnackbarMessage('Success!');
-        setSnackbarSeverity('success')
     };
 
     const handleErrorSnackbarOpen = () => {
         setSnackbarOpen(true);
         setSnackbarSeverity('error')
-        setSnackbarMessage('Error');
+        setSnackbarMessage('Error!');
     };
 
-    const onSuccessfulUpdate = () => {
+    const onSuccessfulUpdate = async () => {
         handleSuccessSnackbarOpen();
-        getUpdatedVideos();
+        await getUpdatedVideos();
+        if(additionalCbs.success) {
+            additionalCbs.success();
+        }
     }
     const onFailedUpdate = () => {
         handleErrorSnackbarOpen();
+        if(additionalCbs.error) {
+            additionalCbs.error();
+        }
     }
 
     const handleClick = async () => {
-        console.log('handleClick button')
+        console.log(videoData, action, userRole)
         const nextState = await validateChangeState({videoData, action, userRole});
         if(nextState){
             if(action === ACTION_NAME.UPLOAD){
                 uploadVideo({...videoData, State:nextState}, onSuccessfulUpdate, onFailedUpdate);
             }  else {
-                console.log({nextState, onSuccessfulUpdate, onFailedUpdate})
                 apiUpdateVideo({...videoData, State: nextState}, onSuccessfulUpdate, onFailedUpdate)
             }
         } else if(action === ACTION_NAME.DELETE){
@@ -109,7 +120,7 @@ const UpdateVideoStateButton = (props) => {
 
     return (
         <>
-            <Button template={template} variant={variant} onClick={onClick || handleClick}>{label}</Button>
+            <Button template={template} variant={variant} onClick={onClick || handleClick} disabled={disabled}>{label}</Button>
             <Snackbar
                 open={snackbarOpen}
                 handleClose={handleClose}

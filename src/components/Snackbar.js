@@ -5,8 +5,7 @@ import SnackbarMui from '@mui/material/Snackbar';
 const Snackbar = ({message, severity, open, handleClose }) => {
     return (
         <SnackbarMui
-            sx={{"&.MuiSnackbar-root": {top: "100px"}}}
-            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
             open={open}
             onClose={handleClose}
             autoHideDuration={null}

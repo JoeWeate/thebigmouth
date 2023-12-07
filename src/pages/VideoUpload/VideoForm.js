@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import {isEmpty} from "lodash";
+import React, {useEffect, useState} from "react";
 import { Box, TextField, useTheme } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
-import { uploadVideo, apiUpdateVideo } from "../../api/videos.js";
 import { useNavigate } from 'react-router-dom';
-import Snackbar from "../../components/Snackbar";
 import UpdateVideoStateButton from "../../components/UpdateVideoStateButton";
 import {routes} from "../../routes";
 import {ACTION_NAME as VIDEO_ACTION} from "../../utils/constants";
 
-
 const isUrlValid = (url) => {
-  const urlRegex =
-    /^(https?:\/\/)?(?:www\.)?(vimeo\.com\/(\d+)|youtube\.com\/watch\?v=([a-zA-Z0-9_-]+))/;
-
+  const urlRegex = /^(https?:\/\/)?(?:www\.)?(vimeo\.com\/(\d+)|youtube\.com\/watch\?v=([a-zA-Z0-9_-]+))/;
   return urlRegex.test(url);
 };
 
@@ -29,9 +25,17 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
     URL: false,
     Description: false,
   });
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState('');
+
+  const validate = () => {
+    const newFormErrors = {
+      Title: !data.Title,
+      ShortDescription: !data.ShortDescription,
+      URL: !isUrlValid(data.URL),
+      Description: !data.Description,
+    };
+    setFormErrors(newFormErrors);
+    return Object.values(newFormErrors).every((error) => error === false);
+  };
 
   const handleChange = (key) => (event) => {
     setData({
@@ -40,69 +44,23 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
     });
   };
 
-  const handleSuccessSnackbarOpen = () => {
-    setSnackbarOpen(true);
-    setSnackbarMessage('Success!');
-    setSnackbarSeverity('success')
-  };
+  useEffect(()=>{
+    if (isEmpty(data) || data === initialData) {
+      return;
+    }
+   validate();
+  }, [data])
 
-  const handleErrorSnackbarOpen = () => {
-    setSnackbarOpen(true);
-    setSnackbarSeverity('error')
-    setSnackbarMessage('Error');
-  };
 
   const onSuccessfulSubmit = () => {
-    handleSuccessSnackbarOpen();
-    getUpdatedVideos();
     if(isEditForm) {
       setOpenEdit(false);
     } else {
       navigate(routes.dashboard.User.draft.path)
     }
   }
-  const onFailedSubmit = () => {
-    handleErrorSnackbarOpen()
-  }
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setSnackbarOpen(false);
-  };
-  const handleSubmit = async () => {
-
-    if (!isUrlValid(data.URL)) {
-      setFormErrors({ ...formErrors, URL: true });
-      return;
-    }
-    const requiredFields = ["Title", "Description", "URL"];
-    const newFormErrors = {};
-    let isValid = true;
-
-    requiredFields.forEach((field) => {
-      if (!data[field]) {
-        newFormErrors[field] = true;
-        isValid = false;
-      } else {
-        newFormErrors[field] = false;
-      }
-    });
-
-    setFormErrors(newFormErrors);
-    if (isValid) {
-      try {
-        if (isEditForm) {
-          await apiUpdateVideo(data, onSuccessfulSubmit, onFailedSubmit);
-        } else {
-          await uploadVideo({ ...data, userId: user.sub, userName: user.name }, onSuccessfulSubmit, onFailedSubmit);
-        }
-      } catch (error) {
-        console.error("Error submitting form:", error);
-      }
-    }
-  };
+  const isFormValid = Object.values(formErrors).some((error) => error);
 
   return (
     <Box
@@ -230,14 +188,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
           },
         }}
       />
-
-        <UpdateVideoStateButton videoData={data} action={initialData ? VIDEO_ACTION.EDIT : VIDEO_ACTION.UPLOAD} onClick={handleSubmit} />
-        <Snackbar
-            open={snackbarOpen}
-            handleClose={handleClose}
-            severity={snackbarSeverity}
-            message={snackbarMessage}/>
-
+        <UpdateVideoStateButton videoData={data} getUpdatedVideos={getUpdatedVideos} action={initialData ? VIDEO_ACTION.EDIT : VIDEO_ACTION.UPLOAD} additionalCbs={{success: onSuccessfulSubmit}} disabled={isFormValid}/>
     </Box>
   );
 };

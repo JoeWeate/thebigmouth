@@ -3,17 +3,19 @@ import { VIDEO_DATA_KEYS } from "../utils/constants";
 const api = configureAxios({});
 
 export const uploadVideo = async (data, successCallback, failureCallback) => {
-  try {
-    const response = await api.post("/videos", data);
-    if (successCallback && typeof successCallback === "function")
-      successCallback();
-    return response.data;
-  } catch (error) {
-    if (failureCallback && typeof failureCallback === "function")
-      failureCallback();
-    console.error("Error uploading video:", error);
-    throw new Error("Failed to upload video. Please try again later.");
-  }
+  return api
+      .post("/videos", data)
+      .then((response) => {
+        return Promise.resolve(response.data);
+      }).then(() => {
+          if (successCallback && typeof successCallback === "function")
+              successCallback();
+      })
+      .catch((error) => {
+        if (failureCallback && typeof failureCallback === "function")
+          failureCallback();
+        console.log(error);
+      });
 };
 
 
