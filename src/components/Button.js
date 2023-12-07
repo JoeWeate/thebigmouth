@@ -16,7 +16,7 @@ const getColor = ({ template, theme }) => {
   return colorMap[template];
 };
 
-const MyButton = ({ template, onClick, children, variant }) => {
+const MyButton = ({ template, onClick, children, variant, startIcon }) => {
   const theme = useTheme();
   const styles = getColor({ template, theme });
   const buttonStyles =
@@ -46,7 +46,7 @@ const MyButton = ({ template, onClick, children, variant }) => {
           border: `1px solid ${styles.bg}`,
         };
   return (
-    <Button sx={buttonStyles} onClick={onClick}>
+    <Button sx={buttonStyles} onClick={onClick} startIcon={startIcon}>
       {children}
     </Button>
   );
