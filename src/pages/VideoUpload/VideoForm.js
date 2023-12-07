@@ -110,12 +110,17 @@ const VideoForm = () => {
           isUrlValid(data.videoLink)
         ) {
           // If it's a link - POST
-          const linkResponse = await UploadUrlData({
+          await UploadUrlData({
             ...data,
             userId: user.sub,
             source: "External",
           });
-          console.log(linkResponse, "linkResponse");
+          setData({
+            title: "",
+            description: "",
+            shortDescription: "",
+            videoLink: "",
+          });
         } else if (selectedOption === "file" && file) {
           // If it's a file, do PUT first
           const formData = new FormData();
@@ -126,6 +131,14 @@ const VideoForm = () => {
 
           // Passing  the setData function to modify the state in the parent component
           await UploadFileData(file, user.sub, data, setData);
+          setData({
+            title: "",
+            description: "",
+            shortDescription: "",
+            videoLink: "",
+          });
+          setFile(null);
+          setFileName("");
         } else {
           console.error("No file or valid video link provided.");
         }
