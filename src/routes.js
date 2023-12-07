@@ -1,4 +1,4 @@
-import {USER_ROLE} from "./utils/constants";
+import {USER_ROLE, VIDEO_STATE} from "./utils/constants";
 
 export const routes = {
     home: {
@@ -36,21 +36,21 @@ export const routes = {
         path: '/dashboard/:role/:page',
         basePath: '/dashboard',
         [USER_ROLE.USER]: {
-            approved: {
+            [VIDEO_STATE.APPROVED]: {
                 displayName: 'All My Live Videos',
-                path: `/dashboard/${USER_ROLE.USER}/approved`,
+                path: `/dashboard/${USER_ROLE.USER}/${VIDEO_STATE.APPROVED}`,
             },
-            drafts: {
+            [VIDEO_STATE.DRAFT]: {
                 displayName: 'Drafts',
-                path: `/dashboard/${USER_ROLE.USER}/drafts`,
+                path: `/dashboard/${USER_ROLE.USER}/${VIDEO_STATE.DRAFT}`,
             },
-            inReview: {
+            [VIDEO_STATE.IN_REVIEW]: {
                 displayName: 'In Review',
-                path: `/dashboard/${USER_ROLE.USER}/pending`,
+                path: `/dashboard/${USER_ROLE.USER}/${VIDEO_STATE.IN_REVIEW}`,
             },
-            blocked: {
+            [VIDEO_STATE.BLOCKED]: {
                 displayName: 'Restricted',
-                path: `/dashboard/${USER_ROLE.USER}/blocked`,
+                path: `/dashboard/${USER_ROLE.USER}/${VIDEO_STATE.BLOCKED}`,
             },
         },
         [USER_ROLE.ADMIN]: {
@@ -60,15 +60,15 @@ export const routes = {
             },
             allUsersVideos: {
                 displayName: 'All Users Videos',
-                path: `/dashboard/${USER_ROLE.ADMIN}/all-users-videos`,
+                path: `/dashboard/${USER_ROLE.ADMIN}/${VIDEO_STATE.APPROVED}`,
             },
-            inReview: {
+            [VIDEO_STATE.IN_REVIEW]: {
                 displayName: 'Waiting List',
-                path: `/dashboard/${USER_ROLE.ADMIN}/in-review`,
+                path: `/dashboard/${USER_ROLE.ADMIN}/${VIDEO_STATE.IN_REVIEW}`,
             },
-            blocked: {
+            [VIDEO_STATE.BLOCKED]: {
                 displayName: 'Restricted',
-                path: `/dashboard/${USER_ROLE.ADMIN}/blocked`,
+                path: `/dashboard/${USER_ROLE.ADMIN}/${VIDEO_STATE.BLOCKED}`,
             },
         },
     },
