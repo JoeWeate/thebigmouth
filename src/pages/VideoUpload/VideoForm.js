@@ -5,8 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Button from "../../components/Button";
 import { useNavigate } from 'react-router-dom';
 import UpdateVideoStateButton from "../../components/UpdateVideoStateButton";
-import {routes} from "../../routes";
-import {ACTION_NAME as VIDEO_ACTION} from "../../utils/constants";
+import { routes } from "../../routes";
+import { ACTION_NAME as VIDEO_ACTION } from "../../utils/constants";
 import { UploadFileData, UploadUrlData } from "../../api/videos";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import styled from "@emotion/styled";
@@ -69,18 +69,18 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
     });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isEmpty(data) || data === initialData) {
       return;
     }
-   validate();
+    validate();
     let isValid = true;
     if (isValid) {
       try {
         if (
-            selectedOption === "videoLink" &&
-            data.videoLink &&
-            isUrlValid(data.videoLink)
+          selectedOption === "videoLink" &&
+          data.videoLink &&
+          isUrlValid(data.videoLink)
         ) {
           // If it's a link - POST
           const linkResponse = UploadUrlData({
@@ -126,7 +126,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
 
 
   const onSuccessfulSubmit = () => {
-    if(isEditForm) {
+    if (isEditForm) {
       setOpenEdit(false);
     } else {
       navigate(routes.dashboard.User.draft.path)
@@ -181,7 +181,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
       />
 
 
-      <TextField
+      {/* <TextField
         fullWidth
         placeholder="Add your YouTube or Vimeo URL"
         label="Link"
@@ -210,7 +210,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
               : theme.overrides.MuiOutlinedInput.input.borderColor,
           },
         }}
-      />
+      /> */}
       <TextField
         fullWidth
         placeholder="Add a short video description"
@@ -279,8 +279,8 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
             ? selectedOption === "file"
               ? "Please select a file"
               : selectedOption === "videoLink"
-              ? "Video link is required"
-              : ""
+                ? "Video link is required"
+                : ""
             : ""
         }
       >
@@ -347,7 +347,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
         />
       ) : null}
 
-      <UpdateVideoStateButton videoData={data} getUpdatedVideos={getUpdatedVideos} action={initialData ? VIDEO_ACTION.EDIT : VIDEO_ACTION.UPLOAD} additionalCbs={{success: onSuccessfulSubmit}} disabled={isFormValid}/>
+      <UpdateVideoStateButton videoData={data} getUpdatedVideos={getUpdatedVideos} action={initialData ? VIDEO_ACTION.EDIT : VIDEO_ACTION.UPLOAD} additionalCbs={{ success: onSuccessfulSubmit }} disabled={isFormValid} />
     </Box>
   );
 };
