@@ -32,8 +32,8 @@ function App() {
       display="flex"
       direction="column"
       id="root"
-      style={{
-        paddingTop: 60,
+      sx={{
+        pt: {xs: "56px", md: "64px"},
         minHeight: "100dvh",
         flexWrap: "nowrap",
       }}
