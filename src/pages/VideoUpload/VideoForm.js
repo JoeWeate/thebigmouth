@@ -1,8 +1,8 @@
 import {isEmpty} from "lodash";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Box, TextField, useTheme } from "@mui/material";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
+import {MyContext} from "../../App";
 import UpdateVideoStateButton from "../../components/UpdateVideoStateButton";
 import {routes} from "../../routes";
 import {ACTION_NAME as VIDEO_ACTION} from "../../utils/constants";
@@ -16,7 +16,7 @@ const isUrlValid = (url) => {
 const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
   const isEditForm = initialData;
   const navigate = useNavigate();
-  const { user } = useAuth0();
+  const { userID, userName } = useContext(MyContext);
   const theme = useTheme();
   const [data, setData] = useState(initialData || {});
   const [formErrors, setFormErrors] = useState({
@@ -188,7 +188,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
           },
         }}
       />
-        <UpdateVideoStateButton videoData={data} getUpdatedVideos={getUpdatedVideos} action={initialData ? VIDEO_ACTION.EDIT : VIDEO_ACTION.UPLOAD} additionalCbs={{success: onSuccessfulSubmit}} disabled={isFormValid}/>
+        <UpdateVideoStateButton videoData={isEditForm ? data : {...data, UserID: userID, UserName: userName}} action={initialData ? VIDEO_ACTION.EDIT : VIDEO_ACTION.UPLOAD} additionalCbs={isEditForm ? {success: onSuccessfulSubmit} : null} disabled={isFormValid} getUpdatedVideos={getUpdatedVideos}/>
     </Box>
   );
 };

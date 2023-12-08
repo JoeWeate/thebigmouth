@@ -1,6 +1,8 @@
 import React, {useContext, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import {apiDeleteVideo, apiUpdateVideo, uploadVideo} from "../api/videos";
 import Snackbar from "../components/Snackbar";
+import {routes} from "../routes";
 import {ACTION_NAME} from "../utils/constants";
 import {validateChangeState} from "../utils/validateChangeState";
 import {MyContext} from "../App";
@@ -70,6 +72,7 @@ const UpdateVideoStateButton = (props) => {
     const template = VIDEO_ACTION_BUTTONS[action].template;
     const variant = VIDEO_ACTION_BUTTONS[action].variant;
     const label = VIDEO_ACTION_BUTTONS[action].label;
+    const navigate = useNavigate();
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -90,16 +93,29 @@ const UpdateVideoStateButton = (props) => {
         setSnackbarMessage('Error!');
     };
 
+    const onSuccessfulUpload = async () => {
+        handleSuccessSnackbarOpen();
+        navigate(routes.videoHub.home.path);
+        if(additionalCbs && additionalCbs.success) {
+            additionalCbs.success();
+        }
+    }
+    const onFailedUpload = () => {
+        handleErrorSnackbarOpen();
+        if(additionalCbs && additionalCbs.error) {
+            additionalCbs.error();
+        }
+    }
     const onSuccessfulUpdate = async () => {
         handleSuccessSnackbarOpen();
         await getUpdatedVideos();
-        if(additionalCbs.success) {
+        if(additionalCbs && additionalCbs.success) {
             additionalCbs.success();
         }
     }
     const onFailedUpdate = () => {
         handleErrorSnackbarOpen();
-        if(additionalCbs.error) {
+        if(additionalCbs && additionalCbs.error) {
             additionalCbs.error();
         }
     }
@@ -109,7 +125,7 @@ const UpdateVideoStateButton = (props) => {
         const nextState = await validateChangeState({videoData, action, userRole});
         if(nextState){
             if(action === ACTION_NAME.UPLOAD){
-                uploadVideo({...videoData, State:nextState}, onSuccessfulUpdate, onFailedUpdate);
+                uploadVideo({...videoData, State:nextState}, onSuccessfulUpload, onFailedUpload);
             }  else {
                 apiUpdateVideo({...videoData, State: nextState, issuerID: userID}, onSuccessfulUpdate, onFailedUpdate)
             }
