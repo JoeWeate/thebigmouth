@@ -65,8 +65,8 @@ root.render(
               <Route path={routes.videoHub.home.path} element={<VideoHub />}/>
               <Route path={routes.videoHub.videoUpload.path} element={<VideoUpload />}/>
               <Route path={routes.videoHub.profile.path} element={<Profile />} />
-              <Route path={routes.dashboard.basePath} element={<DashboardLayout />}>
-                  <Route path=':role/:page'  element={<DashboardPage />} />
+              <Route element={<DashboardLayout />}>
+                  <Route path='/dashboard/:role/:page'  element={<DashboardPage />} />
               </Route>
               <Route path="*" element={<Error />} />
             </Route>
