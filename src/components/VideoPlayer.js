@@ -57,8 +57,7 @@ export default function VideoPlayer({ url }) {
       <ReactPlayer
         url={url}
         width="100%"
-        height="calc(100vh - 70px)"
-        maxHeight="120vh"
+        height="calc(100vh - 90px)"
         controls
         playing={isPlaying}
         onProgress={handleProgress}

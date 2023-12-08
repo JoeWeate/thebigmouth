@@ -25,11 +25,12 @@ const InfoRow = ({ label, text, sx }) => {
 };
 
 const UserVideoInfo = ({ videoInfo }) => {
+
   const theme = useTheme();
 
   const { UserName, Title, ShortDescription, Description, Timestamp } =
     videoInfo;
-  const date = new Date(Timestamp);
+  const date = new Date(parseFloat(Timestamp));
   const normalDate = date.toLocaleDateString();
   return (
     <Box sx={{ display: "flex", flexDirection: "column", p: 2 }}>
@@ -52,9 +53,9 @@ const UserVideoInfo = ({ videoInfo }) => {
           variant="p"
           component="time"
           color={theme.palette.text.secondary}
-          datetime={normalDate}
+          datetime={date.toLocaleString()}
         >
-          {normalDate}
+          {date.toLocaleString()}
         </Typography>
       </Box>
     </Box>
