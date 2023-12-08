@@ -4,7 +4,7 @@ const api = configureAxios({});
 
 export const UploadFileData = async (file, userId, data, setData) => {
   try {
-    const response = await api.get("/presigned-url", {});
+    const response = await api.put("/presigned-url", {}); //changed to put as we are going to use to put objects
 
     if (response.status !== 200) {
       throw new Error("Failed to get presigned URL.");
