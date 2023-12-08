@@ -10,13 +10,15 @@ import NavBar from "./components/NavBar.js";
 export const MyContext = createContext();
 
 function MyContextProvider({ children }) {
-    const {user} = useAuth0();
-    const [contextValue, setContextValue] = useState({userRole: null, userID: null});
-    console.log({user})
+    const { user } = useAuth0();
+    const [contextValue, setContextValue] = useState({});
 
     useEffect(() => {
-       if(user){
-           getUserById(user?.sub).then(data => setContextValue({userRole: data.user?.Role, userID: user.sub})).catch(error => console.log(error));
+       if( user ){
+           const userId = user.sub;
+           setContextValue({userID: userId})
+           getUserById(userId).then(data => (setContextValue({...contextValue, userRole: data.user.Role})))
+                   .catch(error => console.log(error));
        }
     }, [user]);
     return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;
