@@ -1,8 +1,8 @@
 import configureAxios from "./configureAxios";
-import {VIDEO_DATA_KEYS} from "../utils/constants";
+import { VIDEO_DATA_KEYS } from "../utils/constants";
 const api = configureAxios({});
 
-export const UploadFileData = async (file, userId, data, setData) => {
+export const UploadFileData = async (file, data, UserID, UserName) => {
   try {
     const response = await api.put("/presigned-url", {}); //changed to put as we are going to use to put objects
 
@@ -29,13 +29,13 @@ export const UploadFileData = async (file, userId, data, setData) => {
     //get the key of the uploaded file and send it to database
     console.log(s3Link, "s3Link");
 
-    const { videoLink, ...restData } = data;
+    const { URL, ...restData } = data;
 
     await UploadUrlData({
       ...restData,
-      videoLink: s3Link,
-      userId: userId,
-      source: "Internal",
+      URL: s3Link,
+      UserID,
+      UserName,
     });
   } catch (error) {
     console.error("An error occurred during file upload:", error);
@@ -71,28 +71,37 @@ export const getAllVideoByUserID = async (UserID) => {
 };
 
 export const apiUpdateVideo = (updatedVideo, handleSnackbar) => {
-    const videoId = updatedVideo[VIDEO_DATA_KEYS.VIDEO_ID];
-    const userId = updatedVideo[VIDEO_DATA_KEYS.USER_ID];
-    return api
-        .put(`/videos/${userId}/${videoId}`, updatedVideo)
-        .then((data) => {
-          if(handleSnackbar && typeof handleSnackbar === 'function') handleSnackbar("success")
-            return Promise.resolve(data.data);
-        })
-        .catch((error) => {
-            console.log("putUpdatedVideo", {error});
-          if(handleSnackbar && typeof handleSnackbar === 'function') handleSnackbar("error")
-        });
-};
-export const apiDeleteVideo = (userId, videoId, successCallback, failureCallback) => {
+  const videoId = updatedVideo[VIDEO_DATA_KEYS.VIDEO_ID];
+  const userId = updatedVideo[VIDEO_DATA_KEYS.USER_ID];
   return api
-      .delete(`/videos/${userId}/${videoId}`)
-      .then((data) => {
-        if(successCallback && typeof successCallback === 'function')successCallback()
-        return Promise.resolve(data);
-      })
-      .catch((error) => {
-        if(failureCallback && typeof failureCallback === 'function')failureCallback();
-        console.log(error);
-      });
+    .put(`/videos/${userId}/${videoId}`, updatedVideo)
+    .then((data) => {
+      if (handleSnackbar && typeof handleSnackbar === "function")
+        handleSnackbar("success");
+      return Promise.resolve(data.data);
+    })
+    .catch((error) => {
+      console.log("putUpdatedVideo", { error });
+      if (handleSnackbar && typeof handleSnackbar === "function")
+        handleSnackbar("error");
+    });
+};
+export const apiDeleteVideo = (
+  userId,
+  videoId,
+  successCallback,
+  failureCallback
+) => {
+  return api
+    .delete(`/videos/${userId}/${videoId}`)
+    .then((data) => {
+      if (successCallback && typeof successCallback === "function")
+        successCallback();
+      return Promise.resolve(data);
+    })
+    .catch((error) => {
+      if (failureCallback && typeof failureCallback === "function")
+        failureCallback();
+      console.log(error);
+    });
 };

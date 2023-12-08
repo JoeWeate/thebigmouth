@@ -22,6 +22,11 @@ const VisuallyHiddenInput = styled.input({
   opacity: 0,
 });
 
+const SuccessMessage = styled.div({
+  color: "#EB038F",
+  marginTop: "1rem",
+});
+
 function isUrlValid(videoLink) {
   const urlRegex =
     /^(https?:\/\/)?(?:www\.)?(youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)|vimeo\.com\/(\d+))/;
@@ -34,16 +39,17 @@ const VideoForm = () => {
   const fileInputRef = useRef(null);
 
   const [data, setData] = useState({
-    title: "",
-    description: "",
-    shortDescription: "",
-    videoLink: "",
+    Title: "",
+    Description: "",
+    ShortDescription: "",
+    URL: "",
   });
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
 
   const [selectedOption, setSelectedOption] = useState("");
   const [formErrors, setFormErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState(""); // New state for success message
 
   const handleChange = (event) => {
     setData({
@@ -69,7 +75,7 @@ const VideoForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const requiredFields = ["title", "shortDescription", "description"];
+    const requiredFields = ["Title", "ShortDescription", "Description"];
     const newFormErrors = {};
 
     let isValid = true;
@@ -92,35 +98,36 @@ const VideoForm = () => {
       newFormErrors[selectedOption] = true;
       isValid = false;
     }
-    if (selectedOption === "videoLink" && !isUrlValid(data.videoLink)) {
+    if (selectedOption === "URL" && !isUrlValid(data.URL)) {
       newFormErrors[selectedOption] = true;
-      newFormErrors["videoLink"] = true;
+      newFormErrors["URL"] = true;
       isValid = false;
     } else {
-      newFormErrors.videoLink = false;
+      newFormErrors.URL = false;
     }
 
     setFormErrors(newFormErrors);
 
     if (isValid) {
       try {
-        if (
-          selectedOption === "videoLink" &&
-          data.videoLink &&
-          isUrlValid(data.videoLink)
-        ) {
+        if (selectedOption === "URL" && data.URL && isUrlValid(data.URL)) {
           // If it's a link - POST
           await UploadUrlData({
             ...data,
-            userId: user.sub,
-            source: "External",
+            UserID: user.sub,
+            UserName: user.name,
           });
+
           setData({
-            title: "",
-            description: "",
-            shortDescription: "",
-            videoLink: "",
+            Title: "",
+            ShortDescription: "",
+            Description: "",
+            URL: "",
           });
+          setSuccessMessage("File submitted successfully!");
+          setTimeout(() => {
+            setSuccessMessage("");
+          }, 3000);
         } else if (selectedOption === "file" && file) {
           // If it's a file, do PUT first
           const formData = new FormData();
@@ -130,20 +137,26 @@ const VideoForm = () => {
           // (PUT request)
 
           // Passing  the setData function to modify the state in the parent component
-          await UploadFileData(file, user.sub, data, setData);
+          await UploadFileData(file, user.sub, user.name, data, setData);
+          console.log(user.name, "user.name");
           setData({
-            title: "",
-            description: "",
-            shortDescription: "",
-            videoLink: "",
+            Title: "",
+            Description: "",
+            ShortDescription: "",
+            URL: "",
           });
           setFile(null);
           setFileName("");
+          setSuccessMessage("File submitted successfully!");
+          setTimeout(() => {
+            setSuccessMessage("");
+          }, 3000);
         } else {
           console.error("No file or valid video link provided.");
         }
       } catch (error) {
         console.error("Error handling file upload:", error);
+        setSuccessMessage("Error submitting the file. Please try again.");
       }
     }
   };
@@ -161,7 +174,7 @@ const VideoForm = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: "3rem",
+        padding: "1.5rem",
         paddingBottom: "3rem",
       }}
     >
@@ -169,13 +182,13 @@ const VideoForm = () => {
         fullWidth
         placeholder="Title"
         label="Title"
-        id="title"
-        name="title"
-        value={data.title}
+        id="Title"
+        name="Title"
+        value={data.Title}
         onChange={handleChange}
         margin="normal"
-        error={formErrors.title}
-        helperText={formErrors.title && "Title is required"}
+        error={formErrors.Title}
+        helperText={formErrors.Title && "Title is required"}
         InputLabelProps={{
           style: {
             ...theme.overrides.MuiOutlinedInput.root,
@@ -194,12 +207,14 @@ const VideoForm = () => {
         placeholder="Add a short video description"
         label="Short Description"
         id="shortDescription"
-        name="shortDescription"
-        value={data.shortDescription}
+        name="ShortDescription"
+        value={data.ShortDescription}
         onChange={handleChange}
         margin="normal"
-        error={formErrors.shortDescription}
-        helperText={formErrors.description && "Short description is required"}
+        error={formErrors.ShortDescription}
+        helperText={
+          formErrors.ShortDescription && "Short description is required"
+        }
         InputLabelProps={{
           style: {
             ...theme.overrides.MuiOutlinedInput.root,
@@ -215,16 +230,16 @@ const VideoForm = () => {
       <TextField
         fullWidth
         placeholder="Add a detailed video description"
-        label="Long Description"
-        id="description"
-        name="description"
-        value={data.description}
+        label="Description"
+        id="Description"
+        name="Description"
+        value={data.Description}
         onChange={handleChange}
         margin="normal"
         multiline
         rows={2}
-        error={formErrors.description}
-        helperText={formErrors.description && "Description is required"}
+        error={formErrors.Description}
+        helperText={formErrors.Description && "Description is required"}
         sx={{
           paddingBottom: "1rem",
         }}
@@ -254,8 +269,8 @@ const VideoForm = () => {
           formErrors[selectedOption] === true
             ? selectedOption === "file"
               ? "Please select a file"
-              : selectedOption === "videoLink"
-              ? "Video link is required"
+              : selectedOption === "URL"
+              ? "URL is required"
               : ""
             : ""
         }
@@ -264,7 +279,7 @@ const VideoForm = () => {
           Select Video Upload Type
         </MenuItem>
         <MenuItem value="file">File Upload</MenuItem>
-        <MenuItem value="videoLink">URL</MenuItem>
+        <MenuItem value="URL">URL</MenuItem>
       </TextField>
 
       {selectedOption === "file" ? (
@@ -294,18 +309,18 @@ const VideoForm = () => {
           </Button>
           {fileName ? fileName : "Upload file"}
         </Box>
-      ) : selectedOption === "videoLink" ? (
+      ) : selectedOption === "URL" ? (
         <TextField
           fullWidth
           placeholder="Add your YouTube or Vimeo URL"
-          label="Link"
-          id="VideoLink"
-          name="videoLink"
-          value={data.videoLink}
+          label="URL"
+          id="URL"
+          name="URL"
+          value={data.URL}
           onChange={handleChange}
           margin="normal"
-          error={formErrors.videoLink}
-          helperText={formErrors.videoLink ? "Video link is required" : ""}
+          error={formErrors.URL}
+          helperText={formErrors.URL ? "Video link is required" : ""}
           InputLabelProps={{
             style: {
               ...theme.overrides.MuiOutlinedInput.root,
@@ -326,6 +341,8 @@ const VideoForm = () => {
       <Button template="yellow" variant="outlined" onClick={handleSubmit}>
         Submit
       </Button>
+
+      {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
     </Box>
   );
 };
