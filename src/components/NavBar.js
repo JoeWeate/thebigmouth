@@ -299,7 +299,7 @@ function NavBar() {
                           setting === "Profile"
                             ? routes.videoHub.profile.path
                             : setting === "Dashboard"
-                                ? routes.dashboard[userRole][userRole === USER_ROLE.ADMIN ? "allUsersVideos" : "approved"].path
+                                ? (!!userRole ? (routes.dashboard[userRole]?.[userRole === USER_ROLE.ADMIN ? "allUsersVideos" : "approved"].path) : routes.videoHub.home.path)
                             : "#"
                         )
                       }
