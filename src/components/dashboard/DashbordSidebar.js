@@ -149,7 +149,7 @@ function DashboardSidebar() {
               )}
             </ListItemIcon>
           </ListItemButton>
-          <ListItemButton key="user-hub" onClick={() => navigate(routes.videoHub.path)}>
+          <ListItemButton key="user-hub" onClick={() => navigate(routes.videoHub.home.path)}>
             <ListItemIcon
               sx={{
                 minWidth: collapsed ? "auto" : "40px",
