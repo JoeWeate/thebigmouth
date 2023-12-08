@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import ReactPlayer from "react-player";
 import XRayMocks from "../api/mocks";
 import PosterComponent from "./PosterComponent";
@@ -72,8 +72,6 @@ export default function VideoPlayer({ url }) {
           },
         }}
       />
-      <Typography>Current Time seconds: {Math.floor(currentTime)}</Typography>
-      <Typography>Current Time minutes: {formatTime(currentTime)}</Typography>
     </Grid>
   );
 }
