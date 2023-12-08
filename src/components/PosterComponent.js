@@ -1,24 +1,15 @@
 import { useTheme } from "@emotion/react";
-import styled from "@emotion/styled";
+
 import {
   Box,
   Grid,
   Avatar,
   Typography,
-  Tooltip,
-  tooltipClasses,
   Hidden,
 } from "@mui/material";
 const PosterComponent = ({ XRayMocks, currentTime }) => {
   const theme = useTheme();
   const { seasonActors, XrayTime } = XRayMocks;
-  const CustomWidthTooltip = styled(({ className, ...props }) => (
-    <Tooltip {...props} classes={{ popper: className }} />
-  ))({
-    [`& .${tooltipClasses.tooltip}`]: {
-      maxWidth: 500,
-    },
-  });
   return (
     <Box>
       {XrayTime.map((actor) => {
@@ -75,15 +66,12 @@ const PosterComponent = ({ XRayMocks, currentTime }) => {
                 </Grid>
                 {!moreThanThree ?
                   <Grid item sx={{ mt: { lg: "2rem", md: 0, sm: 0 } }}>
-                    <CustomWidthTooltip
-                      title={seasonActors[index].description}
-                      placement="top"
-                      arrow
-                    >
-                      <Typography variant="h5" sx={{ marginBottom: "0.2rem", color: theme.palette.yellow.main, }}>
-                        {seasonActors[index].name}
-                      </Typography>
-                    </CustomWidthTooltip>
+                    <Typography variant="h5" sx={{
+                      marginBottom: "0.2rem",
+                      color: theme.palette.yellow.main,
+                    }}>
+                      {seasonActors[index].name}
+                    </Typography>
                     <Typography sx={{ fontSize: "10pt" }}>
                       {seasonActors[index].description}
                     </Typography>
