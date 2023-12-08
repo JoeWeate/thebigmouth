@@ -6,7 +6,7 @@ const prod_config = {
   },
   apiGateway: {
     REGION: "ue-west-2",
-    URL: "bthgkjfail.execute-api.eu-west-2.amazonaws.com/v1",
+    URL: "etcart9j81.execute-api.eu-west-2.amazonaws.com/v1",
   },
   auth0: {
     domain: "thebigmouth.uk.auth0.com",
