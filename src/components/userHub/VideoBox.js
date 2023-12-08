@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import { videoUrlMocks } from "../../api/mocks";
 
 
-const VideoBox = ({ videoUrl, videoImg, maxWidth, children }) => {
+const VideoBox = ({ videoUrl, videoImg, maxWidth, activePage, children }) => {
     const [hover, setHover] = React.useState(false);
     const [playVideo, setPlayVideo] = React.useState(false);
 
@@ -56,7 +56,7 @@ const VideoBox = ({ videoUrl, videoImg, maxWidth, children }) => {
                     }} />
                 {videoImg && !playVideo && <CardMedia component="img" image={videoImg} alt="Cover"
                     sx={{ position: "absolute", top: 0, left: 0, height: '100%', width: '100%', objectFit: 'cover' }} />}
-                {children && children({ playVideo }, { hover }, { videoImg })}
+                {children && children(playVideo, hover, videoImg, activePage)}
             </Box>
         </Box>
     )

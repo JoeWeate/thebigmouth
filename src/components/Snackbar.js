@@ -1,24 +1,21 @@
-import {Alert} from "@mui/material";
+import { Alert } from "@mui/material";
 import * as React from 'react';
 import SnackbarMui from '@mui/material/Snackbar';
 
-const Snackbar = ({anchorOrigin, message, severity, open, handleClose }) => {
+const Snackbar = ({message, severity, open, handleClose }) => {
     return (
-        <>
         <SnackbarMui
-            anchorOrigin={{vertical: anchorOrigin?.vertical || 'bottom', horizontal: anchorOrigin?.horizontal || 'center'}}
+            anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
             open={open}
             onClose={handleClose}
-            autoHideDuration={3000}
+            autoHideDuration={null}
             // message={!children && message}
-            key={anchorOrigin?.vertical || 'top' + anchorOrigin?.horizontal || 'center'}
+            key={'top' + 'center'}
         >
-            <Alert onClose={handleClose} severity={severity || 'success'} sx={{ width: '100%' }}>
-                {message || "This is a success message!"}
+            <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+                {message}
             </Alert>
         </SnackbarMui>
-        </>
     );
 }
-
 export default Snackbar;

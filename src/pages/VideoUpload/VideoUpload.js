@@ -1,5 +1,5 @@
 import React from "react";
-import VideoForm from "../VideoUpload/VideoForm";
+import VideoForm from "./VideoForm";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -9,7 +9,7 @@ const VideoUpload = () => {
     <Grid
       container
       style={{
-        height: "60vh",
+        height: "100vh",
         mb: {
           lg: "2rem",
           sm: "4rem",

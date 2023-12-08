@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Typography, Grid, Box } from '@mui/material';
+import { Typography, Grid, Box, Card } from '@mui/material';
 import '../assets/styles/helper.css';
 import JumpingWords from './TextStyles/JumpingWords';
 import GraffitiText from './TextStyles/GraffitiText';
@@ -18,12 +18,17 @@ export default function MediaCardList({ sectionTitle, multimediaData }) {
           <Grid item xs={12} sm={6} md={4} key={index} sx={{ pr: 3, width: '100%', flex: "auto 0 0" }}>
 
             <Link to={`/multimedia/${item.ID}`}>
-              <Box sx={{ position: "relative" }}>
-                <img
-                  style={{ width: "100%", borderRadius: "0.5rem", position: "relative" }}
-                  src={item.Images}
-                  alt={`Image ${item.Name}`}
-                />
+              <Box sx={{ position: "relative", overflow: "hidden", borderRadius: "0.5rem" }}>
+                <Card sx={{ objectFit: "cover" }}>
+                  <img
+                    style={{
+                      width: "100%", height: "auto", position: "relative"
+                    }}
+                    src={item.Images}
+                    alt={`Image ${item.Name}`
+                    }
+                  />
+                </Card>
                 <Box
                   sx={{
                     background: "#E6007E",
@@ -57,9 +62,12 @@ export default function MediaCardList({ sectionTitle, multimediaData }) {
                     <GraffitiText title={item.Name} />
                   ) : item.TitleStyle === "JumpingWords" ? (
                     <JumpingWords title={item.Name} />
-                  ) : <p>{item.Name}</p>}
+                  ) : (
+                    <p>{item.Name}</p>
+                  )}
                 </Typography>
               </Box>
+
             </Link>
           </Grid>
         ))}

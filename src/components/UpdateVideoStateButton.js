@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {apiUpdateVideo, uploadVideo} from "../api/videos";
+import {apiDeleteVideo, apiUpdateVideo, uploadVideo} from "../api/videos";
 import Snackbar from "../components/Snackbar";
 import {ACTION_NAME} from "../utils/constants";
 import {validateChangeState} from "../utils/validateChangeState";
@@ -25,9 +25,9 @@ export const VIDEO_ACTION_BUTTONS = {
         variant: BUTTON_VARIANT.CONTAINED,
     },
     [ACTION_NAME.EDIT]: {
-        label: "UPDATE",
+        label: "SUBMIT",
         template: BUTTON_TEMPLATE.YELLOW,
-        variant: BUTTON_VARIANT.CONTAINED,
+        variant: BUTTON_VARIANT.OUTLINED,
     },
     [ACTION_NAME.DELETE]: {
         label: "DELETE",
@@ -40,21 +40,33 @@ export const VIDEO_ACTION_BUTTONS = {
         variant: BUTTON_VARIANT.OUTLINED,
     },
     [ACTION_NAME.REJECT]: {
-        label: "REJECT",
-        template: BUTTON_TEMPLATE.PINK,
-        variant: BUTTON_VARIANT.CONTAINED,
+        label: "SUBMIT",
+        template: BUTTON_TEMPLATE.YELLOW,
+        variant: BUTTON_VARIANT.OUTLINED,
     },
     [ACTION_NAME.BLOCK]: {
         label: "BLOCK",
         template: BUTTON_TEMPLATE.PINK,
         variant: BUTTON_VARIANT.CONTAINED,
     },
+    OPEN_EDIT_FORM: {
+        label: "UPDATE",
+        template: BUTTON_TEMPLATE.YELLOW,
+        variant: BUTTON_VARIANT.CONTAINED,
+    },
+    OPEN_REJECT_FORM: {
+        label: "REJECT",
+        template: BUTTON_TEMPLATE.PINK,
+        variant: BUTTON_VARIANT.CONTAINED,
+    }
+
 }
 const UpdateVideoStateButton = (props) => {
-    const {videoData, action} = props;
-    const { userRole } = useContext(MyContext);
+    const {videoData, action, getUpdatedVideos, onClick, disabled, additionalCbs = {}} = props;
+    const { userRole, userID } = useContext(MyContext);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarType, setSnackbarType] = useState('success');
+    const [snackbarMessage, setSnackbarMessage] = useState('success');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
     const template = VIDEO_ACTION_BUTTONS[action].template;
     const variant = VIDEO_ACTION_BUTTONS[action].variant;
     const label = VIDEO_ACTION_BUTTONS[action].label;
@@ -66,39 +78,56 @@ const UpdateVideoStateButton = (props) => {
         setSnackbarOpen(false);
     };
 
-    const handleSnackbar = (type) => {
-        setSnackbarType(type);
+    const handleSuccessSnackbarOpen = () => {
         setSnackbarOpen(true);
+        setSnackbarSeverity('success');
+        setSnackbarMessage('Success!');
     };
 
-    const handleClick = () => {
-        const nextState = validateChangeState({videoData, action, userRole});
-        console.log({curState: videoData.State, action, nextState})
+    const handleErrorSnackbarOpen = () => {
+        setSnackbarOpen(true);
+        setSnackbarSeverity('error')
+        setSnackbarMessage('Error!');
+    };
+
+    const onSuccessfulUpdate = async () => {
+        handleSuccessSnackbarOpen();
+        await getUpdatedVideos();
+        if(additionalCbs.success) {
+            additionalCbs.success();
+        }
+    }
+    const onFailedUpdate = () => {
+        handleErrorSnackbarOpen();
+        if(additionalCbs.error) {
+            additionalCbs.error();
+        }
+    }
+
+    const handleClick = async () => {
+        console.log(videoData, action, userRole)
+        const nextState = await validateChangeState({videoData, action, userRole});
         if(nextState){
             if(action === ACTION_NAME.UPLOAD){
-                uploadVideo({...videoData, State:nextState}, handleSnackbar).then(() => {
-                    console.log('video uploaded')
-                    //navigate to somewhere
-                });
-            } else if(action === ACTION_NAME.DELETE){
-                console.log('add delete confirmation and axios request')
-                //send axios request to delete video
-            } else {
-                apiUpdateVideo({...videoData, State: nextState}, handleSnackbar);
+                uploadVideo({...videoData, State:nextState}, onSuccessfulUpdate, onFailedUpdate);
+            }  else {
+                apiUpdateVideo({...videoData, State: nextState, issuerID: userID}, onSuccessfulUpdate, onFailedUpdate)
             }
+        } else if(action === ACTION_NAME.DELETE){
+            apiDeleteVideo(videoData.UserID, videoData.VideoID, onSuccessfulUpdate, onFailedUpdate);
         }
     };
 
     return (
         <>
-            <Button template={template} variant={variant} onClick={handleClick}>{label}</Button>
+            <Button template={template} variant={variant} onClick={onClick || handleClick} disabled={disabled}>{label}</Button>
             <Snackbar
                 open={snackbarOpen}
                 handleClose={handleClose}
-                severity={snackbarType === 'success' ? "success" : 'error'}
-                message={snackbarType === 'success' ? "Success!" : 'Error!'}/>
+                severity={snackbarSeverity}
+                message={snackbarMessage}/>
         </>
     );
 }
 
-export default UpdateVideoStateButton;
+export default UpdateVideoStateButton; //UpdateVideoStateButton;
