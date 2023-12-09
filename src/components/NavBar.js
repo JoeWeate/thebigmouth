@@ -1,3 +1,4 @@
+import {useContext} from "react";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,23 +13,27 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useAuth0 } from "@auth0/auth0-react";
+import {MyContext} from "../App";
+import {routes} from "../routes";
+import {USER_ROLE} from "../utils/constants";
 import LogoutButton from "./LogoutButton";
 import LoginButton from "./LoginButton";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/TheBigHouse.png";
 import SearchIcon from "@mui/icons-material/Search";
 const pages = [
   "HOME",
   "ABOUT US",
   "THEATRE",
-  "GET INVOLVED",
   "TBH MEANS BUSINESS",
   "THE BIG MOUTH",
+  "VIDEOHUB",
 ];
-const settingsLogin = ["Profile"];
+const settingsLogin = ["Profile", "Dashboard"];
 function NavBar() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
+  const { userRole } = useContext(MyContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -88,8 +93,13 @@ function NavBar() {
               aria-label="search"
               color="inherit"
               sx={{ ml: 2, mr: 2 }}
+              onClick={() =>
+                  alert(
+                      "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
+                  )
+              }
             >
-              <SearchIcon />
+              <SearchIcon/>
             </IconButton>
             <IconButton
               size="large"
@@ -127,11 +137,25 @@ function NavBar() {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography
-                    onClick={() =>
-                      navigate(
-                        page === "HOME" || page === "THE BIG MOUTH" ? "/" : "#"
-                      )
-                    }
+                    onClick={() => {
+                      if (
+                        page === "ABOUT US" ||
+                        page === "THEATRE" ||
+                        page === "TBH MEANS BUSINESS"
+                      ) {
+                        alert(
+                          "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages, and the USER environment as well."
+                        );
+                      } else {
+                        navigate(
+                          page === "HOME" || page === "THE BIG MOUTH"
+                            ? routes.home.path
+                            : page === "VIDEOHUB"
+                            ? routes.videoHub.home.path
+                            : "#"
+                        );
+                      }
+                    }}
                     textAlign="center"
                   >
                     {page}
@@ -151,9 +175,23 @@ function NavBar() {
                 key={page}
                 onClick={() => {
                   handleCloseNavMenu();
-                  navigate(
-                    page === "HOME" || page === "THE BIG MOUTH" ? "/" : "#"
-                  );
+                  if (
+                    page === "ABOUT US" ||
+                    page === "THEATRE" ||
+                    page === "TBH MEANS BUSINESS"
+                  ) {
+                    alert(
+                      "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
+                    );
+                  } else {
+                    navigate(
+                      page === "HOME" || page === "THE BIG MOUTH"
+                        ? routes.home.path
+                        : page === "VIDEOHUB"
+                        ? routes.videoHub.home.path
+                        : "#"
+                    );
+                  }
                 }}
                 sx={{
                   my: 2,
@@ -206,6 +244,11 @@ function NavBar() {
               aria-label="search"
               color="inherit"
               sx={{ ml: 2, mr: 2 }}
+              onClick={() =>
+                  alert(
+                      "This section is currently under development. Please take a look at THE BIG MOUTH, VIDEOHUB pages and the USER environment as well."
+                  )
+              }
             >
               <SearchIcon />
             </IconButton>
@@ -254,9 +297,9 @@ function NavBar() {
                       onClick={() =>
                         navigate(
                           setting === "Profile"
-                            ? "/profile"
+                            ? routes.videoHub.profile.path
                             : setting === "Dashboard"
-                            ? "/dashboard"
+                                ? (!!userRole ? (routes.dashboard[userRole]?.[userRole === USER_ROLE.ADMIN ? "allUsersVideos" : "approved"].path) : routes.videoHub.home.path)
                             : "#"
                         )
                       }

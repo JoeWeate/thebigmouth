@@ -1,5 +1,5 @@
 import React from "react";
-import VideoForm from "../VideoUpload/VideoForm";
+import VideoForm from "./VideoForm";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -9,9 +9,8 @@ const VideoUpload = () => {
     <Grid
       container
       style={{
-        height: "60vh",
         mb: {
-          lg: "2rem",
+          lg: "5rem",
           sm: "4rem",
         },
       }}
@@ -30,10 +29,7 @@ const VideoUpload = () => {
           alignContent={"center"}
           justifyContent={"center"}
         >
-          <Typography
-            variant="h5"
-            sx={{ padding: "0.5em", marginTop: "0.5em", color: "white" }}
-          >
+          <Typography variant="h5" sx={{ padding: "0.5em", color: "white" }}>
             PLEASE PROVIDE A LINK TO THE
             <span style={{ color: "#EB038F" }}> VIDEO</span> YOU'D LIKE TO
             UPLOAD

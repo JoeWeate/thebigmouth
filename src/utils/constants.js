@@ -25,12 +25,6 @@ export const ACTION_NAME = {
     MOVE_TO_DRAFT: 'moveToDraft',
 }
 
-export const VIDEO_STATES = [
-    VIDEO_STATE.DRAFT,
-    VIDEO_STATE.IN_REVIEW,
-    VIDEO_STATE.APPROVED,
-    VIDEO_STATE.BLOCKED
-]
 export const VIDEO_STATE_UPDATE_ACTIONS = {
     [USER_ROLE.USER] : {
         [ACTION_NAME.UPLOAD]: {

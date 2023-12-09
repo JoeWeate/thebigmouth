@@ -2,6 +2,7 @@ import { Box } from "@mui/material"
 import cross from "../../assets/images/cross.svg"
 import lockIcon from "../../assets/images/lock-icon.svg"
 import { Avatar } from "@mui/material"
+import {VIDEO_STATE} from "../../utils/constants";
 
 
 
@@ -27,14 +28,14 @@ const TopCover = ({ maxWidth, state }) => {
                 border: "solid white 1px"
             }}
         >
-            {state === 'pending' &&
+            {state === VIDEO_STATE.IN_REVIEW &&
                 <Avatar
                     alt="lock-icon"
                     src={lockIcon}
                     sx={{ width: "6rem", height: "6rem", }}
                     variant="rounded"
                 />}
-            {state === 'rejected' && <Avatar
+            {state === VIDEO_STATE.BLOCKED && <Avatar
                 alt="cross-icon"
                 src={cross}
                 sx={{ width: "6rem", height: "6rem" }}

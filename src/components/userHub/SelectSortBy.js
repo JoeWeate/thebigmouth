@@ -37,13 +37,15 @@ export default function SelectSortBy({ setVideoData, videoData }) {
 
     switch (event.target.value) {
       case userName:
-        sortedData.sort((a, b) => a.author.localeCompare(b.author));
+        sortedData.sort((a, b) => a.UserName.localeCompare(b.UserName));
         break;
       case title:
-        sortedData.sort((a, b) => a.title.localeCompare(b.title));
+        sortedData.sort((a, b) => a.Title.localeCompare(b.Title));
         break;
       case uploadDate:
-        sortedData.sort((a, b) => new Date(a.date) - new Date(b.date));
+        sortedData.sort(
+          (a, b) => new Date(a.Timestamp) - new Date(b.Timestamp)
+        );
         break;
     }
 
