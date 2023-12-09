@@ -274,6 +274,12 @@ const VideoForm = () => {
               : ""
             : ""
         }
+        InputProps={{
+          style: {
+            ...theme.overrides.MuiOutlinedInput.input,
+            backgroundColor: "#852256",
+          },
+        }}
       >
         <MenuItem value="" disabled>
           Select Video Upload Type
@@ -291,7 +297,7 @@ const VideoForm = () => {
         >
           <Button
             template="pink"
-            variant="contained"
+            variant="outlined"
             startIcon={<CloudUploadIcon />}
             component="label"
             onClick={handleFileClick}
@@ -338,7 +344,7 @@ const VideoForm = () => {
         />
       ) : null}
 
-      <Button template="yellow" variant="outlined" onClick={handleSubmit}>
+      <Button template="pink" variant="contained" onClick={handleSubmit}>
         Submit
       </Button>
 
