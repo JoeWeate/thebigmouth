@@ -1,17 +1,35 @@
 import { isEmpty } from "lodash";
-import React, { useContext, useEffect, useState } from "react";
-import { Box, TextField, useTheme } from "@mui/material";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import UpdateVideoStateButton from "../../components/UpdateVideoStateButton";
 import { routes } from "../../routes";
+import { Box, TextField, useTheme, MenuItem } from "@mui/material";
 import { ACTION_NAME as VIDEO_ACTION } from "../../utils/constants";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import styled from "@emotion/styled";
+import Button from "../../components/Button";
 
 const isUrlValid = (url) => {
   const urlRegex =
     /^(https?:\/\/)?(?:www\.)?(vimeo\.com\/(\d+)|youtube\.com\/watch\?v=([a-zA-Z0-9_-]+))/;
   return urlRegex.test(url);
 };
+const VisuallyHiddenInput = styled.input({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+  "&:focus": {
+    outline: "none",
+  },
+  opacity: 0,
+});
 
 const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
   const isEditForm = initialData;
@@ -25,6 +43,9 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
     URL: false,
     Description: false,
   });
+  const [selectedOption, setSelectedOption] = useState("");
+  const [fileName, setFileName] = useState("");
+  const fileInputRef = useRef(null);
 
   const validate = () => {
     const newFormErrors = {
@@ -42,6 +63,19 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
       ...data,
       [key]: event.target.value,
     });
+  };
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleFileClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFileName(selectedFile.name);
   };
 
   useEffect(() => {
@@ -107,34 +141,6 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
 
       <TextField
         fullWidth
-        placeholder="Add your YouTube or Vimeo URL"
-        label="Link"
-        id="VideoLink"
-        name="videoLink"
-        value={data.URL}
-        defaultValue={data.URL}
-        onChange={handleChange("URL")}
-        margin="normal"
-        required
-        error={formErrors.URL}
-        helperText={formErrors.URL && "Provide a valid YouTube or Vimeo url."}
-        InputLabelProps={{
-          style: {
-            ...theme.overrides.MuiOutlinedInput.root,
-          },
-        }}
-        InputProps={{
-          style: {
-            ...theme.overrides.MuiOutlinedInput.input,
-            backgroundColor: "rgba(235, 3, 143, 0.6)",
-            borderColor: formErrors.URL
-              ? "#EB038F"
-              : theme.overrides.MuiOutlinedInput.input.borderColor,
-          },
-        }}
-      />
-      <TextField
-        fullWidth
         placeholder="Add a short video description"
         label="Short Description"
         id="shortDescription"
@@ -182,6 +188,87 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
           },
         }}
       />
+      <TextField
+        fullWidth
+        select
+        sx={{ marginBottom: "1rem" }}
+        label="Select how you want to upload your video "
+        value={selectedOption}
+        onChange={handleOptionChange}
+        margin="normal"
+        error={formErrors[selectedOption]}
+        helperText={
+          formErrors[selectedOption] === true
+            ? selectedOption === "file"
+              ? "Please select a file"
+              : selectedOption === "URL"
+              ? "URL is required"
+              : ""
+            : ""
+        }
+      >
+        <MenuItem value="" disabled>
+          Select Video Upload Type
+        </MenuItem>
+        <MenuItem value="file">File Upload</MenuItem>
+        <MenuItem value="URL">URL</MenuItem>
+      </TextField>
+
+      {selectedOption === "file" ? (
+        <Box
+          sx={{
+            position: "relative",
+            display: "block",
+          }}
+        >
+          <Button
+            template="yellow"
+            variant="contained"
+            startIcon={<CloudUploadIcon />}
+            component="label"
+            onClick={handleFileClick}
+            sx={{ textWrap: " nowrap" }}
+          >
+            Upload file
+            <VisuallyHiddenInput
+              accept="video/mp4"
+              id="fileInput"
+              type="file"
+              name="file"
+              onChange={handleFileChange}
+              ref={fileInputRef}
+            />
+          </Button>
+          {fileName ? fileName : "Upload file"}
+        </Box>
+      ) : selectedOption === "URL" ? (
+        <TextField
+          fullWidth
+          placeholder="Add your YouTube or Vimeo URL"
+          label="URL"
+          id="URL"
+          name="URL"
+          value={data.URL}
+          onChange={handleChange}
+          margin="normal"
+          error={formErrors.URL}
+          helperText={formErrors.URL ? "Video link is required" : ""}
+          InputLabelProps={{
+            style: {
+              ...theme.overrides.MuiOutlinedInput.root,
+            },
+          }}
+          InputProps={{
+            style: {
+              ...theme.overrides.MuiOutlinedInput.input,
+              backgroundColor: "rgba(235, 3, 143, 0.6)",
+              borderColor: formErrors.videoLink
+                ? "#EB038F"
+                : theme.overrides.MuiOutlinedInput.input.borderColor,
+            },
+          }}
+        />
+      ) : null}
       <UpdateVideoStateButton
         videoData={
           isEditForm ? data : { ...data, UserID: userID, UserName: userName }
