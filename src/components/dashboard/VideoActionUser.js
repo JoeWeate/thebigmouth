@@ -1,6 +1,6 @@
 import {ACTION_NAME, VIDEO_STATE} from "../../utils/constants";
-import { Box } from "@mui/material";
 import {useState} from "react";
+import ButtonsContainer from "../ButtonsContainer";
 import UpdateVideoStateButton from "../UpdateVideoStateButton";
 import DialogWindow from "./DialogWindow";
 
@@ -17,26 +17,22 @@ const VideoActionsUser = ({ page, video, getUpdatedUsersVideos }) => {
     }
 
     return (
-        <Box >
+        <ButtonsContainer >
             {page === VIDEO_STATE.DRAFT && (
-                <Box>
+                <>
                     <UpdateVideoStateButton action="OPEN_EDIT_FORM" videoData={video} getUpdatedVideos={getUpdatedUsersVideos} onClick={handleEditOpen}/>
                     {openEdit && <DialogWindow videoInfo={video} openEdit={openEdit} setOpenEdit={setOpenEdit} handleClose={handleClose} titleDialog="Edit the video details" dialogTextDescription={dialogTextDescription} getUpdatedVideos={getUpdatedUsersVideos}/>}
                     <UpdateVideoStateButton action={ACTION_NAME.SEND_FOR_REVIEW} videoData={video} getUpdatedVideos={getUpdatedUsersVideos}/>
                     <UpdateVideoStateButton action={ACTION_NAME.DELETE} videoData={video} getUpdatedVideos={getUpdatedUsersVideos}/>
-                </Box>
+                </>
             )}
             {page === VIDEO_STATE.IN_REVIEW && (
-                <Box>
-                    <UpdateVideoStateButton action={ACTION_NAME.MOVE_TO_DRAFT} videoData={video} getUpdatedVideos={getUpdatedUsersVideos}/>
-                </Box>
+                <UpdateVideoStateButton action={ACTION_NAME.MOVE_TO_DRAFT} videoData={video} getUpdatedVideos={getUpdatedUsersVideos}/>
             )}
             {page === VIDEO_STATE.APPROVED && (
-                <Box>
-                    <UpdateVideoStateButton action={ACTION_NAME.MOVE_TO_DRAFT} videoData={video} getUpdatedVideos={getUpdatedUsersVideos}/>
-                </Box>
+                <UpdateVideoStateButton action={ACTION_NAME.MOVE_TO_DRAFT} videoData={video} getUpdatedVideos={getUpdatedUsersVideos}/>
             )}
-        </Box>
+        </ButtonsContainer>
     )
 }
 
