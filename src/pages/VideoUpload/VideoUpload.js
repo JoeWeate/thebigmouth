@@ -42,9 +42,6 @@ const VideoUpload = () => {
       <Grid
         item
         xs={12}
-        style={{
-          marginBottom: "6rem",
-        }}
       >
         <VideoForm />
       </Grid>

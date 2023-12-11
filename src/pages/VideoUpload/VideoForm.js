@@ -3,12 +3,14 @@ import React, {useContext, useEffect, useState, useRef} from "react";
 import { Box, TextField, useTheme, MenuItem } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import {MyContext} from "../../App";
+import ButtonsContainer from "../../components/ButtonsContainer";
+import Snackbar from "../../components/Snackbar";
 import UpdateVideoStateButton from "../../components/UpdateVideoStateButton";
 import {routes} from "../../routes";
-import {ACTION_NAME as VIDEO_ACTION} from "../../utils/constants";
+import {ACTION_NAME, VIDEO_DATA_KEYS, VIDEO_OPTION, VIDEO_STATE} from "../../utils/constants";
 import Button from "../../components/Button";
 import { useAuth0 } from "@auth0/auth0-react";
-import { UploadFileData, UploadUrlData } from "../../api/videos";
+import { apiUploadFileData, apiUploadUrlData } from "../../api/videos";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import styled from "@emotion/styled";
 
@@ -32,171 +34,155 @@ const isUrlValid = (url) => {
   const urlRegex = /^(https?:\/\/)?(?:www\.)?(vimeo\.com\/(\d+)|youtube\.com\/watch\?v=([a-zA-Z0-9_-]+))/;
   return urlRegex.test(url);
 };
-const SuccessMessage = styled.div({
-  color: "#EB038F",
-  marginTop: "1rem",
-});
 
-
-const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
+const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit, videoOption }) => {
   const isEditForm = initialData;
   const navigate = useNavigate();
-  const { user } = useAuth0();
-  const { userID, userName } = useContext(MyContext);
+  const { userID, userName, userRole } = useContext(MyContext);
   const theme = useTheme();
-  const [data, setData] = useState(initialData || {});
-  const [formErrors, setFormErrors] = useState({
-    Title: false,
-    ShortDescription: false,
-    URL: false,
-    Description: false,
-  });
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState(initialData || {});
+  //FILE UPLOAD
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); // New state for success message
+  const [selectedOption, setSelectedOption] = useState(videoOption || undefined);
+  const [formErrors, setFormErrors] = useState({
+    [VIDEO_DATA_KEYS.TITLE]: false,
+    [VIDEO_DATA_KEYS.SHORT_DESCRIPTION]: false,
+    [VIDEO_DATA_KEYS.DESCRIPTION]: false,
+    SELECTED_OPTION: false,
+    [VIDEO_DATA_KEYS[selectedOption]]: false,
+  });
+  const [errorMessages, setErrorMessages] = useState({
+    [VIDEO_DATA_KEYS.TITLE]: "",
+    [VIDEO_DATA_KEYS.SHORT_DESCRIPTION]: "",
+    [VIDEO_DATA_KEYS[selectedOption]]: "",
+    [VIDEO_DATA_KEYS.DESCRIPTION]: "",
+    SELECTED_OPTION: "",
+  });
 
-  const validate = () => {
+
+  //SNACKBAR
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    type: "",
+   });
+
+  // const form = event.target;
+
+  // const formData = new FormData(videoFormRef.current);
+
+  const handleValidation = () => {
     const newFormErrors = {
-      Title: !data.Title,
-      ShortDescription: !data.ShortDescription,
-      URL: !isUrlValid(data.URL),
-      Description: !data.Description,
+      [VIDEO_DATA_KEYS.TITLE]: !formData[VIDEO_DATA_KEYS.TITLE],
+      [VIDEO_DATA_KEYS.SHORT_DESCRIPTION]: !formData[VIDEO_DATA_KEYS.SHORT_DESCRIPTION],
+      [VIDEO_DATA_KEYS.DESCRIPTION]: !formData[VIDEO_DATA_KEYS.DESCRIPTION],
+      SELECTED_OPTION: !selectedOption,
+      [VIDEO_DATA_KEYS.URL]: (selectedOption ? (selectedOption === VIDEO_OPTION.URL ? !isUrlValid(formData[VIDEO_DATA_KEYS.URL]) : false) : false),
+      [VIDEO_DATA_KEYS.FILE]: (selectedOption ? (selectedOption === VIDEO_OPTION.FILE? !file : false) : false),
     };
+
+    const newErrorMessages = {
+      [VIDEO_DATA_KEYS.TITLE]: newFormErrors[VIDEO_DATA_KEYS.TITLE] ? "Title is required" : "",
+      [VIDEO_DATA_KEYS.SHORT_DESCRIPTION]: newFormErrors[VIDEO_DATA_KEYS.SHORT_DESCRIPTION] ? "Short description is required" : "",
+      [VIDEO_DATA_KEYS[selectedOption]]: selectedOption ? (selectedOption === VIDEO_OPTION.URL && newFormErrors[VIDEO_DATA_KEYS[selectedOption]] ? "Invalid URL" : "No file provided") : "Please select an option",
+      [VIDEO_DATA_KEYS.DESCRIPTION]: newFormErrors[VIDEO_DATA_KEYS.DESCRIPTION] ? "Description is required" : "",
+      SELECTED_OPTION: newFormErrors.SELECTED_OPTION ? "Please select an option" : "",
+    };
+
     setFormErrors(newFormErrors);
+    setErrorMessages(newErrorMessages);
+
     return Object.values(newFormErrors).every((error) => error === false);
   };
 
   const handleChange = (key) => (event) => {
-    setData({
-      ...data,
+    setFormData({
+      ...formData,
       [key]: event.target.value,
     });
   };
 
-  useEffect(()=>{
-    if (isEmpty(data) || data === initialData) {
-      return;
-    }
-   validate();
-  }, [data])
-
-
-  const onSuccessfulSubmit = () => {
-    if(isEditForm) {
-      setOpenEdit(false);
-    } else {
-      navigate(routes.dashboard.User.draft.path)
-    }
-  }
-
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
+    if(!selectedFile) {
+      setFile(null);
+      setFileName(null);
+      return;
+    }
     setFile(selectedFile);
     setFileName(selectedFile.name);
   };
+
+  useEffect(()=>{
+    if (isEmpty(formData) || formData === initialData) {
+      return;
+    }
+    handleValidation();
+  }, [formData, selectedOption, file])
+
+
+  const onSuccessfulSubmit = async () => {
+    if(isEditForm) {
+      setOpenEdit(false);
+    } else {
+      setTimeout(() => {
+        navigate(routes.dashboard[userRole][VIDEO_STATE.DRAFT].path)
+      }, 0);
+    }
+  }
+  const onFailedSubmit = () => {
+    setTimeout(()=>{
+      setSnackbar({
+        open: true,
+        type: "error",
+        message: "Error submitting the file. Please try again."})
+    } ,0)
+
+  }
+
   const handleFileClick = () => {
     // Trigger the file input click event
     fileInputRef.current.click();
   };
   const handleOptionChange = (event) => {
-    const selectedValue =
-      event.target.value === "" ? undefined : event.target.value;
-    setSelectedOption(selectedValue);
+    setSelectedOption(event.target.value);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbar({
+      ...snackbar,
+      open: false,
+    });
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const requiredFields = ["Title", "ShortDescription", "Description"];
-    const newFormErrors = {};
-
-    let isValid = true;
-
-
-    requiredFields.forEach((field) => {
-      if (!data[field]) {
-        newFormErrors[field] = true;
-        isValid = false;
-      } else {
-        newFormErrors[field] = false;
-      }
-    });
-    if (selectedOption === "") {
-      newFormErrors[selectedOption] = true;
-      isValid = false;
-    } else {
-      newFormErrors[selectedOption] = false;
-    }
-    if (selectedOption === "file" && !file) {
-      newFormErrors[selectedOption] = true;
-      isValid = false;
-    }
-    if (selectedOption === "URL" && !isUrlValid(data.URL)) {
-      newFormErrors[selectedOption] = true;
-      newFormErrors["URL"] = true;
-      isValid = false;
-    } else {
-      newFormErrors.URL = false;
-    }
-
-    setFormErrors(newFormErrors);
-
-    if (isValid) {
+    if (handleValidation()) {
       try {
-        if (selectedOption === "URL" && data.URL && isUrlValid(data.URL)) {
-          // If it's a link - POST
-          await UploadUrlData({
-            ...data,
-            UserID: user.sub,
-            UserName: user.name,
-          });
+        const data = isEditForm ? null : {
+          ...formData,
+          UserID: userID,
+          UserName: userName,
+        };
+        setLoading(true);
+        if (selectedOption === VIDEO_OPTION.URL && formData.URL && isUrlValid(formData.URL)) {
+          await apiUploadUrlData(data, onSuccessfulSubmit, onFailedSubmit);
 
-          setData({
-            Title: "",
-            ShortDescription: "",
-            Description: "",
-            URL: "",
-          });
-          setSuccessMessage("File submitted successfully!");
-          setTimeout(() => {
-            setSuccessMessage("");
-          }, 3000);
-        } else if (selectedOption === "file" && file) {
-          // If it's a file, do PUT first
-          const formData = new FormData();
-          formData.append("file", file);
-          console.log("File uploaded successfully!", formData);
-
-          // (PUT request)
-
-          // Passing  the setData function to modify the state in the parent component
-          await UploadFileData(file, user.sub, user.name, data, setData);
-          console.log(user.name, "user.name");
-          setData({
-            Title: "",
-            Description: "",
-            ShortDescription: "",
-            URL: "",
-          });
-          setFile(null);
-          setFileName("");
-          setSuccessMessage("File submitted successfully!");
-          setTimeout(() => {
-            setSuccessMessage("");
-          }, 3000);
-        } else {
-          console.error("No file or valid video link provided.");
+        } else if (selectedOption === VIDEO_OPTION.FILE && file) {
+          await apiUploadFileData(file, data, onSuccessfulSubmit, onFailedSubmit);
         }
       } catch (error) {
         console.error("Error handling file upload:", error);
-        setSuccessMessage("Error submitting the file. Please try again.");
+
+      } finally {
+        setLoading(false);
       }
-    }
+   }
   };
-
-  const isFormValid = Object.values(formErrors).some((error) => error);
-
+  const isFormValid = Object.values(formErrors).every((error) => error === false)
   return (
     <Box
       component="form"
@@ -204,9 +190,6 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
       sx={{
         width: {
           maxWidth: "700px",
-        },
-        height: {
-          maxHeight: "500px",
         },
         margin: "auto",
         display: "flex",
@@ -222,10 +205,10 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
         placeholder="Title"
         label="Title"
         id="title"
-        name="title"
-        value={data.Title}
-        defaultValue={data.Title}
-        onChange={handleChange("Title")}
+        name={VIDEO_DATA_KEYS.TITLE}
+        value={formData[VIDEO_DATA_KEYS.TITLE]}
+        defaultValue=""
+        onChange={handleChange(VIDEO_DATA_KEYS.TITLE)}
         margin="normal"
         required
         error={formErrors.Title}
@@ -243,20 +226,19 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
         }}
       />
 
-
       <TextField
           fullWidth
           placeholder="Add a short video description"
           label="Short Description"
           id="shortDescription"
-          name="shortDescription"
-          value={data.ShortDescription}
-          defaultValue={data.ShortDescription}
-          onChange={handleChange("ShortDescription")}
+          name={VIDEO_DATA_KEYS.SHORT_DESCRIPTION}
+          value={formData[VIDEO_DATA_KEYS.SHORT_DESCRIPTION]}
+          defaultValue=""
+          onChange={handleChange(VIDEO_DATA_KEYS.SHORT_DESCRIPTION)}
           margin="normal"
           required
-          error={formErrors.ShortDescription}
-          helperText={formErrors.ShortDescription && "Description is required"}
+          error={formErrors[VIDEO_DATA_KEYS.SHORT_DESCRIPTION]}
+          helperText={errorMessages[VIDEO_DATA_KEYS.SHORT_DESCRIPTION]}
           InputLabelProps={{
             style: {
               ...theme.overrides.MuiOutlinedInput.root,
@@ -275,10 +257,13 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
         placeholder="Add a detailed video description"
         label="Long Description"
         id="description"
-        name="description"
-        value={data.Description}
-        defaultValue={data.Description}
-        onChange={handleChange("Description")}
+        name={VIDEO_DATA_KEYS.DESCRIPTION}
+        value={formData[VIDEO_DATA_KEYS.DESCRIPTION]}
+        defaultValue=""
+        required
+        error={formErrors[VIDEO_DATA_KEYS.DESCRIPTION]}
+        helperText={errorMessages[VIDEO_DATA_KEYS.DESCRIPTION]}
+        onChange={handleChange(VIDEO_DATA_KEYS.DESCRIPTION)}
         margin="normal"
         multiline
         rows={3}
@@ -298,35 +283,22 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
           fullWidth
           select
           sx={{ marginBottom: "1rem" }}
-          label="Select how you want to upload your video "
+          label={selectedOption ? "Video Upload Type" : "Select how you want to upload your video"}
           value={selectedOption}
           onChange={handleOptionChange}
           margin="normal"
-          error={formErrors[selectedOption]}
-          helperText={
-            formErrors[selectedOption] === true
-                ? selectedOption === "file"
-                    ? "Please select a file"
-                    : selectedOption === "URL"
-                        ? "URL is required"
-                        : ""
-                : ""
-          }
+          error={formErrors.SELECTED_OPTION}
+          helperText={errorMessages.SELECTED_OPTION}
       >
         <MenuItem value="" disabled>
           Select Video Upload Type
         </MenuItem>
-        <MenuItem value="file">File Upload</MenuItem>
-        <MenuItem value="URL">URL</MenuItem>
+        <MenuItem value={VIDEO_OPTION.FILE}>File Upload</MenuItem>
+        <MenuItem value={VIDEO_OPTION.URL}>URL</MenuItem>
         </TextField>
 
-      {selectedOption === "file" ? (
-          <Box
-              sx={{
-                position: "relative",
-                display: "block",
-              }}
-          >
+      {selectedOption === VIDEO_OPTION.FILE ? (
+          <ButtonsContainer>
             <Button
                 template="pink"
                 variant="contained"
@@ -340,23 +312,23 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
                   accept="video/mp4"
                   id="fileInput"
                   type="file"
-                  name="file"
+                  name={VIDEO_DATA_KEYS.FILE}
                   onChange={handleFileChange}
                   ref={fileInputRef}
               />
             </Button>
             {fileName ? fileName : "Upload file"}
-          </Box>
-      ) : selectedOption === "URL" ? (
+          </ButtonsContainer>
+      ) : selectedOption === VIDEO_OPTION.URL ? (
           <TextField
               fullWidth
               placeholder="Add your YouTube or Vimeo URL"
               label="Link"
               id="VideoLink"
-              name="videoLink"
-              value={data.URL}
-              defaultValue={data.URL}
-              onChange={handleChange("URL")}
+              name={VIDEO_DATA_KEYS.URL}
+              value={formData[VIDEO_DATA_KEYS.URL]}
+              defaultValue={formData[VIDEO_DATA_KEYS.URL]}
+              onChange={handleChange(VIDEO_DATA_KEYS.URL)}
               margin="normal"
               required
               error={formErrors.URL}
@@ -379,14 +351,22 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit }) => {
               }}
           />
       ) : null}
-      {isEditForm ? (
-          <UpdateVideoStateButton videoData={isEditForm ? data : {...data, UserID: userID, UserName: userName}} action={initialData ? VIDEO_ACTION.EDIT : VIDEO_ACTION.UPLOAD} additionalCbs={isEditForm ? {success: onSuccessfulSubmit} : null} disabled={isFormValid} getUpdatedVideos={getUpdatedVideos}/>
-      ) : (
-          <Button template="yellow" variant="outlined" onClick={handleSubmit}>
-            Submit
-          </Button>
-      )}
-      {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+      <ButtonsContainer>
+        <>
+          {isEditForm ? (
+              <UpdateVideoStateButton videoData={formData} action={ACTION_NAME.EDIT}  disabled={!isFormValid} getUpdatedVideos={getUpdatedVideos}/>
+          ) : (
+              <Button type='submit' template="yellow" variant="outlined" onClick={handleSubmit} disabled={!isFormValid || loading} loadingButton loading={loading}>
+                <span>Submit</span>
+              </Button>
+          )}
+        </>
+      </ButtonsContainer>
+      <Snackbar
+          open={snackbar.open}
+          handleClose={handleSnackbarClose}
+          type={snackbar.type}
+          message={snackbar.message}/>
     </Box>
   );
 };

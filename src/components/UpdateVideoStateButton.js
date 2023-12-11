@@ -1,8 +1,7 @@
 import React, {useContext, useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import {apiDeleteVideo, apiUpdateVideo, uploadVideo} from "../api/videos";
+import { useNavigate } from "react-router-dom";
+import { apiDeleteVideo, apiUpdateVideo } from "../api/videos";
 import Snackbar from "../components/Snackbar";
-import {routes} from "../routes";
 import {ACTION_NAME} from "../utils/constants";
 import {validateChangeState} from "../utils/validateChangeState";
 import {MyContext} from "../App";
@@ -64,84 +63,66 @@ export const VIDEO_ACTION_BUTTONS = {
 
 }
 const UpdateVideoStateButton = (props) => {
-    const {videoData, action, getUpdatedVideos, onClick, disabled, additionalCbs = {}} = props;
+    const {videoData, action, getUpdatedVideos, onClick, disabled} = props;
     const { userRole, userID } = useContext(MyContext);
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('success');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        type: '',
+        message: '',
+    });
+    const [loading, setLoading] = useState(false);
     const template = VIDEO_ACTION_BUTTONS[action].template;
     const variant = VIDEO_ACTION_BUTTONS[action].variant;
     const label = VIDEO_ACTION_BUTTONS[action].label;
-    const navigate = useNavigate();
 
-    const handleClose = (event, reason) => {
+    const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setSnackbarOpen(false);
+        setSnackbar({
+            ...snackbar,
+            open: false,
+        });
     };
 
-    const handleSuccessSnackbarOpen = () => {
-        setSnackbarOpen(true);
-        setSnackbarSeverity('success');
-        setSnackbarMessage('Success!');
+    const handleSnackbarOpen = (type, message) => {
+        setSnackbar({
+            open: true,
+            type: type,
+            message: message,
+        });
     };
 
-    const handleErrorSnackbarOpen = () => {
-        setSnackbarOpen(true);
-        setSnackbarSeverity('error')
-        setSnackbarMessage('Error!');
-    };
-
-    const onSuccessfulUpload = async () => {
-        handleSuccessSnackbarOpen();
-        navigate(routes.videoHub.home.path);
-        if(additionalCbs && additionalCbs.success) {
-            additionalCbs.success();
-        }
-    }
-    const onFailedUpload = () => {
-        handleErrorSnackbarOpen();
-        if(additionalCbs && additionalCbs.error) {
-            additionalCbs.error();
-        }
-    }
     const onSuccessfulUpdate = async () => {
-        handleSuccessSnackbarOpen();
+        await handleSnackbarOpen('success', 'Success!');
         await getUpdatedVideos();
-        if(additionalCbs && additionalCbs.success) {
-            additionalCbs.success();
-        }
     }
-    const onFailedUpdate = () => {
-        handleErrorSnackbarOpen();
-        if(additionalCbs && additionalCbs.error) {
-            additionalCbs.error();
-        }
+
+    const onFailedUpdate = async () => {
+        await handleSnackbarOpen('error', 'Error!');
     }
 
     const handleClick = async () => {
-        console.log(videoData, action, userRole)
         const nextState = await validateChangeState({videoData, action, userRole});
-        if(nextState){
-            if(action === ACTION_NAME.UPLOAD){
-                uploadVideo({...videoData, State:nextState}, onSuccessfulUpload, onFailedUpload);
-            }  else {
-                apiUpdateVideo({...videoData, State: nextState, issuerID: userID}, onSuccessfulUpdate, onFailedUpdate)
-            }
-        } else if(action === ACTION_NAME.DELETE){
-            apiDeleteVideo(videoData.UserID, videoData.VideoID, onSuccessfulUpdate, onFailedUpdate);
+        if (action === ACTION_NAME.DELETE) {
+            setLoading(true);
+            await apiDeleteVideo(videoData.UserID, videoData.VideoID, onSuccessfulUpdate, onFailedUpdate);
+            setLoading(false);
+        } else if (nextState) {
+            setLoading(true);
+            await apiUpdateVideo({...videoData, State: nextState, issuerID: userID}, onSuccessfulUpdate, onFailedUpdate);
+            setLoading(false);
         }
     };
 
     return (
         <>
-            <Button template={template} variant={variant} onClick={onClick || handleClick} disabled={disabled}>{label}</Button>
+            <Button template={template} variant={variant} onClick={onClick || handleClick} disabled={disabled} loadingButton loading={loading}>{label}</Button>
             <Snackbar
-                open={snackbarOpen}
-                handleClose={handleClose}
-                severity={snackbarSeverity}
-                message={snackbarMessage}/>
+                open={snackbar.open}
+                handleClose={handleSnackbarClose}
+                type={snackbar.type}
+                message={snackbar.message}/>
         </>
     );
 }

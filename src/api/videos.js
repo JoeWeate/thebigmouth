@@ -1,8 +1,8 @@
 import configureAxios from "./configureAxios";
-import { VIDEO_DATA_KEYS } from "../utils/constants";
+import {S3_BASE_URL, VIDEO_DATA_KEYS} from "../utils/constants";
 const api = configureAxios({});
 
-export const uploadVideo = async (data, successCallback, failureCallback) => {
+export const apiUploadUrlData = (data, successCallback, failureCallback) => {
   return api
       .post("/videos", data)
       .then((response) => {
@@ -17,7 +17,7 @@ export const uploadVideo = async (data, successCallback, failureCallback) => {
         console.log(error);
       });
 };
-export const UploadFileData = async (file, data, UserID, UserName) => {
+export const apiUploadFileData = async (file, data, successCallback, failureCallback) => {
   try {
     const response = await api.put("/presigned-url", {}); //changed to put as we are going to use to put objects
 
@@ -40,29 +40,11 @@ export const UploadFileData = async (file, data, UserID, UserName) => {
         "File upload failed. Check the presigned URL or try again."
       );
     }
-    console.log(uploadResponse, "uploadResponse");
-    //get the key of the uploaded file and send it to database
-    console.log(s3Link, "s3Link");
 
-    const { URL, ...restData } = data;
-
-    await UploadUrlData({
-      ...restData,
-      URL: s3Link,
-      UserID,
-      UserName,
-    });
+    await apiUploadUrlData({...data, URL: `${S3_BASE_URL}${s3Link}`}, successCallback, failureCallback);
+    // await apiUploadUrlData({
   } catch (error) {
     console.error("An error occurred during file upload:", error);
-  }
-};
-
-export const UploadUrlData = async (data) => {
-  try {
-    await api.post("/videos", data);
-  } catch (error) {
-    console.error("Error while updating server with metadata:", error);
-    throw error;
   }
 };
 
