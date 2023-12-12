@@ -1,6 +1,10 @@
+import { Typography } from "@mui/material"
+
 const InLineText = ({ title }) => {
     return (
-        <p style={{ wordSpacing: "-0.2rem" }}>{title}</p>
+        <Typography sx={{ wordSpacing: "-0.2rem", fontWeight: 600, fontSize: { lg: "40pt", md: "30pt", xs: "40pt" }, marginTop: 0 }}>
+            {title}
+        </Typography>
     )
 }
 

@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
-import {apiUpdateVideo, uploadVideo} from "../api/videos";
+import { useNavigate } from "react-router-dom";
+import { apiDeleteVideo, apiUpdateVideo } from "../api/videos";
 import Snackbar from "../components/Snackbar";
 import {ACTION_NAME} from "../utils/constants";
 import {validateChangeState} from "../utils/validateChangeState";
@@ -25,9 +26,9 @@ export const VIDEO_ACTION_BUTTONS = {
         variant: BUTTON_VARIANT.CONTAINED,
     },
     [ACTION_NAME.EDIT]: {
-        label: "UPDATE",
+        label: "SUBMIT",
         template: BUTTON_TEMPLATE.YELLOW,
-        variant: BUTTON_VARIANT.CONTAINED,
+        variant: BUTTON_VARIANT.OUTLINED,
     },
     [ACTION_NAME.DELETE]: {
         label: "DELETE",
@@ -40,65 +41,90 @@ export const VIDEO_ACTION_BUTTONS = {
         variant: BUTTON_VARIANT.OUTLINED,
     },
     [ACTION_NAME.REJECT]: {
-        label: "REJECT",
-        template: BUTTON_TEMPLATE.PINK,
-        variant: BUTTON_VARIANT.CONTAINED,
+        label: "SUBMIT",
+        template: BUTTON_TEMPLATE.YELLOW,
+        variant: BUTTON_VARIANT.OUTLINED,
     },
     [ACTION_NAME.BLOCK]: {
         label: "BLOCK",
         template: BUTTON_TEMPLATE.PINK,
         variant: BUTTON_VARIANT.CONTAINED,
     },
+    OPEN_EDIT_FORM: {
+        label: "UPDATE",
+        template: BUTTON_TEMPLATE.YELLOW,
+        variant: BUTTON_VARIANT.CONTAINED,
+    },
+    OPEN_REJECT_FORM: {
+        label: "REJECT",
+        template: BUTTON_TEMPLATE.PINK,
+        variant: BUTTON_VARIANT.CONTAINED,
+    }
+
 }
 const UpdateVideoStateButton = (props) => {
-    const {videoData, action} = props;
-    const { userRole } = useContext(MyContext);
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarType, setSnackbarType] = useState('success');
+    const {videoData, action, getUpdatedVideos, onClick, disabled} = props;
+    const { userRole, userID } = useContext(MyContext);
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        type: '',
+        message: '',
+    });
+    const [loading, setLoading] = useState(false);
     const template = VIDEO_ACTION_BUTTONS[action].template;
     const variant = VIDEO_ACTION_BUTTONS[action].variant;
     const label = VIDEO_ACTION_BUTTONS[action].label;
 
-    const handleClose = (event, reason) => {
+    const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setSnackbarOpen(false);
+        setSnackbar({
+            ...snackbar,
+            open: false,
+        });
     };
 
-    const handleSnackbar = (type) => {
-        setSnackbarType(type);
-        setSnackbarOpen(true);
+    const handleSnackbarOpen = (type, message) => {
+        setSnackbar({
+            open: true,
+            type: type,
+            message: message,
+        });
     };
 
-    const handleClick = () => {
-        const nextState = validateChangeState({videoData, action, userRole});
-        console.log({curState: videoData.State, action, nextState})
-        if(nextState){
-            if(action === ACTION_NAME.UPLOAD){
-                uploadVideo({...videoData, State:nextState}, handleSnackbar).then(() => {
-                    console.log('video uploaded')
-                    //navigate to somewhere
-                });
-            } else if(action === ACTION_NAME.DELETE){
-                console.log('add delete confirmation and axios request')
-                //send axios request to delete video
-            } else {
-                apiUpdateVideo({...videoData, State: nextState}, handleSnackbar);
-            }
+    const onSuccessfulUpdate = async () => {
+        await handleSnackbarOpen('success', 'Success!');
+        await getUpdatedVideos();
+    }
+
+    const onFailedUpdate = async () => {
+        await handleSnackbarOpen('error', 'Error!');
+    }
+
+    const handleClick = async () => {
+        const nextState = await validateChangeState({videoData, action, userRole});
+        if (action === ACTION_NAME.DELETE) {
+            setLoading(true);
+            await apiDeleteVideo(videoData.UserID, videoData.VideoID, onSuccessfulUpdate, onFailedUpdate);
+            setLoading(false);
+        } else if (nextState) {
+            setLoading(true);
+            await apiUpdateVideo({...videoData, State: nextState, issuerID: userID}, onSuccessfulUpdate, onFailedUpdate);
+            setLoading(false);
         }
     };
 
     return (
         <>
-            <Button template={template} variant={variant} onClick={handleClick}>{label}</Button>
+            <Button template={template} variant={variant} onClick={onClick || handleClick} disabled={disabled} loadingButton loading={loading}>{label}</Button>
             <Snackbar
-                open={snackbarOpen}
-                handleClose={handleClose}
-                severity={snackbarType === 'success' ? "success" : 'error'}
-                message={snackbarType === 'success' ? "Success!" : 'Error!'}/>
+                open={snackbar.open}
+                handleClose={handleSnackbarClose}
+                type={snackbar.type}
+                message={snackbar.message}/>
         </>
     );
 }
 
-export default UpdateVideoStateButton;
+export default UpdateVideoStateButton; //UpdateVideoStateButton;

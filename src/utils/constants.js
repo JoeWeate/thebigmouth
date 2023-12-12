@@ -25,18 +25,8 @@ export const ACTION_NAME = {
     MOVE_TO_DRAFT: 'moveToDraft',
 }
 
-export const VIDEO_STATES = [
-    VIDEO_STATE.DRAFT,
-    VIDEO_STATE.IN_REVIEW,
-    VIDEO_STATE.APPROVED,
-    VIDEO_STATE.BLOCKED
-]
 export const VIDEO_STATE_UPDATE_ACTIONS = {
     [USER_ROLE.USER] : {
-        [ACTION_NAME.UPLOAD]: {
-            validate: (currentState) => currentState === undefined,
-            nextSate: VIDEO_STATE.DRAFT
-        },
         [ACTION_NAME.SEND_FOR_REVIEW]: {//PUT
             validate: (currentState) => currentState === VIDEO_STATE.DRAFT,
             nextSate: VIDEO_STATE.IN_REVIEW,
@@ -100,6 +90,10 @@ export const ADMIN_PAGES = [//ADMIN PAGES IN DASHBOARD
     },
 ]
 
+export const VIDEO_OPTION = {
+    FILE: 'file',
+    URL: 'URL'
+};
 export const VIDEO_DATA_KEYS = {
     USER_ID: 'UserID',
     TITLE: 'Title',
@@ -107,8 +101,11 @@ export const VIDEO_DATA_KEYS = {
     VIDEO_DATA: 'VideoData',
     VIDEO_ID: 'VideoID',
     DESCRIPTION: 'Description',
+    SHORT_DESCRIPTION: 'ShortDescription',
     STATE: 'State',
     MESSAGES: 'Messages',
-    URL: 'URL'
-
+    URL: VIDEO_OPTION.URL,
+    FILE: VIDEO_OPTION.FILE
 };
+
+export const S3_BASE_URL = 'https://thebigmouth-user-videos.s3.eu-west-2.amazonaws.com/';
