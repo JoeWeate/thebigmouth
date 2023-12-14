@@ -1,5 +1,4 @@
 import React, {useContext, useState} from 'react';
-import { useNavigate } from "react-router-dom";
 import { apiDeleteVideo, apiUpdateVideo } from "../api/videos";
 import Snackbar from "../components/Snackbar";
 import {ACTION_NAME} from "../utils/constants";

@@ -2,12 +2,12 @@ import {isEmpty} from "lodash";
 import React, {useContext, useEffect, useState, useRef} from "react";
 import { Box, TextField, useTheme, MenuItem } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import {MyContext} from "../../App";
+import { MyContext } from "../../App";
 import ButtonsContainer from "../../components/ButtonsContainer";
 import Snackbar from "../../components/Snackbar";
 import UpdateVideoStateButton from "../../components/UpdateVideoStateButton";
-import {routes} from "../../routes";
-import {ACTION_NAME, VIDEO_DATA_KEYS, VIDEO_OPTION, VIDEO_STATE} from "../../utils/constants";
+import { routes } from "../../routes";
+import { ACTION_NAME, VIDEO_DATA_KEYS, VIDEO_OPTION, VIDEO_STATE } from "../../utils/constants";
 import Button from "../../components/Button";
 import { apiUploadFileData, apiUploadUrlData } from "../../api/videos";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -282,7 +282,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit, videoOption }) 
       <TextField
           fullWidth
           select
-          sx={{ marginBottom: "1rem" }}
+          sx={{ marginBottom: "8px" }}
           label={selectedOption ? "Video Upload Type" : "Select how you want to upload your video"}
           value={selectedOption}
           onChange={handleOptionChange}

@@ -34,7 +34,7 @@ const VideoUpload = () => {
             <span style={{ color: "#EB038F" }}> VIDEO</span> YOU'D LIKE TO
             UPLOAD
           </Typography>
-          <Typography variant="h5" sx={{ padding: "1.5em", color: "#E8FA36" }}>
+          <Typography variant="h5" sx={{ color: "#E8FA36" }}>
             We're excited to check it out!
           </Typography>
         </Box>
@@ -42,6 +42,9 @@ const VideoUpload = () => {
       <Grid
         item
         xs={12}
+        style={{
+          marginBottom: "4rem",
+        }}
       >
         <VideoForm />
       </Grid>
