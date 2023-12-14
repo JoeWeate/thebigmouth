@@ -5,7 +5,7 @@ const prod_config = {
     BUCKET: "thebigmouth-media",
   },
   apiGateway: {
-    REGION: "ue-west-2",
+    REGION: "eu-west-2",
     URL: "etcart9j81.execute-api.eu-west-2.amazonaws.com/v1",
   },
   auth0: {

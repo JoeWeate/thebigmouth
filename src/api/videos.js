@@ -1,10 +1,25 @@
 import configureAxios from "./configureAxios";
-import { VIDEO_DATA_KEYS } from "../utils/constants";
+import {S3_BASE_URL, VIDEO_DATA_KEYS} from "../utils/constants";
 const api = configureAxios({});
 
-export const UploadFileData = async (file, userId, data, setData) => {
+export const apiUploadUrlData = (data, successCallback, failureCallback) => {
+  return api
+      .post("/videos", data)
+      .then((response) => {
+        return Promise.resolve(response.data);
+      }).then(() => {
+        if (successCallback && typeof successCallback === "function")
+          successCallback();
+      })
+      .catch((error) => {
+        if (failureCallback && typeof failureCallback === "function")
+          failureCallback();
+        console.log(error);
+      });
+};
+export const apiUploadFileData = async (file, data, successCallback, failureCallback) => {
   try {
-    const response = await api.get("/presigned-url", {});
+    const response = await api.put("/presigned-url", {}); //changed to put as we are going to use to put objects
 
     if (response.status !== 200) {
       throw new Error("Failed to get presigned URL.");
@@ -25,40 +40,13 @@ export const UploadFileData = async (file, userId, data, setData) => {
         "File upload failed. Check the presigned URL or try again."
       );
     }
-    console.log(uploadResponse, "uploadResponse");
-    //get the key of the uploaded file and send it to database
-    console.log(s3Link, "s3Link");
 
-    const { videoLink, ...restData } = data;
-
-    await UploadUrlData({
-      ...restData,
-      videoLink: s3Link,
-      userId: userId,
-      source: "Internal",
-    });
+    await apiUploadUrlData({...data, URL: `${S3_BASE_URL}${s3Link}`}, successCallback, failureCallback);
+    // await apiUploadUrlData({
   } catch (error) {
     console.error("An error occurred during file upload:", error);
   }
 };
-
-export const UploadUrlData = async (data, successCallback, failureCallback) => {
-  return api
-      .post("/videos", data)
-      .then((response) => {
-        return Promise.resolve(response.data);
-      }).then(() => {
-        if (successCallback && typeof successCallback === "function")
-          successCallback();
-      })
-      .catch((error) => {
-        if (failureCallback && typeof failureCallback === "function")
-          failureCallback();
-        console.log(error);
-      });
-};
-
-
 
 export const getVideos = () => {
   return api

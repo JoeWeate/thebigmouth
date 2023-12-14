@@ -16,9 +16,13 @@ function MyContextProvider({ children }) {
     useEffect(() => {
        if( user ){
            const userId = user.sub;
-           setContextValue({userID: userId})
-           getUserById(userId).then(data => (setContextValue({...contextValue, userRole: data.user.Role})))
-                   .catch(error => console.log(error));
+           const userName = user.name;
+           const getUserRole = async () => {
+               await getUserById(userId).then(data => {
+                   setContextValue({userID: userId, userRole: data.user.Role, userName: userName});
+               }).catch(error => console.log(error));
+            }
+           getUserRole();
        }
     }, [user]);
     return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;
