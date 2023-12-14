@@ -5,9 +5,10 @@ import PageTitleComponent from "../../pages/VideoHub/PageTitleComponent"
 import IconButton from '@mui/material/IconButton';
 import VideoForm from "../../pages/VideoUpload/VideoForm";
 import CloseIcon from '@mui/icons-material/Close';
+import {VIDEO_OPTION} from "../../utils/constants";
 import MessagesInputForm from './MessageInputForm';
 
-const DialogWindow = ({ videoInfo, openEdit, openReject, setOpenReject, getUpdatedVideos, handleClose, titleDialog, dialogTextDescription, setOpenEdit }) => {
+const DialogWindow = ({ videoInfo, openEdit, openReject, setOpenReject, getUpdatedVideos, handleClose, titleDialog, dialogTextDescription, setOpenEdit, scroll = 'body' }) => {
     const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
             padding: theme.spacing(2),
@@ -23,6 +24,7 @@ const DialogWindow = ({ videoInfo, openEdit, openReject, setOpenReject, getUpdat
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={openEdit || openReject}
+                scroll={scroll}
             >
                 <Box sx={{ mt: "2rem", ml: "1rem", mr: "1rem" }}>
                     <PageTitleComponent title={titleDialog} titleFontSize="20pt" />
@@ -45,7 +47,7 @@ const DialogWindow = ({ videoInfo, openEdit, openReject, setOpenReject, getUpdat
                         {dialogTextDescription}
                     </DialogContentText>
                     {openEdit &&
-                        <VideoForm getUpdatedVideos={getUpdatedVideos} initialData={videoInfo} setOpenEdit={setOpenEdit} />}
+                        <VideoForm getUpdatedVideos={getUpdatedVideos} initialData={videoInfo} setOpenEdit={setOpenEdit} videoOption={VIDEO_OPTION.URL}/>}
                     {openReject &&
                         <MessagesInputForm initialData={videoInfo} getUpdatedVideos={getUpdatedVideos} setOpenReject={setOpenReject} />
                     }

@@ -1,22 +1,26 @@
-import { Grid } from "@mui/material";
+import {CircularProgress, Grid} from "@mui/material";
+import ButtonsContainer from "../../components/ButtonsContainer";
+import EmptyState from "../../components/EmptyState";
 import UserVideo from "../../components/userHub/UserVideo";
 import PageTitleComponent from "./PageTitleComponent";
 import AddArtButton from "../../components/userHub/AddArtButton";
 import SelectSortBy from "../../components/userHub/SelectSortBy";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllVideosByState } from "../../api/videos";
 import SubtitleComponent from "./SubtitleComponent";
 
 const VideoHub = () => {
-  const [videoData, setVideoData] = useState([]);
+  const [videoData, setVideoData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     getAllVideosByState("approved")
       .then((videosData) => {
         setVideoData(videosData.videos);
       })
       .catch((error) => {
         console.error({ error });
-      });
+      }).finally(()=> setIsLoading(false));
   }, []);
 
     let title = "Welcome to VideoHub"
@@ -36,7 +40,9 @@ const VideoHub = () => {
                 <SubtitleComponent subtitle={subtitle} subtitleFontSize={subtitleFontSize} />
             </Grid>
             <Grid item>
-                <AddArtButton />
+                <ButtonsContainer>
+                    <AddArtButton />
+                </ButtonsContainer>
             </Grid>
             <Grid
                 item
@@ -54,7 +60,9 @@ const VideoHub = () => {
                     justifyContent="center"
                     sx={{ marginBottom: { lg: "4rem", sm: 0 } }}
                 >
-                    {videoData.map((video) => {
+                    {isLoading && <CircularProgress/>}
+                    {!isLoading && videoData === null && <EmptyState>There is no any videos</EmptyState>}
+                    {!isLoading && videoData && videoData.map((video) => {
                         let withVideoInfo = true;
                         let maxWidth = "800px";
                         return (

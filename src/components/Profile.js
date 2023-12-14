@@ -53,8 +53,8 @@ const Profile = () => {
               }
               sx={{
                 m: 1,
-                width: "auto",
-                height: 120,
+                width: "120px",
+                height: "120px",
                 border: "0.2rem solid #E6007E",
               }}
             ></Avatar>

@@ -9,9 +9,8 @@ const VideoUpload = () => {
     <Grid
       container
       style={{
-        height: "120vh",
         mb: {
-          lg: "2rem",
+          lg: "5rem",
           sm: "4rem",
         },
       }}
@@ -30,15 +29,12 @@ const VideoUpload = () => {
           alignContent={"center"}
           justifyContent={"center"}
         >
-          <Typography
-            variant="h5"
-            sx={{ padding: "0.5em", marginTop: "0.5em", color: "white" }}
-          >
+          <Typography variant="h5" sx={{ padding: "0.5em", color: "white" }}>
             PLEASE PROVIDE A LINK TO THE
             <span style={{ color: "#EB038F" }}> VIDEO</span> YOU'D LIKE TO
             UPLOAD
           </Typography>
-          <Typography variant="h5" sx={{ padding: "1.5em", color: "#E8FA36" }}>
+          <Typography variant="h5" sx={{ color: "#E8FA36" }}>
             We're excited to check it out!
           </Typography>
         </Box>
@@ -47,7 +43,7 @@ const VideoUpload = () => {
         item
         xs={12}
         style={{
-          marginBottom: "6rem",
+          marginBottom: "4rem",
         }}
       >
         <VideoForm />
