@@ -182,7 +182,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit, videoOption }) 
    }
   };
   const isFormValid = Object.values(formErrors).every((error) => error === false);
-  console.log({formErrors})
+
   return (
     <Box
       component="form"
