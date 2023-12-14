@@ -282,7 +282,7 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit, videoOption }) 
       <TextField
           fullWidth
           select
-          sx={{ marginBottom: "1rem" }}
+          sx={{ marginBottom: "8px" }}
           label={selectedOption ? "Video Upload Type" : "Select how you want to upload your video"}
           value={selectedOption}
           onChange={handleOptionChange}
