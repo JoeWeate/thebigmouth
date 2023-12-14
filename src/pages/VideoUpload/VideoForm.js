@@ -9,7 +9,6 @@ import UpdateVideoStateButton from "../../components/UpdateVideoStateButton";
 import {routes} from "../../routes";
 import {ACTION_NAME, VIDEO_DATA_KEYS, VIDEO_OPTION, VIDEO_STATE} from "../../utils/constants";
 import Button from "../../components/Button";
-import { useAuth0 } from "@auth0/auth0-react";
 import { apiUploadFileData, apiUploadUrlData } from "../../api/videos";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import styled from "@emotion/styled";
@@ -31,7 +30,7 @@ const VisuallyHiddenInput = styled.input({
 });
 
 const isUrlValid = (url) => {
-  const urlRegex = /^(https?:\/\/)?(?:www\.)?(vimeo\.com\/(\d+)|youtube\.com\/watch\?v=([a-zA-Z0-9_-]+))/;
+  const urlRegex = /^(https?:\/\/)?(?:www\.)?(vimeo\.com\/(\d+)|thebigmouth-user-videos\.s3\.eu-west-2\.amazonaws\.com|youtube\.com\/watch\?v=([a-zA-Z0-9_-]+))/;
   return urlRegex.test(url);
 };
 
@@ -182,7 +181,8 @@ const VideoForm = ({ initialData, getUpdatedVideos, setOpenEdit, videoOption }) 
       }
    }
   };
-  const isFormValid = Object.values(formErrors).every((error) => error === false)
+  const isFormValid = Object.values(formErrors).every((error) => error === false);
+  console.log({formErrors})
   return (
     <Box
       component="form"
